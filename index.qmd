@@ -1,0 +1,9 @@
+---
+title: "Solutions"
+---
+
+## Solutions for the book R for Data Science, 2nd edition
+
+Author: Aditya Dahiya
+
+This website display the worked out solutions for the [open source book](https://r4ds.hadley.nz/ "R for Data Science (2e)").
