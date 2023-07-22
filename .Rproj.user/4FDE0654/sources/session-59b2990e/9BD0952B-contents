@@ -6,7 +6,7 @@ editor_options:
 bibliography: references.bib
 ---
 
-### 29.2.1 Exercises
+# 29.2.1 Exercises
 
 1.  **Create a new Quarto document using *File \> New File \> Quarto Document*. Read the instructions. Practice running the chunks individually. Then render the document by clicking the appropriate button and then by using the appropriate keyboard short cut. Verify that you can modify the code, re-run it, and see modified output.**
 
@@ -57,7 +57,7 @@ The outputs are different in the following ways:\--
 
 -   The size of the PDF document is the largest, followed by MS Word document, while the HTML uses the least disk space.
 
-### 29.3.1 Exercises
+# 29.3.1 Exercises
 
 1.  **Re-create the document in [Figure 29.5](https://r4ds.hadley.nz/quarto.html#fig-visual-editor) using the visual editor.**
 
@@ -143,18 +143,46 @@ Let us first add some text from the paper, so that we can use a citation:\-\--
 
 Once we render the document, the citation shows up in the very end of the HTML webpage rendered. It is displayed just above the footnotes. The YAML header of the document, when viewed in the "Source" displays an additional line `bibliography: references.bib`.
 
-### 29.4.1 Exercises
+# 29.4.1 Exercises
 
 1.  **Practice what you've learned by creating a brief CV. The title should be your name, and you should include headings for (at least) education or employment. Each of the sections should include a bulleted list of jobs/degrees. Highlight the year in bold.**
 
-2.  Using the source editor and the Markdown quick reference, figure out how to:
+    #### Aditya Dahiya
 
-    a.  Add a footnote.
+    -   Education
 
-    b.  Add a horizontal rule.
+        -   **2005 - 2010:** Bachelor of Medicine and Bachelor of Surgery (M.B.B.S.), All India Institute of Medical Sciences, New Delhi
 
-    c.  Add a block quote.
+        -   **2011-2013:** Master of Arts (Public Policy), Indira Gandhi National Open University
+
+        -   **2021-22:** Master of Public Health, Harvard University, U.S.A.
+
+    -   Employment
+
+        -   **2010-2011:** Junior Resident Doctor, Neuro-Radiology, A.I.I.M.S., New Delhi
+
+        -   **2011-to date:** Indian Administrative Services, Government of India
+
+2.  **Using the source editor and the Markdown quick reference, figure out how to:**
+
+    a.  **Add a footnote.**
+
+        To begin with we add a footnote here.[^3] Then, we inspect the `Source` tab and find that the method to create a footnote in source editor is to use `[^x]`, where `x` represents the footnote number. Further, I could not find the `footnote` option in **Markdown Quick Reference** though **Help** menu in the RStudio. But, I searched online and found from [here](https://crimebythenumbers.com/r-markdown.html "Crime by the Numbers: A Criminologist’s Guide to R by Jacob Kaplan") that "*to create a footnote in R Markdown, you use the carrot \^ followed immediately by square brackets \[\]. Put the text inside of the \[\] and it'll print that at the bottom of the page.* *Code for a footnote will look like this: \^\[This sentence will be printed as a footnote.\] .* So, I try it here again. [^4]
+
+    b.  **Add a horizontal rule.**
+
+        The easiest way to add a horizontal rule in the source editor is "\-\--", i.e. three hyphens. Or, in the **Visual** editor, we can choose **Insert** -\> **Horizontal Rule**.
+
+        ------------------------------------------------------------------------
+
+    c.  **Add a block quote.**
+
+        A block quote can be added in the source editor by using a tab, followed by "\>" key, followed by the text. Further, the book, [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/tufte-quotes.html "R Markdown: The Definitive Guide by Yihui Xie, J. J. Allaire, Garrett Grolemund"), tells us that *"paragraphs that start with* `>` *are converted to block quotes."*
 
 3.  Copy and paste the contents of `diamond-sizes.qmd` from <https://github.com/hadley/r4ds/tree/main/quarto> in to a local R Quarto document. Check that you can run it, then add text after the frequency polygon that describes its most striking features.
 
 4.  Create a document in a Google doc or MS Word (or locate a document you have created previously) with some content in it such as headings, hyperlinks, formatted text, etc. Copy the contents of this document and paste it into a Quarto document in the visual editor. Then, switch over to the source editor and inspect the source code.
+
+[^3]: I use Ctrl + Shift + 7 to create a footnote here.
+
+[^4]: This is a test footnote I wrote in the Source Editor

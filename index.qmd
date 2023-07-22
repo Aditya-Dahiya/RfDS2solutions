@@ -1,5 +1,5 @@
 ---
-title: "Solutions"
+title: "Solutions: R for Data Science (2e)"
 ---
 
 ## Solutions for the book R for Data Science, 2nd edition

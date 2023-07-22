@@ -139,12 +139,12 @@ div.csl-indent {
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html" rel="" target="">
- <span class="menu-text">About</span></a>
+    <a class="nav-link" href="./solutions.html" rel="" target="">
+ <span class="menu-text">Solutions</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./Chapter29.html" rel="" target="" aria-current="page">
- <span class="menu-text">Chapter 29 (Quarto)</span></a>
+    <a class="nav-link" href="./about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
   </li>  
 </ul>
             <div class="quarto-navbar-tools ms-auto">
@@ -163,8 +163,10 @@ div.csl-indent {
    
   <ul>
   <li><a href="#exercises" id="toc-exercises" class="nav-link active" data-scroll-target="#exercises">29.2.1 Exercises</a></li>
-  <li><a href="#exercises-1" id="toc-exercises-1" class="nav-link" data-scroll-target="#exercises-1">29.3.1 Exercises</a></li>
+  <li><a href="#exercises-1" id="toc-exercises-1" class="nav-link" data-scroll-target="#exercises-1">29.3.1 Exercises</a>
+  <ul class="collapse">
   <li><a href="#headings" id="toc-headings" class="nav-link" data-scroll-target="#headings">Headings</a></li>
+  </ul></li>
   <li><a href="#st-level-header" id="toc-st-level-header" class="nav-link" data-scroll-target="#st-level-header">1st Level Header</a>
   <ul class="collapse">
   <li><a href="#nd-level-header" id="toc-nd-level-header" class="nav-link" data-scroll-target="#nd-level-header">2nd Level Header</a>
@@ -174,9 +176,9 @@ div.csl-indent {
   <li><a href="#lists" id="toc-lists" class="nav-link" data-scroll-target="#lists">Lists</a>
   <ul class="collapse">
   <li><a href="#links-and-images" id="toc-links-and-images" class="nav-link" data-scroll-target="#links-and-images">Links and Images</a></li>
+  </ul></li>
+  </ul></li>
   <li><a href="#exercises-2" id="toc-exercises-2" class="nav-link" data-scroll-target="#exercises-2">29.4.1 Exercises</a></li>
-  </ul></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -206,8 +208,8 @@ div.csl-indent {
 
 </header>
 
-<section id="exercises" class="level3">
-<h3 class="anchored" data-anchor-id="exercises">29.2.1 Exercises</h3>
+<section id="exercises" class="level1">
+<h1>29.2.1 Exercises</h1>
 <ol type="1">
 <li><strong>Create a new Quarto document using <em>File &gt; New File &gt; Quarto Document</em>. Read the instructions. Practice running the chunks individually. Then render the document by clicking the appropriate button and then by using the appropriate keyboard short cut. Verify that you can modify the code, re-run it, and see modified output.</strong></li>
 </ol>
@@ -263,16 +265,16 @@ div.csl-indent {
 <li><p>The size of the PDF document is the largest, followed by MS Word document, while the HTML uses the least disk space.</p></li>
 </ul>
 </section>
-<section id="exercises-1" class="level3">
-<h3 class="anchored" data-anchor-id="exercises-1">29.3.1 Exercises</h3>
+<section id="exercises-1" class="level1">
+<h1>29.3.1 Exercises</h1>
 <ol type="1">
 <li><strong>Re-create the document in <a href="https://r4ds.hadley.nz/quarto.html#fig-visual-editor">Figure&nbsp;29.5</a> using the visual editor.</strong></li>
 </ol>
 <p>Text Formatting</p>
 <p><em>italic</em> <strong>bold</strong> underline <del>strikeout</del> <span class="smallcaps">small caps</span> <code>code</code> superscript<sup>2</sup> and subscript<sub>2</sub></p>
-</section>
 <section id="headings" class="level3">
 <h3 class="anchored" data-anchor-id="headings">Headings</h3>
+</section>
 </section>
 <section id="st-level-header" class="level1">
 <h1>1st Level Header</h1>
@@ -303,7 +305,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/"><img src="https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/imgs/r-knitr-rmd.jpeg" class="img-fluid figure-img" alt="Notes on Changing from Rmarkdown/Bookdown to Quarto" width="338"></a></p>
-<figcaption class="figure-caption">Credits: Nick Tierney’s (mostly) rstats blog</figcaption>
+<figcaption class="figure-caption">Credits: Nick Tierney's (mostly) rstats blog</figcaption>
 </figure>
 </div>
 <p>Tables</p>
@@ -360,8 +362,10 @@ div.csl-indent {
 </blockquote>
 <p>Once we render the document, the citation shows up in the very end of the HTML webpage rendered. It is displayed just above the footnotes. The YAML header of the document, when viewed in the “Source” displays an additional line <code>bibliography: references.bib</code>.</p>
 </section>
-<section id="exercises-2" class="level3">
-<h3 class="anchored" data-anchor-id="exercises-2">29.4.1 Exercises</h3>
+</section>
+</section>
+<section id="exercises-2" class="level1">
+<h1>29.4.1 Exercises</h1>
 <ol type="1">
 <li><p><strong>Practice what you’ve learned by creating a brief CV. The title should be your name, and you should include headings for (at least) education or employment. Each of the sections should include a bulleted list of jobs/degrees. Highlight the year in bold.</strong></p></li>
 <li><p>Using the source editor and the Markdown quick reference, figure out how to:</p>
@@ -376,8 +380,6 @@ div.csl-indent {
 
 
 
-</section>
-</section>
 </section>
 
 

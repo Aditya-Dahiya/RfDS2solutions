@@ -6,7 +6,7 @@ editor_options:
 bibliography: references.bib
 ---
 
-### 29.2.1 Exercises
+# 29.2.1 Exercises
 
 1.  **Create a new Quarto document using *File \> New File \> Quarto Document*. Read the instructions. Practice running the chunks individually. Then render the document by clicking the appropriate button and then by using the appropriate keyboard short cut. Verify that you can modify the code, re-run it, and see modified output.**
 
@@ -57,7 +57,7 @@ The outputs are different in the following ways:\--
 
 -   The size of the PDF document is the largest, followed by MS Word document, while the HTML uses the least disk space.
 
-### 29.3.1 Exercises
+# 29.3.1 Exercises
 
 1.  **Re-create the document in [Figure 29.5](https://r4ds.hadley.nz/quarto.html#fig-visual-editor) using the visual editor.**
 
@@ -93,7 +93,7 @@ Text Formatting
 
 [linked phrases](https://www.oxfordinternationalenglish.com/linking-words-and-phrases-in-english/ "Oxford English Dictionary meaning of Linked Phrases")
 
-[![Credits: Nick Tierney's (mostly) rstats blog](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/imgs/r-knitr-rmd.jpeg){fig-alt="Notes on Changing from Rmarkdown/Bookdown to Quarto" width="338"}](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/)
+[![Credits: Nick Tierney\'s (mostly) rstats blog](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/imgs/r-knitr-rmd.jpeg){fig-alt="Notes on Changing from Rmarkdown/Bookdown to Quarto" width="338"}](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/)
 
 Tables
 
@@ -143,7 +143,7 @@ Let us first add some text from the paper, so that we can use a citation:\-\--
 
 Once we render the document, the citation shows up in the very end of the HTML webpage rendered. It is displayed just above the footnotes. The YAML header of the document, when viewed in the "Source" displays an additional line `bibliography: references.bib`.
 
-### 29.4.1 Exercises
+# 29.4.1 Exercises
 
 1.  **Practice what you've learned by creating a brief CV. The title should be your name, and you should include headings for (at least) education or employment. Each of the sections should include a bulleted list of jobs/degrees. Highlight the year in bold.**
 

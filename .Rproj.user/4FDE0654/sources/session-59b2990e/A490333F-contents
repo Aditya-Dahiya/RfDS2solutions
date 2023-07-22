@@ -7,8 +7,8 @@ website:
     left:
       - href: index.qmd
         text: Home
+      - solutions.qmd
       - about.qmd
-      - Chapter29.qmd
 
 format:
   html:
