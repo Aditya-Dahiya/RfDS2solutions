@@ -1,6 +1,7 @@
 project:
   type: website
-
+  output-dir: docs
+  
 website:
   title: "RfDS2solutions"
   navbar:
@@ -9,7 +10,7 @@ website:
         text: Home
       - solutions.qmd
       - about.qmd
-
+  
 format:
   html:
     theme: flatly

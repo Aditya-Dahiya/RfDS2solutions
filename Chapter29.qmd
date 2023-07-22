@@ -93,7 +93,7 @@ Text Formatting
 
 [linked phrases](https://www.oxfordinternationalenglish.com/linking-words-and-phrases-in-english/ "Oxford English Dictionary meaning of Linked Phrases")
 
-[![Credits: Nick Tierney's (mostly) rstats blog](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/imgs/r-knitr-rmd.jpeg){fig-alt="Notes on Changing from Rmarkdown/Bookdown to Quarto" width="338"}](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/)
+[![Credits: Nick Tierney\'s (mostly) rstats blog](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/imgs/r-knitr-rmd.jpeg){fig-alt="Notes on Changing from Rmarkdown/Bookdown to Quarto" width="338"}](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/)
 
 Tables
 
@@ -177,7 +177,7 @@ Once we render the document, the citation shows up in the very end of the HTML w
 
     c.  **Add a block quote.**
 
-        A block quote can be added in the source editor by using a tab, followed by "\>" key, followed by the text. Further, the book, [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/tufte-quotes.html "R Markdown: The Definitive Guide by Yihui Xie, J. J. Allaire, Garrett Grolemund"), tells us that *"paragraphs that start with* `>` *are converted to block quotes."*
+        A block quote can be added in the source editor by using a tab, followed by `>` key, followed by the text. Further, the book, [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/tufte-quotes.html "R Markdown: The Definitive Guide by Yihui Xie, J. J. Allaire, Garrett Grolemund"), tells us that *"paragraphs that start with* `>` *are converted to block quotes."*
 
 3.  Copy and paste the contents of `diamond-sizes.qmd` from <https://github.com/hadley/r4ds/tree/main/quarto> in to a local R Quarto document. Check that you can run it, then add text after the frequency polygon that describes its most striking features.
 
