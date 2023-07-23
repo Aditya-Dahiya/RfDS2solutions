@@ -6,9 +6,6 @@ editor_options:
 bibliography: references.bib
 execute: 
   warning: false
-knitr: 
-  opts_chunk: 
-    collapse: true
 ---
 
 # 29.2.1 Exercises
@@ -103,7 +100,7 @@ Text Formatting
 
 [linked phrases](https://www.oxfordinternationalenglish.com/linking-words-and-phrases-in-english/ "Oxford English Dictionary meaning of Linked Phrases")
 
-[![Credits: Nick Tierney's (mostly) rstats blog](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/imgs/r-knitr-rmd.jpeg){fig-alt="Notes on Changing from Rmarkdown/Bookdown to Quarto" width="338"}](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/)
+[![Credits: Nick Tierney\'s (mostly) rstats blog](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/imgs/r-knitr-rmd.jpeg){fig-alt="Notes on Changing from Rmarkdown/Bookdown to Quarto" width="338"}](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/)
 
 Tables
 
@@ -201,7 +198,7 @@ Once we render the document, the citation shows up in the very end of the HTML w
 #| label: Tidyverse-Diamonds
 library(tidyverse)
 
-smaller <- diamonds |> 
+smaller = diamonds |> 
   filter(carat <= 2.5)
 ```
 
@@ -297,6 +294,8 @@ print(p)
 
     ```{r}
     #| label: Largest-20-diamonds
+    #| fig-show: hold
+    #| fig-cap: Comparison of the distribution of cut, color and clarity amongst all diamonds vs. the 20 largest diamonds
 
     top20 = diamonds |>
       arrange(desc(carat)) |>
@@ -337,6 +336,7 @@ print(p)
 3.  **Modify `diamonds-sizes.qmd` to use `label_comma()` to produce nicely formatted output. Also include the percentage of diamonds that are larger than 2.5 carats.**
 
 ```{r}
+#| label: Comma-Function-Smaller-Diamonds
 smaller <- diamonds |> 
   filter(carat <= 2.5)
 comma = function(x) {format(x, digits = 2, big.mark = ",")}
@@ -351,3 +351,40 @@ comma(nrow(diamonds))
 comma(nrow(diamonds)-nrow(smaller))
 comma(100*(nrow(diamonds)-nrow(smaller))/nrow(diamonds))
 ```
+
+# **29.6.3 Exercises**
+
+1.  **Open `diamond-sizes.qmd` in the visual editor, find an image of a diamond, copy it, and paste it into the document. Double click on the image and add a caption. Resize the image and render your document. Observe how the image is saved in your current working directory.**
+
+    Let's add an image of a diamond here.
+
+    [![Diamond using Canon, EOS 80D. Credits: image from unsplash.com Published May 27, 2020.](images/Diamond-Unsplash.jpg){width="3in"}](https://unsplash.com/photos/RD5GI4A4bu4){#fig-diamondphoto}
+
+    When I render the document, the same image is saved in the `/docs/images` directory of my Quarto Website project. The image name is the same as that of the original file.
+
+2.  **Edit the label of the code chunk in `diamond-sizes.qmd` that generates a plot to start with the prefix `fig-` and add a caption to the figure with the chunk option `fig-cap`. Then, edit the text above the code chunk to add a cross-reference to the figure with Insert \> Cross Reference.**
+
+    The R-code for generating the figure has been copied from `diamond-sizes.qmd`. It is displayed below. The cross-reference to the generated figure is @fig-freq-poly.
+
+    ```{r}
+    #| label: fig-freq-poly
+    #| fig-cap: "Frequency Polygon of smaller diamonds"
+
+    g = diamonds |> 
+      filter(carat <= 2.5) |>
+      ggplot(aes(x = carat)) + 
+        geom_freqpoly(binwidth = 0.01) +
+        theme_light() +
+        labs(x="Diamond Carat Size", y = "Number of Diamonds")
+    print(g)
+    ```
+
+3.  Change the size of the figure with the following chunk options, one at a time, render your document, and describe how the figure changes.
+
+    a.  `fig-width: 10`
+
+    b.  `fig-height: 3`
+
+    c.  `out-width: "100%"`
+
+    d.  `out-width: "20%"`
