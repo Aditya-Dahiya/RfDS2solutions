@@ -179,6 +179,7 @@ div.csl-indent {
   </ul></li>
   </ul></li>
   <li><a href="#exercises-2" id="toc-exercises-2" class="nav-link" data-scroll-target="#exercises-2">29.4.1 Exercises</a></li>
+  <li><a href="#exercises-3" id="toc-exercises-3" class="nav-link" data-scroll-target="#exercises-3"><strong>29.5.5 Exercises</strong></a></li>
   </ul>
 </nav>
     </div>
@@ -214,45 +215,45 @@ div.csl-indent {
 <li><strong>Create a new Quarto document using <em>File &gt; New File &gt; Quarto Document</em>. Read the instructions. Practice running the chunks individually. Then render the document by clicking the appropriate button and then by using the appropriate keyboard short cut. Verify that you can modify the code, re-run it, and see modified output.</strong></li>
 </ol>
 <ul>
-<li><p>The document has been created.</p></li>
-<li><p>Some of the chunks are as follows:</p></li>
+<li>The document has been created. Some of the chunks are as follows:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span> </span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(carat <span class="sc">&gt;</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>carat, <span class="at">y=</span>price,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">color =</span> color)) <span class="sc">+</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#scale_y_continuous(trans = "log") +</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(carat <span class="sc">&gt;</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>carat, <span class="at">y=</span>price,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">color =</span> color)) <span class="sc">+</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#scale_y_continuous(trans = "log") +</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Chapter29_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+<p><img src="Chapter29_files/figure-html/Plot1-Diamonds-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
 <li>Verifying that the code can be modified and re-run:–</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span> </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(carat <span class="sc">&gt;</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span> (carat <span class="sc">&lt;</span> <span class="dv">3</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span> (price <span class="sc">&gt;</span> <span class="dv">10000</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>carat, <span class="at">y=</span>price,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                       <span class="at">color =</span> color)) <span class="sc">+</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> </span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">trans =</span> <span class="st">"log"</span>) <span class="sc">+</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Plot of relation between Carat and Price"</span>,</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"For different colours of diamonds"</span>,</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Price (in $)"</span>, <span class="at">x =</span> <span class="st">"Carat"</span>) <span class="sc">+</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(carat <span class="sc">&gt;</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span> (carat <span class="sc">&lt;</span> <span class="dv">3</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span> (price <span class="sc">&gt;</span> <span class="dv">10000</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>carat, <span class="at">y=</span>price,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">color =</span> color)) <span class="sc">+</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">trans =</span> <span class="st">"log"</span>) <span class="sc">+</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Plot of relation between Carat and Price"</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"For different colours of diamonds"</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Price (in $)"</span>, <span class="at">x =</span> <span class="st">"Carat"</span>) <span class="sc">+</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Chapter29_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+<p><img src="Chapter29_files/figure-html/Plot2-Diamonds-Improved-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ol start="2" type="1">
@@ -336,10 +337,8 @@ div.csl-indent {
 <li><p><strong>Using the visual editor, insert a code chunk using the Insert menu and then the insert anything tool.</strong></p>
 <p>Here, I am inserting a code chunk using simple the “/” key, and then selecting R-code option:--</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Hello World"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Hello World"</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Hello World"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "Hello World"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
 <li><p><strong>Using the visual editor, figure out how to:</strong></p>
 <ol type="a">
@@ -392,9 +391,112 @@ div.csl-indent {
 <li><p><strong>Add a block quote.</strong></p>
 <p>A block quote can be added in the source editor by using a tab, followed by <code>&gt;</code> key, followed by the text. Further, the book, <a href="https://bookdown.org/yihui/rmarkdown/tufte-quotes.html" title="R Markdown: The Definitive Guide by Yihui Xie, J. J. Allaire, Garrett Grolemund">R Markdown: The Definitive Guide</a>, tells us that <em>“paragraphs that start with</em> <code>&gt;</code> <em>are converted to block quotes.”</em></p></li>
 </ol></li>
-<li><p>Copy and paste the contents of <code>diamond-sizes.qmd</code> from <a href="https://github.com/hadley/r4ds/tree/main/quarto" class="uri">https://github.com/hadley/r4ds/tree/main/quarto</a> in to a local R Quarto document. Check that you can run it, then add text after the frequency polygon that describes its most striking features.</p></li>
-<li><p>Create a document in a Google doc or MS Word (or locate a document you have created previously) with some content in it such as headings, hyperlinks, formatted text, etc. Copy the contents of this document and paste it into a Quarto document in the visual editor. Then, switch over to the source editor and inspect the source code.</p></li>
+<li><p><strong>Copy and paste the contents of <code>diamond-sizes.qmd</code> from <a href="https://github.com/hadley/r4ds/tree/main/quarto" class="uri">https://github.com/hadley/r4ds/tree/main/quarto</a> in to a local R Quarto document. Check that you can run it, then add text after the frequency polygon that describes its most striking features.</strong></p></li>
 </ol>
+<p>We have data about 53940 diamonds. Only 126 are larger than 2.5 carats. The distribution of the remainder is shown below:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Chapter29_files/figure-html/plot-smaller-diamonds-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><strong>Here’s the paragraph:</strong> The frequency polygon tells us that the carat distribution peaks at increments of 0.1, reflecting the fact the measurements of <code>carat</code> is done in increments of 0.1. Further, there are fewer diamonds of higher <code>carat</code> size.</p>
+<ol start="4" type="1">
+<li><strong>Create a document in a Google doc or MS Word (or locate a document you have created previously) with some content in it such as headings, hyperlinks, formatted text, etc. Copy the contents of this document and paste it into a Quarto document in the visual editor. Then, switch over to the source editor and inspect the source code.</strong></li>
+</ol>
+<p>This is sample MS Word Document. I will copy this document into <strong>Visual Editor</strong> of Quarto, and then see the code entered in the <strong>Source Editor</strong>.</p>
+<ul>
+<li><p><strong>First, here’s a list of 4 largest continents:</strong></p>
+<ol type="i">
+<li>Asia</li>
+<li>Africa</li>
+<li>North America</li>
+<li>South America</li>
+<li>Europe</li>
+<li>Oceania</li>
+<li>Antarctica</li>
+</ol></li>
+<li><p><strong>Second, here’s a list of largest oceans</strong></p>
+<ol type="1">
+<li>Pacific Ocean</li>
+<li>Atlantic Ocean</li>
+<li>Indian Ocean</li>
+<li>Arctic Ocean</li>
+<li>Southern Ocean</li>
+</ol></li>
+</ul>
+<p>The text can be <strong>bold,</strong> <em>iltalic,</em> or, it can be <u>underlined.</u></p>
+<p>I observe that The <strong>Source Editor</strong> automatically inserts the R Markdown code needed to produce the visual output of MS Word. The <strong>Visual Editor</strong> displays the text, just like MS Word. Of course, there are some bugs, especially in bulletined lists and numbered lists with indents. I am unable to create copy the format of sub-lists within bullet points into the <strong>Visual Editor</strong>. So, I manually went to the <strong>Source Editor,</strong> and inserted two <code>tabs</code> before each sub-list point. But, for retaining the formatting of <strong>bold,</strong> <em>italics</em> or underline, the Visual Editor of Quarto is pretty awesome!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">+</span><span class="dv">3</span> <span class="sc">/</span> <span class="dv">4</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1.75</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercises-3" class="level1">
+<h1><strong>29.5.5 Exercises</strong></h1>
+<ol type="1">
+<li><strong>Add a section that explores how diamond sizes vary by cut, color, and clarity. Assume you’re writing a report for someone who doesn’t know R, and instead of setting <code>echo: false</code> on each chunk, set a global option.</strong></li>
+</ol>
+<p>Let’s explore the <code>diamonds</code> data-set. There are 53,940 diamonds in the data-set. We create histograms for <code>color</code>, <code>cut</code> and <code>clarity</code>. These three help us explore the distribution of diamonds among different types of <code>color</code>, <code>cut</code> and <code>clarity</code>. To not display the code, I use <code>#|echo: false</code> at the start of the chunk. Alternatively, I could use the following code in the YAML header:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">:</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  opts_chunk<span class="sc">:</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    collapse<span class="sc">:</span> true</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<pre><code>## [1] 53940</code></pre>
+<div class="cell-output-display">
+<p><img src="Chapter29_files/figure-html/ggplot2-example-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ol start="2" type="1">
+<li><p><strong>Download <code>diamond-sizes.qmd</code> from <a href="https://github.com/hadley/r4ds/tree/main/quarto" class="uri">https://github.com/hadley/r4ds/tree/main/quarto</a>. Add a section that describes the largest 20 diamonds, including a table that displays their most important attributes.</strong></p>
+<p>Here’s the added section.</p>
+<p>Examining the 20 largest diamonds, by <code>carat</code> since we know from American Gem Society’s <a href="https://www.americangemsociety.org/buying-diamonds-with-confidence/4cs-of-diamonds/understanding-diamond-carat-weight-the-4cs-of-diamonds/#:~:text=Carat%20is%20the%20unit%20of,carat%20equals%200.007%20ounce%20avoirdupois." title="Understanding Diamond Carat Weight: The 4Cs of Diamonds">website</a> that <em>“Carat is the unit of measurement for the physical weight of diamonds. One carat equals 0.200 grams or 1/5 gram and is subdivided into 100 points.”</em></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>top20 <span class="ot">=</span> diamonds <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(carat)) <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">20</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Examining the cut, color and clarity of the top 20 diamonds, in comparison to all diamonds</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>g4 <span class="ot">=</span> <span class="fu">ggplot</span>(<span class="at">data =</span> top20, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> cut)) <span class="sc">+</span> </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"count"</span>) <span class="sc">+</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Cut"</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>g5 <span class="ot">=</span> <span class="fu">ggplot</span>(<span class="at">data =</span> top20, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> color,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">fill =</span> color,</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">color =</span> color)) <span class="sc">+</span> </span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"count"</span>) <span class="sc">+</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Color"</span>) <span class="sc">+</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"null"</span>)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>g6 <span class="ot">=</span> <span class="fu">ggplot</span>(<span class="at">data =</span> top20, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> clarity)) <span class="sc">+</span> </span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"count"</span>) <span class="sc">+</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"No. of Largest Diamonds"</span>, <span class="at">y =</span> <span class="st">"Clarity"</span>) <span class="sc">+</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"null"</span>)</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">=</span> g1 <span class="sc">/</span> g2 <span class="sc">/</span> g3 <span class="sc">/</span> g4 <span class="sc">/</span> g5 <span class="sc">/</span> g6 <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">ncol =</span> <span class="dv">2</span>, </span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">nrow =</span> <span class="dv">3</span>,</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">byrow =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Chapter29_files/figure-html/Largest-20-diamonds-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Hence, we can see that the largest diamonds are, on average, of poorer cut, i.e.&nbsp;<code>Fair</code>. They are more likely to be of <code>l1</code> <code>clarity</code> and <code>J</code> and <code>I</code> colours.</p></li>
+<li><p><strong>Modify <code>diamonds-sizes.qmd</code> to use <code>label_comma()</code> to produce nicely formatted output. Also include the percentage of diamonds that are larger than 2.5 carats.</strong></p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>smaller <span class="ot">&lt;-</span> diamonds <span class="sc">|&gt;</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(carat <span class="sc">&lt;=</span> <span class="fl">2.5</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>comma <span class="ot">=</span> <span class="cf">function</span>(x) {<span class="fu">format</span>(x, <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">big.mark =</span> <span class="st">","</span>)}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Thus, we conclude that we have data about 53,940 diamonds. Only 126 are larger than 2.5 carats. The percentage of diamonds that are larger than 2.5 carats is 0.23 %. The inline code that I used to get these numbers is:–</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">comma</span>(<span class="fu">nrow</span>(diamonds))</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">comma</span>(<span class="fu">nrow</span>(diamonds)<span class="sc">-</span><span class="fu">nrow</span>(smaller))</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">comma</span>(<span class="dv">100</span><span class="sc">*</span>(<span class="fu">nrow</span>(diamonds)<span class="sc">-</span><span class="fu">nrow</span>(smaller))<span class="sc">/</span><span class="fu">nrow</span>(diamonds))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 
