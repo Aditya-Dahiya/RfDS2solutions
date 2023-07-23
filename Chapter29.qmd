@@ -93,7 +93,7 @@ Text Formatting
 
 [linked phrases](https://www.oxfordinternationalenglish.com/linking-words-and-phrases-in-english/ "Oxford English Dictionary meaning of Linked Phrases")
 
-[![Credits: Nick Tierney\'s (mostly) rstats blog](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/imgs/r-knitr-rmd.jpeg){fig-alt="Notes on Changing from Rmarkdown/Bookdown to Quarto" width="338"}](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/)
+[![Credits: Nick Tierney's (mostly) rstats blog](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/imgs/r-knitr-rmd.jpeg){fig-alt="Notes on Changing from Rmarkdown/Bookdown to Quarto" width="338"}](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/)
 
 Tables
 
@@ -179,10 +179,57 @@ Once we render the document, the citation shows up in the very end of the HTML w
 
         A block quote can be added in the source editor by using a tab, followed by `>` key, followed by the text. Further, the book, [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/tufte-quotes.html "R Markdown: The Definitive Guide by Yihui Xie, J. J. Allaire, Garrett Grolemund"), tells us that *"paragraphs that start with* `>` *are converted to block quotes."*
 
-3.  Copy and paste the contents of `diamond-sizes.qmd` from <https://github.com/hadley/r4ds/tree/main/quarto> in to a local R Quarto document. Check that you can run it, then add text after the frequency polygon that describes its most striking features.
-
-4.  Create a document in a Google doc or MS Word (or locate a document you have created previously) with some content in it such as headings, hyperlinks, formatted text, etc. Copy the contents of this document and paste it into a Quarto document in the visual editor. Then, switch over to the source editor and inspect the source code.
+3.  **Copy and paste the contents of `diamond-sizes.qmd` from <https://github.com/hadley/r4ds/tree/main/quarto> in to a local R Quarto document. Check that you can run it, then add text after the frequency polygon that describes its most striking features.**
 
 [^3]: I use Ctrl + Shift + 7 to create a footnote here.
 
 [^4]: This is a test footnote I wrote in the Source Editor
+
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+
+smaller <- diamonds |> 
+  filter(carat <= 2.5)
+```
+
+We have data about `r nrow(diamonds)` diamonds. Only `r nrow(diamonds) - nrow(smaller)` are larger than 2.5 carats. The distribution of the remainder is shown below:
+
+```{r}
+#| label: plot-smaller-diamonds
+#| echo: false
+
+smaller |> 
+  ggplot(aes(x = carat)) + 
+  geom_freqpoly(binwidth = 0.01)
+```
+
+**Here's the paragraph:** The frequency polygon tells us that the carat distribution peaks at increments of 0.1, reflecting the fact the measurements of `carat` is done in increments of 0.1. Further, there are fewer diamonds of higher `carat` size.
+
+4.  **Create a document in a Google doc or MS Word (or locate a document you have created previously) with some content in it such as headings, hyperlinks, formatted text, etc. Copy the contents of this document and paste it into a Quarto document in the visual editor. Then, switch over to the source editor and inspect the source code.**
+
+This is sample MS Word Document. I will copy this document into **Visual Editor** of Quarto, and then see the code entered in the **Source Editor**.
+
+-   **First, here's a list of 4 largest continents:**
+
+    (i) Asia
+    (ii) Africa
+    (iii) North America
+    (iv) South America
+    (v) Europe
+    (vi) Oceania
+    (vii) Antarctica
+
+-   **Second, here's a list of largest oceans**
+
+    1.  Pacific Ocean
+    2.  Atlantic Ocean
+    3.  Indian Ocean
+    4.  Arctic Ocean
+    5.  Southern Ocean
+
+The text can be **bold,** *iltalic,* or, it can be [underlined.]{.underline}
+
+I observe that The **Source Editor** automatically inserts the R Markdown code needed to produce the visual output of MS Word. The **Visual Editor** displays the text, just like MS Word. Of course, there are some bugs, especially in bulletined lists and numbered lists with indents. I am unable to create copy the format of sub-lists within bullet points into the **Visual Editor**. So, I manually went to the **Source Editor,** and inserted two `tabs` before each sub-list point. But, for retaining the formatting of **bold,** *italics* or underline, the Visual Editor of Quarto is pretty awesome!

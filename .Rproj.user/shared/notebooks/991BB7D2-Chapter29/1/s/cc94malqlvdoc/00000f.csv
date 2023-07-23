@@ -1,0 +1,6 @@
+"0","#| label: plot-smaller-diamonds"
+"0","#| echo: false"
+"0",""
+"0","smaller |> "
+"0","  ggplot(aes(x = carat)) + "
+"0","  geom_freqpoly(binwidth = 0.01)"
