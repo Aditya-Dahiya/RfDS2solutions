@@ -435,3 +435,54 @@ comma(100*(nrow(diamonds)-nrow(smaller))/nrow(diamonds))
       tab_header(title = "The attributes of the largest 5 diamonds",
                  subtitle = md("Source: *Diamonds* Dataset; **R** Tidyverse"))
     ```
+
+# **29.8.1 Exercises**
+
+1.  **Set up a network of chunks where `d` depends on `c` and `b`, and both `b` and `c` depend on `a`. Have each chunk print [`lubridate::now()`](https://lubridate.tidyverse.org/reference/now.html), set `cache: true`, then verify your understanding of caching.**
+
+    Let's generate the first chunk by the name `cache-a` below:-
+
+    ```{r}
+    #| label: cache-a
+    #| cache: true
+
+    library(lubridate)
+    now()
+    ```
+
+    The second, third and fourth chunks are:-
+
+    The Chunk named `cache-b`
+
+    ```{r}
+    #| label: cache-b
+    #| cache: true
+    #| dependson: "cache-a"
+
+    library(lubridate)
+    now()
+    ```
+
+    The chunk named `cache-c`
+
+    ```{r}
+    #| label: cache-c
+    #| cache: true
+    #| dependson: "cache-a"
+
+    library(lubridate)
+    now()
+    ```
+
+    The chunk named `cache-d`
+
+    ```{r}
+    #| label: cache-d
+    #| cache: true
+    #| dependson: c("cache-b", "cache-c")
+
+    library(lubridate)
+    now()
+    ```
+
+    The way I understand it, `cache-d` depends on either of the two code chunks' (`cache-b` and `cache-c`) results changing. And, both of these in turn depend on `cache-a`'s results changing. Thus, on each rendering of the file, this chunk `cache-a` will change its result,a nd thus all four will change the result as exactly the same! Hope I am getting this right! If not, please raise an issue or a pull request on GitHub [here](https://github.com/Aditya-Dahiya/RfDS2solutions/blob/main/Chapter29.qmd "Chapter 29 qmd file").
