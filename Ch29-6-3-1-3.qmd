@@ -1,0 +1,77 @@
+---
+title: "Chapter 29: Exercise 29.6.3.3"
+author: "Aditya Dahiya"
+---
+
+3\. Change the size of the figure with the following chunk options, one at a time, render your document, and describe how the figure changes.
+
+a. How the figure changes with `` `fig-width: 6` ``
+
+```{r}
+#| warning: false
+#| message: false
+#| error: false
+#| label: fig-changewidth
+#| fig-cap: "Plot with width fixed at 10"
+#| fig-width: 10
+
+
+library(tidyverse)
+diamonds |>
+  filter(carat <= 2.5) |>
+      ggplot(aes(x = carat)) + 
+        geom_freqpoly(binwidth = 0.01) +
+        theme_light() +
+        labs(x="Diamond Carat Size", y = "Number of Diamonds")
+```
+
+b. How the figure changes with \``fig-height: 3`\`
+
+```{r}
+#| warning: false
+#| message: false
+#| error: false
+#| label: fig-changeheight
+#| fig-cap: "Plot with height fixed at 10"
+#| fig-height: 3
+diamonds |>
+  filter(carat <= 2.5) |>
+      ggplot(aes(x = carat)) + 
+        geom_freqpoly(binwidth = 0.01) +
+        theme_light() +
+        labs(x="Diamond Carat Size", y = "Number of Diamonds")
+```
+
+c. How the figure changes with \``out-width: "100%"`\`
+
+```{r}
+#| warning: false
+#| message: false
+#| error: false
+#| label: fig-changeoutwid
+#| fig-cap: "Plot with output width at 100%"
+#| out-width: "100%"
+diamonds |>
+  filter(carat <= 2.5) |>
+      ggplot(aes(x = carat)) + 
+        geom_freqpoly(binwidth = 0.01) +
+        theme_light() +
+        labs(x="Diamond Carat Size", y = "Number of Diamonds")
+```
+
+d. How the figure changes with \``out-width: "20%"`\`
+
+```{r}
+#| warning: false
+#| message: false
+#| error: false
+#| label: fig-changeoutwid2
+#| fig-cap: "Plot with output width at 20%"
+#| out-width: "20%"
+diamonds |>
+  filter(carat <= 2.5) |>
+      ggplot(aes(x = carat)) + 
+        geom_freqpoly(binwidth = 0.01) +
+        theme_light() +
+        labs(x="Diamond Carat Size", y = "Number of Diamonds")
+```

@@ -1,5 +1,5 @@
 ---
-title: "Chapter 29 (Quarto)"
+title: "Chapter 29: Quarto"
 author: "Aditya Dahiya"
 editor_options: 
   chunk_output_type: console
@@ -20,7 +20,7 @@ library(tidyverse)
 ```
 
 ```{r}
-#| label: Plot1-Diamonds
+#| label: diamonds1
 #| message: false
 diamonds |> 
   filter(carat > 2) |>
@@ -364,27 +364,30 @@ comma(100*(nrow(diamonds)-nrow(smaller))/nrow(diamonds))
 
 2.  **Edit the label of the code chunk in `diamond-sizes.qmd` that generates a plot to start with the prefix `fig-` and add a caption to the figure with the chunk option `fig-cap`. Then, edit the text above the code chunk to add a cross-reference to the figure with Insert \> Cross Reference.**
 
-    The R-code for generating the figure has been copied from `diamond-sizes.qmd`. It is displayed below. The cross-reference to the generated figure is @fig-freq-poly.
+    The R-code for generating the figure has been copied from `diamond-sizes.qmd`. It is displayed below. The cross-reference to the generated figure is @fig-freqpoly.
 
     ```{r}
-    #| label: fig-freq-poly
+    #| label: fig-freqpoly
     #| fig-cap: "Frequency Polygon of smaller diamonds"
 
-    g = diamonds |> 
+    diamonds |> 
       filter(carat <= 2.5) |>
       ggplot(aes(x = carat)) + 
         geom_freqpoly(binwidth = 0.01) +
         theme_light() +
         labs(x="Diamond Carat Size", y = "Number of Diamonds")
-    print(g)
     ```
 
-3.  Change the size of the figure with the following chunk options, one at a time, render your document, and describe how the figure changes.
+3.  **Change the size of the figure with the following chunk options, one at a time, render your document, and describe how the figure changes.**
 
-    a.  `fig-width: 10`
+    I have created the 4 figures in a separate `.qmd` file, `Ch29-6-3-1.qmd`. You can check the file in the GitHub repository here. The results are as follows:
 
-    b.  `fig-height: 3`
+    a.  The option `fig-width:10` keeps the width at a fixed 10 inches
 
-    c.  `out-width: "100%"`
+    b.  The option `fig-height: 3` keeps the height at a fixed 3 inches, and thus disturbs the aspect ratio
 
-    d.  `out-width: "20%"`
+    c.  The option `out-width:"100%"` keeps the aspect ratio fixed at the default *(approximately 0.618, the golden ratio)*, and makes the plot occupy 100% width of the knitted HTML document.
+
+    d.  The option `out-width: "20%"` keeps the aspect ratio fixed at the default *(approximately 0.618, the golden ratio)*, and makes the plot occupy only **20% width** of the knitted HTML document. This makes the plot too small to see.
+
+    Overall, after many iterations, I agree that the one of the best options would be `out-width: "70%"` and the `fig-align: center`, as this preserves the aspect ratio, and allows some breathing space on the sides of the plot.

@@ -8,7 +8,7 @@
 
 <meta name="author" content="Aditya Dahiya">
 
-<title>RfDS2solutions - Chapter 29 (Quarto)</title>
+<title>RfDS2solutions - Chapter 29: Quarto</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -189,7 +189,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Chapter 29 (Quarto)</h1>
+<h1 class="title">Chapter 29: Quarto</h1>
 </div>
 
 
@@ -231,7 +231,7 @@ div.csl-indent {
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Chapter29_files/figure-html/Plot1-Diamonds-1.png" class="img-fluid" width="672"></p>
+<p><img src="Chapter29_files/figure-html/diamonds1-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
@@ -543,31 +543,32 @@ div.csl-indent {
 </div>
 <p>When I render the document, the same image is saved in the <code>/docs/images</code> directory of my Quarto Website project. The image name is the same as that of the original file.</p></li>
 <li><p><strong>Edit the label of the code chunk in <code>diamond-sizes.qmd</code> that generates a plot to start with the prefix <code>fig-</code> and add a caption to the figure with the chunk option <code>fig-cap</code>. Then, edit the text above the code chunk to add a cross-reference to the figure with Insert &gt; Cross Reference.</strong></p>
-<p>The R-code for generating the figure has been copied from <code>diamond-sizes.qmd</code>. It is displayed below. The cross-reference to the generated figure is <a href="#fig-freq-poly">Figure&nbsp;1</a>.</p>
+<p>The R-code for generating the figure has been copied from <code>diamond-sizes.qmd</code>. It is displayed below. The cross-reference to the generated figure is <a href="#fig-freqpoly">Figure&nbsp;1</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> diamonds <span class="sc">|&gt;</span> </span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span> </span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(carat <span class="sc">&lt;=</span> <span class="fl">2.5</span>) <span class="sc">|&gt;</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> carat)) <span class="sc">+</span> </span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_freqpoly</span>(<span class="at">binwidth =</span> <span class="fl">0.01</span>) <span class="sc">+</span></span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_light</span>() <span class="sc">+</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Diamond Carat Size"</span>, <span class="at">y =</span> <span class="st">"Number of Diamonds"</span>)</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(g)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Diamond Carat Size"</span>, <span class="at">y =</span> <span class="st">"Number of Diamonds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-freq-poly" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-freqpoly" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="Chapter29_files/figure-html/fig-freq-poly-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Chapter29_files/figure-html/fig-freqpoly-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption class="figure-caption">Figure&nbsp;1: Frequency Polygon of smaller diamonds</figcaption>
 </figure>
 </div>
 </div>
 </div></li>
-<li><p>Change the size of the figure with the following chunk options, one at a time, render your document, and describe how the figure changes.</p>
+<li><p><strong>Change the size of the figure with the following chunk options, one at a time, render your document, and describe how the figure changes.</strong></p>
+<p>I have created the 4 figures in a separate <code>.qmd</code> file, <code>Ch29-6-3-1.qmd</code>. The results are as follows:</p>
 <ol type="a">
-<li><p><code>fig-width: 10</code></p></li>
-<li><p><code>fig-height: 3</code></p></li>
-<li><p><code>out-width: "100%"</code></p></li>
-<li><p><code>out-width: "20%"</code></p></li>
-</ol></li>
+<li><p>The option <code>fig-width:10</code> keeps the width at a fixed 10 inches</p></li>
+<li><p>The option <code>fig-height: 3</code> keeps the height at a fixed 3 inches, and thus disturbs the aspect ratio</p></li>
+<li><p>The option <code>out-width:"100%"</code> keeps the aspect ratio fixed at the default <em>(approximately 0.618, the golden ratio)</em>, and makes the plot occupy 100% width of the knitted HTML document.</p></li>
+<li><p>The option <code>out-width: "20%"</code> keeps the aspect ratio fixed at the default <em>(approximately 0.618, the golden ratio)</em>, and makes the plot occupy only <strong>20% width</strong> of the knitted HTML document. This makes the plot too small to see.</p></li>
+</ol>
+<p>Overall, after many iterations, I agree that the one of the best options would be <code>out-width: "70%"</code> and the <code>fig-align: center</code>, as this preserves the aspect ratio, and allows some breathing space on the sides of the plot.</p></li>
 </ol>
 
 

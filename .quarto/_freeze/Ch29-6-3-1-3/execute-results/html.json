@@ -1,0 +1,16 @@
+{
+  "hash": "b0de57444f07cf87551a434b9d27b5b5",
+  "result": {
+    "markdown": "---\ntitle: \"Chapter 29: Exercise 29.6.3.3\"\nauthor: \"Aditya Dahiya\"\n---\n\n\n3\\. Change the size of the figure with the following chunk options, one at a time, render your document, and describe how the figure changes.\n\na. How the figure changes with `` `fig-width: 6` ``\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\ndiamonds |>\n  filter(carat <= 2.5) |>\n      ggplot(aes(x = carat)) + \n        geom_freqpoly(binwidth = 0.01) +\n        theme_light() +\n        labs(x=\"Diamond Carat Size\", y = \"Number of Diamonds\")\n```\n\n::: {.cell-output-display}\n![Plot with width fixed at 10](Ch29-6-3-1-3_files/figure-html/fig-changewidth-1.png){#fig-changewidth width=960}\n:::\n:::\n\n\nb. How the figure changes with \\``fig-height: 3`\\`\n\n\n::: {.cell}\n\n```{.r .cell-code}\ndiamonds |>\n  filter(carat <= 2.5) |>\n      ggplot(aes(x = carat)) + \n        geom_freqpoly(binwidth = 0.01) +\n        theme_light() +\n        labs(x=\"Diamond Carat Size\", y = \"Number of Diamonds\")\n```\n\n::: {.cell-output-display}\n![Plot with height fixed at 10](Ch29-6-3-1-3_files/figure-html/fig-changeheight-1.png){#fig-changeheight width=672}\n:::\n:::\n\n\nc. How the figure changes with \\``out-width: \"100%\"`\\`\n\n\n::: {.cell}\n\n```{.r .cell-code}\ndiamonds |>\n  filter(carat <= 2.5) |>\n      ggplot(aes(x = carat)) + \n        geom_freqpoly(binwidth = 0.01) +\n        theme_light() +\n        labs(x=\"Diamond Carat Size\", y = \"Number of Diamonds\")\n```\n\n::: {.cell-output-display}\n![Plot with output width at 100%](Ch29-6-3-1-3_files/figure-html/fig-changeoutwid-1.png){#fig-changeoutwid width=100%}\n:::\n:::\n\n\nd. How the figure changes with \\``out-width: \"20%\"`\\`\n\n\n::: {.cell}\n\n```{.r .cell-code}\ndiamonds |>\n  filter(carat <= 2.5) |>\n      ggplot(aes(x = carat)) + \n        geom_freqpoly(binwidth = 0.01) +\n        theme_light() +\n        labs(x=\"Diamond Carat Size\", y = \"Number of Diamonds\")\n```\n\n::: {.cell-output-display}\n![Plot with output width at 20%](Ch29-6-3-1-3_files/figure-html/fig-changeoutwid2-1.png){#fig-changeoutwid2 width=20%}\n:::\n:::\n",
+    "supporting": [
+      "Ch29-6-3-1-3_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
