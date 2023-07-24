@@ -100,7 +100,7 @@ Text Formatting
 
 [linked phrases](https://www.oxfordinternationalenglish.com/linking-words-and-phrases-in-english/ "Oxford English Dictionary meaning of Linked Phrases")
 
-[![Credits: Nick Tierney\'s (mostly) rstats blog](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/imgs/r-knitr-rmd.jpeg){fig-alt="Notes on Changing from Rmarkdown/Bookdown to Quarto" width="338"}](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/)
+[![Credits: Nick Tierney's (mostly) rstats blog](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/imgs/r-knitr-rmd.jpeg){fig-alt="Notes on Changing from Rmarkdown/Bookdown to Quarto" width="338"}](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/)
 
 Tables
 
@@ -485,4 +485,4 @@ comma(100*(nrow(diamonds)-nrow(smaller))/nrow(diamonds))
     now()
     ```
 
-    The way I understand it, `cache-d` depends on either of the two code chunks' (`cache-b` and `cache-c`) results changing. And, both of these in turn depend on `cache-a`'s results changing. Thus, on each rendering of the file, this chunk `cache-a` will change its result,a nd thus all four will change the result as exactly the same! Hope I am getting this right! If not, please raise an issue or a pull request on GitHub [here](https://github.com/Aditya-Dahiya/RfDS2solutions/blob/main/Chapter29.qmd "Chapter 29 qmd file").
+    The way I understand it, `cache-d` depends on either of the two code chunks' (`cache-b` and `cache-c`) results changing. And, both of these in turn depend on `cache-a`'s results changing. Thus, on each rendering of the file, we see that this chunk `cache-a` will never its result because it has been cached, i.e. we had put `#| cache: true` above the first code chunk called `cache-a`. Since the code itself never changes, `R` and ***Quarto*** never bother to re-run the code again, rather than just use the output, i.e. the time from when the code first ran! And, the other three chunks depend on `cache-a` changing, which does not. Thus, all the four code chunks are stuck with the same output i.e., the date and time when this code was first run afresh. Hope I am getting this right! If not, please raise an issue or a pull request on GitHub [here](https://github.com/Aditya-Dahiya/RfDS2solutions/blob/main/Chapter29.qmd "Chapter 29 qmd file").
