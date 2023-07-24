@@ -113,6 +113,9 @@ div.csl-indent {
   }
 }</script>
 
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -181,6 +184,7 @@ div.csl-indent {
   <li><a href="#exercises-2" id="toc-exercises-2" class="nav-link" data-scroll-target="#exercises-2">29.4.1 Exercises</a></li>
   <li><a href="#exercises-3" id="toc-exercises-3" class="nav-link" data-scroll-target="#exercises-3"><strong>29.5.5 Exercises</strong></a></li>
   <li><a href="#exercises-4" id="toc-exercises-4" class="nav-link" data-scroll-target="#exercises-4"><strong>29.6.3 Exercises</strong></a></li>
+  <li><a href="#exercises-5" id="toc-exercises-5" class="nav-link" data-scroll-target="#exercises-5"><strong>29.7.1 Exercises</strong></a></li>
   </ul>
 </nav>
     </div>
@@ -561,7 +565,7 @@ div.csl-indent {
 </div>
 </div></li>
 <li><p><strong>Change the size of the figure with the following chunk options, one at a time, render your document, and describe how the figure changes.</strong></p>
-<p>I have created the 4 figures in a separate <code>.qmd</code> file, <code>Ch29-6-3-1.qmd</code>. The results are as follows:</p>
+<p>I have created the 4 figures in a separate <code>.qmd</code> file, <code>Ch29-6-3-1.qmd</code>. You can check the file in the GitHub repository <a href="https://github.com/Aditya-Dahiya/RfDS2solutions/blob/main/Ch29-6-3-1-3.qmd" title="The .qmd file for Question 3">here</a>. The results are as follows:</p>
 <ol type="a">
 <li><p>The option <code>fig-width:10</code> keeps the width at a fixed 10 inches</p></li>
 <li><p>The option <code>fig-height: 3</code> keeps the height at a fixed 3 inches, and thus disturbs the aspect ratio</p></li>
@@ -569,6 +573,1164 @@ div.csl-indent {
 <li><p>The option <code>out-width: "20%"</code> keeps the aspect ratio fixed at the default <em>(approximately 0.618, the golden ratio)</em>, and makes the plot occupy only <strong>20% width</strong> of the knitted HTML document. This makes the plot too small to see.</p></li>
 </ol>
 <p>Overall, after many iterations, I agree that the one of the best options would be <code>out-width: "70%"</code> and the <code>fig-align: center</code>, as this preserves the aspect ratio, and allows some breathing space on the sides of the plot.</p></li>
+</ol>
+</section>
+<section id="exercises-5" class="level1">
+<h1><strong>29.7.1 Exercises</strong></h1>
+<ol type="1">
+<li><p><strong>Open <code>diamond-sizes.qmd</code> in the visual editor, insert a code chunk, and add a table with <a href="https://rdrr.io/pkg/knitr/man/kable.html"><code>knitr::kable()</code></a> that shows the first 5 rows of the <code>diamonds</code> data frame.</strong></p>
+<p>I will use the <code>kable</code> and the <code>kableExtra</code> packages to produce the Table. The table dispalys the largest 5 diamonds by the <code>carat</code> size variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">5</span>, carat) <span class="sc">|&gt;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">|&gt;</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic_2</span>(<span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="lightable-classic-2 table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">carat</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">cut</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">color</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">clarity</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">depth</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">table</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">price</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">x</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">y</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">z</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">4.01</td>
+<td style="text-align: left;">Premium</td>
+<td style="text-align: left;">I</td>
+<td style="text-align: left;">I1</td>
+<td style="text-align: right;">61.0</td>
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">15223</td>
+<td style="text-align: right;">10.14</td>
+<td style="text-align: right;">10.10</td>
+<td style="text-align: right;">6.17</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4.01</td>
+<td style="text-align: left;">Premium</td>
+<td style="text-align: left;">J</td>
+<td style="text-align: left;">I1</td>
+<td style="text-align: right;">62.5</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">15223</td>
+<td style="text-align: right;">10.02</td>
+<td style="text-align: right;">9.94</td>
+<td style="text-align: right;">6.24</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4.13</td>
+<td style="text-align: left;">Fair</td>
+<td style="text-align: left;">H</td>
+<td style="text-align: left;">I1</td>
+<td style="text-align: right;">64.8</td>
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">17329</td>
+<td style="text-align: right;">10.00</td>
+<td style="text-align: right;">9.85</td>
+<td style="text-align: right;">6.43</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5.01</td>
+<td style="text-align: left;">Fair</td>
+<td style="text-align: left;">J</td>
+<td style="text-align: left;">I1</td>
+<td style="text-align: right;">65.5</td>
+<td style="text-align: right;">59</td>
+<td style="text-align: right;">18018</td>
+<td style="text-align: right;">10.74</td>
+<td style="text-align: right;">10.54</td>
+<td style="text-align: right;">6.98</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4.50</td>
+<td style="text-align: left;">Fair</td>
+<td style="text-align: left;">J</td>
+<td style="text-align: left;">I1</td>
+<td style="text-align: right;">65.8</td>
+<td style="text-align: right;">58</td>
+<td style="text-align: right;">18531</td>
+<td style="text-align: right;">10.23</td>
+<td style="text-align: right;">10.16</td>
+<td style="text-align: right;">6.72</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div></li>
+<li><p><strong>Display the same table with <code>gt::gt()</code> instead.</strong></p>
+<p>The <code>gt</code> package gives us even more flexibility to add Title, Sub-title and even do R-Markdown style font editing in the text entered in the subtitle below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">5</span>, carat) <span class="sc">|&gt;</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">"The attributes of the largest 5 diamonds"</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">subtitle =</span> <span class="fu">md</span>(<span class="st">"Source: *Diamonds* Dataset; **R** Tidyverse"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div id="suuvmbroqi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#suuvmbroqi table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#suuvmbroqi thead, #suuvmbroqi tbody, #suuvmbroqi tfoot, #suuvmbroqi tr, #suuvmbroqi td, #suuvmbroqi th {
+  border-style: none;
+}
+
+#suuvmbroqi p {
+  margin: 0;
+  padding: 0;
+}
+
+#suuvmbroqi .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#suuvmbroqi .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#suuvmbroqi .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#suuvmbroqi .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#suuvmbroqi .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#suuvmbroqi .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#suuvmbroqi .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#suuvmbroqi .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#suuvmbroqi .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#suuvmbroqi .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#suuvmbroqi .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#suuvmbroqi .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#suuvmbroqi .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#suuvmbroqi .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#suuvmbroqi .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#suuvmbroqi .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#suuvmbroqi .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#suuvmbroqi .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#suuvmbroqi .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#suuvmbroqi .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#suuvmbroqi .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#suuvmbroqi .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#suuvmbroqi .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#suuvmbroqi .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#suuvmbroqi .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#suuvmbroqi .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#suuvmbroqi .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#suuvmbroqi .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#suuvmbroqi .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#suuvmbroqi .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#suuvmbroqi .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#suuvmbroqi .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#suuvmbroqi .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#suuvmbroqi .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#suuvmbroqi .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#suuvmbroqi .gt_left {
+  text-align: left;
+}
+
+#suuvmbroqi .gt_center {
+  text-align: center;
+}
+
+#suuvmbroqi .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#suuvmbroqi .gt_font_normal {
+  font-weight: normal;
+}
+
+#suuvmbroqi .gt_font_bold {
+  font-weight: bold;
+}
+
+#suuvmbroqi .gt_font_italic {
+  font-style: italic;
+}
+
+#suuvmbroqi .gt_super {
+  font-size: 65%;
+}
+
+#suuvmbroqi .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#suuvmbroqi .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#suuvmbroqi .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#suuvmbroqi .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#suuvmbroqi .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#suuvmbroqi .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#suuvmbroqi .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_heading">
+      <td colspan="10" class="gt_heading gt_title gt_font_normal" style="">The attributes of the largest 5 diamonds</td>
+    </tr>
+    <tr class="gt_heading">
+      <td colspan="10" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="">Source: <em>Diamonds</em> Dataset; <strong>R</strong> Tidyverse</td>
+    </tr>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="carat">carat</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="cut">cut</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="color">color</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="clarity">clarity</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="depth">depth</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="table">table</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="price">price</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="x">x</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="y">y</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="z">z</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="carat" class="gt_row gt_right">4.01</td>
+<td headers="cut" class="gt_row gt_center">Premium</td>
+<td headers="color" class="gt_row gt_center">I</td>
+<td headers="clarity" class="gt_row gt_center">I1</td>
+<td headers="depth" class="gt_row gt_right">61.0</td>
+<td headers="table" class="gt_row gt_right">61</td>
+<td headers="price" class="gt_row gt_right">15223</td>
+<td headers="x" class="gt_row gt_right">10.14</td>
+<td headers="y" class="gt_row gt_right">10.10</td>
+<td headers="z" class="gt_row gt_right">6.17</td></tr>
+    <tr><td headers="carat" class="gt_row gt_right">4.01</td>
+<td headers="cut" class="gt_row gt_center">Premium</td>
+<td headers="color" class="gt_row gt_center">J</td>
+<td headers="clarity" class="gt_row gt_center">I1</td>
+<td headers="depth" class="gt_row gt_right">62.5</td>
+<td headers="table" class="gt_row gt_right">62</td>
+<td headers="price" class="gt_row gt_right">15223</td>
+<td headers="x" class="gt_row gt_right">10.02</td>
+<td headers="y" class="gt_row gt_right">9.94</td>
+<td headers="z" class="gt_row gt_right">6.24</td></tr>
+    <tr><td headers="carat" class="gt_row gt_right">4.13</td>
+<td headers="cut" class="gt_row gt_center">Fair</td>
+<td headers="color" class="gt_row gt_center">H</td>
+<td headers="clarity" class="gt_row gt_center">I1</td>
+<td headers="depth" class="gt_row gt_right">64.8</td>
+<td headers="table" class="gt_row gt_right">61</td>
+<td headers="price" class="gt_row gt_right">17329</td>
+<td headers="x" class="gt_row gt_right">10.00</td>
+<td headers="y" class="gt_row gt_right">9.85</td>
+<td headers="z" class="gt_row gt_right">6.43</td></tr>
+    <tr><td headers="carat" class="gt_row gt_right">5.01</td>
+<td headers="cut" class="gt_row gt_center">Fair</td>
+<td headers="color" class="gt_row gt_center">J</td>
+<td headers="clarity" class="gt_row gt_center">I1</td>
+<td headers="depth" class="gt_row gt_right">65.5</td>
+<td headers="table" class="gt_row gt_right">59</td>
+<td headers="price" class="gt_row gt_right">18018</td>
+<td headers="x" class="gt_row gt_right">10.74</td>
+<td headers="y" class="gt_row gt_right">10.54</td>
+<td headers="z" class="gt_row gt_right">6.98</td></tr>
+    <tr><td headers="carat" class="gt_row gt_right">4.50</td>
+<td headers="cut" class="gt_row gt_center">Fair</td>
+<td headers="color" class="gt_row gt_center">J</td>
+<td headers="clarity" class="gt_row gt_center">I1</td>
+<td headers="depth" class="gt_row gt_right">65.8</td>
+<td headers="table" class="gt_row gt_right">58</td>
+<td headers="price" class="gt_row gt_right">18531</td>
+<td headers="x" class="gt_row gt_right">10.23</td>
+<td headers="y" class="gt_row gt_right">10.16</td>
+<td headers="z" class="gt_row gt_right">6.72</td></tr>
+  </tbody>
+
+
+</table>
+</div>
+</div>
+</div></li>
+<li><p><strong>Add a chunk label that starts with the prefix <code>tbl-</code> and add a caption to the table with the chunk option <code>tbl-cap</code>. Then, edit the text above the code chunk to add a cross-reference to the table with Insert &gt; Cross Reference.</strong></p>
+<p>Now, I use the <code>tbl-cap</code> option in the chunk to create a caption for the table, and cross reference it here in the text as <a href="#tbl-gttab2">Table&nbsp;1</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">5</span>, carat) <span class="sc">|&gt;</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">"The attributes of the largest 5 diamonds"</span>,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">subtitle =</span> <span class="fu">md</span>(<span class="st">"Source: *Diamonds* Dataset; **R** Tidyverse"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="tbl-gttab2" class="anchored">
+
+<div id="tybhxzxewe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tybhxzxewe table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#tybhxzxewe thead, #tybhxzxewe tbody, #tybhxzxewe tfoot, #tybhxzxewe tr, #tybhxzxewe td, #tybhxzxewe th {
+  border-style: none;
+}
+
+#tybhxzxewe p {
+  margin: 0;
+  padding: 0;
+}
+
+#tybhxzxewe .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#tybhxzxewe .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#tybhxzxewe .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#tybhxzxewe .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#tybhxzxewe .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tybhxzxewe .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tybhxzxewe .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tybhxzxewe .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#tybhxzxewe .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#tybhxzxewe .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#tybhxzxewe .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#tybhxzxewe .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#tybhxzxewe .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#tybhxzxewe .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#tybhxzxewe .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#tybhxzxewe .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#tybhxzxewe .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#tybhxzxewe .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#tybhxzxewe .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tybhxzxewe .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#tybhxzxewe .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#tybhxzxewe .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#tybhxzxewe .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tybhxzxewe .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#tybhxzxewe .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#tybhxzxewe .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tybhxzxewe .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tybhxzxewe .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#tybhxzxewe .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tybhxzxewe .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#tybhxzxewe .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tybhxzxewe .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tybhxzxewe .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tybhxzxewe .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tybhxzxewe .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tybhxzxewe .gt_left {
+  text-align: left;
+}
+
+#tybhxzxewe .gt_center {
+  text-align: center;
+}
+
+#tybhxzxewe .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#tybhxzxewe .gt_font_normal {
+  font-weight: normal;
+}
+
+#tybhxzxewe .gt_font_bold {
+  font-weight: bold;
+}
+
+#tybhxzxewe .gt_font_italic {
+  font-style: italic;
+}
+
+#tybhxzxewe .gt_super {
+  font-size: 65%;
+}
+
+#tybhxzxewe .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#tybhxzxewe .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#tybhxzxewe .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#tybhxzxewe .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#tybhxzxewe .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#tybhxzxewe .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#tybhxzxewe .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Table&nbsp;1:  <p>gt formatted table with a cross-reference caption</p> </caption>
+  <thead>
+    <tr class="gt_heading">
+      <td colspan="10" class="gt_heading gt_title gt_font_normal" style="">The attributes of the largest 5 diamonds</td>
+    </tr>
+    <tr class="gt_heading">
+      <td colspan="10" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="">Source: <em>Diamonds</em> Dataset; <strong>R</strong> Tidyverse</td>
+    </tr>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="carat">carat</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="cut">cut</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="color">color</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="clarity">clarity</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="depth">depth</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="table">table</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="price">price</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="x">x</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="y">y</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="z">z</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="carat" class="gt_row gt_right">4.01</td>
+<td headers="cut" class="gt_row gt_center">Premium</td>
+<td headers="color" class="gt_row gt_center">I</td>
+<td headers="clarity" class="gt_row gt_center">I1</td>
+<td headers="depth" class="gt_row gt_right">61.0</td>
+<td headers="table" class="gt_row gt_right">61</td>
+<td headers="price" class="gt_row gt_right">15223</td>
+<td headers="x" class="gt_row gt_right">10.14</td>
+<td headers="y" class="gt_row gt_right">10.10</td>
+<td headers="z" class="gt_row gt_right">6.17</td></tr>
+    <tr><td headers="carat" class="gt_row gt_right">4.01</td>
+<td headers="cut" class="gt_row gt_center">Premium</td>
+<td headers="color" class="gt_row gt_center">J</td>
+<td headers="clarity" class="gt_row gt_center">I1</td>
+<td headers="depth" class="gt_row gt_right">62.5</td>
+<td headers="table" class="gt_row gt_right">62</td>
+<td headers="price" class="gt_row gt_right">15223</td>
+<td headers="x" class="gt_row gt_right">10.02</td>
+<td headers="y" class="gt_row gt_right">9.94</td>
+<td headers="z" class="gt_row gt_right">6.24</td></tr>
+    <tr><td headers="carat" class="gt_row gt_right">4.13</td>
+<td headers="cut" class="gt_row gt_center">Fair</td>
+<td headers="color" class="gt_row gt_center">H</td>
+<td headers="clarity" class="gt_row gt_center">I1</td>
+<td headers="depth" class="gt_row gt_right">64.8</td>
+<td headers="table" class="gt_row gt_right">61</td>
+<td headers="price" class="gt_row gt_right">17329</td>
+<td headers="x" class="gt_row gt_right">10.00</td>
+<td headers="y" class="gt_row gt_right">9.85</td>
+<td headers="z" class="gt_row gt_right">6.43</td></tr>
+    <tr><td headers="carat" class="gt_row gt_right">5.01</td>
+<td headers="cut" class="gt_row gt_center">Fair</td>
+<td headers="color" class="gt_row gt_center">J</td>
+<td headers="clarity" class="gt_row gt_center">I1</td>
+<td headers="depth" class="gt_row gt_right">65.5</td>
+<td headers="table" class="gt_row gt_right">59</td>
+<td headers="price" class="gt_row gt_right">18018</td>
+<td headers="x" class="gt_row gt_right">10.74</td>
+<td headers="y" class="gt_row gt_right">10.54</td>
+<td headers="z" class="gt_row gt_right">6.98</td></tr>
+    <tr><td headers="carat" class="gt_row gt_right">4.50</td>
+<td headers="cut" class="gt_row gt_center">Fair</td>
+<td headers="color" class="gt_row gt_center">J</td>
+<td headers="clarity" class="gt_row gt_center">I1</td>
+<td headers="depth" class="gt_row gt_right">65.8</td>
+<td headers="table" class="gt_row gt_right">58</td>
+<td headers="price" class="gt_row gt_right">18531</td>
+<td headers="x" class="gt_row gt_right">10.23</td>
+<td headers="y" class="gt_row gt_right">10.16</td>
+<td headers="z" class="gt_row gt_right">6.72</td></tr>
+  </tbody>
+
+
+</table>
+</div>
+</div>
+</div>
+</div></li>
 </ol>
 
 

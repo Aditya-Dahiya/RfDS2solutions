@@ -364,7 +364,7 @@ comma(100*(nrow(diamonds)-nrow(smaller))/nrow(diamonds))
 
 2.  **Edit the label of the code chunk in `diamond-sizes.qmd` that generates a plot to start with the prefix `fig-` and add a caption to the figure with the chunk option `fig-cap`. Then, edit the text above the code chunk to add a cross-reference to the figure with Insert \> Cross Reference.**
 
-    The R-code for generating the figure has been copied from `diamond-sizes.qmd`. It is displayed below. The cross-reference to the generated figure is @fig-freqpoly.
+    The R-code for generating the figure has been copied from `diamond-sizes.qmd`. It is displayed below. The cross-reference to the generated figure is @fig-freqpoly. I do this by adding `#| label: fig-freqpoly` and `#| fig-cap: "Frequency Polygon of smaller diamonds"` before the `R` code.
 
     ```{r}
     #| label: fig-freqpoly
@@ -380,7 +380,7 @@ comma(100*(nrow(diamonds)-nrow(smaller))/nrow(diamonds))
 
 3.  **Change the size of the figure with the following chunk options, one at a time, render your document, and describe how the figure changes.**
 
-    I have created the 4 figures in a separate `.qmd` file, `Ch29-6-3-1.qmd`. You can check the file in the GitHub repository here. The results are as follows:
+    I have created the 4 figures in a separate `.qmd` file, `Ch29-6-3-1.qmd`. You can check the file in the GitHub repository [here](https://github.com/Aditya-Dahiya/RfDS2solutions/blob/main/Ch29-6-3-1-3.qmd "The .qmd file for Question 3"). The results are as follows:
 
     a.  The option `fig-width:10` keeps the width at a fixed 10 inches
 
@@ -391,3 +391,47 @@ comma(100*(nrow(diamonds)-nrow(smaller))/nrow(diamonds))
     d.  The option `out-width: "20%"` keeps the aspect ratio fixed at the default *(approximately 0.618, the golden ratio)*, and makes the plot occupy only **20% width** of the knitted HTML document. This makes the plot too small to see.
 
     Overall, after many iterations, I agree that the one of the best options would be `out-width: "70%"` and the `fig-align: center`, as this preserves the aspect ratio, and allows some breathing space on the sides of the plot.
+
+# **29.7.1 Exercises**
+
+1.  **Open `diamond-sizes.qmd` in the visual editor, insert a code chunk, and add a table with [`knitr::kable()`](https://rdrr.io/pkg/knitr/man/kable.html) that shows the first 5 rows of the `diamonds` data frame.**
+
+    I will use the `kable` and the `kableExtra` packages to produce the Table. The table dispalys the largest 5 diamonds by the `carat` size variable.
+
+    ```{r}
+    library(kableExtra)
+    diamonds |>
+      top_n(5, carat) |>
+      kbl() |>
+      kable_classic_2(full_width = FALSE)
+
+    ```
+
+2.  **Display the same table with `gt::gt()` instead.**
+
+    The `gt` package gives us even more flexibility to add Title, Sub-title and even do R-Markdown style font editing in the text entered in the subtitle below.
+
+    ```{r}
+    library(gt)
+    diamonds |>
+      top_n(5, carat) |>
+      gt() |>
+      tab_header(title = "The attributes of the largest 5 diamonds",
+                 subtitle = md("Source: *Diamonds* Dataset; **R** Tidyverse"))
+    ```
+
+3.  **Add a chunk label that starts with the prefix `tbl-` and add a caption to the table with the chunk option `tbl-cap`. Then, edit the text above the code chunk to add a cross-reference to the table with Insert \> Cross Reference.**
+
+    Now, I use the `tbl-cap` option in the chunk to create a caption for the table, and cross reference it here in the text as @tbl-gttab2. This is done by adding `#| label: tbl-gttab2` and `#| tbl-cap: "gt table with a cross-reference caption"` before the `R` code.
+
+    ```{r}
+    #| label: tbl-gttab2
+    #| tbl-cap: "gt table with a cross-reference caption"
+
+    library(gt)
+    diamonds |>
+      top_n(5, carat) |>
+      gt() |>
+      tab_header(title = "The attributes of the largest 5 diamonds",
+                 subtitle = md("Source: *Diamonds* Dataset; **R** Tidyverse"))
+    ```
