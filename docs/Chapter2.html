@@ -213,90 +213,32 @@ div.csl-indent {
 <ol start="2" type="1">
 <li><strong>What does the <code>bill_depth_mm</code> variable in the <code>penguins</code> data frame describe? Read the help for <a href="https://allisonhorst.github.io/palmerpenguins/reference/penguins.html"><code>?penguins</code></a> to find out.</strong></li>
 </ol>
-<p>First, we find out the names of the variables in the <code>penguins</code> data frame.</p>
-<div class="cell" data-hash="Chapter2_cache/html/bill_depth_mm_6cf9d8117b7c2770bbb0653475fcdbfd">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "species"           "island"            "bill_length_mm"   
-[4] "bill_depth_mm"     "flipper_length_mm" "body_mass_g"      
-[7] "sex"               "year"             </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Finding the details of the variables.</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ?penguins</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The variable name <code>bill_depth_mm</code> depicts <em>“a number denoting bill depth (millimeters)”.</em>[<span class="citation" data-cites="gorman2014">Gorman, Williams, and Fraser (<a href="#ref-gorman2014" role="doc-biblioref">2014</a>)</span>]<span class="citation" data-cites="horst2020">(<a href="#ref-horst2020" role="doc-biblioref">Horst, Hill, and Gorman 2020</a>)</span></p>
-<ol start="3" type="1">
-<li><strong>Make a scatterplot of <code>bill_depth_mm</code> vs.&nbsp;<code>bill_length_mm</code>. That is, make a scatterplot with <code>bill_depth_mm</code> on the y-axis and <code>bill_length_mm</code> on the x-axis. Describe the relationship between these two variables.</strong></li>
-</ol>
-<p>The scatter-plot is depicted below.</p>
-<div class="cell fig-cap-location-top" data-layout-align="center" data-hash="Chapter2_cache/html/fig-depthlength_e2f90389394ff46fea663793f877b2c4">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm,</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> bill_depth_mm,</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">col =</span> species)) <span class="sc">+</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Bill Length (mm)"</span>, <span class="at">y =</span> <span class="st">"Bill Depth (mm)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>First, we find out the names of the variables in the <code>penguins</code> data frame in <a href="#tbl-penguinscols">Table&nbsp;1</a>.</p>
+<div class="cell tbl-cap-location-top" data-hash="Chapter2_cache/html/tbl-penguinscols_344a9e349d8283d4ce31e20f7aec4328">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(penguins) <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t</span>() <span class="sc">|&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-depthlength" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="Chapter2_files/figure-html/fig-depthlength-1.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;1: Scatterplot of relation between Bill Length and Bill Depth</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>We now test the correlations.</p>
-<div class="cell" data-hash="Chapter2_cache/html/tbl-correlations_9847d383e934d3d3a61ad061ee297afc">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r fold-hide code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking the correlation between the two variables</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>test1 <span class="ot">=</span> <span class="cf">function</span>(x) {<span class="fu">cor.test</span>(x<span class="sc">$</span>bill_length_mm, x<span class="sc">$</span>bill_depth_mm)<span class="sc">$</span>estimate}</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># An empty data-frame to collect results</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">tibble</span>(<span class="at">Penguins =</span> <span class="cn">NA</span>,</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">Correlation =</span> <span class="cn">NA</span>,</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">.rows =</span> <span class="dv">4</span>)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Finding Correlation by each penguin variety</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (y <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  c <span class="ot">=</span> penguins <span class="sc">|&gt;</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(species <span class="sc">==</span> <span class="fu">unique</span>(penguins<span class="sc">$</span>species)[y]) <span class="sc">|&gt;</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">test1</span>() <span class="sc">|&gt;</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">format</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  df[y,<span class="dv">2</span>] <span class="ot">=</span> c</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  df[y,<span class="dv">1</span>] <span class="ot">=</span> <span class="fu">unique</span>(penguins<span class="sc">$</span>species)[y]</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Converting the nature of 1st column from factor to character</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Penguins <span class="ot">=</span> <span class="fu">as.character</span>(df<span class="sc">$</span>Penguins)  </span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Storing the overall correlation</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">4</span>,<span class="dv">1</span>] <span class="ot">=</span> <span class="st">"Overall"</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">4</span>,<span class="dv">2</span>] <span class="ot">=</span> penguins <span class="sc">|&gt;</span> <span class="fu">test1</span>() <span class="sc">|&gt;</span> <span class="fu">format</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Displaying the result</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>gt<span class="sc">::</span><span class="fu">gt</span>(df) <span class="sc">|&gt;</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">"Correlation Coefficitents"</span>,</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>                 <span class="at">subtitle =</span> <span class="st">"Between Bill Length &amp; Bill Depth amongst   </span></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="st">                 different penguins"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div id="tbl-correlations" class="anchored">
+<div id="tbl-penguinscols" class="anchored">
 
-<div id="huofvpsyab" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#huofvpsyab table {
+<div id="omxsbekevr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#omxsbekevr table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#huofvpsyab thead, #huofvpsyab tbody, #huofvpsyab tfoot, #huofvpsyab tr, #huofvpsyab td, #huofvpsyab th {
+#omxsbekevr thead, #omxsbekevr tbody, #omxsbekevr tfoot, #omxsbekevr tr, #omxsbekevr td, #omxsbekevr th {
   border-style: none;
 }
 
-#huofvpsyab p {
+#omxsbekevr p {
   margin: 0;
   padding: 0;
 }
 
-#huofvpsyab .gt_table {
+#omxsbekevr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -322,12 +264,12 @@ div.csl-indent {
   border-left-color: #D3D3D3;
 }
 
-#huofvpsyab .gt_caption {
+#omxsbekevr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#huofvpsyab .gt_title {
+#omxsbekevr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -339,7 +281,7 @@ div.csl-indent {
   border-bottom-width: 0;
 }
 
-#huofvpsyab .gt_subtitle {
+#omxsbekevr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -351,7 +293,7 @@ div.csl-indent {
   border-top-width: 0;
 }
 
-#huofvpsyab .gt_heading {
+#omxsbekevr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -363,13 +305,13 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#huofvpsyab .gt_bottom_border {
+#omxsbekevr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#huofvpsyab .gt_col_headings {
+#omxsbekevr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -384,7 +326,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#huofvpsyab .gt_col_heading {
+#omxsbekevr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -404,7 +346,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-#huofvpsyab .gt_column_spanner_outer {
+#omxsbekevr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -416,15 +358,15 @@ div.csl-indent {
   padding-right: 4px;
 }
 
-#huofvpsyab .gt_column_spanner_outer:first-child {
+#omxsbekevr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#huofvpsyab .gt_column_spanner_outer:last-child {
+#omxsbekevr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#huofvpsyab .gt_column_spanner {
+#omxsbekevr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -436,11 +378,11 @@ div.csl-indent {
   width: 100%;
 }
 
-#huofvpsyab .gt_spanner_row {
+#omxsbekevr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#huofvpsyab .gt_group_heading {
+#omxsbekevr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -466,7 +408,7 @@ div.csl-indent {
   text-align: left;
 }
 
-#huofvpsyab .gt_empty_group_heading {
+#omxsbekevr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -481,15 +423,15 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-#huofvpsyab .gt_from_md > :first-child {
+#omxsbekevr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#huofvpsyab .gt_from_md > :last-child {
+#omxsbekevr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#huofvpsyab .gt_row {
+#omxsbekevr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -508,7 +450,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-#huofvpsyab .gt_stub {
+#omxsbekevr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -521,7 +463,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#huofvpsyab .gt_stub_row_group {
+#omxsbekevr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -535,15 +477,15 @@ div.csl-indent {
   vertical-align: top;
 }
 
-#huofvpsyab .gt_row_group_first td {
+#omxsbekevr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#huofvpsyab .gt_row_group_first th {
+#omxsbekevr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#huofvpsyab .gt_summary_row {
+#omxsbekevr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -553,16 +495,16 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#huofvpsyab .gt_first_summary_row {
+#omxsbekevr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#huofvpsyab .gt_first_summary_row.thick {
+#omxsbekevr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#huofvpsyab .gt_last_summary_row {
+#omxsbekevr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -572,7 +514,7 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-#huofvpsyab .gt_grand_summary_row {
+#omxsbekevr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -582,7 +524,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#huofvpsyab .gt_first_grand_summary_row {
+#omxsbekevr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -592,7 +534,7 @@ div.csl-indent {
   border-top-color: #D3D3D3;
 }
 
-#huofvpsyab .gt_last_grand_summary_row_top {
+#omxsbekevr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -602,11 +544,11 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-#huofvpsyab .gt_striped {
+#omxsbekevr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#huofvpsyab .gt_table_body {
+#omxsbekevr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -615,7 +557,7 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-#huofvpsyab .gt_footnotes {
+#omxsbekevr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -629,7 +571,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#huofvpsyab .gt_footnote {
+#omxsbekevr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -638,7 +580,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#huofvpsyab .gt_sourcenotes {
+#omxsbekevr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -652,7 +594,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#huofvpsyab .gt_sourcenote {
+#omxsbekevr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -660,67 +602,603 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#huofvpsyab .gt_left {
+#omxsbekevr .gt_left {
   text-align: left;
 }
 
-#huofvpsyab .gt_center {
+#omxsbekevr .gt_center {
   text-align: center;
 }
 
-#huofvpsyab .gt_right {
+#omxsbekevr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#huofvpsyab .gt_font_normal {
+#omxsbekevr .gt_font_normal {
   font-weight: normal;
 }
 
-#huofvpsyab .gt_font_bold {
+#omxsbekevr .gt_font_bold {
   font-weight: bold;
 }
 
-#huofvpsyab .gt_font_italic {
+#omxsbekevr .gt_font_italic {
   font-style: italic;
 }
 
-#huofvpsyab .gt_super {
+#omxsbekevr .gt_super {
   font-size: 65%;
 }
 
-#huofvpsyab .gt_footnote_marks {
+#omxsbekevr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#huofvpsyab .gt_asterisk {
+#omxsbekevr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#huofvpsyab .gt_indent_1 {
+#omxsbekevr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#huofvpsyab .gt_indent_2 {
+#omxsbekevr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#huofvpsyab .gt_indent_3 {
+#omxsbekevr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#huofvpsyab .gt_indent_4 {
+#omxsbekevr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#huofvpsyab .gt_indent_5 {
+#omxsbekevr .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Table&nbsp;1:  <p>Correlation Table amongst different types of penguins</p> </caption>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Table&nbsp;1:  <p>List of variables in the penguins dataset</p> </caption>
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="V1">V1</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="V2">V2</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="V3">V3</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="V4">V4</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="V5">V5</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="V6">V6</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="V7">V7</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="V8">V8</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="V1" class="gt_row gt_left">species</td>
+<td headers="V2" class="gt_row gt_left">island</td>
+<td headers="V3" class="gt_row gt_left">bill_length_mm</td>
+<td headers="V4" class="gt_row gt_left">bill_depth_mm</td>
+<td headers="V5" class="gt_row gt_left">flipper_length_mm</td>
+<td headers="V6" class="gt_row gt_left">body_mass_g</td>
+<td headers="V7" class="gt_row gt_left">sex</td>
+<td headers="V8" class="gt_row gt_left">year</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Finding the details of the variables.</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ?penguins</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The variable name <code>bill_depth_mm</code> depicts <em>“a number denoting bill depth (millimeters)”.</em>[<span class="citation" data-cites="gorman2014">Gorman, Williams, and Fraser (<a href="#ref-gorman2014" role="doc-biblioref">2014</a>)</span>]<span class="citation" data-cites="horst2020">(<a href="#ref-horst2020" role="doc-biblioref">Horst, Hill, and Gorman 2020</a>)</span></p>
+<ol start="3" type="1">
+<li><strong>Make a scatter-plot of <code>bill_depth_mm</code> vs.&nbsp;<code>bill_length_mm</code>. That is, make a scatter-plot with <code>bill_depth_mm</code> on the y-axis and <code>bill_length_mm</code> on the x-axis. Describe the relationship between these two variables.</strong></li>
+</ol>
+<p>The scatter-plot is depicted below.</p>
+<div class="cell fig-cap-location-top" data-layout-align="center" data-hash="Chapter2_cache/html/fig-depthlength_e2f90389394ff46fea663793f877b2c4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> bill_depth_mm,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">col =</span> species)) <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Bill Length (mm)"</span>, <span class="at">y =</span> <span class="st">"Bill Depth (mm)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-depthlength" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter2_files/figure-html/fig-depthlength-1.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: Scatterplot of relation between Bill Length and Bill Depth</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>We now test the correlations, and create a beautiful table using <code>gt</code> <span class="citation" data-cites="gt">(<a href="#ref-gt" role="doc-biblioref">Iannone et al. 2023</a>)</span>and <code>gtExtras</code> packages.<span class="citation" data-cites="gtExtras">(<a href="#ref-gtExtras" role="doc-biblioref">Mock 2022</a>)</span></p>
+<div class="cell" data-hash="Chapter2_cache/html/tbl-correlations_0eec0d4979e9165c68cd938f8a7b9c58">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r fold-hide code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking the correlation between the two variables</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>test1 <span class="ot">=</span> <span class="cf">function</span>(x) {<span class="fu">cor.test</span>(x<span class="sc">$</span>bill_length_mm, x<span class="sc">$</span>bill_depth_mm)<span class="sc">$</span>estimate}</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># An empty data-frame to collect results</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">tibble</span>(<span class="at">Penguins =</span> <span class="cn">NA</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">Correlation =</span> <span class="cn">NA</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">.rows =</span> <span class="dv">4</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Finding Correlation by each penguin variety</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (y <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  c <span class="ot">=</span> penguins <span class="sc">|&gt;</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(species <span class="sc">==</span> <span class="fu">unique</span>(penguins<span class="sc">$</span>species)[y]) <span class="sc">|&gt;</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">test1</span>() <span class="sc">|&gt;</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">format</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  df[y,<span class="dv">2</span>] <span class="ot">=</span> c</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  df[y,<span class="dv">1</span>] <span class="ot">=</span> <span class="fu">unique</span>(penguins<span class="sc">$</span>species)[y]</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Converting the nature of 1st column from factor to character</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Penguins <span class="ot">=</span> <span class="fu">as.character</span>(df<span class="sc">$</span>Penguins)  </span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Storing the overall correlation</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">4</span>,<span class="dv">1</span>] <span class="ot">=</span> <span class="st">"Overall"</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">4</span>,<span class="dv">2</span>] <span class="ot">=</span> penguins <span class="sc">|&gt;</span> <span class="fu">test1</span>() <span class="sc">|&gt;</span> <span class="fu">format</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Displaying the result</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>gt<span class="sc">::</span><span class="fu">gt</span>(df) <span class="sc">|&gt;</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">"Correlation Coefficitents"</span>,</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>                 <span class="at">subtitle =</span> <span class="st">"Between Bill Length &amp; Bill Depth amongst   </span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="st">                 different penguins"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>  gtExtras<span class="sc">::</span><span class="fu">gt_theme_538</span>() <span class="sc">|&gt;</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>  gtExtras<span class="sc">::</span><span class="fu">gt_highlight_rows</span>(<span class="at">rows =</span> <span class="dv">4</span>, <span class="at">fill =</span> <span class="st">"#d4cecd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="tbl-correlations" class="anchored">
+
+<div id="ohsqknjfhu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#ohsqknjfhu table {
+  font-family: Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ohsqknjfhu thead, #ohsqknjfhu tbody, #ohsqknjfhu tfoot, #ohsqknjfhu tr, #ohsqknjfhu td, #ohsqknjfhu th {
+  border-style: none;
+}
+
+#ohsqknjfhu p {
+  margin: 0;
+  padding: 0;
+}
+
+#ohsqknjfhu .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: 300;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: none;
+  border-top-width: 3px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ohsqknjfhu .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ohsqknjfhu .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ohsqknjfhu .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ohsqknjfhu .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ohsqknjfhu .gt_bottom_border {
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ohsqknjfhu .gt_col_headings {
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ohsqknjfhu .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: normal;
+  text-transform: uppercase;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ohsqknjfhu .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: normal;
+  text-transform: uppercase;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ohsqknjfhu .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ohsqknjfhu .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ohsqknjfhu .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ohsqknjfhu .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ohsqknjfhu .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #000000;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ohsqknjfhu .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #000000;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #FFFFFF;
+  vertical-align: middle;
+}
+
+#ohsqknjfhu .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ohsqknjfhu .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ohsqknjfhu .gt_row {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ohsqknjfhu .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-right-color: #FFFFFF;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ohsqknjfhu .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ohsqknjfhu .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ohsqknjfhu .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ohsqknjfhu .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ohsqknjfhu .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ohsqknjfhu .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ohsqknjfhu .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ohsqknjfhu .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ohsqknjfhu .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ohsqknjfhu .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ohsqknjfhu .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ohsqknjfhu .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ohsqknjfhu .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ohsqknjfhu .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ohsqknjfhu .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ohsqknjfhu .gt_sourcenote {
+  font-size: 12px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ohsqknjfhu .gt_left {
+  text-align: left;
+}
+
+#ohsqknjfhu .gt_center {
+  text-align: center;
+}
+
+#ohsqknjfhu .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ohsqknjfhu .gt_font_normal {
+  font-weight: normal;
+}
+
+#ohsqknjfhu .gt_font_bold {
+  font-weight: bold;
+}
+
+#ohsqknjfhu .gt_font_italic {
+  font-style: italic;
+}
+
+#ohsqknjfhu .gt_super {
+  font-size: 65%;
+}
+
+#ohsqknjfhu .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ohsqknjfhu .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ohsqknjfhu .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ohsqknjfhu .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ohsqknjfhu .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ohsqknjfhu .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ohsqknjfhu .gt_indent_5 {
+  text-indent: 25px;
+}
+
+tbody tr:last-child {
+  border-bottom: 2px solid #ffffff00;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Table&nbsp;2:  <p>Correlation Table amongst different types of penguins</p> </caption>
   <thead>
     <tr class="gt_heading">
       <td colspan="2" class="gt_heading gt_title gt_font_normal" style="">Correlation Coefficitents</td>
@@ -730,8 +1208,8 @@ div.csl-indent {
                  different penguins</td>
     </tr>
     <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Penguins">Penguins</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Correlation">Correlation</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Penguins">Penguins</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Correlation">Correlation</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
@@ -741,8 +1219,8 @@ div.csl-indent {
 <td headers="Correlation" class="gt_row gt_right">0.64</td></tr>
     <tr><td headers="Penguins" class="gt_row gt_left">Chinstrap</td>
 <td headers="Correlation" class="gt_row gt_right">0.65</td></tr>
-    <tr><td headers="Penguins" class="gt_row gt_left">Overall</td>
-<td headers="Correlation" class="gt_row gt_right">-0.24</td></tr>
+    <tr><td headers="Penguins" class="gt_row gt_left" style="background-color: rgba(212,206,205,0.8); color: #000000; font-weight: bold;">Overall</td>
+<td headers="Correlation" class="gt_row gt_right" style="background-color: rgba(212,206,205,0.8); color: #000000; font-weight: bold;">-0.24</td></tr>
   </tbody>
   
   
@@ -753,41 +1231,100 @@ div.csl-indent {
 </div>
 <p>Thus, we see that the relation is not apparent on a simple scatter plot, but if we plot a different colour for each species, we observe that there is positive correlation between Bill Length and Bill Depth, in all three species. The strongest correlation is amongst Gentoo and Chinstrap penguins.</p>
 <ol start="4" type="1">
-<li><p><strong>What happens if you make a scatterplot of <code>species</code> vs.&nbsp;<code>bill_depth_mm</code>? What might be a better choice of geom?</strong></p>
+<li><p><strong>What happens if you make a scatter-plot of <code>species</code> vs.&nbsp;<code>bill_depth_mm</code>? What might be a better choice of geom?</strong></p>
 <p>If we make a scatter-plot of <code>species</code> vs.&nbsp;<code>bill_depth_mm</code>, the following happens:-</p>
-<div class="cell fig-cap-location-top" data-layout-align="center" data-hash="Chapter2_cache/html/fig-dotplot1_23600464c35c3c8140b93616bc02b78d">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> species,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> bill_depth_mm)) <span class="sc">+</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Species"</span>, <span class="at">y =</span> <span class="st">"Bill Depth (mm)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell fig-cap-location-top" data-layout-align="center" data-hash="Chapter2_cache/html/fig-dotplot1_861365a48cc364e7ef47f1ac8ecae5b2">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> species,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> bill_depth_mm)) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Species"</span>, <span class="at">y =</span> <span class="st">"Bill Depth (mm)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-dotplot1" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="Chapter2_files/figure-html/fig-dotplot1-1.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p><img src="Chapter2_files/figure-html/fig-dotplot1-1.png" class="img-fluid figure-img" width="576"></p>
 <figcaption class="figure-caption">Figure&nbsp;2: Scatter plot of species vs.&nbsp;Bill Depth</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>This produces an awkward scatter-plot, since the x-axis variable is discrete, and not continuous. A better choice of <code>geom</code> might be a box-plot, which shows that the average Bill Depth (in mm) is lower in Gentoo penguins compared to the other two.</p>
-<div class="cell fig-cap-location-top" data-layout-align="center" data-hash="Chapter2_cache/html/fig-boxplot1_d4c5435d7edcf2f85c3299ee805ddaa9">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> species,</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> bill_depth_mm)) <span class="sc">+</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Species"</span>, <span class="at">y =</span> <span class="st">"Bill Depth (mm)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell fig-cap-location-top" data-layout-align="center" data-hash="Chapter2_cache/html/fig-boxplot1_f174871d056176754fe6fee7722165e5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> species,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> bill_depth_mm)) <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Species"</span>, <span class="at">y =</span> <span class="st">"Bill Depth (mm)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-boxplot1" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="Chapter2_files/figure-html/fig-boxplot1-1.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p><img src="Chapter2_files/figure-html/fig-boxplot1-1.png" class="img-fluid figure-img" width="576"></p>
 <figcaption class="figure-caption">Figure&nbsp;3: Box-plot of species vs.&nbsp;Bill Depth</figcaption>
 </figure>
 </div>
 </div>
 </div></li>
+<li><p><strong>Why does the following give an error and how would you fix it?</strong></p>
+<p><code>ggplot(data = penguins) +    geom_point()</code></p>
+<p>The above code will give an error, because we have only given the data to the <code>ggplot</code> call, but not specified the <code>mapping</code> aesthetics, i.e., the x-axis and y-axis for the scatter plot called by the <code>geom_point()</code> . We can fix the error as follows in <a href="#fig-correctcode1">Figure&nbsp;4</a> :---</p>
+<div class="cell fig-cap-location-top" data-hash="Chapter2_cache/html/fig-correctcode1_89434121a6cc52e71aa227ab3a114a1e">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> bill_depth_mm,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> bill_length_mm)) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing missing values (`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div id="fig-correctcode1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter2_files/figure-html/fig-correctcode1-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;4: Corrected code to display the plot</figcaption>
+</figure>
+</div>
+</div>
+</div></li>
+<li><p><strong>What does the <code>na.rm</code> argument do in <a href="https://ggplot2.tidyverse.org/reference/geom_point.html"><code>geom_point()</code></a>? What is the default value of the argument? Create a scatterplot where you successfully use this argument set to <code>TRUE</code>.</strong></p>
+<p>Within the function <code>geom_point()</code> the <code>na.rm</code> argument can do one of the two things. If it is set to <code>FALSE</code> , as it is by default, then the missing values are removed but the following warning message is displayed:–</p>
+<pre><code>Warning message: 
+Removed 2 rows containing missing values (`geom_point()`)</code></pre>
+<p>But, if it is set to <code>na.rm = TRUE</code>, then the missing values are silently removed. Here’s the code with <code>na.rm = TRUE</code> to produce <a href="#fig-correctcode2">Figure&nbsp;5</a> :---</p>
+<div class="cell fig-cap-location-top" data-hash="Chapter2_cache/html/fig-correctcode2_1405d1c17f52936537884488b173c1e8">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins,</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> bill_depth_mm,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> bill_length_mm)) <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-correctcode2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter2_files/figure-html/fig-correctcode2-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;5: Corrected code to display the plot with na.rm = TRUE</figcaption>
+</figure>
+</div>
+</div>
+</div></li>
+<li><p><strong>Add the following caption to the plot you made in the previous exercise: “Data come from the <code>palmerpenguins</code> package.” Hint: Take a look at the documentation for <a href="https://ggplot2.tidyverse.org/reference/labs.html"><code>labs()</code></a>.</strong></p>
+<p>The caption is added here with the <code>labs</code> function with <code>ggplot</code> function below in <span class="citation" data-cites="fi">(<a href="#ref-fi" role="doc-biblioref"><strong>fi?</strong></a>)</span></p>
+<div class="cell fig-cap-location-top" data-hash="Chapter2_cache/html/fig-correctcode3_24e2335632adb2b6646c54413f2b100f">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins,</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> bill_depth_mm,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> bill_length_mm)) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">"Data come from the palmerpenguins package."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-correctcode3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter2_files/figure-html/fig-correctcode3-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;6: Plot with a caption added in ggplot call itself</figcaption>
+</figure>
+</div>
+</div>
+</div></li>
+<li><p><strong>Recreate the following visualization. What aesthetic should <code>bill_depth_mm</code> be mapped to? And should it be mapped at the global level or at the geom level?</strong></p>
+<p>aa</p></li>
+<li></li>
 </ol>
 
 
@@ -800,6 +1337,12 @@ Gorman, Kristen B., Tony D. Williams, and William R. Fraser. 2014. <span>“Ecol
 </div>
 <div id="ref-horst2020" class="csl-entry" role="listitem">
 Horst, Allison M, Alison Presmanes Hill, and Kristen B Gorman. 2020. <em>Allisonhorst/Palmerpenguins: V0.1.0</em>. Zenodo. <a href="https://doi.org/10.5281/ZENODO.3960218">https://doi.org/10.5281/ZENODO.3960218</a>.
+</div>
+<div id="ref-gt" class="csl-entry" role="listitem">
+Iannone, Richard, Joe Cheng, Barret Schloerke, Ellis Hughes, Alexandra Lauer, and JooYoung Seo. 2023. <span>“Gt: Easily Create Presentation-Ready Display Tables.”</span> <a href="https://CRAN.R-project.org/package=gt">https://CRAN.R-project.org/package=gt</a>.
+</div>
+<div id="ref-gtExtras" class="csl-entry" role="listitem">
+Mock, Thomas. 2022. <span>“gtExtras: Extending ’Gt’ for Beautiful HTML Tables.”</span> <a href="https://CRAN.R-project.org/package=gtExtras">https://CRAN.R-project.org/package=gtExtras</a>.
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

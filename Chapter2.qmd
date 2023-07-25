@@ -28,18 +28,24 @@ The number of rows in `penguins` data-set is `r nrow(penguins)` and the number o
 
 2.  **What does the `bill_depth_mm` variable in the `penguins` data frame describe? Read the help for [`?penguins`](https://allisonhorst.github.io/palmerpenguins/reference/penguins.html) to find out.**
 
-First, we find out the names of the variables in the `penguins` data frame.
+First, we find out the names of the variables in the `penguins` data frame in @tbl-penguinscols.
 
 ```{r}
-#| label: bill_depth_mm
-names(penguins)
+#| label: tbl-penguinscols
+#| tbl-cap: "List of variables in the penguins dataset"
+#| tbl-cap-location: top
+
+names(penguins) |>
+  t() |>
+  as_tibble() |>
+  gt::gt()
 # Finding the details of the variables.
 # ?penguins
 ```
 
 The variable name `bill_depth_mm` depicts *"a number denoting bill depth (millimeters)".*[@gorman2014][@horst2020]
 
-3.  **Make a scatterplot of `bill_depth_mm` vs. `bill_length_mm`. That is, make a scatterplot with `bill_depth_mm` on the y-axis and `bill_length_mm` on the x-axis. Describe the relationship between these two variables.**
+3.  **Make a scatter-plot of `bill_depth_mm` vs. `bill_length_mm`. That is, make a scatter-plot with `bill_depth_mm` on the y-axis and `bill_length_mm` on the x-axis. Describe the relationship between these two variables.**
 
 The scatter-plot is depicted below.
 
@@ -63,7 +69,7 @@ penguins |>
   labs(x = "Bill Length (mm)", y = "Bill Depth (mm)")
 ```
 
-We now test the correlations.
+We now test the correlations, and create a beautiful table using `gt` [@gt]and `gtExtras` packages.[@gtExtras]
 
 ```{r}
 #| label: tbl-correlations
@@ -96,12 +102,14 @@ df[4,2] = penguins |> test1() |> format(digits = 2)
 gt::gt(df) |>
   gt::tab_header(title = "Correlation Coefficitents",
                  subtitle = "Between Bill Length & Bill Depth amongst   
-                 different penguins")
+                 different penguins") |>
+  gtExtras::gt_theme_538() |>
+  gtExtras::gt_highlight_rows(rows = 4, fill = "#d4cecd")
 ```
 
 Thus, we see that the relation is not apparent on a simple scatter plot, but if we plot a different colour for each species, we observe that there is positive correlation between Bill Length and Bill Depth, in all three species. The strongest correlation is amongst Gentoo and Chinstrap penguins.
 
-4.  **What happens if you make a scatterplot of `species` vs. `bill_depth_mm`? What might be a better choice of geom?**
+4.  **What happens if you make a scatter-plot of `species` vs. `bill_depth_mm`? What might be a better choice of geom?**
 
     If we make a scatter-plot of `species` vs. `bill_depth_mm`, the following happens:-
 
@@ -109,7 +117,7 @@ Thus, we see that the relation is not apparent on a simple scatter plot, but if 
     #| label: fig-dotplot1
     #| fig-cap: "Scatter plot of species vs. Bill Depth"
     #| fig-cap-location: top
-    #| out-width: "70%"
+    #| fig-width: 6
     #| fig-align: "center"
 
     penguins |>
@@ -126,7 +134,7 @@ Thus, we see that the relation is not apparent on a simple scatter plot, but if 
     #| label: fig-boxplot1
     #| fig-cap: "Box-plot of species vs. Bill Depth"
     #| fig-cap-location: top
-    #| out-width: "70%"
+    #| fig-width: 6
     #| fig-align: "center"
 
     penguins |>
@@ -136,3 +144,66 @@ Thus, we see that the relation is not apparent on a simple scatter plot, but if 
       theme_bw() +
       labs(x = "Species", y = "Bill Depth (mm)")
     ```
+
+5.  **Why does the following give an error and how would you fix it?**
+
+    `ggplot(data = penguins) +    geom_point()`
+
+    The above code will give an error, because we have only given the data to the `ggplot` call, but not specified the `mapping` aesthetics, i.e., the x-axis and y-axis for the scatter plot called by the `geom_point()` . We can fix the error as follows in @fig-correctcode1 :\-\--
+
+    ```{r}
+    #| label: fig-correctcode1
+    #| fig-cap: "Corrected code to display the plot"
+    #| fig-cap-location: top
+    #| warning: true
+    #| message: true
+
+    ggplot(data = penguins,
+           mapping = aes(x = bill_depth_mm,
+                         y = bill_length_mm)) +
+      geom_point()
+    ```
+
+6.  **What does the `na.rm` argument do in [`geom_point()`](https://ggplot2.tidyverse.org/reference/geom_point.html)? What is the default value of the argument? Create a scatterplot where you successfully use this argument set to `TRUE`.**
+
+    Within the function `geom_point()` the `na.rm` argument can do one of the two things. If it is set to `FALSE` , as it is by default, then the missing values are removed but the following warning message is displayed:--
+
+    ```         
+    Warning message: 
+    Removed 2 rows containing missing values (`geom_point()`)
+    ```
+
+    But, if it is set to `na.rm = TRUE`, then the missing values are silently removed. Here's the code with `na.rm = TRUE` to produce @fig-correctcode2 :\-\--
+
+    ```{r}
+    #| label: fig-correctcode2
+    #| fig-cap: "Corrected code to display the plot with na.rm = TRUE"
+    #| fig-cap-location: top
+
+    ggplot(data = penguins,
+           mapping = aes(x = bill_depth_mm,
+                         y = bill_length_mm)) +
+      geom_point(na.rm = TRUE)
+    ```
+
+7.  **Add the following caption to the plot you made in the previous exercise: "Data come from the `palmerpenguins` package." Hint: Take a look at the documentation for [`labs()`](https://ggplot2.tidyverse.org/reference/labs.html).**
+
+    The caption is added here with the `labs` function with `ggplot` function below in @fi
+
+    ```{r}
+    #| label: fig-correctcode3
+    #| fig-cap: "Plot with a caption added in ggplot call itself"
+    #| fig-cap-location: top
+
+    ggplot(data = penguins,
+           mapping = aes(x = bill_depth_mm,
+                         y = bill_length_mm)) +
+      geom_point(na.rm = TRUE) +
+      labs(caption = "Data come from the palmerpenguins package.")
+    ```
+
+8.  **Recreate the following visualization. What aesthetic should `bill_depth_mm` be mapped to? And should it be mapped at the global level or at the geom level?**
+
+    aa
+
+9.  
