@@ -1,7 +1,9 @@
 {
   "listingMap": {
     "solutions.qmd": [
-      "Chapter29.qmd"
+      "Chapter29.qmd",
+      "Chapter2.qmd",
+      "Chapter30.qmd"
     ]
   }
 }

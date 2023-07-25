@@ -41,6 +41,7 @@ Here is an example of using `DT` for an interactive table:\-\--
 
 ```{r}
 #| label: DTdatable-display
+#| eval: false
 diamonds |>
   filter(carat > 3) |>
   datatable(colnames = c("Carat", "Cut", "Color",

@@ -1,0 +1,138 @@
+---
+title: "Chapter 2 (Data Visualization)"
+author: "Aditya Dahiya"
+bibliography: references.bib
+execute: 
+  warning: false
+  cache: true
+date: 2023-07-25
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+#| label: setup
+#| error: false
+#| warning: false
+
+library(tidyverse)
+library(palmerpenguins)
+penguins = penguins
+```
+
+# 2.2.5 Exercises
+
+1.  **How many rows are in `penguins`? How many columns?**
+
+The number of rows in `penguins` data-set is `r nrow(penguins)` and the number of columns is `r ncol(penguins)`
+
+2.  **What does the `bill_depth_mm` variable in the `penguins` data frame describe? Read the help for [`?penguins`](https://allisonhorst.github.io/palmerpenguins/reference/penguins.html) to find out.**
+
+First, we find out the names of the variables in the `penguins` data frame.
+
+```{r}
+#| label: bill_depth_mm
+names(penguins)
+# Finding the details of the variables.
+# ?penguins
+```
+
+The variable name `bill_depth_mm` depicts *"a number denoting bill depth (millimeters)".*[@gorman2014][@horst2020]
+
+3.  **Make a scatterplot of `bill_depth_mm` vs. `bill_length_mm`. That is, make a scatterplot with `bill_depth_mm` on the y-axis and `bill_length_mm` on the x-axis. Describe the relationship between these two variables.**
+
+The scatter-plot is depicted below.
+
+```{r}
+#| label: fig-depthlength
+#| fig-cap: "Scatterplot of relation between Bill Length and Bill Depth"
+#| fig-cap-location: top
+#| warning: false
+#| message: false
+#| out-width: "70%"
+#| fig-align: "center"
+
+penguins |>
+  ggplot(mapping = aes(x = bill_length_mm,
+                       y = bill_depth_mm,
+                       col = species)) +
+  geom_point() +
+  geom_smooth(se = FALSE,
+              method = "lm") +
+  theme_classic() +
+  labs(x = "Bill Length (mm)", y = "Bill Depth (mm)")
+```
+
+We now test the correlations.
+
+```{r}
+#| label: tbl-correlations
+#| class-source: "fold-hide"
+#| tbl-cap: "Correlation Table amongst different types of penguins"
+
+# Checking the correlation between the two variables
+test1 = function(x) {cor.test(x$bill_length_mm, x$bill_depth_mm)$estimate}
+
+# An empty data-frame to collect results
+df = tibble(Penguins = NA,
+            Correlation = NA,
+            .rows = 4)
+# Finding Correlation by each penguin variety
+for (y in 1:3) {
+  c = penguins |>
+      filter(species == unique(penguins$species)[y]) |>
+      test1() |>
+      format(digits = 2)
+  df[y,2] = c
+  df[y,1] = unique(penguins$species)[y]
+  }
+# Converting the nature of 1st column from factor to character
+df$Penguins = as.character(df$Penguins)  
+# Storing the overall correlation
+df[4,1] = "Overall"
+df[4,2] = penguins |> test1() |> format(digits = 2)
+
+# Displaying the result
+gt::gt(df) |>
+  gt::tab_header(title = "Correlation Coefficitents",
+                 subtitle = "Between Bill Length & Bill Depth amongst   
+                 different penguins")
+```
+
+Thus, we see that the relation is not apparent on a simple scatter plot, but if we plot a different colour for each species, we observe that there is positive correlation between Bill Length and Bill Depth, in all three species. The strongest correlation is amongst Gentoo and Chinstrap penguins.
+
+4.  **What happens if you make a scatterplot of `species` vs. `bill_depth_mm`? What might be a better choice of geom?**
+
+    If we make a scatter-plot of `species` vs. `bill_depth_mm`, the following happens:-
+
+    ```{r}
+    #| label: fig-dotplot1
+    #| fig-cap: "Scatter plot of species vs. Bill Depth"
+    #| fig-cap-location: top
+    #| out-width: "70%"
+    #| fig-align: "center"
+
+    penguins |>
+      ggplot(mapping = aes(x = species,
+                           y = bill_depth_mm)) +
+      geom_point() +
+      theme_bw() +
+      labs(x = "Species", y = "Bill Depth (mm)")
+    ```
+
+    This produces an awkward scatter-plot, since the x-axis variable is discrete, and not continuous. A better choice of `geom` might be a box-plot, which shows that the average Bill Depth (in mm) is lower in Gentoo penguins compared to the other two.
+
+    ```{r}
+    #| label: fig-boxplot1
+    #| fig-cap: "Box-plot of species vs. Bill Depth"
+    #| fig-cap-location: top
+    #| out-width: "70%"
+    #| fig-align: "center"
+
+    penguins |>
+      ggplot(mapping = aes(x = species,
+                           y = bill_depth_mm)) +
+      geom_boxplot() +
+      theme_bw() +
+      labs(x = "Species", y = "Bill Depth (mm)")
+    ```

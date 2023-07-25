@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Aditya Dahiya">
-<meta name="dcterms.date" content="2023-07-20">
+<meta name="dcterms.date" content="2023-07-25">
 
 <title>RfDS2solutions - Chapter 29: Quarto</title>
 <style>
@@ -213,7 +213,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">July 20, 2023</p>
+      <p class="date">July 25, 2023</p>
     </div>
   </div>
   
@@ -231,10 +231,10 @@ div.csl-indent {
 <ul>
 <li>The document has been created. Some of the chunks are as follows:</li>
 </ul>
-<div class="cell">
+<div class="cell" data-hash="Chapter29_cache/html/setup_b19b9406cd5230e67a3ec41c3953513a">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
+<div class="cell" data-hash="Chapter29_cache/html/diamonds1_55318ed7c6a6ba328d42ef5ba6628f45">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span> </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(carat <span class="sc">&gt;</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>carat, <span class="at">y=</span>price,</span>
@@ -250,7 +250,7 @@ div.csl-indent {
 <ul>
 <li>Verifying that the code can be modified and re-run:–</li>
 </ul>
-<div class="cell">
+<div class="cell" data-hash="Chapter29_cache/html/Plot2-Diamonds-Improved_caeb007dc96e1178e6323d7fd2f45745">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span> </span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(carat <span class="sc">&gt;</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span> (carat <span class="sc">&lt;</span> <span class="dv">3</span>) <span class="sc">|&gt;</span></span>
@@ -350,7 +350,7 @@ div.csl-indent {
 <ol start="2" type="1">
 <li><p><strong>Using the visual editor, insert a code chunk using the Insert menu and then the insert anything tool.</strong></p>
 <p>Here, I am inserting a code chunk using simple the “/” key, and then selecting R-code option:--</p>
-<div class="cell">
+<div class="cell" data-hash="Chapter29_cache/html/Hello-World_65b2805f22a5bfd91ccfde5f1f8bfa16">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Hello World"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Hello World"</code></pre>
@@ -410,7 +410,7 @@ div.csl-indent {
 <li><p><strong>Copy and paste the contents of <code>diamond-sizes.qmd</code> from <a href="https://github.com/hadley/r4ds/tree/main/quarto" class="uri">https://github.com/hadley/r4ds/tree/main/quarto</a> in to a local R Quarto document. Check that you can run it, then add text after the frequency polygon that describes its most striking features.</strong></p></li>
 </ol>
 <p>We have data about 53940 diamonds. Only 126 are larger than 2.5 carats. The distribution of the remainder is shown below:</p>
-<div class="cell">
+<div class="cell" data-hash="Chapter29_cache/html/plot-smaller-diamonds_83b6a649a372a2817fe272d49f3b653d">
 <div class="cell-output-display">
 <p><img src="Chapter29_files/figure-html/plot-smaller-diamonds-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -442,7 +442,7 @@ div.csl-indent {
 </ul>
 <p>The text can be <strong>bold,</strong> <em>iltalic,</em> or, it can be <u>underlined.</u></p>
 <p>I observe that The <strong>Source Editor</strong> automatically inserts the R Markdown code needed to produce the visual output of MS Word. The <strong>Visual Editor</strong> displays the text, just like MS Word. Of course, there are some bugs, especially in bulletined lists and numbered lists with indents. I am unable to create copy the format of sub-lists within bullet points into the <strong>Visual Editor</strong>. So, I manually went to the <strong>Source Editor,</strong> and inserted two <code>tabs</code> before each sub-list point. But, for retaining the formatting of <strong>bold,</strong> <em>italics</em> or underline, the Visual Editor of Quarto is pretty awesome!</p>
-<div class="cell">
+<div class="cell" data-hash="Chapter29_cache/html/Testing-Chapter-29.5_1fd98e87c1c84fd0920dfdddddffce6a">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">+</span><span class="dv">3</span> <span class="sc">/</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.75</code></pre>
@@ -455,12 +455,12 @@ div.csl-indent {
 <li><strong>Add a section that explores how diamond sizes vary by cut, color, and clarity. Assume you’re writing a report for someone who doesn’t know R, and instead of setting <code>echo: false</code> on each chunk, set a global option.</strong></li>
 </ol>
 <p>Let’s explore the <code>diamonds</code> data-set. There are 53,940 diamonds in the data-set. We create histograms for <code>color</code>, <code>cut</code> and <code>clarity</code>. These three help us explore the distribution of diamonds among different types of <code>color</code>, <code>cut</code> and <code>clarity</code>. To not display the code, I use <code>#|echo: false</code> at the start of the chunk. Alternatively, I could use the following code in the YAML header:</p>
-<div class="cell">
+<div class="cell" data-hash="Chapter29_cache/html/Global-Options-Format_696670ec130153bdfe34a31a5052f07a">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">:</span> </span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  opts_chunk<span class="sc">:</span> </span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    collapse<span class="sc">:</span> true</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
+<div class="cell" data-hash="Chapter29_cache/html/ggplot2-example_e1233ef65b81c055bce0176bc17c15e9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(diamonds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 53940</code></pre>
@@ -492,7 +492,7 @@ div.csl-indent {
 <li><p><strong>Download <code>diamond-sizes.qmd</code> from <a href="https://github.com/hadley/r4ds/tree/main/quarto" class="uri">https://github.com/hadley/r4ds/tree/main/quarto</a>. Add a section that describes the largest 20 diamonds, including a table that displays their most important attributes.</strong></p>
 <p>Here’s the added section.</p>
 <p>Examining the 20 largest diamonds, by <code>carat</code> since we know from American Gem Society’s <a href="https://www.americangemsociety.org/buying-diamonds-with-confidence/4cs-of-diamonds/understanding-diamond-carat-weight-the-4cs-of-diamonds/#:~:text=Carat%20is%20the%20unit%20of,carat%20equals%200.007%20ounce%20avoirdupois." title="Understanding Diamond Carat Weight: The 4Cs of Diamonds">website</a> that <em>“Carat is the unit of measurement for the physical weight of diamonds. One carat equals 0.200 grams or 1/5 gram and is subdivided into 100 points.”</em></p>
-<div class="cell">
+<div class="cell" data-hash="Chapter29_cache/html/Largest-20-diamonds_7dacb23b026a60c7b8df522bf1b499ed">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>top20 <span class="ot">=</span> diamonds <span class="sc">|&gt;</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(carat)) <span class="sc">|&gt;</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">20</span>)</span>
@@ -531,13 +531,13 @@ div.csl-indent {
 <p>Hence, we can see that the largest diamonds are, on average, of poorer cut, i.e.&nbsp;<code>Fair</code>. They are more likely to be of <code>l1</code> <code>clarity</code> and <code>J</code> and <code>I</code> colours.</p></li>
 <li><p><strong>Modify <code>diamonds-sizes.qmd</code> to use <code>label_comma()</code> to produce nicely formatted output. Also include the percentage of diamonds that are larger than 2.5 carats.</strong></p></li>
 </ol>
-<div class="cell">
+<div class="cell" data-hash="Chapter29_cache/html/Comma-Function-Smaller-Diamonds_81e1682aa3c32209d05b46a796dc4caa">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>smaller <span class="ot">&lt;-</span> diamonds <span class="sc">|&gt;</span> </span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(carat <span class="sc">&lt;=</span> <span class="fl">2.5</span>)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>comma <span class="ot">=</span> <span class="cf">function</span>(x) {<span class="fu">format</span>(x, <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">big.mark =</span> <span class="st">","</span>)}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Thus, we conclude that we have data about 53,940 diamonds. Only 126 are larger than 2.5 carats. The percentage of diamonds that are larger than 2.5 carats is 0.23 %. The inline code that I used to get these numbers is:–</p>
-<div class="cell">
+<div class="cell" data-hash="Chapter29_cache/html/29.5.5-Question-3-Code_71c2a3eda9dceafa5a4a8cbd19cc6d52">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">comma</span>(<span class="fu">nrow</span>(diamonds))</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">comma</span>(<span class="fu">nrow</span>(diamonds)<span class="sc">-</span><span class="fu">nrow</span>(smaller))</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">comma</span>(<span class="dv">100</span><span class="sc">*</span>(<span class="fu">nrow</span>(diamonds)<span class="sc">-</span><span class="fu">nrow</span>(smaller))<span class="sc">/</span><span class="fu">nrow</span>(diamonds))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -557,7 +557,7 @@ div.csl-indent {
 <p>When I render the document, the same image is saved in the <code>/docs/images</code> directory of my Quarto Website project. The image name is the same as that of the original file.</p></li>
 <li><p><strong>Edit the label of the code chunk in <code>diamond-sizes.qmd</code> that generates a plot to start with the prefix <code>fig-</code> and add a caption to the figure with the chunk option <code>fig-cap</code>. Then, edit the text above the code chunk to add a cross-reference to the figure with Insert &gt; Cross Reference.</strong></p>
 <p>The R-code for generating the figure has been copied from <code>diamond-sizes.qmd</code>. It is displayed below. The cross-reference to the generated figure is <a href="#fig-freqpoly">Figure&nbsp;1</a>. I do this by adding <code>#| label: fig-freqpoly</code> and <code>#| fig-cap: "Frequency Polygon of smaller diamonds"</code> before the <code>R</code> code.</p>
-<div class="cell">
+<div class="cell" data-hash="Chapter29_cache/html/fig-freqpoly_8cb6f16c2e326acefe99057fdce9efc0">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span> </span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(carat <span class="sc">&lt;=</span> <span class="fl">2.5</span>) <span class="sc">|&gt;</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> carat)) <span class="sc">+</span> </span>
@@ -589,7 +589,7 @@ div.csl-indent {
 <ol type="1">
 <li><p><strong>Open <code>diamond-sizes.qmd</code> in the visual editor, insert a code chunk, and add a table with <a href="https://rdrr.io/pkg/knitr/man/kable.html"><code>knitr::kable()</code></a> that shows the first 5 rows of the <code>diamonds</code> data frame.</strong></p>
 <p>I will use the <code>kable</code> and the <code>kableExtra</code> packages to produce the Table. The table dispalys the largest 5 diamonds by the <code>carat</code> size variable.</p>
-<div class="cell">
+<div class="cell" data-hash="Chapter29_cache/html/unnamed-chunk-15_505957c0125ca5457101965372581028">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">5</span>, carat) <span class="sc">|&gt;</span></span>
@@ -680,7 +680,7 @@ div.csl-indent {
 </div></li>
 <li><p><strong>Display the same table with <code>gt::gt()</code> instead.</strong></p>
 <p>The <code>gt</code> package gives us even more flexibility to add Title, Sub-title and even do R-Markdown style font editing in the text entered in the subtitle below.</p>
-<div class="cell">
+<div class="cell" data-hash="Chapter29_cache/html/unnamed-chunk-16_32f5cc75868991f0b5e3634c430bc420">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">5</span>, carat) <span class="sc">|&gt;</span></span>
@@ -689,23 +689,23 @@ div.csl-indent {
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">subtitle =</span> <span class="fu">md</span>(<span class="st">"Source: *Diamonds* Dataset; **R** Tidyverse"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="bhoihcsmmn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bhoihcsmmn table {
+<div id="rxzzuzdykm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rxzzuzdykm table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bhoihcsmmn thead, #bhoihcsmmn tbody, #bhoihcsmmn tfoot, #bhoihcsmmn tr, #bhoihcsmmn td, #bhoihcsmmn th {
+#rxzzuzdykm thead, #rxzzuzdykm tbody, #rxzzuzdykm tfoot, #rxzzuzdykm tr, #rxzzuzdykm td, #rxzzuzdykm th {
   border-style: none;
 }
 
-#bhoihcsmmn p {
+#rxzzuzdykm p {
   margin: 0;
   padding: 0;
 }
 
-#bhoihcsmmn .gt_table {
+#rxzzuzdykm .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -731,12 +731,12 @@ div.csl-indent {
   border-left-color: #D3D3D3;
 }
 
-#bhoihcsmmn .gt_caption {
+#rxzzuzdykm .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bhoihcsmmn .gt_title {
+#rxzzuzdykm .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -748,7 +748,7 @@ div.csl-indent {
   border-bottom-width: 0;
 }
 
-#bhoihcsmmn .gt_subtitle {
+#rxzzuzdykm .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -760,7 +760,7 @@ div.csl-indent {
   border-top-width: 0;
 }
 
-#bhoihcsmmn .gt_heading {
+#rxzzuzdykm .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -772,13 +772,13 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#bhoihcsmmn .gt_bottom_border {
+#rxzzuzdykm .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bhoihcsmmn .gt_col_headings {
+#rxzzuzdykm .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -793,7 +793,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#bhoihcsmmn .gt_col_heading {
+#rxzzuzdykm .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -813,7 +813,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-#bhoihcsmmn .gt_column_spanner_outer {
+#rxzzuzdykm .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -825,15 +825,15 @@ div.csl-indent {
   padding-right: 4px;
 }
 
-#bhoihcsmmn .gt_column_spanner_outer:first-child {
+#rxzzuzdykm .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bhoihcsmmn .gt_column_spanner_outer:last-child {
+#rxzzuzdykm .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bhoihcsmmn .gt_column_spanner {
+#rxzzuzdykm .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -845,11 +845,11 @@ div.csl-indent {
   width: 100%;
 }
 
-#bhoihcsmmn .gt_spanner_row {
+#rxzzuzdykm .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bhoihcsmmn .gt_group_heading {
+#rxzzuzdykm .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -875,7 +875,7 @@ div.csl-indent {
   text-align: left;
 }
 
-#bhoihcsmmn .gt_empty_group_heading {
+#rxzzuzdykm .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -890,15 +890,15 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-#bhoihcsmmn .gt_from_md > :first-child {
+#rxzzuzdykm .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bhoihcsmmn .gt_from_md > :last-child {
+#rxzzuzdykm .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bhoihcsmmn .gt_row {
+#rxzzuzdykm .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -917,7 +917,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-#bhoihcsmmn .gt_stub {
+#rxzzuzdykm .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -930,7 +930,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#bhoihcsmmn .gt_stub_row_group {
+#rxzzuzdykm .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -944,15 +944,15 @@ div.csl-indent {
   vertical-align: top;
 }
 
-#bhoihcsmmn .gt_row_group_first td {
+#rxzzuzdykm .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bhoihcsmmn .gt_row_group_first th {
+#rxzzuzdykm .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bhoihcsmmn .gt_summary_row {
+#rxzzuzdykm .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -962,16 +962,16 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#bhoihcsmmn .gt_first_summary_row {
+#rxzzuzdykm .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bhoihcsmmn .gt_first_summary_row.thick {
+#rxzzuzdykm .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bhoihcsmmn .gt_last_summary_row {
+#rxzzuzdykm .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -981,7 +981,7 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-#bhoihcsmmn .gt_grand_summary_row {
+#rxzzuzdykm .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -991,7 +991,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#bhoihcsmmn .gt_first_grand_summary_row {
+#rxzzuzdykm .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1001,7 +1001,7 @@ div.csl-indent {
   border-top-color: #D3D3D3;
 }
 
-#bhoihcsmmn .gt_last_grand_summary_row_top {
+#rxzzuzdykm .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1011,11 +1011,11 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-#bhoihcsmmn .gt_striped {
+#rxzzuzdykm .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bhoihcsmmn .gt_table_body {
+#rxzzuzdykm .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1024,7 +1024,7 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-#bhoihcsmmn .gt_footnotes {
+#rxzzuzdykm .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1038,7 +1038,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#bhoihcsmmn .gt_footnote {
+#rxzzuzdykm .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1047,7 +1047,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#bhoihcsmmn .gt_sourcenotes {
+#rxzzuzdykm .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1061,7 +1061,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#bhoihcsmmn .gt_sourcenote {
+#rxzzuzdykm .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1069,63 +1069,63 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#bhoihcsmmn .gt_left {
+#rxzzuzdykm .gt_left {
   text-align: left;
 }
 
-#bhoihcsmmn .gt_center {
+#rxzzuzdykm .gt_center {
   text-align: center;
 }
 
-#bhoihcsmmn .gt_right {
+#rxzzuzdykm .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bhoihcsmmn .gt_font_normal {
+#rxzzuzdykm .gt_font_normal {
   font-weight: normal;
 }
 
-#bhoihcsmmn .gt_font_bold {
+#rxzzuzdykm .gt_font_bold {
   font-weight: bold;
 }
 
-#bhoihcsmmn .gt_font_italic {
+#rxzzuzdykm .gt_font_italic {
   font-style: italic;
 }
 
-#bhoihcsmmn .gt_super {
+#rxzzuzdykm .gt_super {
   font-size: 65%;
 }
 
-#bhoihcsmmn .gt_footnote_marks {
+#rxzzuzdykm .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bhoihcsmmn .gt_asterisk {
+#rxzzuzdykm .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bhoihcsmmn .gt_indent_1 {
+#rxzzuzdykm .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bhoihcsmmn .gt_indent_2 {
+#rxzzuzdykm .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bhoihcsmmn .gt_indent_3 {
+#rxzzuzdykm .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bhoihcsmmn .gt_indent_4 {
+#rxzzuzdykm .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bhoihcsmmn .gt_indent_5 {
+#rxzzuzdykm .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1210,7 +1210,7 @@ div.csl-indent {
 </div></li>
 <li><p><strong>Add a chunk label that starts with the prefix <code>tbl-</code> and add a caption to the table with the chunk option <code>tbl-cap</code>. Then, edit the text above the code chunk to add a cross-reference to the table with Insert &gt; Cross Reference.</strong></p>
 <p>Now, I use the <code>tbl-cap</code> option in the chunk to create a caption for the table, and cross reference it here in the text as <a href="#tbl-gttab2">Table&nbsp;1</a>. This is done by adding <code>#| label: tbl-gttab2</code> and <code>#| tbl-cap: "gt table with a cross-reference caption"</code> before the <code>R</code> code.</p>
-<div class="cell">
+<div class="cell" data-hash="Chapter29_cache/html/tbl-gttab2_456452e343e44b66cfafadf1d31439fe">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">5</span>, carat) <span class="sc">|&gt;</span></span>
@@ -1220,23 +1220,23 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="tbl-gttab2" class="anchored">
 
-<div id="ymnckvgouk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ymnckvgouk table {
+<div id="wqmgvcuapy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wqmgvcuapy table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ymnckvgouk thead, #ymnckvgouk tbody, #ymnckvgouk tfoot, #ymnckvgouk tr, #ymnckvgouk td, #ymnckvgouk th {
+#wqmgvcuapy thead, #wqmgvcuapy tbody, #wqmgvcuapy tfoot, #wqmgvcuapy tr, #wqmgvcuapy td, #wqmgvcuapy th {
   border-style: none;
 }
 
-#ymnckvgouk p {
+#wqmgvcuapy p {
   margin: 0;
   padding: 0;
 }
 
-#ymnckvgouk .gt_table {
+#wqmgvcuapy .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1262,12 +1262,12 @@ div.csl-indent {
   border-left-color: #D3D3D3;
 }
 
-#ymnckvgouk .gt_caption {
+#wqmgvcuapy .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ymnckvgouk .gt_title {
+#wqmgvcuapy .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1279,7 +1279,7 @@ div.csl-indent {
   border-bottom-width: 0;
 }
 
-#ymnckvgouk .gt_subtitle {
+#wqmgvcuapy .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1291,7 +1291,7 @@ div.csl-indent {
   border-top-width: 0;
 }
 
-#ymnckvgouk .gt_heading {
+#wqmgvcuapy .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1303,13 +1303,13 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#ymnckvgouk .gt_bottom_border {
+#wqmgvcuapy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ymnckvgouk .gt_col_headings {
+#wqmgvcuapy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1324,7 +1324,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#ymnckvgouk .gt_col_heading {
+#wqmgvcuapy .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1344,7 +1344,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-#ymnckvgouk .gt_column_spanner_outer {
+#wqmgvcuapy .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1356,15 +1356,15 @@ div.csl-indent {
   padding-right: 4px;
 }
 
-#ymnckvgouk .gt_column_spanner_outer:first-child {
+#wqmgvcuapy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ymnckvgouk .gt_column_spanner_outer:last-child {
+#wqmgvcuapy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ymnckvgouk .gt_column_spanner {
+#wqmgvcuapy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1376,11 +1376,11 @@ div.csl-indent {
   width: 100%;
 }
 
-#ymnckvgouk .gt_spanner_row {
+#wqmgvcuapy .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ymnckvgouk .gt_group_heading {
+#wqmgvcuapy .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1406,7 +1406,7 @@ div.csl-indent {
   text-align: left;
 }
 
-#ymnckvgouk .gt_empty_group_heading {
+#wqmgvcuapy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1421,15 +1421,15 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-#ymnckvgouk .gt_from_md > :first-child {
+#wqmgvcuapy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ymnckvgouk .gt_from_md > :last-child {
+#wqmgvcuapy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ymnckvgouk .gt_row {
+#wqmgvcuapy .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1448,7 +1448,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-#ymnckvgouk .gt_stub {
+#wqmgvcuapy .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1461,7 +1461,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#ymnckvgouk .gt_stub_row_group {
+#wqmgvcuapy .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1475,15 +1475,15 @@ div.csl-indent {
   vertical-align: top;
 }
 
-#ymnckvgouk .gt_row_group_first td {
+#wqmgvcuapy .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ymnckvgouk .gt_row_group_first th {
+#wqmgvcuapy .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ymnckvgouk .gt_summary_row {
+#wqmgvcuapy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1493,16 +1493,16 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#ymnckvgouk .gt_first_summary_row {
+#wqmgvcuapy .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ymnckvgouk .gt_first_summary_row.thick {
+#wqmgvcuapy .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ymnckvgouk .gt_last_summary_row {
+#wqmgvcuapy .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1512,7 +1512,7 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-#ymnckvgouk .gt_grand_summary_row {
+#wqmgvcuapy .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1522,7 +1522,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#ymnckvgouk .gt_first_grand_summary_row {
+#wqmgvcuapy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1532,7 +1532,7 @@ div.csl-indent {
   border-top-color: #D3D3D3;
 }
 
-#ymnckvgouk .gt_last_grand_summary_row_top {
+#wqmgvcuapy .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1542,11 +1542,11 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-#ymnckvgouk .gt_striped {
+#wqmgvcuapy .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ymnckvgouk .gt_table_body {
+#wqmgvcuapy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1555,7 +1555,7 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-#ymnckvgouk .gt_footnotes {
+#wqmgvcuapy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1569,7 +1569,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#ymnckvgouk .gt_footnote {
+#wqmgvcuapy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1578,7 +1578,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#ymnckvgouk .gt_sourcenotes {
+#wqmgvcuapy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1592,7 +1592,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#ymnckvgouk .gt_sourcenote {
+#wqmgvcuapy .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1600,63 +1600,63 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#ymnckvgouk .gt_left {
+#wqmgvcuapy .gt_left {
   text-align: left;
 }
 
-#ymnckvgouk .gt_center {
+#wqmgvcuapy .gt_center {
   text-align: center;
 }
 
-#ymnckvgouk .gt_right {
+#wqmgvcuapy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ymnckvgouk .gt_font_normal {
+#wqmgvcuapy .gt_font_normal {
   font-weight: normal;
 }
 
-#ymnckvgouk .gt_font_bold {
+#wqmgvcuapy .gt_font_bold {
   font-weight: bold;
 }
 
-#ymnckvgouk .gt_font_italic {
+#wqmgvcuapy .gt_font_italic {
   font-style: italic;
 }
 
-#ymnckvgouk .gt_super {
+#wqmgvcuapy .gt_super {
   font-size: 65%;
 }
 
-#ymnckvgouk .gt_footnote_marks {
+#wqmgvcuapy .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ymnckvgouk .gt_asterisk {
+#wqmgvcuapy .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ymnckvgouk .gt_indent_1 {
+#wqmgvcuapy .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ymnckvgouk .gt_indent_2 {
+#wqmgvcuapy .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ymnckvgouk .gt_indent_3 {
+#wqmgvcuapy .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ymnckvgouk .gt_indent_4 {
+#wqmgvcuapy .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ymnckvgouk .gt_indent_5 {
+#wqmgvcuapy .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1787,7 +1787,7 @@ div.csl-indent {
 <p>Lessons from the Workflow chapter include the following:</p>
 <ol type="1">
 <li><p>Include the <code>sessionInfo()</code> as a easy and dirty hack to know the version of packages used during the intial rendering of this quarto document and its <code>R</code> code.</p>
-<div class="cell">
+<div class="cell" data-hash="Chapter29_cache/html/sessionInfo_f7bd1bb72579cb0846e2b30d263904ad">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.3.1 (2023-06-16 ucrt)
@@ -1815,30 +1815,30 @@ other attached packages:
 [13] tidyverse_2.0.0 
 
 loaded via a namespace (and not attached):
- [1] sass_0.4.7         utf8_1.2.3         generics_0.1.3     xml2_1.3.5        
- [5] stringi_1.7.12     lattice_0.21-8     hms_1.1.3          digest_0.6.33     
- [9] magrittr_2.0.3     evaluate_0.21      grid_4.3.1         timechange_0.2.0  
-[13] RColorBrewer_1.1-3 fastmap_1.1.1      jsonlite_1.8.7     Matrix_1.5-4.1    
-[17] httr_1.4.6         rvest_1.0.3        mgcv_1.8-42        fansi_1.0.4       
-[21] viridisLite_0.4.2  scales_1.2.1       cli_3.6.1          rlang_1.1.1       
-[25] commonmark_1.9.0   munsell_0.5.0      splines_4.3.1      withr_2.5.0       
-[29] yaml_2.3.7         tools_4.3.1        tzdb_0.4.0         colorspace_2.1-0  
-[33] webshot_0.5.5      vctrs_0.6.3        R6_2.5.1           lifecycle_1.0.3   
-[37] htmlwidgets_1.6.2  pkgconfig_2.0.3    pillar_1.9.0       gtable_0.3.3      
-[41] glue_1.6.2         systemfonts_1.0.4  highr_0.10         xfun_0.39         
-[45] tidyselect_1.2.0   rstudioapi_0.15.0  knitr_1.43         farver_2.1.1      
-[49] htmltools_0.5.5    nlme_3.1-162       svglite_2.1.1      rmarkdown_2.23    
-[53] labeling_0.4.2     compiler_4.3.1     markdown_1.7      </code></pre>
+ [1] gtable_0.3.3       xfun_0.39          htmlwidgets_1.6.2  lattice_0.21-8    
+ [5] tzdb_0.4.0         vctrs_0.6.3        tools_4.3.1        generics_0.1.3    
+ [9] fansi_1.0.4        highr_0.10         pkgconfig_2.0.3    Matrix_1.5-4.1    
+[13] RColorBrewer_1.1-3 webshot_0.5.5      lifecycle_1.0.3    compiler_4.3.1    
+[17] farver_2.1.1       munsell_0.5.0      codetools_0.2-19   htmltools_0.5.5   
+[21] sass_0.4.7         yaml_2.3.7         pillar_1.9.0       nlme_3.1-162      
+[25] commonmark_1.9.0   tidyselect_1.2.0   rvest_1.0.3        digest_0.6.33     
+[29] stringi_1.7.12     labeling_0.4.2     splines_4.3.1      fastmap_1.1.1     
+[33] grid_4.3.1         colorspace_2.1-0   cli_3.6.1          magrittr_2.0.3    
+[37] utf8_1.2.3         withr_2.5.0        scales_1.2.1       timechange_0.2.0  
+[41] rmarkdown_2.23     httr_1.4.6         hms_1.1.3          evaluate_0.21     
+[45] knitr_1.43         viridisLite_0.4.2  markdown_1.7       mgcv_1.8-42       
+[49] rlang_1.1.1        glue_1.6.2         xml2_1.3.5         svglite_2.1.1     
+[53] rstudioapi_0.15.0  jsonlite_1.8.7     R6_2.5.1           systemfonts_1.0.4 </code></pre>
 </div>
 </div></li>
 <li><p>Use the <code>renv</code> package to store the exact versions of the packages to run your code years from now.</p>
-<div class="cell">
+<div class="cell" data-hash="Chapter29_cache/html/renv-package_e1aca42917df15ec38099f0c9072dea7">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(renv)</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co"># renv::init()</span></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co"># renv::deactivate(clean = TRUE)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
 <li><p>Avoid entering data in <code>R</code> , but if you must, use the function <code>tribble()</code> of the package <code>tibble</code></p>
-<div class="cell">
+<div class="cell" data-hash="Chapter29_cache/html/entering-data-with-tibble_ee97c4a776844581c0bbbdb31ef53775">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">alpha =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">beta =</span> LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>],</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">gamma =</span> <span class="dv">101</span><span class="sc">:</span><span class="dv">105</span>,</span>
