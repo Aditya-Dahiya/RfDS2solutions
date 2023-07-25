@@ -1,0 +1,50 @@
+---
+title: "Chapter 30 (Quarto Formats)"
+author: "Aditya Dahiya"
+date: 2023-07-25
+execute: 
+  warning: false
+  cache: true
+editor_options: 
+  chunk_output_type: console
+---
+
+# 30.5 Interactivity
+
+```{r}
+#| label: setup
+library(DT)
+library(tidyverse)
+```
+
+## 30.5.1. htmlwidgets
+
+Let us try to create an interactive map in HTML below @fig-leaflet:---̥
+
+```{r}
+#| label: leaflet
+#| eval: false
+library(leaflet)
+leaflet() |>
+  setView(76.801175, 30.761403, zoom = 14) |> 
+  addTiles() |>
+  addMarkers(76.801175, 30.761403, 
+             popup = "Haryana Civil Secretariat")  |>
+  addMarkers(76.803773534,
+             30.752910586,
+             popup = "Rock Garden")
+```
+
+#### Using `DT` for interactive tables:\-\--
+
+Here is an example of using `DT` for an interactive table:\-\--
+
+```{r}
+#| label: DTdatable-display
+diamonds |>
+  filter(carat > 3) |>
+  datatable(colnames = c("Carat", "Cut", "Color",
+                         "Clarity", "Depth", "Table",
+                         "Price", "X", "Y", "Z"),
+            rownames = FALSE)
+```
