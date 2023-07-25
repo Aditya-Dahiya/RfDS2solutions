@@ -6,6 +6,7 @@ editor_options:
 bibliography: references.bib
 execute: 
   warning: false
+date: 2023-07-20
 ---
 
 # 29.2.1 Exercises
@@ -100,7 +101,7 @@ Text Formatting
 
 [linked phrases](https://www.oxfordinternationalenglish.com/linking-words-and-phrases-in-english/ "Oxford English Dictionary meaning of Linked Phrases")
 
-[![Credits: Nick Tierney's (mostly) rstats blog](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/imgs/r-knitr-rmd.jpeg){fig-alt="Notes on Changing from Rmarkdown/Bookdown to Quarto" width="338"}](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/)
+[![Credits: Nick Tierney\'s (mostly) rstats blog](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/imgs/r-knitr-rmd.jpeg){fig-alt="Notes on Changing from Rmarkdown/Bookdown to Quarto" width="338"}](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/)
 
 Tables
 
@@ -486,3 +487,36 @@ comma(100*(nrow(diamonds)-nrow(smaller))/nrow(diamonds))
     ```
 
     The way I understand it, `cache-d` depends on either of the two code chunks' (`cache-b` and `cache-c`) results changing. And, both of these in turn depend on `cache-a`'s results changing. Thus, on each rendering of the file, we see that this chunk `cache-a` will never its result because it has been cached, i.e. we had put `#| cache: true` above the first code chunk called `cache-a`. Since the code itself never changes, `R` and ***Quarto*** never bother to re-run the code again, rather than just use the output, i.e. the time from when the code first ran! And, the other three chunks depend on `cache-a` changing, which does not. Thus, all the four code chunks are stuck with the same output i.e., the date and time when this code was first run afresh. Hope I am getting this right! If not, please raise an issue or a pull request on GitHub [here](https://github.com/Aditya-Dahiya/RfDS2solutions/blob/main/Chapter29.qmd "Chapter 29 qmd file").
+
+# 29.11 Workflow
+
+Lessons from the Workflow chapter include the following:
+
+1.  Include the `sessionInfo()` as a easy and dirty hack to know the version of packages used during the intial rendering of this quarto document and its `R` code.
+
+    ```{r}
+    #| label: sessionInfo
+    sessionInfo()
+    ```
+
+2.  Use the `renv` package to store the exact versions of the packages to run your code years from now.
+
+    ```{r}
+    #| label: renv-package
+    # install.packages(renv)
+    # renv::init()
+    # renv::deactivate(clean = TRUE)
+    ```
+
+3.  Avoid entering data in `R` , but if you must, use the function `tribble()` of the package `tibble`
+
+    ```{r}
+    #| label: entering-data-with-tibble
+    tibble(alpha = 1:5,
+                  beta = LETTERS[1:5],
+                  gamma = 101:105,
+                  delta = LETTERS[21:25]) |>
+      gt::gt() |>
+      gt::tab_caption(caption = "A Temporary Table created using tibble()") |>
+      gt::tab_header(title = "A temporary Table")
+    ```
