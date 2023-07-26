@@ -4,9 +4,8 @@ author: "Aditya Dahiya"
 date: 2023-07-25
 execute: 
   warning: false
+  message: false
   cache: true
-editor_options: 
-  chunk_output_type: console
 ---
 
 # 30.5 Interactivity
@@ -15,6 +14,7 @@ editor_options:
 #| label: setup
 library(DT)
 library(tidyverse)
+library(knitr)
 ```
 
 ## 30.5.1. htmlwidgets
@@ -22,8 +22,11 @@ library(tidyverse)
 Let us try to create an interactive map in HTML below @fig-leaflet:---̥
 
 ```{r}
-#| label: leaflet
-#| eval: false
+#| label: fig-leaflet
+#| fig-cap: "A map of Chandigarh, India using Leaflet"
+#| fig-cap-location: top
+
+
 library(leaflet)
 leaflet() |>
   setView(76.801175, 30.761403, zoom = 14) |> 
@@ -37,11 +40,12 @@ leaflet() |>
 
 #### Using `DT` for interactive tables:\-\--
 
-Here is an example of using `DT` for an interactive table:\-\--
+An example of using `DT` for an interactive table is at @fig-DTtable :\-\--
 
 ```{r}
-#| label: DTdatable-display
-#| eval: false
+#| label: fig-DTtable
+#| fig-cap: "A visually pleasing table produced using DT package"
+#| fig-cap-location: top
 diamonds |>
   filter(carat > 3) |>
   datatable(colnames = c("Carat", "Cut", "Color",

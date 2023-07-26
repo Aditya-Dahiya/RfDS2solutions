@@ -95,6 +95,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+<script src="site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="site_libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="site_libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="site_libs/leaflet-binding-2.1.2/leaflet.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="site_libs/datatables-binding-0.28/datatables.js"></script>
+<link href="site_libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="site_libs/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="site_libs/dt-core-1.13.4/js/jquery.dataTables.min.js"></script>
+<link href="site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -185,14 +202,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="interactivity" class="level1">
 <h1>30.5 Interactivity</h1>
-<div class="cell" data-hash="Chapter30_cache/html/setup_5873bcd5e84efe0cae76bcfa5dfc58ba">
+<div class="cell" data-hash="Chapter30_cache/html/setup_5cd60817d4f916106eba5bf4d35515ab">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="htmlwidgets" class="level2">
 <h2 class="anchored" data-anchor-id="htmlwidgets">30.5.1. htmlwidgets</h2>
-<p>Let us try to create an interactive map in HTML below <strong>?@fig-leaflet</strong>:—̥</p>
-<div class="cell" data-hash="Chapter30_cache/html/leaflet_c111c7b89a96808cf9fcef0373603482">
+<p>Let us try to create an interactive map in HTML below <a href="#fig-leaflet">Figure&nbsp;1</a>:—̥</p>
+<div class="cell fig-cap-location-top" data-hash="Chapter30_cache/html/fig-leaflet_60aa6db11078cc5ec8eb0f79bfc4fe4c">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">leaflet</span>() <span class="sc">|&gt;</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setView</span>(<span class="fl">76.801175</span>, <span class="fl">30.761403</span>, <span class="at">zoom =</span> <span class="dv">14</span>) <span class="sc">|&gt;</span> </span>
@@ -202,17 +220,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(<span class="fl">76.803773534</span>,</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>             <span class="fl">30.752910586</span>,</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">popup =</span> <span class="st">"Rock Garden"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-leaflet" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div class="leaflet html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-a575ca8845b5ce8d0620" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-a575ca8845b5ce8d0620">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"setView":[[30.761403,76.801175],14,[]],"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[30.761403,76.801175,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Haryana Civil Secretariat",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[30.752910586,76.803773534,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Rock Garden",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[30.752910586,30.761403],"lng":[76.801175,76.803773534]}},"evals":[],"jsHooks":[]}</script>
+<figcaption class="figure-caption">Figure&nbsp;1: A map of Chandigarh, India using Leaflet</figcaption>
+</figure>
+</div>
 </div>
 <section id="using-dt-for-interactive-tables---" class="level4">
 <h4 class="anchored" data-anchor-id="using-dt-for-interactive-tables---">Using <code>DT</code> for interactive tables:---</h4>
-<p>Here is an example of using <code>DT</code> for an interactive table:---</p>
-<div class="cell" data-hash="Chapter30_cache/html/DTdatable-display_ae5fbcb477edbfc599cd43d8956d3970">
+<p>An example of using <code>DT</code> for an interactive table is at <a href="#fig-DTtable">Figure&nbsp;2</a> :---</p>
+<div class="cell fig-cap-location-top" data-hash="Chapter30_cache/html/fig-DTtable_40815c15b12a056afc4e7455b38ab033">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(carat <span class="sc">&gt;</span> <span class="dv">3</span>) <span class="sc">|&gt;</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">datatable</span>(<span class="at">colnames =</span> <span class="fu">c</span>(<span class="st">"Carat"</span>, <span class="st">"Cut"</span>, <span class="st">"Color"</span>,</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"Clarity"</span>, <span class="st">"Depth"</span>, <span class="st">"Table"</span>,</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"Price"</span>, <span class="st">"X"</span>, <span class="st">"Y"</span>, <span class="st">"Z"</span>),</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">rownames =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-DTtable" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-0997393c9ba4bcfcfd63" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-0997393c9ba4bcfcfd63">{"x":{"filter":"none","vertical":false,"data":[[3.01,3.11,3.01,3.05,3.02,3.01,3.65,3.24,3.22,3.5,3.01,4.01,4.01,3.04,3.4,4,3.01,3.67,3.01,4.13,5.01,3.01,3.01,3.01,3.01,3.01,4.5,3.04,3.01,3.51,3.01,3.01],["Premium","Fair","Premium","Premium","Fair","Fair","Fair","Premium","Ideal","Ideal","Premium","Premium","Premium","Very Good","Fair","Very Good","Ideal","Premium","Ideal","Fair","Fair","Premium","Fair","Fair","Good","Good","Fair","Premium","Good","Premium","Premium","Premium"],["I","J","F","E","I","H","H","H","I","H","G","I","J","I","D","I","J","I","J","H","J","I","I","I","I","I","J","I","H","J","J","J"],["I1","I1","I1","I1","I1","I1","I1","I1","I1","I1","SI2","I1","I1","SI2","I1","I1","SI2","I1","I1","I1","I1","SI2","SI2","SI2","SI2","SI2","I1","SI2","SI2","VS2","SI2","SI2"],[62.7,65.90000000000001,62.2,60.9,65.2,56.1,67.09999999999999,62.1,62.6,62.8,59.8,61,62.5,63.2,66.8,63.3,61.7,62.4,65.40000000000001,64.8,65.5,60.2,65.8,65.8,63.9,63.9,65.8,59.3,57.6,62.5,60.7,59.7],[58,57,56,58,56,62,53,58,55,57,58,61,62,59,52,58,58,56,60,61,59,59,56,56,60,60,58,60,64,59,59,58],[8040,9823,9925,10453,10577,10761,11668,12300,12545,12587,14220,15223,15223,15354,15964,15984,16037,16193,16538,17329,18018,18242,18242,18242,18242,18242,18531,18559,18593,18701,18710,18710],[9.1,9.15,9.24,9.26,9.109999999999999,9.539999999999999,9.529999999999999,9.44,9.49,9.65,9.44,10.14,10.02,9.140000000000001,9.42,10.01,9.25,9.859999999999999,8.99,10,10.74,9.359999999999999,8.99,8.99,9.06,9.06,10.23,9.51,9.44,9.66,9.35,9.41],[8.970000000000001,9.02,9.130000000000001,9.25,9.02,9.380000000000001,9.48,9.4,9.42,9.59,9.369999999999999,10.1,9.94,9.07,9.34,9.94,9.199999999999999,9.81,8.93,9.85,10.54,9.31,8.94,8.94,9.01,9.01,10.16,9.460000000000001,9.380000000000001,9.630000000000001,9.220000000000001,9.32],[5.67,5.98,5.73,5.66,5.91,5.31,6.38,5.85,5.92,6.03,5.62,6.17,6.24,5.75,6.27,6.31,5.69,6.13,5.86,6.43,6.98,5.62,5.9,5.9,5.77,5.77,6.72,5.62,5.42,6.03,5.64,5.59]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Carat<\/th>\n      <th>Cut<\/th>\n      <th>Color<\/th>\n      <th>Clarity<\/th>\n      <th>Depth<\/th>\n      <th>Table<\/th>\n      <th>Price<\/th>\n      <th>X<\/th>\n      <th>Y<\/th>\n      <th>Z<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[0,4,5,6,7,8,9]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<figcaption class="figure-caption">Figure&nbsp;2: A visually pleasing table produced using DT package</figcaption>
+</figure>
+</div>
 </div>
 
 
