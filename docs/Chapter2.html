@@ -1323,7 +1323,54 @@ Removed 2 rows containing missing values (`geom_point()`)</code></pre>
 </div>
 </div></li>
 <li><p><strong>Recreate the following visualization. What aesthetic should <code>bill_depth_mm</code> be mapped to? And should it be mapped at the global level or at the geom level?</strong></p>
-<p>aa</p></li>
+<div class="cell" data-hash="Chapter2_cache/html/fig-recreateggplot2_457b3193fefe3668808f028c8092bac1">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> flipper_length_mm,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> body_mass_g)) <span class="sc">+</span> </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">color =</span> bill_depth_mm)) <span class="sc">+</span> </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-recreateggplot2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter2_files/figure-html/fig-recreateggplot2-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;7: Recreated figure using the ggplot2 code</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The code above recreates the <a href="#fig-recreateggplot2">Figure&nbsp;7</a>. The aesthetic should <code>bill_depth_mm</code> should be mapped the aesthetic <code>colo</code> in the <code>geom_point()</code> function level. It should not be done at the global level, because then it will even be an aesthetic for <code>geom_smooth</code> resulting in multiple smoother lines fitted for each level of <code>bill_depth_mm</code> , and possible result in an error because <code>bill_depth_mm</code> is not a categorical variable or a factor variable with certain distinct categories or levels. Luckily, <code>ggplot2</code> recognizes this error and still produces the same plot by droppin the <code>color</code> aesthetic, i.e., <code>The following aesthetics were dropped during statistical transformation: colour.</code> So, <code>ggplot2</code> is trying to guess our intentions, and it works, but the <code>code</code> not correct.</p>
+<div class="cell" data-hash="Chapter2_cache/html/fig-recreatewrong_6eeb9a5813fda1fd805051e95b1d20b6">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> flipper_length_mm,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> body_mass_g,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">color =</span> bill_depth_mm)) <span class="sc">+</span> </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing non-finite values (`stat_smooth()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: The following aesthetics were dropped during statistical transformation: colour
+ℹ This can happen when ggplot fails to infer the correct grouping structure in
+  the data.
+ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+  variable into a factor?</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing missing values (`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div id="fig-recreatewrong" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter2_files/figure-html/fig-recreatewrong-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;8: The Wrong Code - Recreated figure</figcaption>
+</figure>
+</div>
+</div>
+</div></li>
 <li></li>
 </ol>
 

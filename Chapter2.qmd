@@ -5,6 +5,9 @@ bibliography: references.bib
 execute: 
   warning: false
   cache: true
+  error: false
+  fig-cap-location: "top"
+  out-width: "70%"
 date: 2023-07-25
 editor_options: 
   chunk_output_type: console
@@ -204,6 +207,33 @@ Thus, we see that the relation is not apparent on a simple scatter plot, but if 
 
 8.  **Recreate the following visualization. What aesthetic should `bill_depth_mm` be mapped to? And should it be mapped at the global level or at the geom level?**
 
-    aa
+    ```{r}
+    #| label: fig-recreateggplot2
+    #| fig-cap: "Recreated figure using the ggplot2 code"
+    penguins |>
+      ggplot(mapping = aes(x = flipper_length_mm,
+                           y = body_mass_g)) + 
+      geom_point(mapping = aes(color = bill_depth_mm)) + 
+      geom_smooth()
+    ```
+
+    The code above recreates the @fig-recreateggplot2. The aesthetic should `bill_depth_mm` should be mapped the aesthetic `colo` in the `geom_point()` function level. It should not be done at the global level, because then it will even be an aesthetic for `geom_smooth` resulting in multiple smoother lines fitted for each level of `bill_depth_mm` , and possible result in an error because `bill_depth_mm` is not a categorical variable or a factor variable with certain distinct categories or levels.
+
+    Luckily, `ggplot2` recognizes this error and still produces the same plot by droppin the `color` aesthetic, i.e., `The following aesthetics were dropped during statistical transformation: colour.` So, `ggplot2` is trying to guess our intentions, and it works, but the `code` not correct. The wrong `code` is tested at @fig-recreatewrong.
+
+    ```{r}
+    #| label: fig-recreatewrong
+    #| fig-cap: "The Wrong Code - Recreated figure is the same - but the code is fundamentally flawed"
+    #| error: true
+    #| warning: true
+    #| message: true
+
+    penguins |>
+      ggplot(mapping = aes(x = flipper_length_mm,
+                           y = body_mass_g,
+                           color = bill_depth_mm)) + 
+      geom_point() + 
+      geom_smooth()
+    ```
 
 9.  
