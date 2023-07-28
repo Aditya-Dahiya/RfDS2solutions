@@ -349,10 +349,86 @@ Thus, we see that the relation is not apparent on a simple scatter plot, but if 
 
 2.  **How are the following two plots different? Which aesthetic, `color` or `fill`, is more useful for changing the color of bars?**
 
-    ```         
-    ggplot(penguins, aes(x = species)) +   geom_bar(color = "red")  ggplot(penguins, aes(x = species)) +   geom_bar(fill = "red")
+    The output of the two plots is in @fig-Question_2_Ex_2.4.3 .
+
+    ```{r}
+    #| label: fig-Question_2_Ex_2.4.3
+    #| fig-cap: "The two plots produced by the code given, with red color vs. red fill"
+    #| fig-asp: 0.5
+    gridExtra::grid.arrange(
+      
+    ggplot(penguins, aes(x = species)) + geom_bar(color = "red") +
+      labs(caption = "Color = Red"),
+
+    ggplot(penguins, aes(x = species)) + geom_bar(fill = "red") +
+      labs(caption = "Fill = Red"),
+
+    ncol = 2)
+
     ```
 
-3.  What does the `bins` argument in [`geom_histogram()`](https://ggplot2.tidyverse.org/reference/geom_histogram.html) do?
+    The two plots are different in where the colour [red]{style="color:red;"} appears. As a `color` aesthetic, it appears only on the borders. But, as a `fill` aesthetic, it fills the entire bar(s).
 
-4.  Make a histogram of the `carat` variable in the `diamonds` dataset that is available when you load the tidyverse package. Experiment with different binwidths. What binwidth reveals the most interesting patterns?
+    Thus, the aesthetic `fill` is more useful in changing the colour of the bars.
+
+3.  **What does the `bins` argument in [`geom_histogram()`](https://ggplot2.tidyverse.org/reference/geom_histogram.html) do?**
+
+    The bins argument tell the number of bins (i.e. number of bars) in the histogram to be plotted. The default value is 30. However, if the `binwidth` is also specified, then the `binwidth` argument over-rides the `bins` argument.
+
+4.  **Make a histogram of the `carat` variable in the `diamonds` dataset that is available when you load the tidyverse package. Experiment with different binwidths. What bin-width reveals the most interesting patterns?**
+
+    ```{r}
+    #| label: fig-hist1
+    #| fig-cap: "Histogram with different bin-widths tried out to select the most relevant one"
+    #| warning: false
+
+
+    f1 = theme_classic() 
+    f2 = labs(x=NULL, y=NULL)
+
+    g1 = ggplot(diamonds, aes(x=carat)) + 
+      geom_histogram(fill = "white", color = "black") + 
+      theme_classic() + labs(x = NULL, y = NULL, 
+                             subtitle = "Default Bindwidth")
+    g2 = ggplot(diamonds, aes(x=carat)) + 
+        geom_histogram(fill = "white", color = "black", 
+                       binwidth = 0.1) + 
+        theme_classic() + 
+        labs(x = NULL, y = NULL, 
+             subtitle = "Bindwidth = 0.1")
+    g3 = ggplot(diamonds, aes(x=carat)) + 
+        geom_histogram(fill = "white", color = "black", 
+                       binwidth = 0.2) + 
+        theme_classic() + 
+        labs(x = NULL, y = NULL, 
+             subtitle = "Bindwidth = 0.2")  
+    g4 = ggplot(diamonds, aes(x=carat)) + 
+        geom_histogram(fill = "white", color = "black", 
+                       binwidth = 0.3) + 
+        theme_classic() + 
+        labs(x = NULL, y = NULL, 
+             subtitle = "Bindwidth = 0.3")
+    g5 = ggplot(diamonds, aes(x=carat)) + 
+        geom_histogram(fill = "white", color = "black", 
+                       binwidth = 0.5) + 
+        theme_classic() + 
+        labs(x = NULL, y = NULL, 
+             subtitle = "Bindwidth = 0.5")
+    g6 = ggplot(diamonds, aes(x=carat)) + 
+        geom_histogram(fill = "white", color = "black", 
+                       binwidth = 1) + 
+        theme_classic() + 
+        labs(x = NULL, y = NULL, 
+             subtitle = "Bindwidth = 1")
+    gridExtra::grid.arrange(g1, g2, g3, g4, g5, g6,
+                            ncol = 3, nrow = 2)
+    ```
+
+    ```{r}
+    #| label: remove-objects-1
+    #| echo: false
+
+    rm(g1, g2, g3, g4, g5, g6)
+    ```
+
+    Thus, we see that best `binwidth` is either the default `binwidth` chosen by `ggplot2` or the bind-width of 0.2 per bin, since it reveals the most interesting patterns.

@@ -164,7 +164,7 @@ div.csl-indent {
    
   <ul>
   <li><a href="#exercises" id="toc-exercises" class="nav-link active" data-scroll-target="#exercises">2.2.5 Exercises</a></li>
-  <li><a href="#exercises-1" id="toc-exercises-1" class="nav-link" data-scroll-target="#exercises-1">Exercises</a></li>
+  <li><a href="#exercises-1" id="toc-exercises-1" class="nav-link" data-scroll-target="#exercises-1">2.4.3 Exercises</a></li>
   </ul>
 </nav>
     </div>
@@ -1415,11 +1415,11 @@ Removed 2 rows containing missing values (`geom_point()`)</code></pre>
 </div>
 <p>Yes, these two graphs should look the same. Since, the data and the aesthetics mapped are the same in both. Only difference is that the second code has redundancy.</p>
 <p>Here’s the visual confirmation for both codes in <a href="#fig-Question-10-code">Figure&nbsp;10</a>.</p>
-<div class="cell" data-hash="Chapter2_cache/html/fig-Question-10-code_22af3ef072ec8badc0ff6f61fd66aa7f">
+<div class="cell" data-fig.asp="0.5" data-hash="Chapter2_cache/html/fig-Question-10-code_9e9904e45e94b35b2413cdfed73f66cf">
 <div class="cell-output-display">
 <div id="fig-Question-10-code" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="Chapter2_files/figure-html/fig-Question-10-code-1.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p><img src="Chapter2_files/figure-html/fig-Question-10-code-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption class="figure-caption">Figure&nbsp;10: Comparison of the two plots produced by the codes in Question 10</figcaption>
 </figure>
 </div>
@@ -1428,9 +1428,10 @@ Removed 2 rows containing missing values (`geom_point()`)</code></pre>
 </ol>
 </section>
 <section id="exercises-1" class="level1">
-<h1>Exercises</h1>
+<h1>2.4.3 Exercises</h1>
 <ol type="1">
 <li><p><strong>Make a bar plot of <code>species</code> of <code>penguins</code>, where you assign <code>species</code> to the <code>y</code> aesthetic. How is this plot different?</strong></p>
+<p>When we assign <code>species</code> to the y-axis, we get a horizontal bar plot, instead of the vertical bar plot given in the textbook. The results are compared in <a href="#fig-Question-1-Exercise-2.4.3">Figure&nbsp;11</a> .</p>
 <div class="cell fig-cap-location-top" data-fig.asp="0.5" data-hash="Chapter2_cache/html/fig-Question-1-Exercise-2.4.3_974ba2283f9923c6f18294e7703eedef">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">=</span> penguins <span class="sc">|&gt;</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> species)) <span class="sc">+</span></span>
@@ -1451,9 +1452,81 @@ Removed 2 rows containing missing values (`geom_point()`)</code></pre>
 </div>
 </div></li>
 <li><p><strong>How are the following two plots different? Which aesthetic, <code>color</code> or <code>fill</code>, is more useful for changing the color of bars?</strong></p>
-<pre><code>ggplot(penguins, aes(x = species)) +   geom_bar(color = "red")  ggplot(penguins, aes(x = species)) +   geom_bar(fill = "red")</code></pre></li>
-<li><p>What does the <code>bins</code> argument in <a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html"><code>geom_histogram()</code></a> do?</p></li>
-<li><p>Make a histogram of the <code>carat</code> variable in the <code>diamonds</code> dataset that is available when you load the tidyverse package. Experiment with different binwidths. What binwidth reveals the most interesting patterns?</p></li>
+<p>The output of the two plots is in <a href="#fig-Question_2_Ex_2.4.3">Figure&nbsp;12</a> .</p>
+<div class="cell" data-fig.asp="0.5" data-hash="Chapter2_cache/html/fig-Question_2_Ex_2.4.3_f8f91244e6c41f2820707f538df8310b">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">"Color = Red"</span>),</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">"Fill = Red"</span>),</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="at">ncol =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-Question_2_Ex_2.4.3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter2_files/figure-html/fig-Question_2_Ex_2.4.3-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;12: The two plots produced by the code given, with red color vs.&nbsp;red fill</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The two plots are different in where the colour <span style="color:red;">red</span> appears. As a <code>color</code> aesthetic, it appears only on the borders. But, as a <code>fill</code> aesthetic, it fills the entire bar(s).</p>
+<p>Thus, the aesthetic <code>fill</code> is more useful in changing the colour of the bars.</p></li>
+<li><p><strong>What does the <code>bins</code> argument in <a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html"><code>geom_histogram()</code></a> do?</strong></p>
+<p>The bins argument tell the number of bins (i.e.&nbsp;number of bars) in the histogram to be plotted. The default value is 30. However, if the <code>binwidth</code> is also specified, then the <code>binwidth</code> argument over-rides the <code>bins</code> argument.</p></li>
+<li><p><strong>Make a histogram of the <code>carat</code> variable in the <code>diamonds</code> dataset that is available when you load the tidyverse package. Experiment with different binwidths. What bin-width reveals the most interesting patterns?</strong></p>
+<div class="cell" data-fig.asp="1" data-hash="Chapter2_cache/html/fig-hist1_c21fe4e2e52193db0fd56a5bed92618f">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">=</span> <span class="fu">theme_classic</span>() </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>f2 <span class="ot">=</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="cn">NULL</span>, <span class="at">y=</span><span class="cn">NULL</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>g1 <span class="ot">=</span> <span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x=</span>carat)) <span class="sc">+</span> </span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> </span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>, </span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>                         <span class="at">subtitle =</span> <span class="st">"Default Bindwidth"</span>)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>g2 <span class="ot">=</span> <span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x=</span>carat)) <span class="sc">+</span> </span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="st">"black"</span>, </span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>                   <span class="at">binwidth =</span> <span class="fl">0.1</span>) <span class="sc">+</span> </span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>() <span class="sc">+</span> </span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>, </span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">subtitle =</span> <span class="st">"Bindwidth = 0.1"</span>)</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>g3 <span class="ot">=</span> <span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x=</span>carat)) <span class="sc">+</span> </span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="st">"black"</span>, </span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>                   <span class="at">binwidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>() <span class="sc">+</span> </span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>, </span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>         <span class="at">subtitle =</span> <span class="st">"Bindwidth = 0.2"</span>)  </span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>g4 <span class="ot">=</span> <span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x=</span>carat)) <span class="sc">+</span> </span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="st">"black"</span>, </span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>                   <span class="at">binwidth =</span> <span class="fl">0.3</span>) <span class="sc">+</span> </span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>() <span class="sc">+</span> </span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>, </span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>         <span class="at">subtitle =</span> <span class="st">"Bindwidth = 0.3"</span>)</span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>g5 <span class="ot">=</span> <span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x=</span>carat)) <span class="sc">+</span> </span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="st">"black"</span>, </span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>                   <span class="at">binwidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>() <span class="sc">+</span> </span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>, </span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>         <span class="at">subtitle =</span> <span class="st">"Bindwidth = 0.5"</span>)</span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>g6 <span class="ot">=</span> <span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x=</span>carat)) <span class="sc">+</span> </span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="st">"black"</span>, </span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a>                   <span class="at">binwidth =</span> <span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>() <span class="sc">+</span> </span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>, </span>
+<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a>         <span class="at">subtitle =</span> <span class="st">"Bindwidth = 1"</span>)</span>
+<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(g1, g2, g3, g4, g5, g6,</span>
+<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a>                        <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-hist1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter2_files/figure-html/fig-hist1-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;13: Histogram with different bin-widths tried out to select the most relevant one</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Thus, we see that best <code>binwidth</code> is either the default <code>binwidth</code> chosen by <code>ggplot2</code> or the bind-width of 0.2 per bin, since it reveals the most interesting patterns.</p></li>
 </ol>
 
 
