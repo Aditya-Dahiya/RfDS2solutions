@@ -236,4 +236,93 @@ Thus, we see that the relation is not apparent on a simple scatter plot, but if 
       geom_smooth()
     ```
 
-9.  
+9.  **Run this code in your head and predict what the output will look like. Then, run the code in R and check your predictions.**
+
+    ```{r}
+    #| label: Question_9_Code
+    #| eval: false
+
+    ggplot(data = penguins,
+           mapping = aes(x = flipper_length_mm, 
+                         y = body_mass_g, 
+                         color = island)) +
+      geom_point() +
+      geom_smooth(se = FALSE)
+    ```
+
+    On visual inspection, I believe this code should create a scatter plot of penguins flipper lengths (on x-axis) vs. body mass (on y-axis), with the dots coloured by islands on the penguins. Further, a smoother line if fitted to show the relationship, with a separate smoother line for each island type. Thus, since we know there are three types of islands, we expect three smoother lines fitted to the plot, without the display of standard error intervals.
+
+    Now, let us check our predictions with the code in the @fig-Question_9_Code_Run :\--
+
+    ```{r}
+    #| label: fig-Question_9_Code_Run
+    #| fig-cap: "Plot generated from running the Code of Question 9"
+    #| echo: false
+
+    ggplot(data = penguins,
+           mapping = aes(x = flipper_length_mm, 
+                         y = body_mass_g, 
+                         color = island)) +
+      geom_point() +
+      geom_smooth(se = FALSE)
+    ```
+
+10. **Will these two graphs look different? Why/why not?**
+
+    ```{r}
+    #| label: Question_10
+    #| eval: false
+
+    # Code 1
+    ggplot(data = penguins,
+           mapping = aes(x = flipper_length_mm, 
+                         y = body_mass_g)) +
+      geom_point() +
+      geom_smooth()
+
+    # Code 2
+    ggplot() +
+      geom_point(data = penguins,
+                 mapping = aes(x = flipper_length_mm, 
+                               y = body_mass_g)
+      ) +
+      geom_smooth(data = penguins,
+                  mapping = aes(x = flipper_length_mm, 
+                                y = body_mass_g))
+    ```
+
+    Yes, these two graphs should look the same. Since, the data and the aesthetics mapped are the same in both. Only difference is that the second code has redundancy.
+
+    Here's the visual confirmation for both codes in @fig-Question-10-code.
+
+    ```{r}
+    #| label: fig-Question-10-code
+    #| fig-cap: "Comparison of the two plots produced by the codes in Question 10"
+    #| echo: false
+    #| warning: false
+    #| message: false
+    #| out-width: "70%"
+
+    g1 = ggplot(data = penguins,
+           mapping = aes(x = flipper_length_mm, 
+                         y = body_mass_g)) +
+      geom_point() +
+      geom_smooth() +
+      labs(caption = "Code 1")
+
+    g2 = ggplot() +
+      geom_point(data = penguins,
+                 mapping = aes(x = flipper_length_mm, 
+                               y = body_mass_g)
+      ) +
+      geom_smooth(data = penguins,
+                  mapping = aes(x = flipper_length_mm, 
+                                y = body_mass_g)) +
+      labs(caption = "Code 2")
+    gridExtra::grid.arrange(g1, g2,
+                            ncol = 2)
+    ```
+
+# Exercises
+
+# 
