@@ -301,7 +301,7 @@ Thus, we see that the relation is not apparent on a simple scatter plot, but if 
     #| echo: false
     #| warning: false
     #| message: false
-    #| out-width: "70%"
+    #| fig-asp: 0.5
 
     g1 = ggplot(data = penguins,
            mapping = aes(x = flipper_length_mm, 
@@ -321,8 +321,38 @@ Thus, we see that the relation is not apparent on a simple scatter plot, but if 
       labs(caption = "Code 2")
     gridExtra::grid.arrange(g1, g2,
                             ncol = 2)
+    rm(g1, g2)
     ```
 
-# Exercises
+# 2.4.3 Exercises
 
-# 
+1.  **Make a bar plot of `species` of `penguins`, where you assign `species` to the `y` aesthetic. How is this plot different?**
+
+    When we assign `species` to the y-axis, we get a horizontal bar plot, instead of the vertical bar plot given in the textbook. The results are compared in @fig-Question-1-Exercise-2.4.3 .
+
+    ```{r}
+    #| label: fig-Question-1-Exercise-2.4.3
+    #| fig-cap: "Change in figure when species is assigned to y-axis"
+    #| fig-cap-location: top
+    #| fig-asp: 0.5
+
+    p1 = penguins |>
+          ggplot(aes(x = species)) +
+          geom_bar() +
+          labs(caption = "Species on x-axis")
+    p2 = penguins |>
+          ggplot(aes(y = species)) +
+          geom_bar() +
+          labs(caption = "Species on y-axis")
+    gridExtra::grid.arrange(p1, p2, ncol = 2)
+    ```
+
+2.  **How are the following two plots different? Which aesthetic, `color` or `fill`, is more useful for changing the color of bars?**
+
+    ```         
+    ggplot(penguins, aes(x = species)) +   geom_bar(color = "red")  ggplot(penguins, aes(x = species)) +   geom_bar(fill = "red")
+    ```
+
+3.  What does the `bins` argument in [`geom_histogram()`](https://ggplot2.tidyverse.org/reference/geom_histogram.html) do?
+
+4.  Make a histogram of the `carat` variable in the `diamonds` dataset that is available when you load the tidyverse package. Experiment with different binwidths. What binwidth reveals the most interesting patterns?

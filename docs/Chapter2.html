@@ -164,6 +164,7 @@ div.csl-indent {
    
   <ul>
   <li><a href="#exercises" id="toc-exercises" class="nav-link active" data-scroll-target="#exercises">2.2.5 Exercises</a></li>
+  <li><a href="#exercises-1" id="toc-exercises-1" class="nav-link" data-scroll-target="#exercises-1">Exercises</a></li>
   </ul>
 </nav>
     </div>
@@ -1338,8 +1339,9 @@ Removed 2 rows containing missing values (`geom_point()`)</code></pre>
 </div>
 </div>
 </div>
-<p>The code above recreates the <a href="#fig-recreateggplot2">Figure&nbsp;7</a>. The aesthetic should <code>bill_depth_mm</code> should be mapped the aesthetic <code>colo</code> in the <code>geom_point()</code> function level. It should not be done at the global level, because then it will even be an aesthetic for <code>geom_smooth</code> resulting in multiple smoother lines fitted for each level of <code>bill_depth_mm</code> , and possible result in an error because <code>bill_depth_mm</code> is not a categorical variable or a factor variable with certain distinct categories or levels. Luckily, <code>ggplot2</code> recognizes this error and still produces the same plot by droppin the <code>color</code> aesthetic, i.e., <code>The following aesthetics were dropped during statistical transformation: colour.</code> So, <code>ggplot2</code> is trying to guess our intentions, and it works, but the <code>code</code> not correct.</p>
-<div class="cell" data-hash="Chapter2_cache/html/fig-recreatewrong_6eeb9a5813fda1fd805051e95b1d20b6">
+<p>The code above recreates the <a href="#fig-recreateggplot2">Figure&nbsp;7</a>. The aesthetic should <code>bill_depth_mm</code> should be mapped the aesthetic <code>colo</code> in the <code>geom_point()</code> function level. It should not be done at the global level, because then it will even be an aesthetic for <code>geom_smooth</code> resulting in multiple smoother lines fitted for each level of <code>bill_depth_mm</code> , and possible result in an error because <code>bill_depth_mm</code> is not a categorical variable or a factor variable with certain distinct categories or levels.</p>
+<p>Luckily, <code>ggplot2</code> recognizes this error and still produces the same plot by droppin the <code>color</code> aesthetic, i.e., <code>The following aesthetics were dropped during statistical transformation: colour.</code> So, <code>ggplot2</code> is trying to guess our intentions, and it works, but the <code>code</code> not correct. The wrong <code>code</code> is tested at <a href="#fig-recreatewrong">Figure&nbsp;8</a>.</p>
+<div class="cell" data-hash="Chapter2_cache/html/fig-recreatewrong_f86a2876f11b316573b7d520b3260ea1">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> flipper_length_mm,</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> body_mass_g,</span>
@@ -1366,12 +1368,92 @@ Removed 2 rows containing missing values (`geom_point()`)</code></pre>
 <div id="fig-recreatewrong" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="Chapter2_files/figure-html/fig-recreatewrong-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;8: The Wrong Code - Recreated figure</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;8: The Wrong Code - Recreated figure is the same - but the code is fundamentally flawed</figcaption>
 </figure>
 </div>
 </div>
 </div></li>
-<li></li>
+<li><p><strong>Run this code in your head and predict what the output will look like. Then, run the code in R and check your predictions.</strong></p>
+<div class="cell" data-hash="Chapter2_cache/html/Question_9_Code_b963299eb66e10c5cd484b6039cf0701">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins,</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> flipper_length_mm, </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> body_mass_g, </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">color =</span> island)) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>On visual inspection, I believe this code should create a scatter plot of penguins flipper lengths (on x-axis) vs.&nbsp;body mass (on y-axis), with the dots coloured by islands on the penguins. Further, a smoother line if fitted to show the relationship, with a separate smoother line for each island type. Thus, since we know there are three types of islands, we expect three smoother lines fitted to the plot, without the display of standard error intervals.</p>
+<p>Now, let us check our predictions with the code in the <a href="#fig-Question_9_Code_Run">Figure&nbsp;9</a> :--</p>
+<div class="cell" data-hash="Chapter2_cache/html/fig-Question_9_Code_Run_a5098a4d8c9c6473240fab1614829fef">
+<div class="cell-output-display">
+<div id="fig-Question_9_Code_Run" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter2_files/figure-html/fig-Question_9_Code_Run-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;9: Plot generated from running the Code of Question 9</figcaption>
+</figure>
+</div>
+</div>
+</div></li>
+<li><p><strong>Will these two graphs look different? Why/why not?</strong></p>
+<div class="cell" data-hash="Chapter2_cache/html/Question_10_abb2f8b55bcb1009cfbd27830b292198">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code 1</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> flipper_length_mm, </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> body_mass_g)) <span class="sc">+</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Code 2</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> penguins,</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> flipper_length_mm, </span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>                           <span class="at">y =</span> body_mass_g)</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data =</span> penguins,</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>              <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> flipper_length_mm, </span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>                            <span class="at">y =</span> body_mass_g))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Yes, these two graphs should look the same. Since, the data and the aesthetics mapped are the same in both. Only difference is that the second code has redundancy.</p>
+<p>Here’s the visual confirmation for both codes in <a href="#fig-Question-10-code">Figure&nbsp;10</a>.</p>
+<div class="cell" data-hash="Chapter2_cache/html/fig-Question-10-code_22af3ef072ec8badc0ff6f61fd66aa7f">
+<div class="cell-output-display">
+<div id="fig-Question-10-code" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter2_files/figure-html/fig-Question-10-code-1.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;10: Comparison of the two plots produced by the codes in Question 10</figcaption>
+</figure>
+</div>
+</div>
+</div></li>
+</ol>
+</section>
+<section id="exercises-1" class="level1">
+<h1>Exercises</h1>
+<ol type="1">
+<li><p><strong>Make a bar plot of <code>species</code> of <code>penguins</code>, where you assign <code>species</code> to the <code>y</code> aesthetic. How is this plot different?</strong></p>
+<div class="cell fig-cap-location-top" data-fig.asp="0.5" data-hash="Chapter2_cache/html/fig-Question-1-Exercise-2.4.3_974ba2283f9923c6f18294e7703eedef">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">=</span> penguins <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> species)) <span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">"Species on x-axis"</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">=</span> penguins <span class="sc">|&gt;</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> species)) <span class="sc">+</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">"Species on y-axis"</span>)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(p1, p2, <span class="at">ncol =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-Question-1-Exercise-2.4.3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter2_files/figure-html/fig-Question-1-Exercise-2.4.3-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;11: Change in figure when species is assigned to y-axis</figcaption>
+</figure>
+</div>
+</div>
+</div></li>
+<li><p><strong>How are the following two plots different? Which aesthetic, <code>color</code> or <code>fill</code>, is more useful for changing the color of bars?</strong></p>
+<pre><code>ggplot(penguins, aes(x = species)) +   geom_bar(color = "red")  ggplot(penguins, aes(x = species)) +   geom_bar(fill = "red")</code></pre></li>
+<li><p>What does the <code>bins</code> argument in <a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html"><code>geom_histogram()</code></a> do?</p></li>
+<li><p>Make a histogram of the <code>carat</code> variable in the <code>diamonds</code> dataset that is available when you load the tidyverse package. Experiment with different binwidths. What binwidth reveals the most interesting patterns?</p></li>
 </ol>
 
 
