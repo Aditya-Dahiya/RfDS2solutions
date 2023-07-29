@@ -58,7 +58,6 @@ The scatter-plot is depicted below.
 #| fig-cap-location: top
 #| warning: false
 #| message: false
-#| out-width: "70%"
 #| fig-align: "center"
 
 penguins |>
@@ -131,7 +130,7 @@ Thus, we see that the relation is not apparent on a simple scatter plot, but if 
       labs(x = "Species", y = "Bill Depth (mm)")
     ```
 
-    This produces an awkward scatter-plot, since the x-axis variable is discrete, and not continuous. A better choice of `geom` might be a box-plot, which shows that the average Bill Depth (in mm) is lower in Gentoo penguins compared to the other two.
+    This produces an awkward scatter-plot, since the x-axis variable is discrete, and not continuous. A better choice of `geom` might be a box-plot, which is a good way to present the relationship between a continuous **(Bill Depth)** and a categorical **(species)** variable. which shows that the average Bill Depth (in mm) is lower in Gentoo penguins compared to the other two.
 
     ```{r}
     #| label: fig-boxplot1
@@ -382,10 +381,6 @@ Thus, we see that the relation is not apparent on a simple scatter plot, but if 
     #| fig-cap: "Histogram with different bin-widths tried out to select the most relevant one"
     #| warning: false
 
-
-    f1 = theme_classic() 
-    f2 = labs(x=NULL, y=NULL)
-
     g1 = ggplot(diamonds, aes(x=carat)) + 
       geom_histogram(fill = "white", color = "black") + 
       theme_classic() + labs(x = NULL, y = NULL, 
@@ -420,6 +415,7 @@ Thus, we see that the relation is not apparent on a simple scatter plot, but if 
         theme_classic() + 
         labs(x = NULL, y = NULL, 
              subtitle = "Bindwidth = 1")
+
     gridExtra::grid.arrange(g1, g2, g3, g4, g5, g6,
                             ncol = 3, nrow = 2)
     ```
@@ -428,7 +424,245 @@ Thus, we see that the relation is not apparent on a simple scatter plot, but if 
     #| label: remove-objects-1
     #| echo: false
 
-    rm(g1, g2, g3, g4, g5, g6)
+    rm(g1, g2, g3, g4, g5, g6, p1, p2, df, c, y, test1)
     ```
 
     Thus, we see that best `binwidth` is either the default `binwidth` chosen by `ggplot2` or the bind-width of 0.2 per bin, since it reveals the most interesting patterns.
+
+# **2.5.5 Exercises**
+
+1.  **The `mpg` data frame that is bundled with the ggplot2 package contains 234 observations collected by the US Environmental Protection Agency on 38 car models. Which variables in `mpg` are categorical? Which variables are numerical? (Hint: Type [`?mpg`](https://ggplot2.tidyverse.org/reference/mpg.html) to read the documentation for the dataset.) How can you see this information when you run `mpg`?**
+
+    The code below displays the summary fo the `mpg` data-set. The following variables are categorical: `manufacturer` (manufacturer name), `model` (model name), `trans` (type of transmission), `drv` (the type of drive train: front, rear or 4-wheel), `fl` (fuel type), and `class` (type of car). The numerical variables are `displ` (engine displacement, in litres), `year` (year of manufacture) , `cyl` (number of cylinders) , `cty` (city miles per gallon) and `hwy` (highway miles per gallon). We can see these in the square parenthesis the column titled **Variable** in the output of the code below .
+
+    ```{r}
+    #| label: loadmpg
+    #| echo: false
+
+    # Load mpg Data
+    data(mpg)
+    ```
+
+    ```{r}
+    #| label: dfSummary1
+    #| results: asis
+    #| eval: false
+
+    # Visualize summary of the data frame
+    mpg |>
+      summarytools::dfSummary(plain.ascii  = FALSE, 
+                              style = "grid", 
+                              graph.magnif = 0.75, 
+                              valid.col = FALSE,
+                              na.col = FALSE,
+                              headings = FALSE) |>
+      view()
+    ```
+
+    If we simply run `mpg` , we can still see this information in the `R` console output, by the terms `<chr>` (for categorical variables) ; and, `<dbl>` or `<int>` (for numerical variables)
+
+    ```{r}
+    #| label: q1-Exercise-2.5.5
+    #| collapse: true
+
+    mpg
+    ```
+
+2.  **Make a scatterplot of `hwy` vs. `displ` using the `mpg` data frame. Next, map a third, numerical variable to `color`, then `size`, then both `color` and `size`, then `shape`. How do these aesthetics behave differently for categorical vs. numerical variables?**
+
+    ```{r}
+    #| label: fig-q2-Exercise-2.5.5
+    #| fig-cap: "Scatterplots of different kinds for different aesthetic mappings"
+    #| fig-cap-location: top
+    #| fig-asp: 0.5
+
+    g1 = mpg |>
+          ggplot(aes(x = hwy, y = displ)) +
+          geom_point() +
+          theme_minimal() +
+          labs(caption = "Original Plot")
+    # Using numerical variable 'cty' to map to colour, size
+    g2 = mpg |>
+          ggplot(aes(x = hwy, y = displ, color = cty)) +
+          geom_point() +
+          theme_minimal()+
+          labs(caption = "cty mapped to color")
+    g3 = mpg |>
+          ggplot(aes(x = hwy, y = displ, size = cty)) +
+          geom_point(alpha = 0.5) +
+          theme_minimal()+
+          labs(caption = "cty mapped to size")
+    g4 = mpg |>
+          ggplot(aes(x = hwy, y = displ, 
+                     color = cty, size = cty)) +
+          geom_point() +
+          theme_minimal()+
+          labs(caption = "cty mapped to size and color")
+    gridExtra::grid.arrange(g1, g2, g3, g4, ncol = 2)
+    ```
+
+    So, we see that we can map a numerical variable to `color` or `size` aesthetics, and `ggplot2` will itself make a scale and display the output with a legend. However, numerical variables (i.e., continuous variables) don't map to `shape` aesthetic, as there cannot be any continuum amongst shapes. Accordingly, when mapped to `shape`, the code throws an error as below:\-\--
+
+    ```{r}
+    #| label: q2-error-code
+    #| error: true
+    #| warning: true
+    #| message: true
+
+
+    # Using numerical variable 'cty' to map to size aesthetic 
+      mpg |>
+          ggplot(aes(x = hwy, 
+                     y = displ, 
+                     shape = cty)) +
+          geom_point()
+    ```
+
+    Thus, the `shape` aesthetic works only with categorical variables, whereas `color` works with both numerical and categorical variables; and, by definition `size` aesthetic should be used only with numerical variables (it can work with categorical variables, but then the sizes are assigned arbitrarily to different categories).
+
+3.  **In the scatter-plot of `hwy` vs. `displ`, what happens if you map a third variable to `linewidth`?**
+
+    ```{r}
+    #| label: fig-q3-Exercise-2.5.5
+    #| fig-cap: "Experiment with mapping line width to a third variable"
+    mpg |>
+          ggplot(aes(x = hwy, y = displ,
+                     linewidth = cty)) +
+          geom_point() +
+          theme_minimal()
+    ```
+
+    As we see, nothing changes with addition of the `linewidth` argument in @fig-q3-Exercise-2.5.5 . This is because the `linewidth` argument *"scales the width of lines and polygon strokes."* in `ggplot2` [documentation](https://ggplot2.tidyverse.org/reference/scale_linewidth.html "ggplot2 Tidyverse Reference Document"). Since we are only plotting point geoms, and no lines, the argument is useless and not used to produce the output.
+
+4.  **What happens if you map the same variable to multiple aesthetics?**
+
+    We can map the same variable to multiple aesthetics, and the output will display its variations in all such aesthetics. But it is redundant, and make plot cluttery with too much visual input.
+
+    For example, @fig-multiple-aesthetics shows a poorly understandable plot where `class` of the vehicle is mapped to size, shape and color. It works, but there's too much information redundancy.
+
+    ```{r}
+    #| label: fig-multiple-aesthetics
+    #| fig-cap: "A messy plot with Mutliple aesthetics defined by the same variable"
+
+    mpg |>
+      ggplot(aes(x=hwy, y = cty,
+                 size = class,
+                 color = class,
+                 shape = class)) +
+      geom_point(alpha = 0.5) +
+      theme_classic()
+    ```
+
+5.  **Make a scatterplot of `bill_depth_mm` vs. `bill_length_mm` and color the points by `species`. What does adding coloring by species reveal about the relationship between these two variables? What about faceting by `species`?**
+
+    The @fig-q5-Exercise-2.5.5 shows the importance of coloring or faceting by `species`. This allows us to detect a fairly strong positive correlation which was not apparent in the simple scatter plot. This, perhaps, can be called an example of negative confounding [@mehio-sibai2005] of the relation between bill depth and bill length by the species type.
+
+    ```{r}
+    #| label: fig-q5-Exercise-2.5.5
+    #| fig-cap: "Adding color by species reveals a strong relationship"
+
+    p1 = penguins |>
+      ggplot(mapping = aes(x = bill_length_mm,
+                           y = bill_depth_mm)) +
+      geom_point() +
+      geom_smooth(se = FALSE,
+                  method = "lm") +
+      theme_classic() +
+      labs(x = "Bill Length (mm)", y = "Bill Depth (mm)",
+           subtitle = "No relation is apparent")
+
+    p2 = penguins |>
+      ggplot(mapping = aes(x = bill_length_mm,
+                           y = bill_depth_mm,
+                           col = species)) +
+      geom_point() +
+      geom_smooth(se = FALSE,
+                  method = "lm") +
+      theme_classic() +
+      labs(x = "Bill Length (mm)", y = "Bill Depth (mm)",
+           subtitle = "Colouring  by species reveals relations")
+
+    p3 = penguins |>
+      ggplot(mapping = aes(x = bill_length_mm,
+                           y = bill_depth_mm)) +
+      geom_point() +
+      geom_smooth(se = FALSE,
+                  method = "lm") +
+      facet_wrap(~species) +
+      theme_classic() +
+      labs(x = "Bill Length (mm)", y = "Bill Depth (mm)",
+           subtitle = "Faceting also reveals the relations")
+
+    lay = rbind(c(1,1,2,2,2),
+                c(3,3,3,3,3))
+    gridExtra::grid.arrange(p1, p2, p3, layout_matrix = lay)
+    ```
+
+6.  **Why does the following yield two separate legends? How would you fix it to combine the two legends?**
+
+```{r}
+#| label: q6-Exercises-2.5.5-1
+#| eval: false
+ggplot(data = penguins,   
+       mapping = aes(x = bill_length_mm, 
+                     y = bill_depth_mm,      
+                     color = species, 
+                     shape = species)) +   
+  geom_point() +   
+  labs(color = "Species")
+```
+
+This code presents a plot with two legends because in the last line, we have forced `ggplot2` to name out "Color" legend as the string "Species". Thus, `ggplot2` differentiates between "species" and "Species".
+
+We can correct this issue in either of the following two ways:\--
+
+```{r}
+#| label: q6-Exercises-2.5.5-2
+#| eval: false
+ggplot(data = penguins,   
+       mapping = aes(x = bill_length_mm, 
+                     y = bill_depth_mm,      
+                     color = species, 
+                     shape = species)) +   
+  geom_point()
+```
+
+or,
+
+```{r}
+#| label: q6-Exercises-2.5.5-3
+#| eval: false
+ggplot(data = penguins,   
+       mapping = aes(x = bill_length_mm, 
+                     y = bill_depth_mm,      
+                     color = species, 
+                     shape = species)) +   
+  geom_point()
+```
+
+7.  **Create the two following stacked bar plots. Which question can you answer with the first one? Which question can you answer with the second one?**
+
+    The plots are produced in @fig-q5-Exercise-2.5.5 .
+
+    ```{r}
+    #| label: fig-q7-Exercises-2.5.5
+    #| fig-cap: The two stacked bar plots produced by the code
+    #| fig-asp: 0.5
+
+
+    g1 = ggplot(penguins, aes(x = island, 
+                         fill = species)) +   
+      geom_bar(position = "fill") +
+      labs(subtitle = "Sub-figure A")
+
+    g2 = ggplot(penguins, aes(x = species, 
+                         fill = island)) +   
+      geom_bar(position = "fill") +
+      labs(subtitle = "Sub-figure B")
+
+    gridExtra::grid.arrange(g1, g2, ncol = 2)
+    ```
+
+    The Sub-Figure A answers the question, that *"On each of the three islands, what proportion of penguins belong to which species?"*
+
+    The Sub-Figure B answers the question reg. distribution of the population of each species of penguins, that is, *"For each of the penguin species', what proportion of each species total population is found on which island?"*

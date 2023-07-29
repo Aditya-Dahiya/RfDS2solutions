@@ -276,6 +276,44 @@
             "title": "Gt: Easily create presentation-ready display tables",
             "title-short": "Gt",
             "type": "article-journal"
+        },
+        {
+            "DOI": "10.1016/j.annepidem.2004.10.004",
+            "URL": "http://dx.doi.org/10.1016/j.annepidem.2004.10.004",
+            "author": [
+                {
+                    "family": "Mehio-Sibai",
+                    "given": "Abla"
+                },
+                {
+                    "family": "Feinleib",
+                    "given": "Manning"
+                },
+                {
+                    "family": "Sibai",
+                    "given": "Tarek A."
+                },
+                {
+                    "family": "Armenian",
+                    "given": "Haroutune K."
+                }
+            ],
+            "container-title": "Annals of Epidemiology",
+            "id": "mehio-sibai2005",
+            "issue": "6",
+            "issued": {
+                "date-parts": [
+                    [
+                        2005,
+                        6
+                    ]
+                ]
+            },
+            "language": "en",
+            "page": "421-423",
+            "title": "A Positive or a Negative Confounding Variable? A Simple Teaching Aid for Clinicians and Students",
+            "type": "article-journal",
+            "volume": "15"
         }
     ],
     "project_biblios": []
