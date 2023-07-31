@@ -405,7 +405,7 @@ data("flights")
 
     The following graph of average delay (on y-axis) plotted against scheduled departure time (on x-axis) shows the overall trend that the average delays rise over the course of the day to hit a peak around 6 pm.
 
-    Note: The scheduled departure time is not accurate, since it is written in `hhmm` format, and thus is not continuous variable. For example, 1:59 am is 159, and then 2:00 am is 200. So there are no values in 60s, 70s, 80s, 90s. I will rectify this once I learn the `lubridate` package.
+    *Note: The scheduled departure time is not accurate in the data-set, since it is written in* `hhmm` *format, and thus is not continuous variable. For example, 1:59 am is 159, and then 2:00 am is 200. So there are no values in 60s, 70s, 80s, 90s. I rectified this using mathematical operators* `%/%` *and* `%%` *to obtain hours and minutes, and then combined them. Now, the result is a smoother graph.*
 
     ```{r}
     #| label: fig-q3-Ex-4.5.7
@@ -415,12 +415,17 @@ data("flights")
     flights |>
       group_by(sched_dep_time) |>
       summarise(avg_delay = mean(dep_delay, na.rm = TRUE)) |>
-      ggplot(aes(x = sched_dep_time, y = avg_delay)) +
+      mutate(hour = sched_dep_time %/% 100,
+             minute = sched_dep_time %% 100) |>
+      mutate(time_hr = hour + minute/60) |>
+      ggplot(aes(x = time_hr, y = avg_delay)) +
       geom_line() +
       geom_smooth(color = "red", se = FALSE) +
       theme_bw() + 
-      labs(x = "Scheduled Departure time",
-           y = "Average delay in minutes")
+      labs(x = "Scheduled Departure time (in Hrs.)",
+           y = "Average delay in minutes") +
+      scale_x_continuous(breaks = seq(from = 0, to = 24, by = 4))
+
     ```
 
 4.  **What happens if you supply a negative `n` to [`slice_min()`](https://dplyr.tidyverse.org/reference/slice.html) and friends?**

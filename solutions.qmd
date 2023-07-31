@@ -6,6 +6,7 @@ listing:
     - "Chapter2.qmd"
     - "Chapter3.qmd"
     - "Chapter4.qmd"
+    - "Chapter5.qmd"
     - "Chapter29.qmd"
     - "Chapter30.qmd"
   type: grid

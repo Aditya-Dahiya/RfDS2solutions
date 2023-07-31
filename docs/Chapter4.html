@@ -3062,8 +3062,10 @@ of Airports</p> </caption>
 </div>
 </div></li>
 <li><p><strong>Find the flights that are most delayed upon departure from each destination.</strong></p>
-<p>We can use the following codes (either one works, and the code checks this equality of results) to find the flight with highest departure delay (<code>dep_delay</code> ) for each destination.</p>
-<div class="cell" data-hash="Chapter4_cache/html/q2-Ex-4.5.7_5bad43d619b2faae2b090ac7eb3d151e">
+<p>We can use the following codes (either one works, and the code checks this equality of results) to find the flight with highest departure delay (<code>dep_delay</code> ) for each destination (<a href="#tbl-q2-Ex-4.5.7">Table&nbsp;6</a>).</p>
+<div class="cell" data-hash="Chapter4_cache/html/tbl-q2-Ex-4.5.7_ea9bc97f796a633f2e94dff16c6b11aa">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 1: Group by "dest" and then use slice_max</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> flights <span class="sc">|&gt;</span></span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(dest) <span class="sc">|&gt;</span></span>
@@ -3077,12 +3079,26 @@ of Airports</p> </caption>
 <span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(dep_delay), <span class="fu">desc</span>(flight))</span>
 <span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Check results</span></span>
 <span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(a <span class="sc">!=</span> b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display results</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>b <span class="sc">|&gt;</span> <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">5</span>) <span class="sc">|&gt;</span> <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>b <span class="sc">|&gt;</span> </span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">5</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(<span class="at">dest =</span> <span class="st">"Destination"</span>, </span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">flight =</span> <span class="st">"Flight"</span>, </span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">origin =</span> <span class="st">"Origin Airport"</span>,</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">dep_delay =</span> <span class="st">"Departure Depay (minutes)"</span>, </span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">month =</span> <span class="st">"Month"</span>, </span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">day =</span> <span class="st">"Date"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_align</span>(<span class="at">align =</span> <span class="st">"center"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
+<div id="tbl-q2-Ex-4.5.7" class="anchored">
 
 <div id="qwbctvhiae" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#qwbctvhiae table {
@@ -3524,70 +3540,75 @@ of Airports</p> </caption>
   text-indent: 25px;
 }
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption><p>Flights with highest departure delay; displayed here only for 5
-destinations highest departure delay</p></caption>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Table&nbsp;6:  <p>Flights with highest departure delay; displayed here only for 5
+destinations highest departure delay</p> </caption>
   <thead>
 
     <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="dest">dest</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="flight">flight</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="origin">origin</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="dep_delay">dep_delay</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="month">month</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="day">day</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Destination">Destination</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Flight">Flight</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Origin Airport">Origin Airport</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Departure Depay (minutes)">Departure Depay (minutes)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Month">Month</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Date">Date</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td headers="dest" class="gt_row gt_left">HNL</td>
-<td headers="flight" class="gt_row gt_right">51</td>
-<td headers="origin" class="gt_row gt_left">JFK</td>
-<td headers="dep_delay" class="gt_row gt_right">1301</td>
-<td headers="month" class="gt_row gt_right">1</td>
-<td headers="day" class="gt_row gt_right">9</td></tr>
-    <tr><td headers="dest" class="gt_row gt_left">CMH</td>
-<td headers="flight" class="gt_row gt_right">3535</td>
-<td headers="origin" class="gt_row gt_left">JFK</td>
-<td headers="dep_delay" class="gt_row gt_right">1137</td>
-<td headers="month" class="gt_row gt_right">6</td>
-<td headers="day" class="gt_row gt_right">15</td></tr>
-    <tr><td headers="dest" class="gt_row gt_left">ORD</td>
-<td headers="flight" class="gt_row gt_right">3695</td>
-<td headers="origin" class="gt_row gt_left">EWR</td>
-<td headers="dep_delay" class="gt_row gt_right">1126</td>
-<td headers="month" class="gt_row gt_right">1</td>
-<td headers="day" class="gt_row gt_right">10</td></tr>
-    <tr><td headers="dest" class="gt_row gt_left">SFO</td>
-<td headers="flight" class="gt_row gt_right">177</td>
-<td headers="origin" class="gt_row gt_left">JFK</td>
-<td headers="dep_delay" class="gt_row gt_right">1014</td>
-<td headers="month" class="gt_row gt_right">9</td>
-<td headers="day" class="gt_row gt_right">20</td></tr>
-    <tr><td headers="dest" class="gt_row gt_left">CVG</td>
-<td headers="flight" class="gt_row gt_right">3075</td>
-<td headers="origin" class="gt_row gt_left">JFK</td>
-<td headers="dep_delay" class="gt_row gt_right">1005</td>
-<td headers="month" class="gt_row gt_right">7</td>
-<td headers="day" class="gt_row gt_right">22</td></tr>
+    <tr><td headers="dest" class="gt_row gt_center">HNL</td>
+<td headers="flight" class="gt_row gt_center">51</td>
+<td headers="origin" class="gt_row gt_center">JFK</td>
+<td headers="dep_delay" class="gt_row gt_center">1301</td>
+<td headers="month" class="gt_row gt_center">1</td>
+<td headers="day" class="gt_row gt_center">9</td></tr>
+    <tr><td headers="dest" class="gt_row gt_center">CMH</td>
+<td headers="flight" class="gt_row gt_center">3535</td>
+<td headers="origin" class="gt_row gt_center">JFK</td>
+<td headers="dep_delay" class="gt_row gt_center">1137</td>
+<td headers="month" class="gt_row gt_center">6</td>
+<td headers="day" class="gt_row gt_center">15</td></tr>
+    <tr><td headers="dest" class="gt_row gt_center">ORD</td>
+<td headers="flight" class="gt_row gt_center">3695</td>
+<td headers="origin" class="gt_row gt_center">EWR</td>
+<td headers="dep_delay" class="gt_row gt_center">1126</td>
+<td headers="month" class="gt_row gt_center">1</td>
+<td headers="day" class="gt_row gt_center">10</td></tr>
+    <tr><td headers="dest" class="gt_row gt_center">SFO</td>
+<td headers="flight" class="gt_row gt_center">177</td>
+<td headers="origin" class="gt_row gt_center">JFK</td>
+<td headers="dep_delay" class="gt_row gt_center">1014</td>
+<td headers="month" class="gt_row gt_center">9</td>
+<td headers="day" class="gt_row gt_center">20</td></tr>
+    <tr><td headers="dest" class="gt_row gt_center">CVG</td>
+<td headers="flight" class="gt_row gt_center">3075</td>
+<td headers="origin" class="gt_row gt_center">JFK</td>
+<td headers="dep_delay" class="gt_row gt_center">1005</td>
+<td headers="month" class="gt_row gt_center">7</td>
+<td headers="day" class="gt_row gt_center">22</td></tr>
   </tbody>
 
 
 </table>
 </div>
 </div>
+</div>
 </div></li>
 <li><p><strong>How do delays vary over the course of the day. Illustrate your answer with a plot.</strong></p>
-<p>The following graph of averge delay (on y-axis) plotted against scheduled departure time (on x-axis) shows the overall trend that the average delays rise over the course of the day to hit a peak around 6 pm.</p>
-<p>Note: The scheduled departure time is not accurate, since it is written in <code>hhmm</code> format, and thus is not continuous variable. For example, 1:59 am is 159, and then 2:00 am is 200. So there are no values in 60s, 70s, 80s, 90s. I will rectify this once I learn the <code>lubridate</code> package.</p>
-<div class="cell fig-cap-location-top" data-hash="Chapter4_cache/html/fig-q3-Ex-4.5.7_4d96248ddb8ee9b468dbdeb467c058b6">
+<p>The following graph of average delay (on y-axis) plotted against scheduled departure time (on x-axis) shows the overall trend that the average delays rise over the course of the day to hit a peak around 6 pm.</p>
+<p><em>Note: The scheduled departure time is not accurate in the data-set, since it is written in</em> <code>hhmm</code> <em>format, and thus is not continuous variable. For example, 1:59 am is 159, and then 2:00 am is 200. So there are no values in 60s, 70s, 80s, 90s. I rectified this using mathematical operators</em> <code>%/%</code> <em>and</em> <code>%%</code> <em>to obtain hours and minutes, and then combined them. Now, the result is a smoother graph.</em></p>
+<div class="cell fig-cap-location-top" data-hash="Chapter4_cache/html/fig-q3-Ex-4.5.7_e963517dc6242f848070031078aa4479">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sched_dep_time) <span class="sc">|&gt;</span></span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sched_dep_time, <span class="at">y =</span> avg_delay)) <span class="sc">+</span></span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Scheduled Departure time"</span>,</span>
-<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Average delay in minutes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">hour =</span> sched_dep_time <span class="sc">%/%</span> <span class="dv">100</span>,</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">minute =</span> sched_dep_time <span class="sc">%%</span> <span class="dv">100</span>) <span class="sc">|&gt;</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">time_hr =</span> hour <span class="sc">+</span> minute<span class="sc">/</span><span class="dv">60</span>) <span class="sc">|&gt;</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time_hr, <span class="at">y =</span> avg_delay)) <span class="sc">+</span></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Scheduled Departure time (in Hrs.)"</span>,</span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Average delay in minutes"</span>) <span class="sc">+</span></span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">24</span>, <span class="at">by =</span> <span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-q3-Ex-4.5.7" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -3599,7 +3620,7 @@ destinations highest departure delay</p></caption>
 </div></li>
 <li><p><strong>What happens if you supply a negative <code>n</code> to <a href="https://dplyr.tidyverse.org/reference/slice.html"><code>slice_min()</code></a> and friends?</strong></p>
 <p>The inbuilt <code>R</code> help tells me that <em>“A negative value of <code>n</code> will be subtracted from the group size. For example, <code>n = -2</code> with a group of 5 rows will select 5 - 2 = 3 rows.”</em></p>
-<p>Here’s an example to explain. First, I create a tibble <code>a</code> (shown in <a href="#tbl-Ex-4.5.7">Table&nbsp;6</a>) to contain the average departure delay from JFK airport to 10 destinations.</p>
+<p>Here’s an example to explain. First, I create a tibble <code>a</code> (shown in <a href="#tbl-Ex-4.5.7">Table&nbsp;7</a>) to contain the average departure delay from JFK airport to 10 destinations.</p>
 <div class="cell" data-hash="Chapter4_cache/html/tbl-Ex-4.5.7_ea1f6fec4d7ce59156334c8d290b5115">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> flights <span class="sc">|&gt;</span></span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(origin <span class="sc">==</span> <span class="st">"JFK"</span>) <span class="sc">|&gt;</span></span>
@@ -4053,7 +4074,7 @@ destinations highest departure delay</p></caption>
   text-indent: 25px;
 }
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Table&nbsp;6:  <p>The average departure delay from JFK airport to 10 destinations</p> </caption>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Table&nbsp;7:  <p>The average departure delay from JFK airport to 10 destinations</p> </caption>
   <thead>
 
     <tr class="gt_col_headings">
@@ -4172,17 +4193,14 @@ destinations highest departure delay</p></caption>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>),   </span>
 <span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">z =</span> <span class="fu">c</span>(<span class="st">"K"</span>, <span class="st">"K"</span>, <span class="st">"L"</span>, <span class="st">"L"</span>, <span class="st">"K"</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<pre><code>df &lt;- tibble(x = 1:5,   
-             y = c("a", "b", "a", "a", "b"),   
-             z = c("K", "K", "L", "L", "K") )</code></pre>
 <ol type="a">
 <li><p><strong>Write down what you think the output will look like, then check if you were correct, and describe what <a href="https://dplyr.tidyverse.org/reference/group_by.html"><code>group_by()</code></a> does.</strong></p>
 <pre><code>df |&gt;   
   group_by(y)</code></pre>
 <p>In my understanding, the output should look the same as <code>df</code> except that on top of it, a line mentioning that data is grouped by <code>y</code> should appear. When we run the code, it shows the following header <code># A tibble: 5 X 3</code> and <code>#Groups: y[2]</code> . Thus, there are two groups formed by two unique values of variable <code>y</code> , i.e., <code>a</code> and <code>b</code> .</p>
 <div class="cell" data-hash="Chapter4_cache/html/unnamed-chunk-28_b2e8ec7ebf652e7e136470ffdea3f1e9">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 3
 # Groups:   y [2]
@@ -4199,8 +4217,8 @@ destinations highest departure delay</p></caption>
 <pre><code>df |&gt;   arrange(y)</code></pre>
 <p>The function <code>arrange()</code> re-orders the data-frame rows in ascending order of the variable mentioned, i.e.&nbsp;<code>y</code> . So, I expect the output to be the <code>df</code> tibble with ascending order of variable <code>y</code> . The ties will be arranged in the same order as they appeared in the original data-frame.</p>
 <div class="cell" data-hash="Chapter4_cache/html/unnamed-chunk-29_8bde9b52976aa7992eed3bf88c8f5eac">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 3
       x y     z    
@@ -4218,9 +4236,9 @@ destinations highest departure delay</p></caption>
   summarize(mean_x = mean(x))</code></pre>
 <p>The output should display the mean values of <code>x</code> for different values of <code>y</code> . For <code>y = a</code> , I expect <code>mean_x = (1+3+4)/3 = 2.67</code> and for <code>y = b</code> , I expect <code>mean_x = (2+5)/2 = 3.5</code> . I expect the output to be a 2 X 2 tibble with first column <code>y</code> and second column <code>mean_x</code> .</p>
 <div class="cell" data-hash="Chapter4_cache/html/unnamed-chunk-30_4b2254080954e10934154d460dffbc4f">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span>   </span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(y) <span class="sc">|&gt;</span>   </span>
-<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_x =</span> <span class="fu">mean</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span>   </span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(y) <span class="sc">|&gt;</span>   </span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_x =</span> <span class="fu">mean</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2
   y     mean_x
@@ -4235,9 +4253,9 @@ destinations highest departure delay</p></caption>
   summarize(mean_x = mean(x))</code></pre>
 <p>Now, I expect <code>R</code> to form groups of various combinations of <code>y</code> and <code>z</code> , and then display average value of <code>x</code> for each combination. The output should be a tibble of 3 X 3, and still containing two groups of <code>y</code> .</p>
 <div class="cell" data-hash="Chapter4_cache/html/unnamed-chunk-31_9c0497885842d87544bfd4d818f690b6">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span>   </span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(y, z) <span class="sc">|&gt;</span>   </span>
-<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_x =</span> <span class="fu">mean</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span>   </span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(y, z) <span class="sc">|&gt;</span>   </span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_x =</span> <span class="fu">mean</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 3
 # Groups:   y [2]
@@ -4254,9 +4272,9 @@ destinations highest departure delay</p></caption>
   summarize(mean_x = mean(x), .groups = "drop")</code></pre>
 <p>I think the output will still be a 3 X 3 tibble with same values as answer from Question 6 (d), i.e.&nbsp;displaying average values of <code>x</code> for different combinations of <code>y</code> and <code>z</code> . But, now the remaining grouping, i.e., of <code>y</code> will be dropped from the output. So the output is visually the same, but now it is an un-grouped tibble, rather than the grouped tibble output of Question 6 (d).</p>
 <div class="cell" data-hash="Chapter4_cache/html/unnamed-chunk-32_b17e9fe39771e44ef9b2e7adaa347621">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span>   </span>
-<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(y, z) <span class="sc">|&gt;</span>   </span>
-<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_x =</span> <span class="fu">mean</span>(x), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span>   </span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(y, z) <span class="sc">|&gt;</span>   </span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_x =</span> <span class="fu">mean</span>(x), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 3
   y     z     mean_x
@@ -4267,23 +4285,23 @@ destinations highest departure delay</p></caption>
 </div>
 </div></li>
 <li><p><strong>Write down what you think the outputs will look like, then check if you were correct, and describe what each pipeline does. How are the outputs of the two pipelines different?</strong></p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Chunk 1</span></span>
-<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span>   </span>
-<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(y, z) <span class="sc">|&gt;</span>   </span>
-<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_x =</span> <span class="fu">mean</span>(x))  </span>
-<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Chunk 2</span></span>
-<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span>   </span>
-<span id="cb71-8"><a href="#cb71-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(y, z) <span class="sc">|&gt;</span>   </span>
-<span id="cb71-9"><a href="#cb71-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mean_x =</span> <span class="fu">mean</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Chunk 1</span></span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span>   </span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(y, z) <span class="sc">|&gt;</span>   </span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_x =</span> <span class="fu">mean</span>(x))  </span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Chunk 2</span></span>
+<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span>   </span>
+<span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(y, z) <span class="sc">|&gt;</span>   </span>
+<span id="cb70-9"><a href="#cb70-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mean_x =</span> <span class="fu">mean</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The answers should be different because <code>summarize()</code> collapses all the rows for a unique combination of grouped variables to produce one summary row. On the other hand, <code>mutate()</code> preserves each row of the original data-frame (or, tibble) and produces and additional variable with mean of <code>x</code> to be entered in each row.</p>
 <p>Thus, I expect the <code># Code Chunk 1</code> to generate a tibble of 3 X 3 (like the output in Question 6(d), while I expect the <code># Code Chunk 2</code> to generate a tibble of 5 X 4, with the 4th column of <code>mean_x</code> having different values for each unique combination of <code>y</code> and <code>z</code> .</p>
 <p>Further, I expect that the <code># Code Chunk 1</code> will re-order the output in ascending of order grouping variables. But, the <code># Code Chunk 2</code> will preserve the original ordering of the rows as in the original <code>df</code> tibble.</p>
 <div class="cell" data-hash="Chapter4_cache/html/unnamed-chunk-33_c1af6487272b0bcb65739325c2059cf2">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Chunk 1</span></span>
-<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span>   </span>
-<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(y, z) <span class="sc">|&gt;</span>   </span>
-<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_x =</span> <span class="fu">mean</span>(x))  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Chunk 1</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span>   </span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(y, z) <span class="sc">|&gt;</span>   </span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_x =</span> <span class="fu">mean</span>(x))  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 3
 # Groups:   y [2]
@@ -4293,10 +4311,10 @@ destinations highest departure delay</p></caption>
 2 a     L        3.5
 3 b     K        3.5</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Chunk 2</span></span>
-<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span>   </span>
-<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(y, z) <span class="sc">|&gt;</span>   </span>
-<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mean_x =</span> <span class="fu">mean</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Chunk 2</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span>   </span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(y, z) <span class="sc">|&gt;</span>   </span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mean_x =</span> <span class="fu">mean</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 4
 # Groups:   y, z [3]

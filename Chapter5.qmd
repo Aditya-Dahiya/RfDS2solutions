@@ -1,0 +1,81 @@
+---
+title: "Chapter 5"
+subtitle: "Workflow: code style"
+author: "Aditya Dahiya"
+editor_options: 
+  chunk_output_type: console
+execute: 
+  cache: true
+---
+
+# 5.6 Exercises
+
+#### Restyle the following pipelines following the guidelines above.
+
+``` r
+flights|>filter(dest=="IAH")|>group_by(year,month,day)|>summarize(n=n(),
+delay=mean(arr_delay,na.rm=TRUE))|>filter(n>10)
+
+flights|>filter(carrier=="UA",dest%in%c("IAH","HOU"),sched_dep_time>
+0900,sched_arr_time<2000)|>group_by(flight)|>summarize(delay=mean(
+arr_delay,na.rm=TRUE),cancelled=sum(is.na(arr_delay)),n=n())|>filter(n>10)
+```
+
+The restyled code is as below:\-\--
+
+```{r}
+#| label: q1-code
+#| eval: false
+
+library(tidyverse)
+library(nycflights13)
+
+flights |>
+  filter(dest == "IAH") |>
+  group_by(year, month, day) |>
+  summarize(
+    n = n(),
+    delay = mean(arr_delay, na.rm = TRUE)
+  ) |>
+  filter(n > 10)
+
+flights |>
+  filter(
+    carrier == "UA",
+    dest %in% c("IAH", "HOU"),
+    sched_dep_time > 0900,
+    sched_arr_time < 2000
+  ) |>
+  group_by(flight) |>
+  summarize(
+    delay = mean(arr_delay, na.rm = TRUE),
+    cancelled = sum(is.na(arr_delay)), n = n()
+  ) |>
+  filter(n > 10)
+```
+
+Let us try to use the `styler` package for the same task, using `Ctrl + Shift + P` . The styled code using `styler` is shown below:\-\--
+
+```{r}
+#| label: code-q1
+#| eval: false
+
+flights |>
+  filter(dest == "IAH") |>
+  group_by(year, month, day) |>
+  summarise(
+    n = n(),
+    delay = mean(arr_delay, na.rm = TRUE)
+  ) |>
+  filter(n > 10)
+
+flights |>
+  filter(carrier == "UA", dest %in% c("IAH", "HOU"), sched_dep_time >
+    0900, sched_arr_time < 2000) |>
+  group_by(flight) |>
+  summarise(delay = mean(
+    arr_delay,
+    na.rm = TRUE
+  ), cancelled = sum(is.na(arr_delay)), n = n()) |>
+  filter(n > 10)
+```
