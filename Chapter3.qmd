@@ -1,0 +1,70 @@
+---
+title: "Chapter 3 (Workflow: Basics)"
+author: "Aditya Dahiya"
+bibliography: references.bib
+execute: 
+  warning: false
+  cache: true
+  error: false
+date: 2023-07-29
+---
+
+### Some important t**ips:**
+
+-   Use `Alt + -` to write the assignment operator `<-` in `R`.
+
+-   In the comments, i.e, text written after `#` in code, explain the **WHY** of your code, not the **WHAT** or **HOW**.
+
+# **3.5 Exercises**
+
+1.  **Why does this code not work?**
+
+    ```         
+    my_variable <- 10 
+    my_varıable 
+    #> Error in eval(expr, envir, enclos): object 'my_varıable' not found
+    ```
+
+    Look carefully! (This may seem like an exercise in pointlessness, but training your brain to notice even the tiniest difference will pay off when programming.)
+
+    The code does not work because of the minor spelling difference, i.e., `i` vs. `ī` .
+
+2.  **Tweak each of the following R commands so that they run correctly:**
+
+    ```         
+    libary(todyverse)  
+    ggplot(dTA = mpg) +    
+      geom_point(maping = aes(x = displ y = hwy)) +   
+      geom_smooth(method = "lm)
+    ```
+
+    The corrected code is as follows:\-\--
+
+    ```{r}
+    #| label: q2-corrected code
+    #| eval: false
+
+    library(tidyverse)  
+    ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +    
+      geom_point() +   
+      geom_smooth(method = "lm")
+
+    ```
+
+3.  **Press Option + Shift + K / Alt + Shift + K. What happens? How can you get to the same place using the menus?**
+
+    The `Alt + Shift + K` shortcut brings up the **Keyboard Shortcut Quick Reference**. We could get to the same using menus as **Help** --\> **Keyboard Shortcuts Help**.
+
+4.  **Let's revisit an exercise from the [Section 2.6](https://r4ds.hadley.nz/data-visualize.html#sec-ggsave). Run the following lines of code. Which of the two plots is saved as `mpg-plot.png`? Why?**
+
+    ```         
+    my_bar_plot <- ggplot(mpg, aes(x = class)) +   
+      geom_bar() 
+
+    my_scatter_plot <- ggplot(mpg, aes(x = cty, y = hwy)) +
+      geom_point() 
+
+    ggsave(filename = "mpg-plot.png", plot = my_bar_plot)
+    ```
+
+    This time, the bar plot, i.e. `my_bar_plot` is saved into the file `mpg-plot.png` because in the arguments to the function `ggsave()` we have specified the name of the plot. The plot argument tells `ggsave()` the Plot to save, and by default, it goes to the last plot displayed.

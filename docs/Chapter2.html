@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Aditya Dahiya">
-<meta name="dcterms.date" content="2023-07-25">
+<meta name="dcterms.date" content="2023-07-29">
 
 <title>RfDS2solutions - Chapter 2 (Data Visualization)</title>
 <style>
@@ -166,6 +166,7 @@ div.csl-indent {
   <li><a href="#exercises" id="toc-exercises" class="nav-link active" data-scroll-target="#exercises">2.2.5 Exercises</a></li>
   <li><a href="#exercises-1" id="toc-exercises-1" class="nav-link" data-scroll-target="#exercises-1">2.4.3 Exercises</a></li>
   <li><a href="#exercises-2" id="toc-exercises-2" class="nav-link" data-scroll-target="#exercises-2"><strong>2.5.5 Exercises</strong></a></li>
+  <li><a href="#exercises-3" id="toc-exercises-3" class="nav-link" data-scroll-target="#exercises-3"><strong>2.6.1 Exercises</strong></a></li>
   </ul>
 </nav>
     </div>
@@ -191,7 +192,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">July 25, 2023</p>
+      <p class="date">July 29, 2023</p>
     </div>
   </div>
   
@@ -702,7 +703,7 @@ div.csl-indent {
 <li><strong>Make a scatter-plot of <code>bill_depth_mm</code> vs.&nbsp;<code>bill_length_mm</code>. That is, make a scatter-plot with <code>bill_depth_mm</code> on the y-axis and <code>bill_length_mm</code> on the x-axis. Describe the relationship between these two variables.</strong></li>
 </ol>
 <p>The scatter-plot is depicted below.</p>
-<div class="cell fig-cap-location-top" data-layout-align="center" data-hash="Chapter2_cache/html/fig-depthlength_e2f90389394ff46fea663793f877b2c4">
+<div class="cell fig-cap-location-top" data-layout-align="center" data-hash="Chapter2_cache/html/fig-depthlength_451f1b5b465d7ed8a647c2b091a3750e">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm,</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> bill_depth_mm,</span>
@@ -715,7 +716,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="fig-depthlength" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="Chapter2_files/figure-html/fig-depthlength-1.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p><img src="Chapter2_files/figure-html/fig-depthlength-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption class="figure-caption">Figure&nbsp;1: Scatterplot of relation between Bill Length and Bill Depth</figcaption>
 </figure>
 </div>
@@ -1532,20 +1533,17 @@ Removed 2 rows containing missing values (`geom_point()`)</code></pre>
 <h1><strong>2.5.5 Exercises</strong></h1>
 <ol type="1">
 <li><p><strong>The <code>mpg</code> data frame that is bundled with the ggplot2 package contains 234 observations collected by the US Environmental Protection Agency on 38 car models. Which variables in <code>mpg</code> are categorical? Which variables are numerical? (Hint: Type <a href="https://ggplot2.tidyverse.org/reference/mpg.html"><code>?mpg</code></a> to read the documentation for the dataset.) How can you see this information when you run <code>mpg</code>?</strong></p>
-<p>The code below displays the summary fo the <code>mpg</code> data-set in <strong>?@fig-q1-Exercise-2.5.5</strong> . The following variables are categorical: <code>manufacturer</code> (manufacturer name), <code>model</code> (model name), <code>trans</code> (type of transmission), <code>drv</code> (the type of drive train: front, rear or 4-wheel), <code>fl</code> (fuel type), and <code>class</code> (type of car). The numerical variables are <code>displ</code> (engine displacement, in litres), <code>year</code> (year of manufacture) , <code>cyl</code> (number of cylinders) , <code>cty</code> (city miles per gallon) and <code>hwy</code> (highway miles per gallon). We can see these in the square parenthesis the column titled <strong>Variable</strong> in the output of the code below .</p>
-<div class="cell" data-hash="Chapter2_cache/html/dfSummary1_e5a26aa42cdb3c7239be53451c29f9fb">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load mpg Data</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mpg)</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize summary of the data frame</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">|&gt;</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  summarytools<span class="sc">::</span><span class="fu">dfSummary</span>(<span class="at">plain.ascii  =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>                          <span class="at">style =</span> <span class="st">"grid"</span>, </span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">graph.magnif =</span> <span class="fl">0.75</span>, </span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>                          <span class="at">valid.col =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>                          <span class="at">na.col =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>                          <span class="at">headings =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">view</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The code below displays the summary fo the <code>mpg</code> data-set. The following variables are categorical: <code>manufacturer</code> (manufacturer name), <code>model</code> (model name), <code>trans</code> (type of transmission), <code>drv</code> (the type of drive train: front, rear or 4-wheel), <code>fl</code> (fuel type), and <code>class</code> (type of car). The numerical variables are <code>displ</code> (engine displacement, in litres), <code>year</code> (year of manufacture) , <code>cyl</code> (number of cylinders) , <code>cty</code> (city miles per gallon) and <code>hwy</code> (highway miles per gallon). We can see these in the square parenthesis the column titled <strong>Variable</strong> in the output of the code below .</p>
+<div class="cell" data-hash="Chapter2_cache/html/dfSummary1_612ef0159bf8d89115753bb809135a4c">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize summary of the data frame</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">|&gt;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  summarytools<span class="sc">::</span><span class="fu">dfSummary</span>(<span class="at">plain.ascii  =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">style =</span> <span class="st">"grid"</span>, </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">graph.magnif =</span> <span class="fl">0.75</span>, </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">valid.col =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>                          <span class="at">na.col =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">headings =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">view</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>If we simply run <code>mpg</code> , we can still see this information in the <code>R</code> console output, by the terms <code>&lt;chr&gt;</code> (for categorical variables) ; and, <code>&lt;dbl&gt;</code> or <code>&lt;int&gt;</code> (for numerical variables)</p>
 <div class="cell" data-hash="Chapter2_cache/html/q1-Exercise-2.5.5_d80ba51966ca2bf6028511b2ff8cab94">
@@ -1565,14 +1563,219 @@ Removed 2 rows containing missing values (`geom_point()`)</code></pre>
 <span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 audi         a4 quattro   2    2008     4 manu… 4        20    28 p     comp…</span></span>
 <span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="do">## # ℹ 224 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
-<li><p>Make a scatterplot of <code>hwy</code> vs.&nbsp;<code>displ</code> using the <code>mpg</code> data frame. Next, map a third, numerical variable to <code>color</code>, then <code>size</code>, then both <code>color</code> and <code>size</code>, then <code>shape</code>. How do these aesthetics behave differently for categorical vs.&nbsp;numerical variables?</p></li>
-<li><p>In the scatterplot of <code>hwy</code> vs.&nbsp;<code>displ</code>, what happens if you map a third variable to <code>linewidth</code>?</p></li>
-<li><p>What happens if you map the same variable to multiple aesthetics?</p></li>
-<li><p>Make a scatterplot of <code>bill_depth_mm</code> vs.&nbsp;<code>bill_length_mm</code> and color the points by <code>species</code>. What does adding coloring by species reveal about the relationship between these two variables? What about faceting by <code>species</code>?</p></li>
-<li><p>Why does the following yield two separate legends? How would you fix it to combine the two legends?</p>
-<pre><code>ggplot(   data = penguins,   mapping = aes(     x = bill_length_mm, y = bill_depth_mm,      color = species, shape = species   ) ) +   geom_point() +   labs(color = "Species")</code></pre></li>
-<li><p>Create the two following stacked bar plots. Which question can you answer with the first one? Which question can you answer with the second one?</p>
-<pre><code>ggplot(penguins, aes(x = island, fill = species)) +   geom_bar(position = "fill") ggplot(penguins, aes(x = species, fill = island)) +   geom_bar(position = "fill")</code></pre></li>
+<li><p><strong>Make a scatterplot of <code>hwy</code> vs.&nbsp;<code>displ</code> using the <code>mpg</code> data frame. Next, map a third, numerical variable to <code>color</code>, then <code>size</code>, then both <code>color</code> and <code>size</code>, then <code>shape</code>. How do these aesthetics behave differently for categorical vs.&nbsp;numerical variables?</strong></p>
+<div class="cell fig-cap-location-top" data-fig.asp="0.5" data-hash="Chapter2_cache/html/fig-q2-Exercise-2.5.5_690e8778a07f47b93e3cbc2d27fe4a3c">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>g1 <span class="ot">=</span> mpg <span class="sc">|&gt;</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hwy, <span class="at">y =</span> displ)) <span class="sc">+</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">"Original Plot"</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Using numerical variable 'cty' to map to colour, size</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>g2 <span class="ot">=</span> mpg <span class="sc">|&gt;</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hwy, <span class="at">y =</span> displ, <span class="at">color =</span> cty)) <span class="sc">+</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">"cty mapped to color"</span>)</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>g3 <span class="ot">=</span> mpg <span class="sc">|&gt;</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hwy, <span class="at">y =</span> displ, <span class="at">size =</span> cty)) <span class="sc">+</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">"cty mapped to size"</span>)</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>g4 <span class="ot">=</span> mpg <span class="sc">|&gt;</span></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hwy, <span class="at">y =</span> displ, </span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> cty, <span class="at">size =</span> cty)) <span class="sc">+</span></span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">"cty mapped to size and color"</span>)</span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(g1, g2, g3, g4, <span class="at">ncol =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-q2-Exercise-2.5.5" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter2_files/figure-html/fig-q2-Exercise-2.5.5-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;14: Scatterplots of different kinds for different aesthetic mappings</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>So, we see that we can map a numerical variable to <code>color</code> or <code>size</code> aesthetics, and <code>ggplot2</code> will itself make a scale and display the output with a legend. However, numerical variables (i.e., continuous variables) don’t map to <code>shape</code> aesthetic, as there cannot be any continuum amongst shapes. Accordingly, when mapped to <code>shape</code>, the code throws an error as below:---</p>
+<div class="cell" data-hash="Chapter2_cache/html/q2-error-code_56c9e49a109ce609385c0e3c6ad09e59">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using numerical variable 'cty' to map to size aesthetic </span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  mpg <span class="sc">|&gt;</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hwy, </span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y =</span> displ, </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">shape =</span> cty)) <span class="sc">+</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `geom_point()`:
+! Problem while computing aesthetics.
+ℹ Error occurred in the 1st layer.
+Caused by error in `scale_f()`:
+! A continuous variable cannot be mapped to the shape aesthetic
+ℹ choose a different aesthetic or use `scale_shape_binned()`</code></pre>
+</div>
+</div>
+<p>Thus, the <code>shape</code> aesthetic works only with categorical variables, whereas <code>color</code> works with both numerical and categorical variables; and, by definition <code>size</code> aesthetic should be used only with numerical variables (it can work with categorical variables, but then the sizes are assigned arbitrarily to different categories).</p></li>
+<li><p><strong>In the scatter-plot of <code>hwy</code> vs.&nbsp;<code>displ</code>, what happens if you map a third variable to <code>linewidth</code>?</strong></p>
+<div class="cell" data-hash="Chapter2_cache/html/fig-q3-Exercise-2.5.5_c7524fc91e1e458040d8a86e61c06e68">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">|&gt;</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hwy, <span class="at">y =</span> displ,</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">linewidth =</span> cty)) <span class="sc">+</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-q3-Exercise-2.5.5" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter2_files/figure-html/fig-q3-Exercise-2.5.5-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;15: Experiment with mapping line width to a third variable</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>As we see, nothing changes with addition of the <code>linewidth</code> argument in <a href="#fig-q3-Exercise-2.5.5">Figure&nbsp;15</a> . This is because the <code>linewidth</code> argument <em>“scales the width of lines and polygon strokes.”</em> in <code>ggplot2</code> <a href="https://ggplot2.tidyverse.org/reference/scale_linewidth.html" title="ggplot2 Tidyverse Reference Document">documentation</a>. Since we are only plotting point geoms, and no lines, the argument is useless and not used to produce the output.</p></li>
+<li><p><strong>What happens if you map the same variable to multiple aesthetics?</strong></p>
+<p>We can map the same variable to multiple aesthetics, and the output will display its variations in all such aesthetics. But it is redundant, and make plot cluttery with too much visual input.</p>
+<p>For example, <a href="#fig-multiple-aesthetics">Figure&nbsp;16</a> shows a poorly understandable plot where <code>class</code> of the vehicle is mapped to size, shape and color. It works, but there’s too much information redundancy.</p>
+<div class="cell" data-hash="Chapter2_cache/html/fig-multiple-aesthetics_0387c942736155505a22625059e93b29">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">|&gt;</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>hwy, <span class="at">y =</span> cty,</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> class,</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> class,</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">shape =</span> class)) <span class="sc">+</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-multiple-aesthetics" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter2_files/figure-html/fig-multiple-aesthetics-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;16: A messy plot with Mutliple aesthetics defined by the same variable</figcaption>
+</figure>
+</div>
+</div>
+</div></li>
+<li><p><strong>Make a scatterplot of <code>bill_depth_mm</code> vs.&nbsp;<code>bill_length_mm</code> and color the points by <code>species</code>. What does adding coloring by species reveal about the relationship between these two variables? What about faceting by <code>species</code>?</strong></p>
+<p>The <a href="#fig-q5-Exercise-2.5.5">Figure&nbsp;17</a> shows the importance of coloring or faceting by <code>species</code>. This allows us to detect a fairly strong positive correlation which was not apparent in the simple scatter plot. This, perhaps, can be called an example of negative confounding <span class="citation" data-cites="mehio-sibai2005">(<a href="#ref-mehio-sibai2005" role="doc-biblioref">Mehio-Sibai et al. 2005</a>)</span> of the relation between bill depth and bill length by the species type.</p>
+<div class="cell" data-hash="Chapter2_cache/html/fig-q5-Exercise-2.5.5_e54f5b372e1c078aa0f31b15fbc0ae6d">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">=</span> penguins <span class="sc">|&gt;</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm,</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> bill_depth_mm)) <span class="sc">+</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Bill Length (mm)"</span>, <span class="at">y =</span> <span class="st">"Bill Depth (mm)"</span>,</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"No relation is apparent"</span>)</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">=</span> penguins <span class="sc">|&gt;</span></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm,</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> bill_depth_mm,</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>                       <span class="at">col =</span> species)) <span class="sc">+</span></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Bill Length (mm)"</span>, <span class="at">y =</span> <span class="st">"Bill Depth (mm)"</span>,</span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Colouring  by species reveals relations"</span>)</span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">=</span> penguins <span class="sc">|&gt;</span></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm,</span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> bill_depth_mm)) <span class="sc">+</span></span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>species) <span class="sc">+</span></span>
+<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Bill Length (mm)"</span>, <span class="at">y =</span> <span class="st">"Bill Depth (mm)"</span>,</span>
+<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Faceting also reveals the relations"</span>)</span>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a>lay <span class="ot">=</span> <span class="fu">rbind</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>),</span>
+<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a>            <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>))</span>
+<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(p1, p2, p3, <span class="at">layout_matrix =</span> lay)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-q5-Exercise-2.5.5" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter2_files/figure-html/fig-q5-Exercise-2.5.5-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;17: Adding color by species reveals a strong relationship</figcaption>
+</figure>
+</div>
+</div>
+</div></li>
+<li><p><strong>Why does the following yield two separate legends? How would you fix it to combine the two legends?</strong></p></li>
+</ol>
+<div class="cell" data-hash="Chapter2_cache/html/q6-Exercises-2.5.5-1_43055074fce1d95a13fe1eb848b61f96">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins,   </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> bill_depth_mm,      </span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">color =</span> species, </span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">shape =</span> species)) <span class="sc">+</span>   </span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>   </span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"Species"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This code presents a plot with two legends because in the last line, we have forced <code>ggplot2</code> to name out “Color” legend as the string “Species”. Thus, <code>ggplot2</code> differentiates between “species” and “Species”.</p>
+<p>We can correct this issue in either of the following two ways:--</p>
+<div class="cell" data-hash="Chapter2_cache/html/q6-Exercises-2.5.5-2_5cdba1f3d2b1cb987ecae8075f94ee5a">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins,   </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> bill_depth_mm,      </span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">color =</span> species, </span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">shape =</span> species)) <span class="sc">+</span>   </span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>or,</p>
+<div class="cell" data-hash="Chapter2_cache/html/q6-Exercises-2.5.5-3_dec05fe466e1e6aa71792d34756dbc76">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins,   </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, </span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> bill_depth_mm,      </span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">color =</span> species, </span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">shape =</span> species)) <span class="sc">+</span>   </span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="7" type="1">
+<li><p><strong>Create the two following stacked bar plots. Which question can you answer with the first one? Which question can you answer with the second one?</strong></p>
+<p>The plots are produced in <a href="#fig-q7-Exercises-2.5.5">Figure&nbsp;18</a> .</p>
+<div class="cell" data-fig.asp="0.5" data-hash="Chapter2_cache/html/fig-q7-Exercises-2.5.5_4fe417ac6645669d3fef7205b1b629d1">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>g1 <span class="ot">=</span> <span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> island, </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">fill =</span> species)) <span class="sc">+</span>   </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Sub-figure A"</span>)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>g2 <span class="ot">=</span> <span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, </span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">fill =</span> island)) <span class="sc">+</span>   </span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Sub-figure B"</span>)</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(g1, g2, <span class="at">ncol =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-q7-Exercises-2.5.5" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter2_files/figure-html/fig-q7-Exercises-2.5.5-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;18: The two stacked bar plots produced by the code</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The Sub-Figure A answers the question, that <em>“On each of the three islands, what proportion of penguins belong to which species?”</em></p>
+<p>The Sub-Figure B answers the question reg. distribution of the population of each species of penguins, that is, <em>“For each of the penguin species’, what proportion of each species total population is found on which island?”</em></p></li>
+</ol>
+</section>
+<section id="exercises-3" class="level1">
+<h1><strong>2.6.1 Exercises</strong></h1>
+<ol type="1">
+<li><p><strong>Run the following lines of code. Which of the two plots is saved as <code>mpg-plot.png</code>? Why?</strong></p>
+<pre><code>ggplot(mpg, aes(x = class)) +   
+geom_bar() 
+
+ggplot(mpg, aes(x = cty, y = hwy)) +   
+geom_point() 
+
+ggsave("mpg-plot.png")</code></pre>
+<p>The second plot, i.e., the scatter plot is saved into the file “mpg-plot.png” in the working directory, because the function <code>ggsave()</code> saves only the most recent plot into the file.</p></li>
+<li><p><strong>What do you need to change in the code above to save the plot as a PDF instead of a PNG? How could you find out what types of image files would work in <a href="https://ggplot2.tidyverse.org/reference/ggsave.html"><code>ggsave()</code></a>?</strong></p>
+<p>To save the plot as a PDF file, we will need to add the arguments <code>device  = "pdf"</code> to the <code>ggsave()</code> function call. We can find out the types of image files that would work by using the help for <code>ggsave()</code> function by running the code <code>?ggsave</code> at the command prompt.</p>
+<p>The documentation for the <code>device</code> argument within <code>ggsave()</code> function tells us that following image document types work with it:--</p>
+<ul>
+<li><p>a device function (e.g.&nbsp;png), or</p></li>
+<li><p>one of “eps”, “ps”, “tex” (pictex), “pdf”, “jpeg”, “tiff”, “png”, “bmp”, “svg” or “wmf” (windows only).</p></li>
+</ul></li>
 </ol>
 
 
@@ -1588,6 +1791,9 @@ Horst, Allison M, Alison Presmanes Hill, and Kristen B Gorman. 2020. <em>Allison
 </div>
 <div id="ref-gt" class="csl-entry" role="listitem">
 Iannone, Richard, Joe Cheng, Barret Schloerke, Ellis Hughes, Alexandra Lauer, and JooYoung Seo. 2023. <span>“Gt: Easily Create Presentation-Ready Display Tables.”</span> <a href="https://CRAN.R-project.org/package=gt">https://CRAN.R-project.org/package=gt</a>.
+</div>
+<div id="ref-mehio-sibai2005" class="csl-entry" role="listitem">
+Mehio-Sibai, Abla, Manning Feinleib, Tarek A. Sibai, and Haroutune K. Armenian. 2005. <span>“A Positive or a Negative Confounding Variable? A Simple Teaching Aid for Clinicians and Students.”</span> <em>Annals of Epidemiology</em> 15 (6): 421–23. <a href="https://doi.org/10.1016/j.annepidem.2004.10.004">https://doi.org/10.1016/j.annepidem.2004.10.004</a>.
 </div>
 <div id="ref-gtExtras" class="csl-entry" role="listitem">
 Mock, Thomas. 2022. <span>“gtExtras: Extending ’Gt’ for Beautiful HTML Tables.”</span> <a href="https://CRAN.R-project.org/package=gtExtras">https://CRAN.R-project.org/package=gtExtras</a>.

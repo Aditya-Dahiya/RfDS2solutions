@@ -8,7 +8,7 @@ execute:
   error: false
   fig-cap-location: "top"
   out-width: "70%"
-date: 2023-07-25
+date: 2023-07-29
 editor_options: 
   chunk_output_type: console
 ---
@@ -642,7 +642,7 @@ ggplot(data = penguins,
 
 7.  **Create the two following stacked bar plots. Which question can you answer with the first one? Which question can you answer with the second one?**
 
-    The plots are produced in @fig-q5-Exercise-2.5.5 .
+    The plots are produced in @fig-q7-Exercises-2.5.5 .
 
     ```{r}
     #| label: fig-q7-Exercises-2.5.5
@@ -666,3 +666,36 @@ ggplot(data = penguins,
     The Sub-Figure A answers the question, that *"On each of the three islands, what proportion of penguins belong to which species?"*
 
     The Sub-Figure B answers the question reg. distribution of the population of each species of penguins, that is, *"For each of the penguin species', what proportion of each species total population is found on which island?"*
+
+    ```{r}
+    #| echo: false
+    #| label: remove-objects2
+    rm(list = ls())
+    data(penguins)
+    ```
+
+# **2.6.1 Exercises**
+
+1.  **Run the following lines of code. Which of the two plots is saved as `mpg-plot.png`? Why?**
+
+    ```         
+    ggplot(mpg, aes(x = class)) +   
+    geom_bar() 
+
+    ggplot(mpg, aes(x = cty, y = hwy)) +   
+    geom_point() 
+
+    ggsave("mpg-plot.png")
+    ```
+
+    The second plot, i.e., the scatter plot is saved into the file "mpg-plot.png" in the working directory, because the function `ggsave()` saves only the most recent plot into the file.
+
+2.  **What do you need to change in the code above to save the plot as a PDF instead of a PNG? How could you find out what types of image files would work in [`ggsave()`](https://ggplot2.tidyverse.org/reference/ggsave.html)?**
+
+    To save the plot as a PDF file, we will need to add the arguments `device  = "pdf"` to the `ggsave()` function call. We can find out the types of image files that would work by using the help for `ggsave()` function by running the code `?ggsave` at the command prompt.
+
+    The documentation for the `device` argument within `ggsave()` function tells us that following image document types work with it:\--
+
+    -   a device function (e.g. png), or
+
+    -   one of "eps", "ps", "tex" (pictex), "pdf", "jpeg", "tiff", "png", "bmp", "svg" or "wmf" (windows only).

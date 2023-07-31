@@ -1,0 +1,603 @@
+---
+title: "Chapter 4 (Data Transformation)"
+author: "Aditya Dahiya"
+bibliography: references.bib
+execute: 
+  warning: false
+  cache: true
+  error: false
+fig-cap-location: "top"
+date: 2023-07-29
+editor_options: 
+  chunk_output_type: console
+---
+
+# **4.2.5 Exercises**
+
+```{r}
+#| label: setup
+
+library(tidyverse) 
+library(nycflights13) 
+library(gt)
+data("flights")
+```
+
+1.  **In a single pipeline for each condition, find all flights that meet the condition:**
+
+    -   **Had an arrival delay of two or more hours**
+
+        ```{r}
+        #| label: q1-1
+        flights |>   
+          filter(arr_delay >= 120)
+        ```
+
+    -   **Flew to Houston (IAH or HOU)**
+
+        ```{r}
+        #| label: q1-2
+
+        flights |>     
+          filter(dest %in% c("IAH", "HOU"))
+        ```
+
+    -   **Were operated by United, American, or Delta**
+
+        ```{r}
+        #| label: q1-3
+
+        flights |>   
+          filter(carrier %in% c("UA", "AA", "DL"))
+        ```
+
+    -   **Departed in summer (July, August, and September)**
+
+        ```{r}
+        #| label: q1-4
+
+        flights |>   
+          filter(month %in% c(7, 8, 9))
+        ```
+
+    -   **Arrived more than two hours late, but didn't leave late**
+
+        ```{r}
+        #| label: q1-5
+
+        flights |>     
+          filter(dep_delay <= 0) 
+        ```
+
+    -   **Were delayed by at least an hour, but made up over 30 minutes in flight**
+
+        ```{r}
+        #| label: q1-6
+
+        flights |>     
+          filter(dep_delay - arr_delay >= 30) 
+        ```
+
+2.  **Sort `flights` to find the flights with longest departure delays. Find the flights that left earliest in the morning.**
+
+    The top 5 flights that has the longest departure delays are shown in @tbl-q2-Ex-4.2.5 .
+
+    ```{r}
+    #| label: tbl-q2-Ex-4.2.5 
+    #| tbl-cap: "5 Flights with longest departure delays"  
+
+    flights |>   
+      arrange(desc(dep_delay)) |>   
+      head(n = 5) |>
+      select(year, month, day, dep_time, sched_dep_time,
+             dep_delay, carrier, flight, origin) |>
+      mutate(Day = as_date(paste(year, month, day, sep = "-"))) |>
+      select(-year, -month, -day) |>
+      relocate(Day, .before = dep_time) |>
+      gt::gt()
+    ```
+
+3.  **Sort `flights` to find the fastest flights. (Hint: Try including a math calculation inside of your function.)**
+
+    The speed of a flight can be found as `distance/air_time` . The @tbl-q3-Ex-4.2.5 displays the 5 fastest flights.
+
+    ```{r}
+    #| label: tbl-q3-Ex-4.2.5 
+    #| tbl-cap: "5 fastest Flights (by speed)"  
+
+    flights |>
+      arrange(desc(distance/air_time)) |>
+      slice_head(n=5) |>
+      select(year, month, day, distance, air_time,
+             carrier, flight, origin, dest) |>
+      gt()
+
+    ```
+
+4.  **Was there a flight on every day of 2013?**
+
+    Yes, there was a flight on every day of 2013, because using `distinct()` function, we find that there are 365 unique combinations of `year` , `month` , and `day` .
+
+    ```{r}
+    #| label: q4
+    flights |>
+      distinct(year, month, day) |>
+      count() |>
+      as.numeric()
+    ```
+
+5.  **Which flights traveled the farthest distance? Which traveled the least distance?**
+
+    The top 5 flights by the farthest distance traveled are shown in @tbl-q5-1 .
+
+    ```{r}
+    #| label: tbl-q5-1
+    #| tbl-cap: "5 longest distance flights"
+
+    flights |>
+      arrange(desc(distance)) |>
+      select(origin, dest, distance, air_time, carrier) |>
+      # Distinct added to remove same flight (on different days) repeating in top 5
+      distinct(origin, dest, .keep_all = TRUE) |>
+      slice_head(n = 5) |>
+      gt()
+    ```
+
+    The 5 flights with least distance traveled are shown in
+
+    ```{r}
+    #| label: tbl-q5-2
+    #| tbl-cap: "5 shortest distance flights"
+
+    flights |>
+      arrange(distance) |>
+      select(origin, dest, distance, air_time, carrier) |>
+      # Distinct added to remove same flight (which runs
+      # on different days) repeating in top 5
+      distinct(origin, dest, .keep_all = TRUE) |>
+      slice_head(n = 5) |>
+      gt()
+
+    ```
+
+6.  **Does it matter what order you used [`filter()`](https://dplyr.tidyverse.org/reference/filter.html) and [`arrange()`](https://dplyr.tidyverse.org/reference/arrange.html) if you're using both? Why/why not? Think about the results and how much work the functions would have to do.**
+
+    Although, in terms of output received, it does not matter in which order we use them, because when we run the function `filter()` it removes the rows not required, but leaves the arrangement-ordering the same, i.e. the remaining rows move up.
+
+    However, using `arrange()` before `filter()` means `R` will have to arrange all the rows, and then we filter out only a few rows - thus meaning that more work will have to be done computationally.
+
+    For computational efficiency, it would be better if we use `filter()` first, then run `arrange()` only on the subset of rows remaining.
+
+    Here's the proof for this, using `system.time()` function in `R` which tells how much time does an `R` expression take to run. Here, I compare both functions using the logical operator `>` (greater than). The `elapsed` time comes `TRUE`, meaning that arranging first, and then filtering takes more time.
+
+    ```{r}
+    system.time( flights |>
+      arrange(distance) |>
+      filter(air_time < 60)
+      ) > system.time(
+      flights |>
+        filter(air_time < 60) |>
+        arrange(distance)
+    )
+    ```
+
+# **4.3.5 Exercises**
+
+1.  **Compare `dep_time`, `sched_dep_time`, and `dep_delay`. How would you expect those three numbers to be related?**
+
+    We would expect `dep_delay` = `dep_time` - `sched_dep_time` . Let us check this in the code, as well.
+
+    ```{r}
+    #| label: q1-Ex-4.3.5
+
+    flights |>
+      mutate(calc = dep_time - sched_dep_time) |>
+      mutate(match = calc == dep_delay, .keep = "used") |>
+      summarise(Matching = sum(match, na.rm = TRUE),
+                Total = count(flights)) |>
+      mutate(Percentage = 100*Matching/Total)
+    ```
+
+    The results indicate that 67.9% of the time, the comparison works out as expected. For others, there might be missing data issues (hence, we had to use `na.rm = TRUE`) or, any other data error.
+
+2.  **Brainstorm as many ways as possible to select `dep_time`, `dep_delay`, `arr_time`, and `arr_delay` from `flights`.**
+
+    ```{r}
+    #| label: q2-Ex-4.3.5
+    #| eval: false
+
+    # Using variable names
+    flights |> 
+      select(dep_time, dep_delay, arr_time, arr_delay)
+
+    # Using starts_with()
+    flights |> 
+      select(starts_with("dep"), starts_with("arr"))
+
+    # Using column numbers
+    flights |>
+      select(4,6,7,9)
+
+    # Using from, to, ie., ":" along with "!" to remove sched_ 
+    flights |> 
+      select(dep_time:arr_delay) |>
+      select(!starts_with("sched"))
+
+    # Using column numbers with :
+    flights |>
+      select(4:9, -5, -8)
+    ```
+
+3.  **What happens if you specify the name of the same variable multiple times in a [`select()`](https://dplyr.tidyverse.org/reference/select.html) call?**
+
+    If we specify the name of the same variable multiple times, the `dplyr` package understands the mistake, and only produces one copy of the variable in the output. The place of the variable is the one that first appears in the code within the `select()` function. Here are two examples:\-\--
+
+    ```{r}
+    #| label: q3-Ex-4.3.5
+
+    flights |>
+      select(dep_time, dep_time) |>
+      slice_head(n=2)
+
+    flights |>
+      select(dep_time:dep_delay, sched_dep_time) |>
+      slice_head(n=2)
+    ```
+
+4.  **What does the [`any_of()`](https://tidyselect.r-lib.org/reference/all_of.html) function do? Why might it be helpful in conjunction with this vector?**
+
+    `variables <- c("year", "month", "day", "dep_delay", "arr_delay")`
+
+    The two functions, `any_of()` and `all_of()` are called selection helpers. They help select variables contained in a character vector, such as `variables` .
+
+    In present scenario, the `any_of()` can be used with `variables` vector to select these columns (or, remove these columns) from the flights data-set, as shown in the code below:\-\--
+
+    ```{r}
+    #| label: q4-Ex-4.3.5
+    variables <- c("year", "month", "day", "dep_delay", "arr_delay")
+
+    flights |>
+      select(any_of(variables)) |>
+      slice_head(n=2)
+    ```
+
+    But, there is a difference between `any_of()` and `all_of()` . As shown in `R` help, `all_of()` is for strict selection. If any of the variables in the character vector is missing, an error is thrown. But, `any_of()` doesn't check for missing variables. It is especially useful with negative selections, when you would like to make sure a variable is removed. Here's an example to demonstrate:\-\--
+
+    ```{r}
+    #| label: q4-error-Ex-4.3.5
+    #| error: true
+    #| warning: true
+    #| message: true
+
+    # Change "day" to "date" to delibertely cause a missing variable name
+    variables <- c("year", "month", "date", "dep_delay", "arr_delay")
+
+    # all_of() should not work
+    flights |>
+      select(all_of(variables)) |>
+      slice_head(n=2)
+
+    # any_of() will still work
+    flights |>
+      select(any_of(variables)) |>
+      slice_head(n=2)
+    ```
+
+5.  **Does the result of running the following code surprise you? How do the select helpers deal with upper and lower case by default? How can you change that default? `flights |> select(contains("TIME"))`**
+
+    Yes, the running of this code surprises me because generally, `R` is very picky about upper-case vs. lower-case. Since `"TIME"` is not contained in any variable name, I expected it to throw an error. Yet, it returns all variables which contain `"time"`.
+
+    Thus, this means that the following `select` helpers from `tidyselect` package ignore the case of the `match` provided by default.
+
+    -   `starts_with()`: Starts with an exact prefix.
+
+    -   `ends_with()`: Ends with an exact suffix.
+
+    -   `contains()`: Contains a literal string.
+
+    -   `matches()`: Matches a regular expression.
+
+    To change this, we can set the argument `ignore.case = FALSE`.
+
+6.  **Rename `air_time` to `air_time_min` to indicate units of measurement and move it to the beginning of the data frame.**
+
+    The following code does the job, as shown in the output:\--
+
+    ```{r}
+    #| label: q6-Ex-4.3.5
+    #| code-overflow: scroll
+    #| code-line-numbers: false
+
+    flights |>
+      rename(air_time_min = air_time) |>
+      relocate(air_time_min)
+    ```
+
+7.  **Why doesn't the following work, and what does the error mean?**
+
+    ```         
+    flights |>    
+      select(tailnum) |>    
+      arrange(arr_delay) 
+
+    #> Error in `arrange()`: #> ℹ In argument: `..1 = arr_delay`.
+    #> Caused by error: #> ! object 'arr_delay' not found
+    ```
+
+    The above code does not work because the `select(tailnum)` has removed all other variables (columns) from the tibble. Thus, when `arrange(arr_delay)` runs, it is unable to find any variable by the name of `arr_delay` in the tibble.
+
+    The error means that object (i.e. variable) `'arr_delay'` has not been found in the tibble by the `arrange()` function.
+
+# **4.5.7 Exercises**
+
+1.  **Which carrier has the worst average delays? Challenge: can you disentangle the effects of bad airports vs. bad carriers? Why/why not? (Hint: think about `flights |> group_by(carrier, dest) |> summarize(n())`)**
+
+    The overall carrier with worst average delays is **F9**, as seen from the code below:
+
+    ```{r}
+    #| label: q1-Ex-4.5.7
+
+    flights |>
+      group_by(carrier) |>
+      summarise(avg_delay = mean(arr_delay, na.rm = TRUE)) |>
+      slice_max(order_by = avg_delay, n = 1)
+    ```
+
+    Yes, we can disentangle the effect of bad airports vs. bad carriers using the code below:\-\--
+
+    ```{r}
+    #| label: tbl-q1-Ex-4.5.7
+    #| tbl-cap: "The airlines which have highest average delay at the maximum number of Airports"
+
+    flights |>
+      group_by(dest, carrier) |>
+      summarise(avg_delay = mean(arr_delay, na.rm = TRUE)) |>
+      # taking the highest average delay flight at each airport
+      slice_max(order_by = avg_delay, n = 1) |>
+      ungroup() |>
+      # for each airline, summarize the number of airports where it is
+      # the most delayed airline
+      summarise(n = n(), .by = carrier) |>
+      slice_head(n=5)|>
+      arrange(desc(n)) |>
+      rename(Carrier = carrier,
+             `Number of Airports` = n) |>
+      gt()
+    ```
+
+2.  **Find the flights that are most delayed upon departure from each destination.**
+
+    We can use the following codes (either one works, and the code checks this equality of results) to find the flight with highest departure delay (`dep_delay` ) for each destination.
+
+    ```{r}
+    #| label: q2-Ex-4.5.7
+    #| tbl-cap: "Flights with highest departure delay; displayed here only for 5 destinations highest departure delay"
+    # Option 1: Group by "dest" and then use slice_max
+    a = flights |>
+      group_by(dest) |>
+      slice_max(n=1, order_by = dep_delay, na_rm = TRUE) |>
+      select(dest, flight, origin, dep_delay, month, day) |>
+      arrange(desc(dep_delay), desc(flight))
+    # Option 2: Directly use slice_max() with "by" argument
+    b = flights |>
+      slice_max(n=1, order_by = dep_delay, by = dest, na_rm = TRUE) |>
+      select(dest, flight, origin, dep_delay, month, day) |>
+      arrange(desc(dep_delay), desc(flight))
+    # Check results
+    sum(a != b)
+    # Display results
+    b |> slice_head(n=5) |> gt()
+    ```
+
+3.  **How do delays vary over the course of the day. Illustrate your answer with a plot.**
+
+    The following graph of averge delay (on y-axis) plotted against scheduled departure time (on x-axis) shows the overall trend that the average delays rise over the course of the day to hit a peak around 6 pm.
+
+    Note: The scheduled departure time is not accurate, since it is written in `hhmm` format, and thus is not continuous variable. For example, 1:59 am is 159, and then 2:00 am is 200. So there are no values in 60s, 70s, 80s, 90s. I will rectify this once I learn the `lubridate` package.
+
+    ```{r}
+    #| label: fig-q3-Ex-4.5.7
+    #| fig-cap: "Graph showing average delays over the course of the day at various scheduled times"
+    #| fig-cap-location: top
+
+    flights |>
+      group_by(sched_dep_time) |>
+      summarise(avg_delay = mean(dep_delay, na.rm = TRUE)) |>
+      ggplot(aes(x = sched_dep_time, y = avg_delay)) +
+      geom_line() +
+      geom_smooth(color = "red", se = FALSE) +
+      theme_bw() + 
+      labs(x = "Scheduled Departure time",
+           y = "Average delay in minutes")
+    ```
+
+4.  **What happens if you supply a negative `n` to [`slice_min()`](https://dplyr.tidyverse.org/reference/slice.html) and friends?**
+
+    The inbuilt `R` help tells me that *"A negative value of `n` will be subtracted from the group size. For example, `n = -2` with a group of 5 rows will select 5 - 2 = 3 rows."*
+
+    Here's an example to explain. First, I create a tibble `a` to contain the average departure delay from JFK airport to 10 destinations.
+
+    ```{r}
+    #| label: q4-Ex-4.5.7
+    #| warning: false
+    #| message: false
+
+    a = flights |>
+      filter(origin == "JFK") |>
+      group_by(origin, dest) |>
+      summarise(avg_delay = mean(dep_delay, na.rm = TRUE)) |>
+      arrange(desc(avg_delay)) |>
+      slice_head(n = 10) |>
+      ungroup()
+    gt(a)
+    ```
+
+    Now, I use `slice_min` function with arguments `n = 2` and then, with arguments `n = -2` to show the difference in output. The first code `n = 2` displays the two rows with minimum average delay. The second code, `n = -2` displays the (total rows minus 2), i.e., 8 rows with minimum average delay.
+
+    ```{r}
+    #| label: q4-2-Ex-4.5.7
+    # n=2 displays the two rows with minimum average delay
+    a |>
+      slice_min(n = 2, order_by = avg_delay)
+    # n=-2 displays the (total rows minus 2), i.e., 8 rows with minimum average delay
+    a |>
+      slice_min(n = -2, order_by = avg_delay)
+    ```
+
+5.  **Explain what [`count()`](https://dplyr.tidyverse.org/reference/count.html) does in terms of the dplyr verbs you just learned. What does the `sort` argument to [`count()`](https://dplyr.tidyverse.org/reference/count.html) do?**
+
+    Instead of using the `group_by()` and `summarize()` verbs, the `count()` function can be used as a shortcut to quickly compute the number of unique values of each combination of a variable occurring in the data-set. Thus, `count()` helps us to calculate the number of values (rows) for each unique combination of variables which have been used as an argument in the `count()` function.
+
+    The inbuilt help in `R` tells us that `df %>% count(a, b)` is roughly equivalent to `df %>% group_by(a, b) %>% summarise(n = n())` .
+
+    Further, the `sort = TRUE` argument in `count()` tells `R` to display the largest groups (by count, i.e., `n`) to be displayed at the top.
+
+    Here's an example. The following code displays the 5 routes with maximum number of flights. For example, JFK to LAX had 11,262 flights in 2013. We can achieve this by using `group_by()`, `summarize()`, `arrange()` and `ungroup()`. Or, we can simply achieve the same result with a single function `count()`.
+
+    ```{r}
+    #| label: q5-Ex-4.5.7
+    flights |>
+      group_by(origin, dest) |>
+      summarise(n = n()) |>
+      arrange(desc(n)) |>
+      ungroup() |>
+      slice_head(n = 5)
+
+    flights |>
+      count(origin, dest, sort = TRUE) |>
+      slice_head(n = 5)
+    ```
+
+6.  **Suppose we have the following tiny data frame:**
+
+    ```{r}
+    df <- tibble(x = 1:5,   
+                 y = c("a", "b", "a", "a", "b"),   
+                 z = c("K", "K", "L", "L", "K") )
+    ```
+
+    ```         
+    df <- tibble(x = 1:5,   
+                 y = c("a", "b", "a", "a", "b"),   
+                 z = c("K", "K", "L", "L", "K") )
+    ```
+
+    a.  **Write down what you think the output will look like, then check if you were correct, and describe what [`group_by()`](https://dplyr.tidyverse.org/reference/group_by.html) does.**
+
+        ```         
+        df |>   
+          group_by(y)
+        ```
+
+        In my understanding, the output should look the same as `df` except that on top of it, a line mentioning that data is grouped by `y` should appear. When we run the code, it shows the following header `# A tibble: 5 X 3` and `#Groups: y[2]` . Thus, there are two groups formed by two unique values of variable `y` , i.e., `a` and `b` .
+
+        ```{r}
+        df |>
+          group_by(y)
+        ```
+
+    b.  **Write down what you think the output will look like, then check if you were correct, and describe what [`arrange()`](https://dplyr.tidyverse.org/reference/arrange.html) does. Also comment on how it's different from the [`group_by()`](https://dplyr.tidyverse.org/reference/group_by.html) in part (a)?**
+
+        ```         
+        df |>   arrange(y)
+        ```
+
+        The function `arrange()` re-orders the data-frame rows in ascending order of the variable mentioned, i.e. `y` . So, I expect the output to be the `df` tibble with ascending order of variable `y` . The ties will be arranged in the same order as they appeared in the original data-frame.
+
+        ```{r}
+        df |>
+          arrange(y)
+        ```
+
+    c.  **Write down what you think the output will look like, then check if you were correct, and describe what the pipeline does.**
+
+        ```         
+        df |>   
+          group_by(y) |>   
+          summarize(mean_x = mean(x))
+        ```
+
+        The output should display the mean values of `x` for different values of `y` . For `y = a` , I expect `mean_x = (1+3+4)/3 = 2.67` and for `y = b` , I expect `mean_x = (2+5)/2 = 3.5` . I expect the output to be a 2 X 2 tibble with first column `y` and second column `mean_x` .
+
+        ```{r}
+        df |>   
+          group_by(y) |>   
+          summarize(mean_x = mean(x))
+        ```
+
+    d.  **Write down what you think the output will look like, then check if you were correct, and describe what the pipeline does. Then, comment on what the message says.**
+
+        ```         
+        df |>   
+          group_by(y, z) |>   
+          summarize(mean_x = mean(x))
+        ```
+
+        Now, I expect `R` to form groups of various combinations of `y` and `z` , and then display average value of `x` for each combination. The output should be a tibble of 3 X 3, and still containing two groups of `y` .
+
+        ```{r}
+        df |>   
+          group_by(y, z) |>   
+          summarize(mean_x = mean(x))
+        ```
+
+    e.  **Write down what you think the output will look like, then check if you were correct, and describe what the pipeline does. How is the output different from the one in part (d).**
+
+        ```         
+        df |>   
+          group_by(y, z) |>   
+          summarize(mean_x = mean(x), .groups = "drop")
+        ```
+
+        I think the output will still be a 3 X 3 tibble with same values as answer from Question 6 (d), i.e. displaying average values of `x` for different combinations of `y` and `z` . But, now the remaining grouping, i.e., of `y` will be dropped from the output. So the output is visually the same, but now it is an un-grouped tibble, rather than the grouped tibble output of Question 6 (d).
+
+        ```{r}
+        df |>   
+          group_by(y, z) |>   
+          summarize(mean_x = mean(x), .groups = "drop")
+        ```
+
+    f.  **Write down what you think the outputs will look like, then check if you were correct, and describe what each pipeline does. How are the outputs of the two pipelines different?**
+
+        ``` r
+        # Code Chunk 1
+        df |>   
+          group_by(y, z) |>   
+          summarize(mean_x = mean(x))  
+
+        # Code Chunk 2
+        df |>   
+          group_by(y, z) |>   
+          mutate(mean_x = mean(x))
+        ```
+
+        The answers should be different because `summarize()` collapses all the rows for a unique combination of grouped variables to produce one summary row. On the other hand, `mutate()` preserves each row of the original data-frame (or, tibble) and produces and additional variable with mean of `x` to be entered in each row.
+
+        Thus, I expect the `# Code Chunk 1` to generate a tibble of 3 X 3 (like the output in Question 6(d), while I expect the `# Code Chunk 2` to generate a tibble of 5 X 4, with the 4th column of `mean_x` having different values for each unique combination of `y` and `z` .
+
+        Further, I expect that the `# Code Chunk 1` will re-order the output in ascending of order grouping variables. But, the `# Code Chunk 2` will preserve the original ordering of the rows as in the original `df` tibble.
+
+        ```{r}
+        # Code Chunk 1
+        df |>   
+          group_by(y, z) |>   
+          summarize(mean_x = mean(x))  
+
+        # Code Chunk 2
+        df |>   
+          group_by(y, z) |>   
+          mutate(mean_x = mean(x))
+        ```
+
+        *Note: It is only by chance that the* `mean_x` *is 3.5 for both combinations:*
+
+        a.  `y=b, z=K` , `mean_x = (2+5)/2 = 3.5`
+
+        b.  `y=a, z=L` , `mean_x = (3+4)/2 = 3.5`
+
+```{r}
+#| label: housekeeping-cleanup
+#| echo: false
+
+rm(list = ls())
+```

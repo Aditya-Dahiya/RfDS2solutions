@@ -4,6 +4,8 @@ author: "Aditya Dahiya"
 listing:
   contents:
     - "Chapter2.qmd"
+    - "Chapter3.qmd"
+    - "Chapter4.qmd"
     - "Chapter29.qmd"
     - "Chapter30.qmd"
   type: grid

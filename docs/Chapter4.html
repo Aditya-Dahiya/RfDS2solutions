@@ -1,0 +1,4558 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Aditya Dahiya">
+<meta name="dcterms.date" content="2023-07-29">
+
+<title>RfDS2solutions - Chapter 4 (Data Transformation)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">RfDS2solutions</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./solutions.html" rel="" target="">
+ <span class="menu-text">Solutions</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link active" data-scroll-target="#exercises"><strong>4.2.5 Exercises</strong></a></li>
+  <li><a href="#exercises-1" id="toc-exercises-1" class="nav-link" data-scroll-target="#exercises-1"><strong>4.3.5 Exercises</strong></a></li>
+  <li><a href="#exercises-2" id="toc-exercises-2" class="nav-link" data-scroll-target="#exercises-2"><strong>4.5.7 Exercises</strong></a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Chapter 4 (Data Transformation)</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Aditya Dahiya </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 29, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="exercises" class="level1">
+<h1><strong>4.2.5 Exercises</strong></h1>
+<div class="cell" data-hash="Chapter4_cache/html/setup_7e2c918cadc2561c994fd8e61419157f">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nycflights13) </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"flights"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="1">
+<li><p><strong>In a single pipeline for each condition, find all flights that meet the condition:</strong></p>
+<ul>
+<li><p><strong>Had an arrival delay of two or more hours</strong></p>
+<div class="cell" data-hash="Chapter4_cache/html/q1-1_eb224408ac05e2ddb3187ab126ff0d61">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span>   </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(arr_delay <span class="sc">&gt;=</span> <span class="dv">120</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10,200 × 19
+    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+ 1  2013     1     1      811            630       101     1047            830
+ 2  2013     1     1      848           1835       853     1001           1950
+ 3  2013     1     1      957            733       144     1056            853
+ 4  2013     1     1     1114            900       134     1447           1222
+ 5  2013     1     1     1505           1310       115     1638           1431
+ 6  2013     1     1     1525           1340       105     1831           1626
+ 7  2013     1     1     1549           1445        64     1912           1656
+ 8  2013     1     1     1558           1359       119     1718           1515
+ 9  2013     1     1     1732           1630        62     2028           1825
+10  2013     1     1     1803           1620       103     2008           1750
+# ℹ 10,190 more rows
+# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+</div></li>
+<li><p><strong>Flew to Houston (IAH or HOU)</strong></p>
+<div class="cell" data-hash="Chapter4_cache/html/q1-2_1783acc750bac6c881e8b042e0c16245">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span>     </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(dest <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"IAH"</span>, <span class="st">"HOU"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9,313 × 19
+    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+ 1  2013     1     1      517            515         2      830            819
+ 2  2013     1     1      533            529         4      850            830
+ 3  2013     1     1      623            627        -4      933            932
+ 4  2013     1     1      728            732        -4     1041           1038
+ 5  2013     1     1      739            739         0     1104           1038
+ 6  2013     1     1      908            908         0     1228           1219
+ 7  2013     1     1     1028           1026         2     1350           1339
+ 8  2013     1     1     1044           1045        -1     1352           1351
+ 9  2013     1     1     1114            900       134     1447           1222
+10  2013     1     1     1205           1200         5     1503           1505
+# ℹ 9,303 more rows
+# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+</div></li>
+<li><p><strong>Were operated by United, American, or Delta</strong></p>
+<div class="cell" data-hash="Chapter4_cache/html/q1-3_7395b814d795048ec5de3ee40490cc40">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span>   </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(carrier <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"UA"</span>, <span class="st">"AA"</span>, <span class="st">"DL"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 139,504 × 19
+    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+ 1  2013     1     1      517            515         2      830            819
+ 2  2013     1     1      533            529         4      850            830
+ 3  2013     1     1      542            540         2      923            850
+ 4  2013     1     1      554            600        -6      812            837
+ 5  2013     1     1      554            558        -4      740            728
+ 6  2013     1     1      558            600        -2      753            745
+ 7  2013     1     1      558            600        -2      924            917
+ 8  2013     1     1      558            600        -2      923            937
+ 9  2013     1     1      559            600        -1      941            910
+10  2013     1     1      559            600        -1      854            902
+# ℹ 139,494 more rows
+# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+</div></li>
+<li><p><strong>Departed in summer (July, August, and September)</strong></p>
+<div class="cell" data-hash="Chapter4_cache/html/q1-4_c9cb11e1492e8d1f5d68e0a9473959c1">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span>   </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 86,326 × 19
+    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+ 1  2013     7     1        1           2029       212      236           2359
+ 2  2013     7     1        2           2359         3      344            344
+ 3  2013     7     1       29           2245       104      151              1
+ 4  2013     7     1       43           2130       193      322             14
+ 5  2013     7     1       44           2150       174      300            100
+ 6  2013     7     1       46           2051       235      304           2358
+ 7  2013     7     1       48           2001       287      308           2305
+ 8  2013     7     1       58           2155       183      335             43
+ 9  2013     7     1      100           2146       194      327             30
+10  2013     7     1      100           2245       135      337            135
+# ℹ 86,316 more rows
+# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+</div></li>
+<li><p><strong>Arrived more than two hours late, but didn’t leave late</strong></p>
+<div class="cell" data-hash="Chapter4_cache/html/q1-5_8d2f05c10d83cd32e11f01b8533e188a">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span>     </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(dep_delay <span class="sc">&lt;=</span> <span class="dv">0</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 200,089 × 19
+    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+ 1  2013     1     1      544            545        -1     1004           1022
+ 2  2013     1     1      554            600        -6      812            837
+ 3  2013     1     1      554            558        -4      740            728
+ 4  2013     1     1      555            600        -5      913            854
+ 5  2013     1     1      557            600        -3      709            723
+ 6  2013     1     1      557            600        -3      838            846
+ 7  2013     1     1      558            600        -2      753            745
+ 8  2013     1     1      558            600        -2      849            851
+ 9  2013     1     1      558            600        -2      853            856
+10  2013     1     1      558            600        -2      924            917
+# ℹ 200,079 more rows
+# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+</div></li>
+<li><p><strong>Were delayed by at least an hour, but made up over 30 minutes in flight</strong></p>
+<div class="cell" data-hash="Chapter4_cache/html/q1-6_15acfdc6237b6fe3684ef703758d3e4b">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span>     </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(dep_delay <span class="sc">-</span> arr_delay <span class="sc">&gt;=</span> <span class="dv">30</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 20,395 × 19
+    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+ 1  2013     1     1      701            700         1     1123           1154
+ 2  2013     1     1      820            820         0     1249           1329
+ 3  2013     1     1      840            845        -5     1311           1350
+ 4  2013     1     1      857            851         6     1157           1222
+ 5  2013     1     1      909            810        59     1331           1315
+ 6  2013     1     1     1025            951        34     1258           1302
+ 7  2013     1     1     1153           1200        -7     1450           1529
+ 8  2013     1     1     1245           1249        -4     1722           1800
+ 9  2013     1     1     1610           1615        -5     1913           1948
+10  2013     1     1     1625           1550        35     2054           2050
+# ℹ 20,385 more rows
+# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+</div></li>
+</ul></li>
+<li><p><strong>Sort <code>flights</code> to find the flights with longest departure delays. Find the flights that left earliest in the morning.</strong></p>
+<p>The top 5 flights that has the longest departure delays are shown in <a href="#tbl-q2-Ex-4.2.5">Table&nbsp;1</a> .</p>
+<div class="cell" data-hash="Chapter4_cache/html/tbl-q2-Ex-4.2.5_62d56a362cd2ed3b58ad242cd0063648">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span>   </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(dep_delay)) <span class="sc">|&gt;</span>   </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">5</span>) <span class="sc">|&gt;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year, month, day, dep_time, sched_dep_time,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>         dep_delay, carrier, flight, origin) <span class="sc">|&gt;</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Day =</span> <span class="fu">as_date</span>(<span class="fu">paste</span>(year, month, day, <span class="at">sep =</span> <span class="st">"-"</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>year, <span class="sc">-</span>month, <span class="sc">-</span>day) <span class="sc">|&gt;</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(Day, <span class="at">.before =</span> dep_time) <span class="sc">|&gt;</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="tbl-q2-Ex-4.2.5" class="anchored">
+
+<div id="ussdovvscz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ussdovvscz table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ussdovvscz thead, #ussdovvscz tbody, #ussdovvscz tfoot, #ussdovvscz tr, #ussdovvscz td, #ussdovvscz th {
+  border-style: none;
+}
+
+#ussdovvscz p {
+  margin: 0;
+  padding: 0;
+}
+
+#ussdovvscz .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ussdovvscz .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ussdovvscz .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ussdovvscz .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ussdovvscz .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ussdovvscz .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ussdovvscz .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ussdovvscz .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ussdovvscz .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ussdovvscz .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ussdovvscz .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ussdovvscz .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ussdovvscz .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ussdovvscz .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ussdovvscz .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ussdovvscz .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ussdovvscz .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ussdovvscz .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ussdovvscz .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ussdovvscz .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ussdovvscz .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ussdovvscz .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ussdovvscz .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ussdovvscz .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ussdovvscz .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ussdovvscz .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ussdovvscz .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ussdovvscz .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ussdovvscz .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ussdovvscz .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ussdovvscz .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ussdovvscz .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ussdovvscz .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ussdovvscz .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ussdovvscz .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ussdovvscz .gt_left {
+  text-align: left;
+}
+
+#ussdovvscz .gt_center {
+  text-align: center;
+}
+
+#ussdovvscz .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ussdovvscz .gt_font_normal {
+  font-weight: normal;
+}
+
+#ussdovvscz .gt_font_bold {
+  font-weight: bold;
+}
+
+#ussdovvscz .gt_font_italic {
+  font-style: italic;
+}
+
+#ussdovvscz .gt_super {
+  font-size: 65%;
+}
+
+#ussdovvscz .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ussdovvscz .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ussdovvscz .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ussdovvscz .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ussdovvscz .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ussdovvscz .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ussdovvscz .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Table&nbsp;1:  <p>5 Flights with longest departure delays</p> </caption>
+  <thead>
+
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Day">Day</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="dep_time">dep_time</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="sched_dep_time">sched_dep_time</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="dep_delay">dep_delay</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="carrier">carrier</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="flight">flight</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="origin">origin</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Day" class="gt_row gt_right">2013-01-09</td>
+<td headers="dep_time" class="gt_row gt_right">641</td>
+<td headers="sched_dep_time" class="gt_row gt_right">900</td>
+<td headers="dep_delay" class="gt_row gt_right">1301</td>
+<td headers="carrier" class="gt_row gt_left">HA</td>
+<td headers="flight" class="gt_row gt_right">51</td>
+<td headers="origin" class="gt_row gt_left">JFK</td></tr>
+    <tr><td headers="Day" class="gt_row gt_right">2013-06-15</td>
+<td headers="dep_time" class="gt_row gt_right">1432</td>
+<td headers="sched_dep_time" class="gt_row gt_right">1935</td>
+<td headers="dep_delay" class="gt_row gt_right">1137</td>
+<td headers="carrier" class="gt_row gt_left">MQ</td>
+<td headers="flight" class="gt_row gt_right">3535</td>
+<td headers="origin" class="gt_row gt_left">JFK</td></tr>
+    <tr><td headers="Day" class="gt_row gt_right">2013-01-10</td>
+<td headers="dep_time" class="gt_row gt_right">1121</td>
+<td headers="sched_dep_time" class="gt_row gt_right">1635</td>
+<td headers="dep_delay" class="gt_row gt_right">1126</td>
+<td headers="carrier" class="gt_row gt_left">MQ</td>
+<td headers="flight" class="gt_row gt_right">3695</td>
+<td headers="origin" class="gt_row gt_left">EWR</td></tr>
+    <tr><td headers="Day" class="gt_row gt_right">2013-09-20</td>
+<td headers="dep_time" class="gt_row gt_right">1139</td>
+<td headers="sched_dep_time" class="gt_row gt_right">1845</td>
+<td headers="dep_delay" class="gt_row gt_right">1014</td>
+<td headers="carrier" class="gt_row gt_left">AA</td>
+<td headers="flight" class="gt_row gt_right">177</td>
+<td headers="origin" class="gt_row gt_left">JFK</td></tr>
+    <tr><td headers="Day" class="gt_row gt_right">2013-07-22</td>
+<td headers="dep_time" class="gt_row gt_right">845</td>
+<td headers="sched_dep_time" class="gt_row gt_right">1600</td>
+<td headers="dep_delay" class="gt_row gt_right">1005</td>
+<td headers="carrier" class="gt_row gt_left">MQ</td>
+<td headers="flight" class="gt_row gt_right">3075</td>
+<td headers="origin" class="gt_row gt_left">JFK</td></tr>
+  </tbody>
+
+
+</table>
+</div>
+</div>
+</div>
+</div></li>
+<li><p><strong>Sort <code>flights</code> to find the fastest flights. (Hint: Try including a math calculation inside of your function.)</strong></p>
+<p>The speed of a flight can be found as <code>distance/air_time</code> . The <a href="#tbl-q3-Ex-4.2.5">Table&nbsp;2</a> displays the 5 fastest flights.</p>
+<div class="cell" data-hash="Chapter4_cache/html/tbl-q3-Ex-4.2.5_ff368f1aa065f6c928026a4fff2e655f">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(distance<span class="sc">/</span>air_time)) <span class="sc">|&gt;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">5</span>) <span class="sc">|&gt;</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year, month, day, distance, air_time,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>         carrier, flight, origin, dest) <span class="sc">|&gt;</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="tbl-q3-Ex-4.2.5" class="anchored">
+
+<div id="sbzzrpyuke" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#sbzzrpyuke table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#sbzzrpyuke thead, #sbzzrpyuke tbody, #sbzzrpyuke tfoot, #sbzzrpyuke tr, #sbzzrpyuke td, #sbzzrpyuke th {
+  border-style: none;
+}
+
+#sbzzrpyuke p {
+  margin: 0;
+  padding: 0;
+}
+
+#sbzzrpyuke .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#sbzzrpyuke .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#sbzzrpyuke .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#sbzzrpyuke .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#sbzzrpyuke .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#sbzzrpyuke .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#sbzzrpyuke .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#sbzzrpyuke .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#sbzzrpyuke .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#sbzzrpyuke .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#sbzzrpyuke .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#sbzzrpyuke .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#sbzzrpyuke .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#sbzzrpyuke .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#sbzzrpyuke .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#sbzzrpyuke .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#sbzzrpyuke .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#sbzzrpyuke .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#sbzzrpyuke .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sbzzrpyuke .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#sbzzrpyuke .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#sbzzrpyuke .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#sbzzrpyuke .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sbzzrpyuke .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#sbzzrpyuke .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#sbzzrpyuke .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#sbzzrpyuke .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sbzzrpyuke .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#sbzzrpyuke .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#sbzzrpyuke .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#sbzzrpyuke .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#sbzzrpyuke .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#sbzzrpyuke .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sbzzrpyuke .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#sbzzrpyuke .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sbzzrpyuke .gt_left {
+  text-align: left;
+}
+
+#sbzzrpyuke .gt_center {
+  text-align: center;
+}
+
+#sbzzrpyuke .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#sbzzrpyuke .gt_font_normal {
+  font-weight: normal;
+}
+
+#sbzzrpyuke .gt_font_bold {
+  font-weight: bold;
+}
+
+#sbzzrpyuke .gt_font_italic {
+  font-style: italic;
+}
+
+#sbzzrpyuke .gt_super {
+  font-size: 65%;
+}
+
+#sbzzrpyuke .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#sbzzrpyuke .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#sbzzrpyuke .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#sbzzrpyuke .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#sbzzrpyuke .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#sbzzrpyuke .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#sbzzrpyuke .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Table&nbsp;2:  <p>5 fastest Flights (by speed)</p> </caption>
+  <thead>
+
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="year">year</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="month">month</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="day">day</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="distance">distance</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="air_time">air_time</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="carrier">carrier</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="flight">flight</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="origin">origin</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="dest">dest</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="year" class="gt_row gt_right">2013</td>
+<td headers="month" class="gt_row gt_right">5</td>
+<td headers="day" class="gt_row gt_right">25</td>
+<td headers="distance" class="gt_row gt_right">762</td>
+<td headers="air_time" class="gt_row gt_right">65</td>
+<td headers="carrier" class="gt_row gt_left">DL</td>
+<td headers="flight" class="gt_row gt_right">1499</td>
+<td headers="origin" class="gt_row gt_left">LGA</td>
+<td headers="dest" class="gt_row gt_left">ATL</td></tr>
+    <tr><td headers="year" class="gt_row gt_right">2013</td>
+<td headers="month" class="gt_row gt_right">7</td>
+<td headers="day" class="gt_row gt_right">2</td>
+<td headers="distance" class="gt_row gt_right">1008</td>
+<td headers="air_time" class="gt_row gt_right">93</td>
+<td headers="carrier" class="gt_row gt_left">EV</td>
+<td headers="flight" class="gt_row gt_right">4667</td>
+<td headers="origin" class="gt_row gt_left">EWR</td>
+<td headers="dest" class="gt_row gt_left">MSP</td></tr>
+    <tr><td headers="year" class="gt_row gt_right">2013</td>
+<td headers="month" class="gt_row gt_right">5</td>
+<td headers="day" class="gt_row gt_right">13</td>
+<td headers="distance" class="gt_row gt_right">594</td>
+<td headers="air_time" class="gt_row gt_right">55</td>
+<td headers="carrier" class="gt_row gt_left">EV</td>
+<td headers="flight" class="gt_row gt_right">4292</td>
+<td headers="origin" class="gt_row gt_left">EWR</td>
+<td headers="dest" class="gt_row gt_left">GSP</td></tr>
+    <tr><td headers="year" class="gt_row gt_right">2013</td>
+<td headers="month" class="gt_row gt_right">3</td>
+<td headers="day" class="gt_row gt_right">23</td>
+<td headers="distance" class="gt_row gt_right">748</td>
+<td headers="air_time" class="gt_row gt_right">70</td>
+<td headers="carrier" class="gt_row gt_left">EV</td>
+<td headers="flight" class="gt_row gt_right">3805</td>
+<td headers="origin" class="gt_row gt_left">EWR</td>
+<td headers="dest" class="gt_row gt_left">BNA</td></tr>
+    <tr><td headers="year" class="gt_row gt_right">2013</td>
+<td headers="month" class="gt_row gt_right">1</td>
+<td headers="day" class="gt_row gt_right">12</td>
+<td headers="distance" class="gt_row gt_right">1035</td>
+<td headers="air_time" class="gt_row gt_right">105</td>
+<td headers="carrier" class="gt_row gt_left">DL</td>
+<td headers="flight" class="gt_row gt_right">1902</td>
+<td headers="origin" class="gt_row gt_left">LGA</td>
+<td headers="dest" class="gt_row gt_left">PBI</td></tr>
+  </tbody>
+
+
+</table>
+</div>
+</div>
+</div>
+</div></li>
+<li><p><strong>Was there a flight on every day of 2013?</strong></p>
+<p>Yes, there was a flight on every day of 2013, because using <code>distinct()</code> function, we find that there are 365 unique combinations of <code>year</code> , <code>month</code> , and <code>day</code> .</p>
+<div class="cell" data-hash="Chapter4_cache/html/q4_b3cb52e365395c48bbe6633bf10c27ca">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(year, month, day) <span class="sc">|&gt;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">|&gt;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 365</code></pre>
+</div>
+</div></li>
+<li><p><strong>Which flights traveled the farthest distance? Which traveled the least distance?</strong></p>
+<p>The top 5 flights by the farthest distance traveled are shown in <a href="#tbl-q5-1">Table&nbsp;3</a> .</p>
+<div class="cell" data-hash="Chapter4_cache/html/tbl-q5-1_2e9dc1940c1b6ad11421aa3d7f7e8a85">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(distance)) <span class="sc">|&gt;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(origin, dest, distance, air_time, carrier) <span class="sc">|&gt;</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Distinct added to remove same flight (on different days) repeating in top 5</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(origin, dest, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">5</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="tbl-q5-1" class="anchored">
+
+<div id="rztzwdnlxx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rztzwdnlxx table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#rztzwdnlxx thead, #rztzwdnlxx tbody, #rztzwdnlxx tfoot, #rztzwdnlxx tr, #rztzwdnlxx td, #rztzwdnlxx th {
+  border-style: none;
+}
+
+#rztzwdnlxx p {
+  margin: 0;
+  padding: 0;
+}
+
+#rztzwdnlxx .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#rztzwdnlxx .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#rztzwdnlxx .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#rztzwdnlxx .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#rztzwdnlxx .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rztzwdnlxx .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rztzwdnlxx .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rztzwdnlxx .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#rztzwdnlxx .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#rztzwdnlxx .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#rztzwdnlxx .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#rztzwdnlxx .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#rztzwdnlxx .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#rztzwdnlxx .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#rztzwdnlxx .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#rztzwdnlxx .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#rztzwdnlxx .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#rztzwdnlxx .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#rztzwdnlxx .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rztzwdnlxx .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#rztzwdnlxx .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#rztzwdnlxx .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#rztzwdnlxx .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rztzwdnlxx .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#rztzwdnlxx .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#rztzwdnlxx .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rztzwdnlxx .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rztzwdnlxx .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#rztzwdnlxx .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rztzwdnlxx .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#rztzwdnlxx .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rztzwdnlxx .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rztzwdnlxx .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rztzwdnlxx .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rztzwdnlxx .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rztzwdnlxx .gt_left {
+  text-align: left;
+}
+
+#rztzwdnlxx .gt_center {
+  text-align: center;
+}
+
+#rztzwdnlxx .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#rztzwdnlxx .gt_font_normal {
+  font-weight: normal;
+}
+
+#rztzwdnlxx .gt_font_bold {
+  font-weight: bold;
+}
+
+#rztzwdnlxx .gt_font_italic {
+  font-style: italic;
+}
+
+#rztzwdnlxx .gt_super {
+  font-size: 65%;
+}
+
+#rztzwdnlxx .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#rztzwdnlxx .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#rztzwdnlxx .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#rztzwdnlxx .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#rztzwdnlxx .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#rztzwdnlxx .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#rztzwdnlxx .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Table&nbsp;3:  <p>5 longest distance flights</p> </caption>
+  <thead>
+
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="origin">origin</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="dest">dest</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="distance">distance</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="air_time">air_time</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="carrier">carrier</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="origin" class="gt_row gt_left">JFK</td>
+<td headers="dest" class="gt_row gt_left">HNL</td>
+<td headers="distance" class="gt_row gt_right">4983</td>
+<td headers="air_time" class="gt_row gt_right">659</td>
+<td headers="carrier" class="gt_row gt_left">HA</td></tr>
+    <tr><td headers="origin" class="gt_row gt_left">EWR</td>
+<td headers="dest" class="gt_row gt_left">HNL</td>
+<td headers="distance" class="gt_row gt_right">4963</td>
+<td headers="air_time" class="gt_row gt_right">656</td>
+<td headers="carrier" class="gt_row gt_left">UA</td></tr>
+    <tr><td headers="origin" class="gt_row gt_left">EWR</td>
+<td headers="dest" class="gt_row gt_left">ANC</td>
+<td headers="distance" class="gt_row gt_right">3370</td>
+<td headers="air_time" class="gt_row gt_right">418</td>
+<td headers="carrier" class="gt_row gt_left">UA</td></tr>
+    <tr><td headers="origin" class="gt_row gt_left">JFK</td>
+<td headers="dest" class="gt_row gt_left">SFO</td>
+<td headers="distance" class="gt_row gt_right">2586</td>
+<td headers="air_time" class="gt_row gt_right">366</td>
+<td headers="carrier" class="gt_row gt_left">UA</td></tr>
+    <tr><td headers="origin" class="gt_row gt_left">JFK</td>
+<td headers="dest" class="gt_row gt_left">OAK</td>
+<td headers="distance" class="gt_row gt_right">2576</td>
+<td headers="air_time" class="gt_row gt_right">330</td>
+<td headers="carrier" class="gt_row gt_left">B6</td></tr>
+  </tbody>
+
+
+</table>
+</div>
+</div>
+</div>
+</div>
+<p>The 5 flights with least distance traveled are shown in</p>
+<div class="cell" data-hash="Chapter4_cache/html/tbl-q5-2_a8b03d5f071697e8c0c586c376494d69">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(distance) <span class="sc">|&gt;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(origin, dest, distance, air_time, carrier) <span class="sc">|&gt;</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Distinct added to remove same flight (which runs</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># on different days) repeating in top 5</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(origin, dest, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">5</span>) <span class="sc">|&gt;</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="tbl-q5-2" class="anchored">
+
+<div id="calnkyhrsj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#calnkyhrsj table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#calnkyhrsj thead, #calnkyhrsj tbody, #calnkyhrsj tfoot, #calnkyhrsj tr, #calnkyhrsj td, #calnkyhrsj th {
+  border-style: none;
+}
+
+#calnkyhrsj p {
+  margin: 0;
+  padding: 0;
+}
+
+#calnkyhrsj .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#calnkyhrsj .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#calnkyhrsj .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#calnkyhrsj .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#calnkyhrsj .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#calnkyhrsj .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#calnkyhrsj .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#calnkyhrsj .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#calnkyhrsj .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#calnkyhrsj .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#calnkyhrsj .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#calnkyhrsj .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#calnkyhrsj .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#calnkyhrsj .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#calnkyhrsj .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#calnkyhrsj .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#calnkyhrsj .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#calnkyhrsj .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#calnkyhrsj .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#calnkyhrsj .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#calnkyhrsj .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#calnkyhrsj .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#calnkyhrsj .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#calnkyhrsj .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#calnkyhrsj .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#calnkyhrsj .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#calnkyhrsj .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#calnkyhrsj .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#calnkyhrsj .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#calnkyhrsj .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#calnkyhrsj .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#calnkyhrsj .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#calnkyhrsj .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#calnkyhrsj .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#calnkyhrsj .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#calnkyhrsj .gt_left {
+  text-align: left;
+}
+
+#calnkyhrsj .gt_center {
+  text-align: center;
+}
+
+#calnkyhrsj .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#calnkyhrsj .gt_font_normal {
+  font-weight: normal;
+}
+
+#calnkyhrsj .gt_font_bold {
+  font-weight: bold;
+}
+
+#calnkyhrsj .gt_font_italic {
+  font-style: italic;
+}
+
+#calnkyhrsj .gt_super {
+  font-size: 65%;
+}
+
+#calnkyhrsj .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#calnkyhrsj .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#calnkyhrsj .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#calnkyhrsj .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#calnkyhrsj .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#calnkyhrsj .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#calnkyhrsj .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Table&nbsp;4:  <p>5 shortest distance flights</p> </caption>
+  <thead>
+
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="origin">origin</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="dest">dest</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="distance">distance</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="air_time">air_time</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="carrier">carrier</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="origin" class="gt_row gt_left">EWR</td>
+<td headers="dest" class="gt_row gt_left">LGA</td>
+<td headers="distance" class="gt_row gt_right">17</td>
+<td headers="air_time" class="gt_row gt_right">NA</td>
+<td headers="carrier" class="gt_row gt_left">US</td></tr>
+    <tr><td headers="origin" class="gt_row gt_left">EWR</td>
+<td headers="dest" class="gt_row gt_left">PHL</td>
+<td headers="distance" class="gt_row gt_right">80</td>
+<td headers="air_time" class="gt_row gt_right">30</td>
+<td headers="carrier" class="gt_row gt_left">EV</td></tr>
+    <tr><td headers="origin" class="gt_row gt_left">JFK</td>
+<td headers="dest" class="gt_row gt_left">PHL</td>
+<td headers="distance" class="gt_row gt_right">94</td>
+<td headers="air_time" class="gt_row gt_right">35</td>
+<td headers="carrier" class="gt_row gt_left">9E</td></tr>
+    <tr><td headers="origin" class="gt_row gt_left">LGA</td>
+<td headers="dest" class="gt_row gt_left">PHL</td>
+<td headers="distance" class="gt_row gt_right">96</td>
+<td headers="air_time" class="gt_row gt_right">32</td>
+<td headers="carrier" class="gt_row gt_left">US</td></tr>
+    <tr><td headers="origin" class="gt_row gt_left">EWR</td>
+<td headers="dest" class="gt_row gt_left">BDL</td>
+<td headers="distance" class="gt_row gt_right">116</td>
+<td headers="air_time" class="gt_row gt_right">25</td>
+<td headers="carrier" class="gt_row gt_left">EV</td></tr>
+  </tbody>
+
+
+</table>
+</div>
+</div>
+</div>
+</div></li>
+<li><p><strong>Does it matter what order you used <a href="https://dplyr.tidyverse.org/reference/filter.html"><code>filter()</code></a> and <a href="https://dplyr.tidyverse.org/reference/arrange.html"><code>arrange()</code></a> if you’re using both? Why/why not? Think about the results and how much work the functions would have to do.</strong></p>
+<p>Although, in terms of output received, it does not matter in which order we use them, because when we run the function <code>filter()</code> it removes the rows not required, but leaves the arrangement-ordering the same, i.e.&nbsp;the remaining rows move up.</p>
+<p>However, using <code>arrange()</code> before <code>filter()</code> means <code>R</code> will have to arrange all the rows, and then we filter out only a few rows - thus meaning that more work will have to be done computationally.</p>
+<p>For computational efficiency, it would be better if we use <code>filter()</code> first, then run <code>arrange()</code> only on the subset of rows remaining.</p>
+<p>Here’s the proof for this, using <code>system.time()</code> function in <code>R</code> which tells how much time does an <code>R</code> expression take to run. Here, I compare both functions using the logical operator <code>&gt;</code> (greater than). The <code>elapsed</code> time comes <code>TRUE</code>, meaning that arranging first, and then filtering takes more time.</p>
+<div class="cell" data-hash="Chapter4_cache/html/unnamed-chunk-13_97dbacce2d1e110db93a65d7532e6ab4">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>( flights <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(distance) <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(air_time <span class="sc">&lt;</span> <span class="dv">60</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">&gt;</span> <span class="fu">system.time</span>(</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  flights <span class="sc">|&gt;</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(air_time <span class="sc">&lt;</span> <span class="dv">60</span>) <span class="sc">|&gt;</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(distance)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> user.self   sys.self    elapsed user.child  sys.child 
+     FALSE      FALSE       TRUE         NA         NA </code></pre>
+</div>
+</div></li>
+</ol>
+</section>
+<section id="exercises-1" class="level1">
+<h1><strong>4.3.5 Exercises</strong></h1>
+<ol type="1">
+<li><p><strong>Compare <code>dep_time</code>, <code>sched_dep_time</code>, and <code>dep_delay</code>. How would you expect those three numbers to be related?</strong></p>
+<p>We would expect <code>dep_delay</code> = <code>dep_time</code> - <code>sched_dep_time</code> . Let us check this in the code, as well.</p>
+<div class="cell" data-hash="Chapter4_cache/html/q1-Ex-4.3.5_25db5f6d7d33764cc4e447420960c6df">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">calc =</span> dep_time <span class="sc">-</span> sched_dep_time) <span class="sc">|&gt;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">match =</span> calc <span class="sc">==</span> dep_delay, <span class="at">.keep =</span> <span class="st">"used"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Matching =</span> <span class="fu">sum</span>(match, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">Total =</span> <span class="fu">count</span>(flights)) <span class="sc">|&gt;</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Percentage =</span> <span class="dv">100</span><span class="sc">*</span>Matching<span class="sc">/</span>Total)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  Matching Total$n Percentage$n
+     &lt;int&gt;   &lt;int&gt;        &lt;dbl&gt;
+1   228744  336776         67.9</code></pre>
+</div>
+</div>
+<p>The results indicate that 67.9% of the time, the comparison works out as expected. For others, there might be missing data issues (hence, we had to use <code>na.rm = TRUE</code>) or, any other data error.</p></li>
+<li><p><strong>Brainstorm as many ways as possible to select <code>dep_time</code>, <code>dep_delay</code>, <code>arr_time</code>, and <code>arr_delay</code> from <code>flights</code>.</strong></p>
+<div class="cell" data-hash="Chapter4_cache/html/q2-Ex-4.3.5_f9842a430a7f70815100908f28197e02">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using variable names</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span> </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(dep_time, dep_delay, arr_time, arr_delay)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Using starts_with()</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span> </span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"dep"</span>), <span class="fu">starts_with</span>(<span class="st">"arr"</span>))</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Using column numbers</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">9</span>)</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Using from, to, ie., ":" along with "!" to remove sched_ </span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span> </span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(dep_time<span class="sc">:</span>arr_delay) <span class="sc">|&gt;</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span><span class="fu">starts_with</span>(<span class="st">"sched"</span>))</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Using column numbers with :</span></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">9</span>, <span class="sc">-</span><span class="dv">5</span>, <span class="sc">-</span><span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+<li><p><strong>What happens if you specify the name of the same variable multiple times in a <a href="https://dplyr.tidyverse.org/reference/select.html"><code>select()</code></a> call?</strong></p>
+<p>If we specify the name of the same variable multiple times, the <code>dplyr</code> package understands the mistake, and only produces one copy of the variable in the output. The place of the variable is the one that first appears in the code within the <code>select()</code> function. Here are two examples:---</p>
+<div class="cell" data-hash="Chapter4_cache/html/q3-Ex-4.3.5_564864a4af820b817455b66e37f49e1d">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(dep_time, dep_time) <span class="sc">|&gt;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 1
+  dep_time
+     &lt;int&gt;
+1      517
+2      533</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(dep_time<span class="sc">:</span>dep_delay, sched_dep_time) <span class="sc">|&gt;</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  dep_time sched_dep_time dep_delay
+     &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;
+1      517            515         2
+2      533            529         4</code></pre>
+</div>
+</div></li>
+<li><p><strong>What does the <a href="https://tidyselect.r-lib.org/reference/all_of.html"><code>any_of()</code></a> function do? Why might it be helpful in conjunction with this vector?</strong></p>
+<p><code>variables &lt;- c("year", "month", "day", "dep_delay", "arr_delay")</code></p>
+<p>The two functions, <code>any_of()</code> and <code>all_of()</code> are called selection helpers. They help select variables contained in a character vector, such as <code>variables</code> .</p>
+<p>In present scenario, the <code>any_of()</code> can be used with <code>variables</code> vector to select these columns (or, remove these columns) from the flights data-set, as shown in the code below:---</p>
+<div class="cell" data-hash="Chapter4_cache/html/q4-Ex-4.3.5_3015de85c134357caadbd2a54e0d865f">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>variables <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"year"</span>, <span class="st">"month"</span>, <span class="st">"day"</span>, <span class="st">"dep_delay"</span>, <span class="st">"arr_delay"</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">any_of</span>(variables)) <span class="sc">|&gt;</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+   year month   day dep_delay arr_delay
+  &lt;int&gt; &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1  2013     1     1         2        11
+2  2013     1     1         4        20</code></pre>
+</div>
+</div>
+<p>But, there is a difference between <code>any_of()</code> and <code>all_of()</code> . As shown in <code>R</code> help, <code>all_of()</code> is for strict selection. If any of the variables in the character vector is missing, an error is thrown. But, <code>any_of()</code> doesn’t check for missing variables. It is especially useful with negative selections, when you would like to make sure a variable is removed. Here’s an example to demonstrate:---</p>
+<div class="cell" data-hash="Chapter4_cache/html/q4-error-Ex-4.3.5_f1e0f91a811f3b46c44b203c54ffe1c8">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Change "day" to "date" to delibertely cause a missing variable name</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>variables <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"year"</span>, <span class="st">"month"</span>, <span class="st">"date"</span>, <span class="st">"dep_delay"</span>, <span class="st">"arr_delay"</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co"># all_of() should not work</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">all_of</span>(variables)) <span class="sc">|&gt;</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `all_of()`:
+! Can't subset columns that don't exist.
+✖ Column `date` doesn't exist.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># any_of() will still work</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">any_of</span>(variables)) <span class="sc">|&gt;</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+   year month dep_delay arr_delay
+  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1  2013     1         2        11
+2  2013     1         4        20</code></pre>
+</div>
+</div></li>
+<li><p><strong>Does the result of running the following code surprise you? How do the select helpers deal with upper and lower case by default? How can you change that default? <code>flights |&gt; select(contains("TIME"))</code></strong></p>
+<p>Yes, the running of this code surprises me because generally, <code>R</code> is very picky about upper-case vs.&nbsp;lower-case. Since <code>"TIME"</code> is not contained in any variable name, I expected it to throw an error. Yet, it returns all variables which contain <code>"time"</code>.</p>
+<p>Thus, this means that the following <code>select</code> helpers from <code>tidyselect</code> package ignore the case of the <code>match</code> provided by default.</p>
+<ul>
+<li><p><code>starts_with()</code>: Starts with an exact prefix.</p></li>
+<li><p><code>ends_with()</code>: Ends with an exact suffix.</p></li>
+<li><p><code>contains()</code>: Contains a literal string.</p></li>
+<li><p><code>matches()</code>: Matches a regular expression.</p></li>
+</ul>
+<p>To change this, we can set the argument <code>ignore.case = FALSE</code>.</p></li>
+<li><p><strong>Rename <code>air_time</code> to <code>air_time_min</code> to indicate units of measurement and move it to the beginning of the data frame.</strong></p>
+<p>The following code does the job, as shown in the output:--</p>
+<div class="cell" data-hash="Chapter4_cache/html/q6-Ex-4.3.5_2f7b6746e82fd24354f99e521eaedde8">
+<div class="sourceCode cell-code" id="cb35" data-code-line-numbers="false"><pre class="sourceCode r code-overflow-scroll code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">air_time_min =</span> air_time) <span class="sc">|&gt;</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(air_time_min)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 19
+   air_time_min  year month   day dep_time sched_dep_time dep_delay arr_time
+          &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
+ 1          227  2013     1     1      517            515         2      830
+ 2          227  2013     1     1      533            529         4      850
+ 3          160  2013     1     1      542            540         2      923
+ 4          183  2013     1     1      544            545        -1     1004
+ 5          116  2013     1     1      554            600        -6      812
+ 6          150  2013     1     1      554            558        -4      740
+ 7          158  2013     1     1      555            600        -5      913
+ 8           53  2013     1     1      557            600        -3      709
+ 9          140  2013     1     1      557            600        -3      838
+10          138  2013     1     1      558            600        -2      753
+# ℹ 336,766 more rows
+# ℹ 11 more variables: sched_arr_time &lt;int&gt;, arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;,
+#   flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, distance &lt;dbl&gt;,
+#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+</div></li>
+<li><p><strong>Why doesn’t the following work, and what does the error mean?</strong></p>
+<pre><code>flights |&gt;    
+  select(tailnum) |&gt;    
+  arrange(arr_delay) 
+
+#&gt; Error in `arrange()`: #&gt; ℹ In argument: `..1 = arr_delay`.
+#&gt; Caused by error: #&gt; ! object 'arr_delay' not found</code></pre>
+<p>The above code does not work because the <code>select(tailnum)</code> has removed all other variables (columns) from the tibble. Thus, when <code>arrange(arr_delay)</code> runs, it is unable to find any variable by the name of <code>arr_delay</code> in the tibble.</p>
+<p>The error means that object (i.e.&nbsp;variable) <code>'arr_delay'</code> has not been found in the tibble by the <code>arrange()</code> function.</p></li>
+</ol>
+</section>
+<section id="exercises-2" class="level1">
+<h1><strong>4.5.7 Exercises</strong></h1>
+<ol type="1">
+<li><p><strong>Which carrier has the worst average delays? Challenge: can you disentangle the effects of bad airports vs.&nbsp;bad carriers? Why/why not? (Hint: think about <code>flights |&gt; group_by(carrier, dest) |&gt; summarize(n())</code>)</strong></p>
+<p>The overall carrier with worst average delays is <strong>F9</strong>, as seen from the code below:</p>
+<div class="cell" data-hash="Chapter4_cache/html/q1-Ex-4.5.7_758f339f26060b1919f2897456776041">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(carrier) <span class="sc">|&gt;</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_delay =</span> <span class="fu">mean</span>(arr_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(<span class="at">order_by =</span> avg_delay, <span class="at">n =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  carrier avg_delay
+  &lt;chr&gt;       &lt;dbl&gt;
+1 F9           21.9</code></pre>
+</div>
+</div>
+<p>Yes, we can disentangle the effect of bad airports vs.&nbsp;bad carriers using the code below:---</p>
+<div class="cell" data-hash="Chapter4_cache/html/tbl-q1-Ex-4.5.7_ae15f0df3f64aea8ee66a72ce2e4f50c">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(dest, carrier) <span class="sc">|&gt;</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_delay =</span> <span class="fu">mean</span>(arr_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># taking the highest average delay flight at each airport</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(<span class="at">order_by =</span> avg_delay, <span class="at">n =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># for each airline, summarize the number of airports where it is</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># the most delayed airline</span></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">.by =</span> carrier) <span class="sc">|&gt;</span></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">5</span>)<span class="sc">|&gt;</span></span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n)) <span class="sc">|&gt;</span></span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Carrier =</span> carrier,</span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Number of Airports</span><span class="st">`</span> <span class="ot">=</span> n) <span class="sc">|&gt;</span></span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="tbl-q1-Ex-4.5.7" class="anchored">
+
+<div id="ezarulqdgk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ezarulqdgk table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ezarulqdgk thead, #ezarulqdgk tbody, #ezarulqdgk tfoot, #ezarulqdgk tr, #ezarulqdgk td, #ezarulqdgk th {
+  border-style: none;
+}
+
+#ezarulqdgk p {
+  margin: 0;
+  padding: 0;
+}
+
+#ezarulqdgk .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ezarulqdgk .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ezarulqdgk .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ezarulqdgk .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ezarulqdgk .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ezarulqdgk .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ezarulqdgk .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ezarulqdgk .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ezarulqdgk .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ezarulqdgk .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ezarulqdgk .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ezarulqdgk .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ezarulqdgk .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ezarulqdgk .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ezarulqdgk .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ezarulqdgk .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ezarulqdgk .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ezarulqdgk .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ezarulqdgk .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ezarulqdgk .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ezarulqdgk .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ezarulqdgk .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ezarulqdgk .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ezarulqdgk .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ezarulqdgk .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ezarulqdgk .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ezarulqdgk .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ezarulqdgk .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ezarulqdgk .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ezarulqdgk .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ezarulqdgk .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ezarulqdgk .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ezarulqdgk .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ezarulqdgk .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ezarulqdgk .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ezarulqdgk .gt_left {
+  text-align: left;
+}
+
+#ezarulqdgk .gt_center {
+  text-align: center;
+}
+
+#ezarulqdgk .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ezarulqdgk .gt_font_normal {
+  font-weight: normal;
+}
+
+#ezarulqdgk .gt_font_bold {
+  font-weight: bold;
+}
+
+#ezarulqdgk .gt_font_italic {
+  font-style: italic;
+}
+
+#ezarulqdgk .gt_super {
+  font-size: 65%;
+}
+
+#ezarulqdgk .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ezarulqdgk .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ezarulqdgk .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ezarulqdgk .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ezarulqdgk .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ezarulqdgk .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ezarulqdgk .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Table&nbsp;5:  <p>The airlines which have highest average delay at the maximum number
+of Airports</p> </caption>
+  <thead>
+
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Carrier">Carrier</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Number of Airports">Number of Airports</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Carrier" class="gt_row gt_left">EV</td>
+<td headers="Number of Airports" class="gt_row gt_right">42</td></tr>
+    <tr><td headers="Carrier" class="gt_row gt_left">B6</td>
+<td headers="Number of Airports" class="gt_row gt_right">20</td></tr>
+    <tr><td headers="Carrier" class="gt_row gt_left">UA</td>
+<td headers="Number of Airports" class="gt_row gt_right">14</td></tr>
+    <tr><td headers="Carrier" class="gt_row gt_left">AA</td>
+<td headers="Number of Airports" class="gt_row gt_right">6</td></tr>
+    <tr><td headers="Carrier" class="gt_row gt_left">FL</td>
+<td headers="Number of Airports" class="gt_row gt_right">2</td></tr>
+  </tbody>
+
+
+</table>
+</div>
+</div>
+</div>
+</div></li>
+<li><p><strong>Find the flights that are most delayed upon departure from each destination.</strong></p>
+<p>We can use the following codes (either one works, and the code checks this equality of results) to find the flight with highest departure delay (<code>dep_delay</code> ) for each destination.</p>
+<div class="cell" data-hash="Chapter4_cache/html/q2-Ex-4.5.7_5bad43d619b2faae2b090ac7eb3d151e">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 1: Group by "dest" and then use slice_max</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> flights <span class="sc">|&gt;</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(dest) <span class="sc">|&gt;</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(<span class="at">n=</span><span class="dv">1</span>, <span class="at">order_by =</span> dep_delay, <span class="at">na_rm =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(dest, flight, origin, dep_delay, month, day) <span class="sc">|&gt;</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(dep_delay), <span class="fu">desc</span>(flight))</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 2: Directly use slice_max() with "by" argument</span></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>b <span class="ot">=</span> flights <span class="sc">|&gt;</span></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(<span class="at">n=</span><span class="dv">1</span>, <span class="at">order_by =</span> dep_delay, <span class="at">by =</span> dest, <span class="at">na_rm =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(dest, flight, origin, dep_delay, month, day) <span class="sc">|&gt;</span></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(dep_delay), <span class="fu">desc</span>(flight))</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Check results</span></span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(a <span class="sc">!=</span> b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display results</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>b <span class="sc">|&gt;</span> <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">5</span>) <span class="sc">|&gt;</span> <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div id="qwbctvhiae" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qwbctvhiae table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#qwbctvhiae thead, #qwbctvhiae tbody, #qwbctvhiae tfoot, #qwbctvhiae tr, #qwbctvhiae td, #qwbctvhiae th {
+  border-style: none;
+}
+
+#qwbctvhiae p {
+  margin: 0;
+  padding: 0;
+}
+
+#qwbctvhiae .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#qwbctvhiae .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#qwbctvhiae .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#qwbctvhiae .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#qwbctvhiae .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qwbctvhiae .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qwbctvhiae .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qwbctvhiae .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#qwbctvhiae .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#qwbctvhiae .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#qwbctvhiae .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#qwbctvhiae .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#qwbctvhiae .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#qwbctvhiae .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#qwbctvhiae .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#qwbctvhiae .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#qwbctvhiae .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#qwbctvhiae .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#qwbctvhiae .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qwbctvhiae .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#qwbctvhiae .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#qwbctvhiae .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#qwbctvhiae .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qwbctvhiae .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#qwbctvhiae .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#qwbctvhiae .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qwbctvhiae .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qwbctvhiae .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#qwbctvhiae .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qwbctvhiae .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#qwbctvhiae .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qwbctvhiae .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qwbctvhiae .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qwbctvhiae .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qwbctvhiae .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qwbctvhiae .gt_left {
+  text-align: left;
+}
+
+#qwbctvhiae .gt_center {
+  text-align: center;
+}
+
+#qwbctvhiae .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#qwbctvhiae .gt_font_normal {
+  font-weight: normal;
+}
+
+#qwbctvhiae .gt_font_bold {
+  font-weight: bold;
+}
+
+#qwbctvhiae .gt_font_italic {
+  font-style: italic;
+}
+
+#qwbctvhiae .gt_super {
+  font-size: 65%;
+}
+
+#qwbctvhiae .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#qwbctvhiae .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#qwbctvhiae .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#qwbctvhiae .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#qwbctvhiae .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#qwbctvhiae .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#qwbctvhiae .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption><p>Flights with highest departure delay; displayed here only for 5
+destinations highest departure delay</p></caption>
+  <thead>
+
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="dest">dest</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="flight">flight</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="origin">origin</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="dep_delay">dep_delay</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="month">month</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="day">day</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="dest" class="gt_row gt_left">HNL</td>
+<td headers="flight" class="gt_row gt_right">51</td>
+<td headers="origin" class="gt_row gt_left">JFK</td>
+<td headers="dep_delay" class="gt_row gt_right">1301</td>
+<td headers="month" class="gt_row gt_right">1</td>
+<td headers="day" class="gt_row gt_right">9</td></tr>
+    <tr><td headers="dest" class="gt_row gt_left">CMH</td>
+<td headers="flight" class="gt_row gt_right">3535</td>
+<td headers="origin" class="gt_row gt_left">JFK</td>
+<td headers="dep_delay" class="gt_row gt_right">1137</td>
+<td headers="month" class="gt_row gt_right">6</td>
+<td headers="day" class="gt_row gt_right">15</td></tr>
+    <tr><td headers="dest" class="gt_row gt_left">ORD</td>
+<td headers="flight" class="gt_row gt_right">3695</td>
+<td headers="origin" class="gt_row gt_left">EWR</td>
+<td headers="dep_delay" class="gt_row gt_right">1126</td>
+<td headers="month" class="gt_row gt_right">1</td>
+<td headers="day" class="gt_row gt_right">10</td></tr>
+    <tr><td headers="dest" class="gt_row gt_left">SFO</td>
+<td headers="flight" class="gt_row gt_right">177</td>
+<td headers="origin" class="gt_row gt_left">JFK</td>
+<td headers="dep_delay" class="gt_row gt_right">1014</td>
+<td headers="month" class="gt_row gt_right">9</td>
+<td headers="day" class="gt_row gt_right">20</td></tr>
+    <tr><td headers="dest" class="gt_row gt_left">CVG</td>
+<td headers="flight" class="gt_row gt_right">3075</td>
+<td headers="origin" class="gt_row gt_left">JFK</td>
+<td headers="dep_delay" class="gt_row gt_right">1005</td>
+<td headers="month" class="gt_row gt_right">7</td>
+<td headers="day" class="gt_row gt_right">22</td></tr>
+  </tbody>
+
+
+</table>
+</div>
+</div>
+</div></li>
+<li><p><strong>How do delays vary over the course of the day. Illustrate your answer with a plot.</strong></p>
+<p>The following graph of averge delay (on y-axis) plotted against scheduled departure time (on x-axis) shows the overall trend that the average delays rise over the course of the day to hit a peak around 6 pm.</p>
+<p>Note: The scheduled departure time is not accurate, since it is written in <code>hhmm</code> format, and thus is not continuous variable. For example, 1:59 am is 159, and then 2:00 am is 200. So there are no values in 60s, 70s, 80s, 90s. I will rectify this once I learn the <code>lubridate</code> package.</p>
+<div class="cell fig-cap-location-top" data-hash="Chapter4_cache/html/fig-q3-Ex-4.5.7_4d96248ddb8ee9b468dbdeb467c058b6">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sched_dep_time) <span class="sc">|&gt;</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sched_dep_time, <span class="at">y =</span> avg_delay)) <span class="sc">+</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Scheduled Departure time"</span>,</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Average delay in minutes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-q3-Ex-4.5.7" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<figcaption class="figure-caption">Figure&nbsp;1: Graph showing average delays over the course of the day at various scheduled times</figcaption>
+<p><img src="Chapter4_files/figure-html/fig-q3-Ex-4.5.7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div></li>
+<li><p><strong>What happens if you supply a negative <code>n</code> to <a href="https://dplyr.tidyverse.org/reference/slice.html"><code>slice_min()</code></a> and friends?</strong></p>
+<p>The inbuilt <code>R</code> help tells me that <em>“A negative value of <code>n</code> will be subtracted from the group size. For example, <code>n = -2</code> with a group of 5 rows will select 5 - 2 = 3 rows.”</em></p>
+<p>Here’s an example to explain. First, I create a tibble <code>a</code> to contain the average departure delay from JFK airport to 10 destinations.</p>
+<div class="cell" data-hash="Chapter4_cache/html/q4-Ex-4.5.7_080c39894f009316a4c1beda207f1be8">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> flights <span class="sc">|&gt;</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(origin <span class="sc">==</span> <span class="st">"JFK"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(origin, dest) <span class="sc">|&gt;</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(avg_delay)) <span class="sc">|&gt;</span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a><span class="fu">gt</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div id="xeywzhyfhz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xeywzhyfhz table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#xeywzhyfhz thead, #xeywzhyfhz tbody, #xeywzhyfhz tfoot, #xeywzhyfhz tr, #xeywzhyfhz td, #xeywzhyfhz th {
+  border-style: none;
+}
+
+#xeywzhyfhz p {
+  margin: 0;
+  padding: 0;
+}
+
+#xeywzhyfhz .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#xeywzhyfhz .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#xeywzhyfhz .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#xeywzhyfhz .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#xeywzhyfhz .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xeywzhyfhz .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xeywzhyfhz .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xeywzhyfhz .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#xeywzhyfhz .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#xeywzhyfhz .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#xeywzhyfhz .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#xeywzhyfhz .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#xeywzhyfhz .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#xeywzhyfhz .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#xeywzhyfhz .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#xeywzhyfhz .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#xeywzhyfhz .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#xeywzhyfhz .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#xeywzhyfhz .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xeywzhyfhz .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#xeywzhyfhz .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#xeywzhyfhz .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#xeywzhyfhz .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xeywzhyfhz .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#xeywzhyfhz .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#xeywzhyfhz .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xeywzhyfhz .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xeywzhyfhz .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#xeywzhyfhz .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xeywzhyfhz .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#xeywzhyfhz .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xeywzhyfhz .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xeywzhyfhz .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xeywzhyfhz .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xeywzhyfhz .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xeywzhyfhz .gt_left {
+  text-align: left;
+}
+
+#xeywzhyfhz .gt_center {
+  text-align: center;
+}
+
+#xeywzhyfhz .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#xeywzhyfhz .gt_font_normal {
+  font-weight: normal;
+}
+
+#xeywzhyfhz .gt_font_bold {
+  font-weight: bold;
+}
+
+#xeywzhyfhz .gt_font_italic {
+  font-style: italic;
+}
+
+#xeywzhyfhz .gt_super {
+  font-size: 65%;
+}
+
+#xeywzhyfhz .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#xeywzhyfhz .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#xeywzhyfhz .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#xeywzhyfhz .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#xeywzhyfhz .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#xeywzhyfhz .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#xeywzhyfhz .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="origin">origin</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="dest">dest</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="avg_delay">avg_delay</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="origin" class="gt_row gt_left">JFK</td>
+<td headers="dest" class="gt_row gt_left">CVG</td>
+<td headers="avg_delay" class="gt_row gt_right">27.35047</td></tr>
+    <tr><td headers="origin" class="gt_row gt_left">JFK</td>
+<td headers="dest" class="gt_row gt_left">SDF</td>
+<td headers="avg_delay" class="gt_row gt_right">23.97674</td></tr>
+    <tr><td headers="origin" class="gt_row gt_left">JFK</td>
+<td headers="dest" class="gt_row gt_left">EGE</td>
+<td headers="avg_delay" class="gt_row gt_right">23.43564</td></tr>
+    <tr><td headers="origin" class="gt_row gt_left">JFK</td>
+<td headers="dest" class="gt_row gt_left">SAT</td>
+<td headers="avg_delay" class="gt_row gt_right">23.41360</td></tr>
+    <tr><td headers="origin" class="gt_row gt_left">JFK</td>
+<td headers="dest" class="gt_row gt_left">MCI</td>
+<td headers="avg_delay" class="gt_row gt_right">23.08594</td></tr>
+    <tr><td headers="origin" class="gt_row gt_left">JFK</td>
+<td headers="dest" class="gt_row gt_left">CMH</td>
+<td headers="avg_delay" class="gt_row gt_right">22.01839</td></tr>
+    <tr><td headers="origin" class="gt_row gt_left">JFK</td>
+<td headers="dest" class="gt_row gt_left">ORD</td>
+<td headers="avg_delay" class="gt_row gt_right">21.55372</td></tr>
+    <tr><td headers="origin" class="gt_row gt_left">JFK</td>
+<td headers="dest" class="gt_row gt_left">MSP</td>
+<td headers="avg_delay" class="gt_row gt_right">21.33428</td></tr>
+    <tr><td headers="origin" class="gt_row gt_left">JFK</td>
+<td headers="dest" class="gt_row gt_left">DEN</td>
+<td headers="avg_delay" class="gt_row gt_right">20.09585</td></tr>
+    <tr><td headers="origin" class="gt_row gt_left">JFK</td>
+<td headers="dest" class="gt_row gt_left">STL</td>
+<td headers="avg_delay" class="gt_row gt_right">20.00000</td></tr>
+  </tbody>
+
+
+</table>
+</div>
+</div>
+</div>
+<p>Now, I use <code>slice_min</code> function with arguments <code>n = 2</code> and then, with arguments <code>n = -2</code> to show the difference in output. The first code <code>n = 2</code> displays the two rows with minimum average delay. The second code, <code>n = -2</code> displays the (total rows minus 2), i.e., 8 rows with minimum average delay.</p>
+<div class="cell" data-hash="Chapter4_cache/html/q4-2-Ex-4.5.7_576a6da7ed125721e6955a673af8f847">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># n=2 displays the two rows with minimum average delay</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>a <span class="sc">|&gt;</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_min</span>(<span class="at">n =</span> <span class="dv">2</span>, <span class="at">order_by =</span> avg_delay)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  origin dest  avg_delay
+  &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;
+1 JFK    STL        20  
+2 JFK    DEN        20.1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># n=-2 displays the (total rows minus 2), i.e., 8 rows with minimum average delay</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>a <span class="sc">|&gt;</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_min</span>(<span class="at">n =</span> <span class="sc">-</span><span class="dv">2</span>, <span class="at">order_by =</span> avg_delay)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 3
+  origin dest  avg_delay
+  &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;
+1 JFK    STL        20  
+2 JFK    DEN        20.1
+3 JFK    MSP        21.3
+4 JFK    ORD        21.6
+5 JFK    CMH        22.0
+6 JFK    MCI        23.1
+7 JFK    SAT        23.4
+8 JFK    EGE        23.4</code></pre>
+</div>
+</div></li>
+<li><p><strong>Explain what <a href="https://dplyr.tidyverse.org/reference/count.html"><code>count()</code></a> does in terms of the dplyr verbs you just learned. What does the <code>sort</code> argument to <a href="https://dplyr.tidyverse.org/reference/count.html"><code>count()</code></a> do?</strong></p>
+<p>Instead of using the <code>group_by()</code> and <code>summarize()</code> verbs, the <code>count()</code> function can be used as a shortcut to quickly compute the number of unique values of each combination of a variable occurring in the data-set. Thus, <code>count()</code> helps us to calculate the number of values (rows) for each unique combination of variables which have been used as an argument in the <code>count()</code> function.</p>
+<p>The inbuilt help in <code>R</code> tells us that <code>df %&gt;% count(a, b)</code>&nbsp;is roughly equivalent to&nbsp;<code>df %&gt;% group_by(a, b) %&gt;% summarise(n = n())</code> .</p>
+<p>Further, the <code>sort = TRUE</code> argument in <code>count()</code> tells <code>R</code> to display the largest groups (by count, i.e., <code>n</code>) to be displayed at the top.</p>
+<p>Here’s an example. The following code displays the 5 routes with maximum number of flights. For example, JFK to LAX had 11,262 flights in 2013. We can achieve this by using <code>group_by()</code>, <code>summarize()</code>, <code>arrange()</code> and <code>ungroup()</code>. Or, we can simply achieve the same result with a single function <code>count()</code>.</p>
+<div class="cell" data-hash="Chapter4_cache/html/q5-Ex-4.5.7_cf471b82afc69b529624d4df7265d181">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(origin, dest) <span class="sc">|&gt;</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n)) <span class="sc">|&gt;</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  origin dest      n
+  &lt;chr&gt;  &lt;chr&gt; &lt;int&gt;
+1 JFK    LAX   11262
+2 LGA    ATL   10263
+3 LGA    ORD    8857
+4 JFK    SFO    8204
+5 LGA    CLT    6168</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(origin, dest, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  origin dest      n
+  &lt;chr&gt;  &lt;chr&gt; &lt;int&gt;
+1 JFK    LAX   11262
+2 LGA    ATL   10263
+3 LGA    ORD    8857
+4 JFK    SFO    8204
+5 LGA    CLT    6168</code></pre>
+</div>
+</div></li>
+<li><p><strong>Suppose we have the following tiny data frame:</strong></p>
+<div class="cell" data-hash="Chapter4_cache/html/unnamed-chunk-27_19be34ee9cda7074904504f188ff4c99">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,   </span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>),   </span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">z =</span> <span class="fu">c</span>(<span class="st">"K"</span>, <span class="st">"K"</span>, <span class="st">"L"</span>, <span class="st">"L"</span>, <span class="st">"K"</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>df &lt;- tibble(x = 1:5,   
+             y = c("a", "b", "a", "a", "b"),   
+             z = c("K", "K", "L", "L", "K") )</code></pre>
+<ol type="a">
+<li><p><strong>Write down what you think the output will look like, then check if you were correct, and describe what <a href="https://dplyr.tidyverse.org/reference/group_by.html"><code>group_by()</code></a> does.</strong></p>
+<pre><code>df |&gt;   
+  group_by(y)</code></pre>
+<p>In my understanding, the output should look the same as <code>df</code> except that on top of it, a line mentioning that data is grouped by <code>y</code> should appear. When we run the code, it shows the following header <code># A tibble: 5 X 3</code> and <code>#Groups: y[2]</code> . Thus, there are two groups formed by two unique values of variable <code>y</code> , i.e., <code>a</code> and <code>b</code> .</p>
+<div class="cell" data-hash="Chapter4_cache/html/unnamed-chunk-28_b2e8ec7ebf652e7e136470ffdea3f1e9">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+# Groups:   y [2]
+      x y     z    
+  &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+1     1 a     K    
+2     2 b     K    
+3     3 a     L    
+4     4 a     L    
+5     5 b     K    </code></pre>
+</div>
+</div></li>
+<li><p><strong>Write down what you think the output will look like, then check if you were correct, and describe what <a href="https://dplyr.tidyverse.org/reference/arrange.html"><code>arrange()</code></a> does. Also comment on how it’s different from the <a href="https://dplyr.tidyverse.org/reference/group_by.html"><code>group_by()</code></a> in part (a)?</strong></p>
+<pre><code>df |&gt;   arrange(y)</code></pre>
+<p>The function <code>arrange()</code> re-orders the data-frame rows in ascending order of the variable mentioned, i.e.&nbsp;<code>y</code> . So, I expect the output to be the <code>df</code> tibble with ascending order of variable <code>y</code> . The ties will be arranged in the same order as they appeared in the original data-frame.</p>
+<div class="cell" data-hash="Chapter4_cache/html/unnamed-chunk-29_8bde9b52976aa7992eed3bf88c8f5eac">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+      x y     z    
+  &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+1     1 a     K    
+2     3 a     L    
+3     4 a     L    
+4     2 b     K    
+5     5 b     K    </code></pre>
+</div>
+</div></li>
+<li><p><strong>Write down what you think the output will look like, then check if you were correct, and describe what the pipeline does.</strong></p>
+<pre><code>df |&gt;   
+  group_by(y) |&gt;   
+  summarize(mean_x = mean(x))</code></pre>
+<p>The output should display the mean values of <code>x</code> for different values of <code>y</code> . For <code>y = a</code> , I expect <code>mean_x = (1+3+4)/3 = 2.67</code> and for <code>y = b</code> , I expect <code>mean_x = (2+5)/2 = 3.5</code> . I expect the output to be a 2 X 2 tibble with first column <code>y</code> and second column <code>mean_x</code> .</p>
+<div class="cell" data-hash="Chapter4_cache/html/unnamed-chunk-30_4b2254080954e10934154d460dffbc4f">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span>   </span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(y) <span class="sc">|&gt;</span>   </span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_x =</span> <span class="fu">mean</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  y     mean_x
+  &lt;chr&gt;  &lt;dbl&gt;
+1 a       2.67
+2 b       3.5 </code></pre>
+</div>
+</div></li>
+<li><p><strong>Write down what you think the output will look like, then check if you were correct, and describe what the pipeline does. Then, comment on what the message says.</strong></p>
+<pre><code>df |&gt;   
+  group_by(y, z) |&gt;   
+  summarize(mean_x = mean(x))</code></pre>
+<p>Now, I expect <code>R</code> to form groups of various combinations of <code>y</code> and <code>z</code> , and then display average value of <code>x</code> for each combination. The output should be a tibble of 3 X 3, and still containing two groups of <code>y</code> .</p>
+<div class="cell" data-hash="Chapter4_cache/html/unnamed-chunk-31_9c0497885842d87544bfd4d818f690b6">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span>   </span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(y, z) <span class="sc">|&gt;</span>   </span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_x =</span> <span class="fu">mean</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+# Groups:   y [2]
+  y     z     mean_x
+  &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;
+1 a     K        1  
+2 a     L        3.5
+3 b     K        3.5</code></pre>
+</div>
+</div></li>
+<li><p><strong>Write down what you think the output will look like, then check if you were correct, and describe what the pipeline does. How is the output different from the one in part (d).</strong></p>
+<pre><code>df |&gt;   
+  group_by(y, z) |&gt;   
+  summarize(mean_x = mean(x), .groups = "drop")</code></pre>
+<p>I think the output will still be a 3 X 3 tibble with same values as answer from Question 6 (d), i.e.&nbsp;displaying average values of <code>x</code> for different combinations of <code>y</code> and <code>z</code> . But, now the remaining grouping, i.e., of <code>y</code> will be dropped from the output. So the output is visually the same, but now it is an un-grouped tibble, rather than the grouped tibble output of Question 6 (d).</p>
+<div class="cell" data-hash="Chapter4_cache/html/unnamed-chunk-32_b17e9fe39771e44ef9b2e7adaa347621">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span>   </span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(y, z) <span class="sc">|&gt;</span>   </span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_x =</span> <span class="fu">mean</span>(x), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  y     z     mean_x
+  &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;
+1 a     K        1  
+2 a     L        3.5
+3 b     K        3.5</code></pre>
+</div>
+</div></li>
+<li><p><strong>Write down what you think the outputs will look like, then check if you were correct, and describe what each pipeline does. How are the outputs of the two pipelines different?</strong></p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Chunk 1</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span>   </span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(y, z) <span class="sc">|&gt;</span>   </span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_x =</span> <span class="fu">mean</span>(x))  </span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Chunk 2</span></span>
+<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span>   </span>
+<span id="cb71-8"><a href="#cb71-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(y, z) <span class="sc">|&gt;</span>   </span>
+<span id="cb71-9"><a href="#cb71-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mean_x =</span> <span class="fu">mean</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The answers should be different because <code>summarize()</code> collapses all the rows for a unique combination of grouped variables to produce one summary row. On the other hand, <code>mutate()</code> preserves each row of the original data-frame (or, tibble) and produces and additional variable with mean of <code>x</code> to be entered in each row.</p>
+<p>Thus, I expect the <code># Code Chunk 1</code> to generate a tibble of 3 X 3 (like the output in Question 6(d), while I expect the <code># Code Chunk 2</code> to generate a tibble of 5 X 4, with the 4th column of <code>mean_x</code> having different values for each unique combination of <code>y</code> and <code>z</code> .</p>
+<p>Further, I expect that the <code># Code Chunk 1</code> will re-order the output in ascending of order grouping variables. But, the <code># Code Chunk 2</code> will preserve the original ordering of the rows as in the original <code>df</code> tibble.</p>
+<div class="cell" data-hash="Chapter4_cache/html/unnamed-chunk-33_c1af6487272b0bcb65739325c2059cf2">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Chunk 1</span></span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span>   </span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(y, z) <span class="sc">|&gt;</span>   </span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_x =</span> <span class="fu">mean</span>(x))  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+# Groups:   y [2]
+  y     z     mean_x
+  &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;
+1 a     K        1  
+2 a     L        3.5
+3 b     K        3.5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Chunk 2</span></span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span>   </span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(y, z) <span class="sc">|&gt;</span>   </span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mean_x =</span> <span class="fu">mean</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 4
+# Groups:   y, z [3]
+      x y     z     mean_x
+  &lt;int&gt; &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;
+1     1 a     K        1  
+2     2 b     K        3.5
+3     3 a     L        3.5
+4     4 a     L        3.5
+5     5 b     K        3.5</code></pre>
+</div>
+</div>
+<p><em>Note: It is only by chance that the</em> <code>mean_x</code> <em>is 3.5 for both combinations:</em></p>
+<ol type="a">
+<li><p><code>y=b, z=K</code> , <code>mean_x = (2+5)/2 = 3.5</code></p></li>
+<li><p><code>y=a, z=L</code> , <code>mean_x = (3+4)/2 = 3.5</code></p></li>
+</ol></li>
+</ol></li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
