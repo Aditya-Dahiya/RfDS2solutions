@@ -3599,8 +3599,8 @@ destinations highest departure delay</p></caption>
 </div></li>
 <li><p><strong>What happens if you supply a negative <code>n</code> to <a href="https://dplyr.tidyverse.org/reference/slice.html"><code>slice_min()</code></a> and friends?</strong></p>
 <p>The inbuilt <code>R</code> help tells me that <em>“A negative value of <code>n</code> will be subtracted from the group size. For example, <code>n = -2</code> with a group of 5 rows will select 5 - 2 = 3 rows.”</em></p>
-<p>Here’s an example to explain. First, I create a tibble <code>a</code> to contain the average departure delay from JFK airport to 10 destinations.</p>
-<div class="cell" data-hash="Chapter4_cache/html/q4-Ex-4.5.7_080c39894f009316a4c1beda207f1be8">
+<p>Here’s an example to explain. First, I create a tibble <code>a</code> (shown in <a href="#tbl-Ex-4.5.7">Table&nbsp;6</a>) to contain the average departure delay from JFK airport to 10 destinations.</p>
+<div class="cell" data-hash="Chapter4_cache/html/tbl-Ex-4.5.7_ea1f6fec4d7ce59156334c8d290b5115">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> flights <span class="sc">|&gt;</span></span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(origin <span class="sc">==</span> <span class="st">"JFK"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(origin, dest) <span class="sc">|&gt;</span></span>
@@ -3608,8 +3608,10 @@ destinations highest departure delay</p></caption>
 <span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(avg_delay)) <span class="sc">|&gt;</span></span>
 <span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
 <span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a><span class="fu">gt</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a><span class="fu">gt</span>(a) <span class="sc">|&gt;</span></span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
+<div id="tbl-Ex-4.5.7" class="anchored">
 
 <div id="xeywzhyfhz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#xeywzhyfhz table {
@@ -4051,7 +4053,7 @@ destinations highest departure delay</p></caption>
   text-indent: 25px;
 }
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Table&nbsp;6:  <p>The average departure delay from JFK airport to 10 destinations</p> </caption>
   <thead>
 
     <tr class="gt_col_headings">
@@ -4063,38 +4065,39 @@ destinations highest departure delay</p></caption>
   <tbody class="gt_table_body">
     <tr><td headers="origin" class="gt_row gt_left">JFK</td>
 <td headers="dest" class="gt_row gt_left">CVG</td>
-<td headers="avg_delay" class="gt_row gt_right">27.35047</td></tr>
+<td headers="avg_delay" class="gt_row gt_right">27.35</td></tr>
     <tr><td headers="origin" class="gt_row gt_left">JFK</td>
 <td headers="dest" class="gt_row gt_left">SDF</td>
-<td headers="avg_delay" class="gt_row gt_right">23.97674</td></tr>
+<td headers="avg_delay" class="gt_row gt_right">23.98</td></tr>
     <tr><td headers="origin" class="gt_row gt_left">JFK</td>
 <td headers="dest" class="gt_row gt_left">EGE</td>
-<td headers="avg_delay" class="gt_row gt_right">23.43564</td></tr>
+<td headers="avg_delay" class="gt_row gt_right">23.44</td></tr>
     <tr><td headers="origin" class="gt_row gt_left">JFK</td>
 <td headers="dest" class="gt_row gt_left">SAT</td>
-<td headers="avg_delay" class="gt_row gt_right">23.41360</td></tr>
+<td headers="avg_delay" class="gt_row gt_right">23.41</td></tr>
     <tr><td headers="origin" class="gt_row gt_left">JFK</td>
 <td headers="dest" class="gt_row gt_left">MCI</td>
-<td headers="avg_delay" class="gt_row gt_right">23.08594</td></tr>
+<td headers="avg_delay" class="gt_row gt_right">23.09</td></tr>
     <tr><td headers="origin" class="gt_row gt_left">JFK</td>
 <td headers="dest" class="gt_row gt_left">CMH</td>
-<td headers="avg_delay" class="gt_row gt_right">22.01839</td></tr>
+<td headers="avg_delay" class="gt_row gt_right">22.02</td></tr>
     <tr><td headers="origin" class="gt_row gt_left">JFK</td>
 <td headers="dest" class="gt_row gt_left">ORD</td>
-<td headers="avg_delay" class="gt_row gt_right">21.55372</td></tr>
+<td headers="avg_delay" class="gt_row gt_right">21.55</td></tr>
     <tr><td headers="origin" class="gt_row gt_left">JFK</td>
 <td headers="dest" class="gt_row gt_left">MSP</td>
-<td headers="avg_delay" class="gt_row gt_right">21.33428</td></tr>
+<td headers="avg_delay" class="gt_row gt_right">21.33</td></tr>
     <tr><td headers="origin" class="gt_row gt_left">JFK</td>
 <td headers="dest" class="gt_row gt_left">DEN</td>
-<td headers="avg_delay" class="gt_row gt_right">20.09585</td></tr>
+<td headers="avg_delay" class="gt_row gt_right">20.10</td></tr>
     <tr><td headers="origin" class="gt_row gt_left">JFK</td>
 <td headers="dest" class="gt_row gt_left">STL</td>
-<td headers="avg_delay" class="gt_row gt_right">20.00000</td></tr>
+<td headers="avg_delay" class="gt_row gt_right">20.00</td></tr>
   </tbody>
 
 
 </table>
+</div>
 </div>
 </div>
 </div>

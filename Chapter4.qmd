@@ -367,11 +367,13 @@ data("flights")
 
 2.  **Find the flights that are most delayed upon departure from each destination.**
 
-    We can use the following codes (either one works, and the code checks this equality of results) to find the flight with highest departure delay (`dep_delay` ) for each destination.
+    We can use the following codes (either one works, and the code checks this equality of results) to find the flight with highest departure delay (`dep_delay` ) for each destination (@tbl-q2-Ex-4.5.7).
 
     ```{r}
-    #| label: q2-Ex-4.5.7
+    #| label: tbl-q2-Ex-4.5.7
     #| tbl-cap: "Flights with highest departure delay; displayed here only for 5 destinations highest departure delay"
+    #| code-fold: true
+
     # Option 1: Group by "dest" and then use slice_max
     a = flights |>
       group_by(dest) |>
@@ -385,13 +387,23 @@ data("flights")
       arrange(desc(dep_delay), desc(flight))
     # Check results
     sum(a != b)
+
     # Display results
-    b |> slice_head(n=5) |> gt()
+    b |> 
+      slice_head(n=5) |> 
+      gt() |>
+      cols_label(dest = "Destination", 
+                 flight = "Flight", 
+                 origin = "Origin Airport",
+                 dep_delay = "Departure Depay (minutes)", 
+                 month = "Month", 
+                 day = "Date") |>
+      cols_align(align = "center")
     ```
 
 3.  **How do delays vary over the course of the day. Illustrate your answer with a plot.**
 
-    The following graph of averge delay (on y-axis) plotted against scheduled departure time (on x-axis) shows the overall trend that the average delays rise over the course of the day to hit a peak around 6 pm.
+    The following graph of average delay (on y-axis) plotted against scheduled departure time (on x-axis) shows the overall trend that the average delays rise over the course of the day to hit a peak around 6 pm.
 
     Note: The scheduled departure time is not accurate, since it is written in `hhmm` format, and thus is not continuous variable. For example, 1:59 am is 159, and then 2:00 am is 200. So there are no values in 60s, 70s, 80s, 90s. I will rectify this once I learn the `lubridate` package.
 
@@ -415,10 +427,11 @@ data("flights")
 
     The inbuilt `R` help tells me that *"A negative value of `n` will be subtracted from the group size. For example, `n = -2` with a group of 5 rows will select 5 - 2 = 3 rows."*
 
-    Here's an example to explain. First, I create a tibble `a` to contain the average departure delay from JFK airport to 10 destinations.
+    Here's an example to explain. First, I create a tibble `a` (shown in @tbl-Ex-4.5.7) to contain the average departure delay from JFK airport to 10 destinations.
 
     ```{r}
-    #| label: q4-Ex-4.5.7
+    #| label: tbl-Ex-4.5.7
+    #| tbl-cap: "The average departure delay from JFK airport to 10 destinations"
     #| warning: false
     #| message: false
 
@@ -429,7 +442,8 @@ data("flights")
       arrange(desc(avg_delay)) |>
       slice_head(n = 10) |>
       ungroup()
-    gt(a)
+    gt(a) |>
+      fmt_number(decimals = 2)
     ```
 
     Now, I use `slice_min` function with arguments `n = 2` and then, with arguments `n = -2` to show the difference in output. The first code `n = 2` displays the two rows with minimum average delay. The second code, `n = -2` displays the (total rows minus 2), i.e., 8 rows with minimum average delay.
@@ -471,12 +485,6 @@ data("flights")
 6.  **Suppose we have the following tiny data frame:**
 
     ```{r}
-    df <- tibble(x = 1:5,   
-                 y = c("a", "b", "a", "a", "b"),   
-                 z = c("K", "K", "L", "L", "K") )
-    ```
-
-    ```         
     df <- tibble(x = 1:5,   
                  y = c("a", "b", "a", "a", "b"),   
                  z = c("K", "K", "L", "L", "K") )
