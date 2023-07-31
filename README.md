@@ -1,2 +1,2 @@
 # RfDS2solutions
- Solutions for the Book R for Data Science 2nd Edition
+ Solutions for the Book **R for Data Science** _(2nd Edition)_
