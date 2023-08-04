@@ -1,0 +1,62 @@
+---
+title: "Chapter 8"
+subtitle: "Data Import"
+author: "Aditya Dahiya"
+---
+
+# 8.2.4 Exercises
+
+### Question 1
+
+**What function would you use to read a file where fields were separated with "\|"?**
+
+### Question 2
+
+**Apart from file, skip, and comment, what other arguments do `read_csv()` and `read_tsv()` have in common?**
+
+### Question 3
+
+**What are the most important arguments to `read_fwf()`?**
+
+### Question 4
+
+**Sometimes strings in a CSV file contain commas. To prevent them from causing problems, they need to be surrounded by a quoting character, like " or '. By default, read_csv() assumes that the quoting character will be ". To read the following text into a data frame, what argument to read_csv() do you need to specify?**
+
+``` r
+"x,y\n1,'a,b'"
+```
+
+### Question 5
+
+**Identify what is wrong with each of the following inline CSV files. What happens when you run the code?**
+
+``` r
+read_csv("a,b\n1,2,3\n4,5,6")
+
+read_csv("a,b,c\n1,2\n1,2,3,4")
+
+read_csv("a,b\n\"1")
+
+read_csv("a,b\n1,2\na,b")
+
+read_csv("a;b\n1;3")
+```
+
+### Question 6
+
+**Practice referring to non-syntactic names in the following data frame by:**
+
+a.  **Extracting the variable called `1`.**
+
+b.  **Plotting a scatterplot of `1` vs. `2`.**
+
+c.  **Creating a new column called `3`, which is `2` divided by `1`.**
+
+d.  **Renaming the columns to `one`, `two`, and `three`.**
+
+``` r
+annoying <- tibble(
+  `1` = 1:10,
+  `2` = `1` * 2 + rnorm(length(`1`))
+)
+```

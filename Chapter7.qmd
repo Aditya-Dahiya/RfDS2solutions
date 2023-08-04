@@ -16,4 +16,20 @@ One tip that I found interesting is the use of `Ctrl + Shift + P` to open the R-
 ```
 ### Question 2
 
-What other common mistakes will RStudio diagnostics report? Read <https://support.posit.co/hc/en-us/articles/205753617-Code-Diagnostics> to find out.
+**What other common mistakes will RStudio diagnostics report? Read <https://support.posit.co/hc/en-us/articles/205753617-Code-Diagnostics> to find out.**
+
+Some of the common mistakes that RStudio diagnostics will report are:\--
+
+1.  It can detect if a variable named in a function has not yet been defined (i.e. the variable used has no definition in scope), or is misspelt.
+
+2.  It can detect if a variable has been defined, but is not being used within a function.
+
+3.  It can detect the missing punctuation, i.e. a missing comma or missing brackets.
+
+4.  It can detect whether the call within a function can work or not, i.e., whether the arguments to a function are matched, partially matched or unmatched.
+
+5.  It can detect if an essential argument to a function is missing.
+
+6.  It can provide us `R` code style diagnostics, e.g. white-space etc.
+
+7.  It can even detect mistakes in other languages such as `C` , `C++` , `JavaScript` and `Python` .
