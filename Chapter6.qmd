@@ -1,0 +1,151 @@
+---
+title: "Chapter 6"
+subtitle: "Data tidying"
+author: "Aditya Dahiya"
+execute: 
+  warning: false
+  error: false
+editor_options: 
+  chunk_output_type: console
+---
+
+# **6.2.1 Exercises**
+
+### **Question 1**
+
+**For each of the sample tables, describe what each observation and each column represents.**
+
+For `table1` , the following columns represent:\--
+
+1.  Country
+
+2.  Year of the observation of cases and population
+
+3.  Number of cases
+
+4.  Total Population for that year
+
+For `table1` , each observation represents number of cases and total population for a country in a given year.
+
+------------------------------------------------------------------------
+
+For `table2` , the following columns represent:\--
+
+1.  Country
+
+2.  Year of the Observation
+
+3.  Which type of variable is represented in column 4 - i.e., cases or population. Thus, this column in itself is not a variable. Thus, this data-set is not tidy.
+
+4.  The actual value (i.e. observation) of the variable mentioned in Column 3.
+
+For `table2` , each observation represents either the number of cases or the total population for a country in a given year.
+
+------------------------------------------------------------------------
+
+For `table3` , the columns represent the following:\--
+
+1.  Country
+
+2.  Year of the observation
+
+3.  The ratio of two observations, i.e. rate = cases divided by the population. Thus, the column 3 represents two observations, not one. Hence, the data is not tidy.
+
+For `table3` , each observation is a rate, i.e., actually it is a ratio of two observations, namely, cases and population.
+
+### **Question 2**
+
+**Sketch out the process you'd use to calculate the rate for table2 and table3. You will need to perform four operations:**
+
+#### **a.**
+
+**Extract the number of TB cases per country per year.**
+
+For `table2` , we will have to `filter` out rows where `type == "cases"` .
+
+For `table3` , we will have to extract the **numerator** from `rate` variable for each row.
+
+#### **b.**
+
+**Extract the matching population per country per year.**
+
+For `table2` , we will have to `filter` out rows where `type == "population"` .
+
+For `table3` , we will have to extract the **denominator** from `rate` variable for each row.
+
+#### **c.**
+
+**Divide cases by population, and multiply by 10000.**
+
+For `table2` , we will have to divide the observations from question 2 (a) by observations from question 2(b). We might also want to check that the year and country match, row by row.
+
+For `table3` , we can divide the numerator by denominator, and multiply by 10,000. Or simply calculate the expression in `rate` column, as a `numeric`.
+
+#### **d.**
+
+**Store back in the appropriate place.**
+
+For `table2` , we will have to re-save the rates in a new set of rows, where `type == "rate"` and `count` will be the calculated rate. Thus, the `table2` will have 6 new rows.
+
+For `table3` , we will have to convert `rate` column into numeric, to get the ratio per 10,000. But we will end up losing information, i.e. the cases and population of each country for different years will be lost if data is reported directly as `rate` .
+
+# Section 6.3.4
+
+**Data and variable names in the column headers**
+
+Here's an attempt to recreate `".values"` argument method in `R` :\-\--
+
+```{r}
+#| label: Chunk-6.3.4
+#| message: false
+#| error: false
+#| warning: false
+
+library(tidyverse)
+household |>
+  pivot_longer(
+    cols = !family,
+    names_to = c(".value", "child"),
+    names_sep = "_",
+    values_to = "Value",
+    values_drop_na = TRUE
+  )
+
+
+```
+
+# Section 6.4.1
+
+**How does the `pivot_wider()` work?**
+
+Here I try to understand what is the output from `pivot_wider()` is there are more than 1 unique values for a measurement, i.e.. there are two `bp1` 's for `A` .
+
+```{r}
+#| label: pivot-wider-working
+#| collapse: true
+#| error: true
+#| warning: true
+#| message: true
+
+df <- tribble(
+  ~id, ~measurement, ~value,
+  "A",        "bp1",    100,
+  "A",        "bp1",    102,
+  "A",        "bp2",    120,
+  "B",        "bp1",    140, 
+  "B",        "bp2",    115
+)
+df |>
+  pivot_wider(
+    id_cols = id,
+    names_from = measurement,
+    values_from = value
+  )
+
+# Using the Code given by R in Warning to find out the 
+# duplicate observation
+df |>
+  group_by(id, measurement) |>
+  summarise(n = n(), .groups = "drop") |>
+  filter(n > 1)
+```
