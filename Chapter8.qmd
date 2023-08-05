@@ -2,17 +2,63 @@
 title: "Chapter 8"
 subtitle: "Data Import"
 author: "Aditya Dahiya"
+execute: 
+  warning: false
+  error: false
+  message: false
+editor_options: 
+  chunk_output_type: console
 ---
 
 # 8.2.4 Exercises
+
+```{r}
+#| label: setup
+
+library(tidyverse)
+library(gt)
+```
 
 ### Question 1
 
 **What function would you use to read a file where fields were separated with "\|"?**
 
+Let us first create a dataset with "`|`" delimiter. I used `ChatGPT` to create a random dataset and named it as the data to be imported, i.e., `imp_df` .
+
+I will use the function `read_delim()` to read a file where fields were separated with "\|", as shown below. The output is
+
+```{r}
+
+#| label: tbl-q1-Ex-8.2.4
+#| tbl-cap: "Imported data using read_delim() function"
+
+import_df = "Name|Age|Gender|City|Salary
+John|28|Male|New York|75000
+Emily|22|Female|Los Angeles|60000
+Michael|31|Male|Chicago|80000
+Jessica|25|Female|Houston|65000
+William|29|Male|Miami|70000
+Sophia|27|Female|San Francisco|75000
+Daniel|24|Male|Seattle|72000
+Olivia|30|Female|Boston|78000
+James|26|Male|Dallas|67000
+Ava|23|Female|Atlanta|62000"
+
+df = read_delim(import_df, delim = "|")
+
+df |>
+  gt()
+```
+
 ### Question 2
 
 **Apart from file, skip, and comment, what other arguments do `read_csv()` and `read_tsv()` have in common?**
+
+While `read_csv()` works for comma separated files, `read_tsv()` works for `TAB` separated files. The arguments for each of them are as follows:-
+
+```{r}
+?read_csv
+```
 
 ### Question 3
 
