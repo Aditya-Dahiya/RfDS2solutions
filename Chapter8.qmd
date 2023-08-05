@@ -23,7 +23,7 @@ library(gt)
 
 **What function would you use to read a file where fields were separated with "\|"?**
 
-Let us first create a dataset with "`|`" delimiter. I used `ChatGPT` to create a random dataset and named it as the data to be imported, i.e., `imp_df` .
+Let us first create a data set with "`|`" delimiter. I used `ChatGPT` to create a random data set and named it as the data to be imported, i.e., `imp_df` .
 
 I will use the function `read_delim()` to read a file where fields were separated with "\|", as shown below. The output is
 
@@ -50,19 +50,138 @@ df |>
   gt()
 ```
 
+Note: The same `read_delim()` function will even work without the argument `delim = "|"` because it has in-built capacity to identify the delimiter.
+
 ### Question 2
 
 **Apart from file, skip, and comment, what other arguments do `read_csv()` and `read_tsv()` have in common?**
 
-While `read_csv()` works for comma separated files, `read_tsv()` works for `TAB` separated files. The arguments for each of them are as follows:-
+While `read_csv()` works for comma separated files, `read_tsv()` works for tab-separated files. The arguments for each of them are as follows:-
 
-```{r}
-?read_csv
-```
+::: {layout-ncol="2"}
+#### Arguments for `read_csv`
+
+1.  `file`,
+
+2.  `col_names = TRUE,`
+
+3.  `col_types = NULL,`
+
+4.  `col_select = NULL,`
+
+5.  `id = NULL,`
+
+6.  `locale = default_locale(),`
+
+7.  `na = c("", "NA"),`
+
+8.  `quoted_na = TRUE,`
+
+9.  `quote = "\"",`
+
+10. `comment = "",`
+
+11. `trim_ws = TRUE,`
+
+12. `skip = 0,`
+
+13. `n_max = Inf,`
+
+14. `guess_max = min(1000, n_max),`
+
+15. `name_repair = "unique",`
+
+16. `num_threads = readr_threads(),`
+
+17. `progress = show_progress(),`
+
+18. `show_col_types = should_show_types(),`
+
+19. `skip_empty_rows = TRUE,`
+
+20. `lazy = should_read_lazy()`
+
+#### Arguments for `read_tsv`
+
+1.  `file,`
+
+2.  `col_names = TRUE,`
+
+3.  `col_types = NULL,`
+
+4.  `col_select = NULL,`
+
+5.  `id = NULL,`
+
+6.  `locale = default_locale(),`
+
+7.  `na = c("", "NA"),`
+
+8.  `quoted_na = TRUE,`
+
+9.  `quote = "\"",`
+
+10. `comment = "",`
+
+11. `trim_ws = TRUE,`
+
+12. `skip = 0,`
+
+13. `n_max = Inf,`
+
+14. `guess_max = min(1000, n_max),`
+
+15. `name_repair = "unique",`
+
+16. `num_threads = readr_threads(),`
+
+17. `progress = show_progress(),`
+
+18. `show_col_types = should_show_types(),`
+
+19. `skip_empty_rows = TRUE,`
+
+20. `lazy = should_read_lazy()`
+:::
+
+Thus, all the arguments to both the functions are common, and have the exact same role.
 
 ### Question 3
 
 **What are the most important arguments to `read_fwf()`?**
+
+The fixed width files are very fast to parse because each field will be in exact sample place in each line. However, this means, we must know the exact width of each column. Hence, the most important argument to `read_fwf()` is the **`cols_position =`** , which can take the following values:
+
+-   `fwf_empty()` - Guesses based on the positions of empty columns.
+
+-   `fwf_widths()` - Supply the widths of the columns.
+
+-   `fwf_positions()` - Supply paired vectors of start and end positions.
+
+-   `fwf_cols()` - Supply named arguments of paired start and end positions or column widths.
+
+Also, another important argument is **`cols_types`** which will tell whether each column will be of which class - character, integer, factor etc.
+
+Here's an example shown in @tbl-q3-Ex-8.2.4 .
+
+```{r}
+#| label: tbl-q3-Ex-8.2.4
+#| tbl-cap: "Fixed Width File Data parsed using read_fwf"
+
+import_fwf_data = "John    Smith   35  New York
+Alice   Johnson 28  Los Angeles
+Michael Williams 42  Chicago"
+
+df2 = read_fwf(
+  import_fwf_data,
+  col_positions = fwf_widths(c(8, 8, 3, 12))
+) 
+
+colnames(df2) = c("Name", "Surname", "Age", "City")
+
+df2 |>
+  gt()
+```
 
 ### Question 4
 
@@ -72,21 +191,49 @@ While `read_csv()` works for comma separated files, `read_tsv()` works for `TAB`
 "x,y\n1,'a,b'"
 ```
 
+To read a data above text into a data-frame, we will need to used the argument `quote = "'"` . Here's an example in @tbl-q4-Ex-8.2.4 .
+
+```{r}
+#| label: tbl-q4-Ex-8.2.4
+#| tbl-cap: "A data-frame imported from csv file with different quotes"
+
+import_quote = "x,y\n1,'a,b'"
+
+read_csv(
+  import_quote,
+  quote = "'",
+  col_names = FALSE
+) |>
+  gt()
+```
+
 ### Question 5
 
 **Identify what is wrong with each of the following inline CSV files. What happens when you run the code?**
 
-``` r
-read_csv("a,b\n1,2,3\n4,5,6")
+-   `read_csv("a,b\n1,2,3\n4,5,6")` : This data is not rectangular, there are only two columns in first row, but three in other two rows. Thus, `R` ends up reading only two columns by default and joins the second and third column values for the two observations.
 
-read_csv("a,b,c\n1,2\n1,2,3,4")
+    ```{r}
+    #| error: true
+    #| warning: true
 
-read_csv("a,b\n\"1")
+    read_csv("a,b\n1,2,3\n4,5,6")
+    ```
 
-read_csv("a,b\n1,2\na,b")
+-   `read_csv("a,b,c\n1,2\n1,2,3,4")`: This data is again not rectangular, there are three columns (column names) in first row, but two values in second row, and four in the third row. Thus, `R` ends up reading three columns by default, creates an `NA` and joins the second and third column values for the second row.
 
-read_csv("a;b\n1;3")
-```
+    ```{r}
+    #| error: true
+    #| warning: true
+
+    read_csv("a,b,c\n1,2\n1,2,3,4")
+    ```
+
+-   `read_csv("a,b\n\"1")`: This data is
+
+-   `read_csv("a,b\n1,2\na,b")`: This data is
+
+-   `read_csv("a;b\n1;3")`: This data is
 
 ### Question 6
 
