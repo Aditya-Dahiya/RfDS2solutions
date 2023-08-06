@@ -229,27 +229,83 @@ read_csv(
     read_csv("a,b,c\n1,2\n1,2,3,4")
     ```
 
--   `read_csv("a,b\n\"1")`: This data is
+-   `read_csv("a,b\n\"1")`: This data is entered wrong, as the double quotes don't match up in pairs, i.e., there are three double quotes (`"`), so `R` will read only the data between first two, i.e, `a` and `b` as variable names, and the data-frame will be empty. An error with also be displayed, as shown below:\-\--
 
--   `read_csv("a,b\n1,2\na,b")`: This data is
+    ```{r}
+    #| error: true
+    #| warning: true
 
--   `read_csv("a;b\n1;3")`: This data is
+    read_csv("a,b\n\"1")
+
+    ```
+
+-   `read_csv("a,b\n1,2\na,b")`: This data is rectangular, but the names of the columns are repeated in the second row, i.e. the second observation. Further, the data in each column is not of a single type, i.e. either `<chr>` or `<dbl>` or `<int>` etc. Thus, each column is not a variable, and each row is not an observation. The data is not tidy.
+
+    ```{r}
+    #| error: true
+    #| warning: true
+
+    read_csv("a,b\n1,2\na,b")
+    ```
+
+-   `read_csv("a;b\n1;3")`: This data is wrong coded, i.e. it is not a comma-separated data, rather it is a semi-colon-separated data. Thus, `read_csv()` will end up reading `a;b` as a single string (i.e., column name) and the `1;3` as the single observation, i.e. first row. Instead, we should have used `read_csv2()` here.
+
+    ```{r}
+    #| error: true
+    #| warning: true
+
+    read_csv("a;b\n1;3")
+    ```
+
+    Using `read_csv2()` , the data is read-in correctly:\-\--
+
+    ```{r}
+    read_csv2("a;b\n1;3")
+    ```
 
 ### Question 6
 
 **Practice referring to non-syntactic names in the following data frame by:**
 
-a.  **Extracting the variable called `1`.**
-
-b.  **Plotting a scatterplot of `1` vs. `2`.**
-
-c.  **Creating a new column called `3`, which is `2` divided by `1`.**
-
-d.  **Renaming the columns to `one`, `two`, and `three`.**
-
-``` r
+```{r}
 annoying <- tibble(
   `1` = 1:10,
   `2` = `1` * 2 + rnorm(length(`1`))
 )
+annoying
 ```
+
+a.  **Extracting the variable called `1`.**
+
+    ```{r}
+    annoying |>
+      pull(`1`)
+    ```
+
+b.  **Plotting a scatterplot of `1` vs. `2`.**
+
+    ```{r}
+    annoying |>
+      ggplot(aes(x = `1`, y = `2`)) +
+      geom_point() +
+      theme_classic()
+    ```
+
+c.  **Creating a new column called `3`, which is `2` divided by `1`.**
+
+    ```{r}
+    annoying = annoying |>
+      mutate(`3` = `2` / `1`)
+    annoying
+    ```
+
+d.  **Renaming the columns to `one`, `two`, and `three`.**
+
+    ```{r}
+    annoying |>
+      rename(
+        "one" = `1`,
+        "two" = `2`,
+        "three" = `3`
+      )
+    ```
