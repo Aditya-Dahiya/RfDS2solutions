@@ -6,6 +6,7 @@ execute:
   warning: false
   message: false
   error: false
+  cache: true
 ---
 
 # 7.3 Exercises

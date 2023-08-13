@@ -101,7 +101,7 @@ Text Formatting
 
 [linked phrases](https://www.oxfordinternationalenglish.com/linking-words-and-phrases-in-english/ "Oxford English Dictionary meaning of Linked Phrases")
 
-[![Credits: Nick Tierney\'s (mostly) rstats blog](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/imgs/r-knitr-rmd.jpeg){fig-alt="Notes on Changing from Rmarkdown/Bookdown to Quarto" width="338"}](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/)
+[![Credits: Nick Tierney's (mostly) rstats blog](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/imgs/r-knitr-rmd.jpeg){fig-alt="Notes on Changing from Rmarkdown/Bookdown to Quarto" width="338"}](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/)
 
 Tables
 
@@ -198,7 +198,7 @@ Once we render the document, the citation shows up in the very end of the HTML w
 #| include: false
 #| label: Tidyverse-Diamonds
 library(tidyverse)
-
+data("diamonds")
 smaller = diamonds |> 
   filter(carat <= 2.5)
 ```

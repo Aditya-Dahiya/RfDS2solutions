@@ -1,0 +1,9 @@
+---
+title: "Chapter 21"
+subtitle: "Spreadsheets"
+author: "Aditya Dahiya"
+execute: 
+  warning: false
+  error: false
+  message: false
+---

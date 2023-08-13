@@ -5,6 +5,7 @@ author: "Aditya Dahiya"
 execute: 
   warning: false
   error: false
+  cache: true
 editor_options: 
   chunk_output_type: console
 date: 2023-08-05

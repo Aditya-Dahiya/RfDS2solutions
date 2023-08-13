@@ -3,19 +3,54 @@ project:
   output-dir: docs
   
 website:
-  title: "RfDS2solutions"
+  title: "solutions"
+  search: true
+  reader-mode: true
+  repo-url: https://github.com/Aditya-Dahiya/RfDS2solutions
+  repo-actions: [edit, issue]
   navbar:
     left:
       - href: index.qmd
         text: Home
       - solutions.qmd
       - about.qmd
-  
+    logo: "book-cover.jpg"
+    logo-alt: "R for Data Science (2nd Edition)"
+    tools:
+      - icon: github
+        menu:
+          - text: Source Code
+            url:  https://github.com/Aditya-Dahiya/RfDS2solutions
+          - text: Report a Bug
+            url:  https://github.com/Aditya-Dahiya/RfDS2solutions/issues
+  sidebar:
+    style: "docked"
+    search: true
+    title: true
+    subtitle: "Sections and Chapters"
+    contents:
+      - section: "Whole Game"
+        contents:
+          - Chapter2.qmd
+          - Chapter3.qmd
+          - Chapter4.qmd
+          - Chapter5.qmd
+          - Chapter6.qmd
+          - Chapter7.qmd
+          - Chapter8.qmd
+          - Chapter9.qmd
+      - section: "Import"
+        contents:
+          - Chapter21.qmd
+      - section: "Communicate"
+        contents:
+          - Chapter29.qmd
+          - Chapter30.qmd
+          
 format:
   html:
     theme: flatly
     css: styles.css
     toc: true
 
-editor: visual
 
