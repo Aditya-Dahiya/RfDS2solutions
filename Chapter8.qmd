@@ -395,5 +395,6 @@ read_csv(
   ),
   na = ".",
   id = "file"
-)
+) |>
+  slice_head(n = 5)
 ```

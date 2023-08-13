@@ -152,6 +152,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#question-5" id="toc-question-5" class="nav-link" data-scroll-target="#question-5">Question 5</a></li>
   <li><a href="#question-6" id="toc-question-6" class="nav-link" data-scroll-target="#question-6">Question 6</a></li>
   </ul></li>
+  <li><a href="#controlling-column-types" id="toc-controlling-column-types" class="nav-link" data-scroll-target="#controlling-column-types">8.3 Controlling column types</a></li>
   </ul>
 </nav>
     </div>
@@ -184,7 +185,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="exercises" class="level1">
 <h1>8.2.4 Exercises</h1>
-<div class="cell">
+<div class="cell" data-hash="Chapter8_cache/html/setup_514ee301e214d112afe01117431f7a3a">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -193,7 +194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>What function would you use to read a file where fields were separated with “|”?</strong></p>
 <p>Let us first create a data set with “<code>|</code>” delimiter. I used <code>ChatGPT</code> to create a random data set and named it as the data to be imported, i.e., <code>imp_df</code> .</p>
 <p>I will use the function <code>read_delim()</code> to read a file where fields were separated with “|”, as shown below. The output is</p>
-<div class="cell">
+<div class="cell" data-hash="Chapter8_cache/html/unnamed-chunk-2_a82a6009170d7161d08802b46e8c312a">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-q1-Ex-8.2.4</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "Imported data using read_delim() function"</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -215,23 +216,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="loaltedmtr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#loaltedmtr table {
+<div id="yqnqgouqqp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#yqnqgouqqp table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#loaltedmtr thead, #loaltedmtr tbody, #loaltedmtr tfoot, #loaltedmtr tr, #loaltedmtr td, #loaltedmtr th {
+#yqnqgouqqp thead, #yqnqgouqqp tbody, #yqnqgouqqp tfoot, #yqnqgouqqp tr, #yqnqgouqqp td, #yqnqgouqqp th {
   border-style: none;
 }
 
-#loaltedmtr p {
+#yqnqgouqqp p {
   margin: 0;
   padding: 0;
 }
 
-#loaltedmtr .gt_table {
+#yqnqgouqqp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -257,12 +258,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#loaltedmtr .gt_caption {
+#yqnqgouqqp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#loaltedmtr .gt_title {
+#yqnqgouqqp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -274,7 +275,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#loaltedmtr .gt_subtitle {
+#yqnqgouqqp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -286,7 +287,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#loaltedmtr .gt_heading {
+#yqnqgouqqp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -298,13 +299,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#loaltedmtr .gt_bottom_border {
+#yqnqgouqqp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#loaltedmtr .gt_col_headings {
+#yqnqgouqqp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -319,7 +320,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#loaltedmtr .gt_col_heading {
+#yqnqgouqqp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -339,7 +340,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#loaltedmtr .gt_column_spanner_outer {
+#yqnqgouqqp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -351,15 +352,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#loaltedmtr .gt_column_spanner_outer:first-child {
+#yqnqgouqqp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#loaltedmtr .gt_column_spanner_outer:last-child {
+#yqnqgouqqp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#loaltedmtr .gt_column_spanner {
+#yqnqgouqqp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -371,11 +372,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#loaltedmtr .gt_spanner_row {
+#yqnqgouqqp .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#loaltedmtr .gt_group_heading {
+#yqnqgouqqp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -401,7 +402,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#loaltedmtr .gt_empty_group_heading {
+#yqnqgouqqp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -416,15 +417,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#loaltedmtr .gt_from_md > :first-child {
+#yqnqgouqqp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#loaltedmtr .gt_from_md > :last-child {
+#yqnqgouqqp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#loaltedmtr .gt_row {
+#yqnqgouqqp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -443,7 +444,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#loaltedmtr .gt_stub {
+#yqnqgouqqp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -456,7 +457,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#loaltedmtr .gt_stub_row_group {
+#yqnqgouqqp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -470,15 +471,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#loaltedmtr .gt_row_group_first td {
+#yqnqgouqqp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#loaltedmtr .gt_row_group_first th {
+#yqnqgouqqp .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#loaltedmtr .gt_summary_row {
+#yqnqgouqqp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -488,16 +489,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#loaltedmtr .gt_first_summary_row {
+#yqnqgouqqp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#loaltedmtr .gt_first_summary_row.thick {
+#yqnqgouqqp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#loaltedmtr .gt_last_summary_row {
+#yqnqgouqqp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -507,7 +508,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#loaltedmtr .gt_grand_summary_row {
+#yqnqgouqqp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -517,7 +518,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#loaltedmtr .gt_first_grand_summary_row {
+#yqnqgouqqp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -527,7 +528,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#loaltedmtr .gt_last_grand_summary_row_top {
+#yqnqgouqqp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -537,11 +538,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#loaltedmtr .gt_striped {
+#yqnqgouqqp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#loaltedmtr .gt_table_body {
+#yqnqgouqqp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -550,7 +551,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#loaltedmtr .gt_footnotes {
+#yqnqgouqqp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -564,7 +565,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#loaltedmtr .gt_footnote {
+#yqnqgouqqp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -573,7 +574,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#loaltedmtr .gt_sourcenotes {
+#yqnqgouqqp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -587,7 +588,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#loaltedmtr .gt_sourcenote {
+#yqnqgouqqp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -595,63 +596,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#loaltedmtr .gt_left {
+#yqnqgouqqp .gt_left {
   text-align: left;
 }
 
-#loaltedmtr .gt_center {
+#yqnqgouqqp .gt_center {
   text-align: center;
 }
 
-#loaltedmtr .gt_right {
+#yqnqgouqqp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#loaltedmtr .gt_font_normal {
+#yqnqgouqqp .gt_font_normal {
   font-weight: normal;
 }
 
-#loaltedmtr .gt_font_bold {
+#yqnqgouqqp .gt_font_bold {
   font-weight: bold;
 }
 
-#loaltedmtr .gt_font_italic {
+#yqnqgouqqp .gt_font_italic {
   font-style: italic;
 }
 
-#loaltedmtr .gt_super {
+#yqnqgouqqp .gt_super {
   font-size: 65%;
 }
 
-#loaltedmtr .gt_footnote_marks {
+#yqnqgouqqp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#loaltedmtr .gt_asterisk {
+#yqnqgouqqp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#loaltedmtr .gt_indent_1 {
+#yqnqgouqqp .gt_indent_1 {
   text-indent: 5px;
 }
 
-#loaltedmtr .gt_indent_2 {
+#yqnqgouqqp .gt_indent_2 {
   text-indent: 10px;
 }
 
-#loaltedmtr .gt_indent_3 {
+#yqnqgouqqp .gt_indent_3 {
   text-indent: 15px;
 }
 
-#loaltedmtr .gt_indent_4 {
+#yqnqgouqqp .gt_indent_4 {
   text-indent: 20px;
 }
 
-#loaltedmtr .gt_indent_5 {
+#yqnqgouqqp .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -729,13 +730,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="question-2" class="level3">
 <h3 class="anchored" data-anchor-id="question-2">Question 2</h3>
 <p><strong>Apart from file, skip, and comment, what other arguments do <code>read_csv()</code> and <code>read_tsv()</code> have in common?</strong></p>
-<p>While <code>read_csv()</code> works for comma separated files, <code>read_tsv()</code> works for <code>TAB</code> separated files. The arguments for each of them are as follows:-</p>
-</section>
+<p>While <code>read_csv()</code> works for comma separated files, <code>read_tsv()</code> works for tab-separated files. The arguments for each of them are as follows:-</p>
 <div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
-<section id="arguments-for-read_csv" class="level3 quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<h3 class="anchored" data-anchor-id="arguments-for-read_csv">Arguments for <code>read_csv</code></h3>
-<ul>
+<section id="arguments-for-read_csv" class="level4 quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<h4 class="anchored" data-anchor-id="arguments-for-read_csv">Arguments for <code>read_csv</code></h4>
+<ol type="1">
 <li><p><code>file</code>,</p></li>
 <li><p><code>col_names = TRUE,</code></p></li>
 <li><p><code>col_types = NULL,</code></p></li>
@@ -756,11 +756,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><code>show_col_types = should_show_types(),</code></p></li>
 <li><p><code>skip_empty_rows = TRUE,</code></p></li>
 <li><p><code>lazy = should_read_lazy()</code></p></li>
-</ul>
+</ol>
 </section>
-<section id="arguments-for-read_tsv" class="level3 quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<h3 class="anchored" data-anchor-id="arguments-for-read_tsv">Arguments for <code>read_tsv</code></h3>
-<ul>
+<section id="arguments-for-read_tsv" class="level4 quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<h4 class="anchored" data-anchor-id="arguments-for-read_tsv">Arguments for <code>read_tsv</code></h4>
+<ol type="1">
 <li><p><code>file,</code></p></li>
 <li><p><code>col_names = TRUE,</code></p></li>
 <li><p><code>col_types = NULL,</code></p></li>
@@ -775,54 +775,1381 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><code>skip = 0,</code></p></li>
 <li><p><code>n_max = Inf,</code></p></li>
 <li><p><code>guess_max = min(1000, n_max),</code></p></li>
-<li><p><code>progress = show_progress(),</code></p></li>
 <li><p><code>name_repair = "unique",</code></p></li>
 <li><p><code>num_threads = readr_threads(),</code></p></li>
+<li><p><code>progress = show_progress(),</code></p></li>
 <li><p><code>show_col_types = should_show_types(),</code></p></li>
 <li><p><code>skip_empty_rows = TRUE,</code></p></li>
 <li><p><code>lazy = should_read_lazy()</code></p></li>
-</ul>
+</ol>
 </section>
 </div>
 </div>
+<p>Thus, all the arguments to both the functions are common, and have the exact same role.</p>
+</section>
 <section id="question-3" class="level3">
 <h3 class="anchored" data-anchor-id="question-3">Question 3</h3>
 <p><strong>What are the most important arguments to <code>read_fwf()</code>?</strong></p>
+<p>The fixed width files are very fast to parse because each field will be in exact sample place in each line. However, this means, we must know the exact width of each column. Hence, the most important argument to <code>read_fwf()</code> is the <strong><code>cols_position =</code></strong> , which can take the following values:</p>
+<ul>
+<li><p><code>fwf_empty()</code> - Guesses based on the positions of empty columns.</p></li>
+<li><p><code>fwf_widths()</code> - Supply the widths of the columns.</p></li>
+<li><p><code>fwf_positions()</code> - Supply paired vectors of start and end positions.</p></li>
+<li><p><code>fwf_cols()</code> - Supply named arguments of paired start and end positions or column widths.</p></li>
+</ul>
+<p>Also, another important argument is <strong><code>cols_types</code></strong> which will tell whether each column will be of which class - character, integer, factor etc.</p>
+<p>Here’s an example shown in <a href="#tbl-q3-Ex-8.2.4">Table&nbsp;1</a> .</p>
+<div class="cell" data-hash="Chapter8_cache/html/tbl-q3-Ex-8.2.4_adbe6655bcea5010ed60f0ce2d3b6a62">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>import_fwf_data <span class="ot">=</span> <span class="st">"John    Smith   35  New York</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="st">Alice   Johnson 28  Los Angeles</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="st">Michael Williams 42  Chicago"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">=</span> <span class="fu">read_fwf</span>(</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  import_fwf_data,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_positions =</span> <span class="fu">fwf_widths</span>(<span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">3</span>, <span class="dv">12</span>))</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>) </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df2) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Name"</span>, <span class="st">"Surname"</span>, <span class="st">"Age"</span>, <span class="st">"City"</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>df2 <span class="sc">|&gt;</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="tbl-q3-Ex-8.2.4" class="anchored">
+
+<div id="hfmfwwrwqs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hfmfwwrwqs table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#hfmfwwrwqs thead, #hfmfwwrwqs tbody, #hfmfwwrwqs tfoot, #hfmfwwrwqs tr, #hfmfwwrwqs td, #hfmfwwrwqs th {
+  border-style: none;
+}
+
+#hfmfwwrwqs p {
+  margin: 0;
+  padding: 0;
+}
+
+#hfmfwwrwqs .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#hfmfwwrwqs .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#hfmfwwrwqs .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#hfmfwwrwqs .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#hfmfwwrwqs .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hfmfwwrwqs .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hfmfwwrwqs .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hfmfwwrwqs .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#hfmfwwrwqs .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#hfmfwwrwqs .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#hfmfwwrwqs .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#hfmfwwrwqs .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#hfmfwwrwqs .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#hfmfwwrwqs .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#hfmfwwrwqs .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#hfmfwwrwqs .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#hfmfwwrwqs .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#hfmfwwrwqs .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#hfmfwwrwqs .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hfmfwwrwqs .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#hfmfwwrwqs .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#hfmfwwrwqs .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#hfmfwwrwqs .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hfmfwwrwqs .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#hfmfwwrwqs .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#hfmfwwrwqs .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hfmfwwrwqs .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hfmfwwrwqs .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#hfmfwwrwqs .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hfmfwwrwqs .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#hfmfwwrwqs .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hfmfwwrwqs .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hfmfwwrwqs .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hfmfwwrwqs .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hfmfwwrwqs .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hfmfwwrwqs .gt_left {
+  text-align: left;
+}
+
+#hfmfwwrwqs .gt_center {
+  text-align: center;
+}
+
+#hfmfwwrwqs .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#hfmfwwrwqs .gt_font_normal {
+  font-weight: normal;
+}
+
+#hfmfwwrwqs .gt_font_bold {
+  font-weight: bold;
+}
+
+#hfmfwwrwqs .gt_font_italic {
+  font-style: italic;
+}
+
+#hfmfwwrwqs .gt_super {
+  font-size: 65%;
+}
+
+#hfmfwwrwqs .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#hfmfwwrwqs .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#hfmfwwrwqs .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#hfmfwwrwqs .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#hfmfwwrwqs .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#hfmfwwrwqs .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#hfmfwwrwqs .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Table&nbsp;1:  <p>Fixed Width File Data parsed using read_fwf</p> </caption>
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Name">Name</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Surname">Surname</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Age">Age</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="City">City</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Name" class="gt_row gt_left">John</td>
+<td headers="Surname" class="gt_row gt_left">Smith</td>
+<td headers="Age" class="gt_row gt_right">35</td>
+<td headers="City" class="gt_row gt_left">New York</td></tr>
+    <tr><td headers="Name" class="gt_row gt_left">Alice</td>
+<td headers="Surname" class="gt_row gt_left">Johnson</td>
+<td headers="Age" class="gt_row gt_right">28</td>
+<td headers="City" class="gt_row gt_left">Los Angeles</td></tr>
+    <tr><td headers="Name" class="gt_row gt_left">Michael</td>
+<td headers="Surname" class="gt_row gt_left">Williams</td>
+<td headers="Age" class="gt_row gt_right">42</td>
+<td headers="City" class="gt_row gt_left">Chicago</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="question-4" class="level3">
 <h3 class="anchored" data-anchor-id="question-4">Question 4</h3>
 <p><strong>Sometimes strings in a CSV file contain commas. To prevent them from causing problems, they need to be surrounded by a quoting character, like ” or ’. By default, read_csv() assumes that the quoting character will be “. To read the following text into a data frame, what argument to read_csv() do you need to specify?</strong></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="st">"x,y</span><span class="sc">\n</span><span class="st">1,'a,b'"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="st">"x,y</span><span class="sc">\n</span><span class="st">1,'a,b'"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To read a data above text into a data-frame, we will need to used the argument <code>quote = "'"</code> . Here’s an example in <a href="#tbl-q4-Ex-8.2.4">Table&nbsp;2</a> .</p>
+<div class="cell" data-hash="Chapter8_cache/html/tbl-q4-Ex-8.2.4_f031efed05f6acfe70750697d4a9349a">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>import_quote <span class="ot">=</span> <span class="st">"x,y</span><span class="sc">\n</span><span class="st">1,'a,b'"</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  import_quote,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">quote =</span> <span class="st">"'"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_names =</span> <span class="cn">FALSE</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="tbl-q4-Ex-8.2.4" class="anchored">
+
+<div id="hblbpwrgix" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hblbpwrgix table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#hblbpwrgix thead, #hblbpwrgix tbody, #hblbpwrgix tfoot, #hblbpwrgix tr, #hblbpwrgix td, #hblbpwrgix th {
+  border-style: none;
+}
+
+#hblbpwrgix p {
+  margin: 0;
+  padding: 0;
+}
+
+#hblbpwrgix .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#hblbpwrgix .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#hblbpwrgix .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#hblbpwrgix .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#hblbpwrgix .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hblbpwrgix .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hblbpwrgix .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hblbpwrgix .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#hblbpwrgix .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#hblbpwrgix .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#hblbpwrgix .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#hblbpwrgix .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#hblbpwrgix .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#hblbpwrgix .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#hblbpwrgix .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#hblbpwrgix .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#hblbpwrgix .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#hblbpwrgix .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#hblbpwrgix .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hblbpwrgix .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#hblbpwrgix .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#hblbpwrgix .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#hblbpwrgix .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hblbpwrgix .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#hblbpwrgix .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#hblbpwrgix .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hblbpwrgix .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hblbpwrgix .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#hblbpwrgix .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hblbpwrgix .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#hblbpwrgix .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hblbpwrgix .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hblbpwrgix .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hblbpwrgix .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hblbpwrgix .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hblbpwrgix .gt_left {
+  text-align: left;
+}
+
+#hblbpwrgix .gt_center {
+  text-align: center;
+}
+
+#hblbpwrgix .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#hblbpwrgix .gt_font_normal {
+  font-weight: normal;
+}
+
+#hblbpwrgix .gt_font_bold {
+  font-weight: bold;
+}
+
+#hblbpwrgix .gt_font_italic {
+  font-style: italic;
+}
+
+#hblbpwrgix .gt_super {
+  font-size: 65%;
+}
+
+#hblbpwrgix .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#hblbpwrgix .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#hblbpwrgix .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#hblbpwrgix .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#hblbpwrgix .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#hblbpwrgix .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#hblbpwrgix .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Table&nbsp;2:  <p>A data-frame imported from csv file with different quotes</p> </caption>
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="X1">X1</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="X2">X2</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="X1" class="gt_row gt_left">x</td>
+<td headers="X2" class="gt_row gt_left">y</td></tr>
+    <tr><td headers="X1" class="gt_row gt_left">1</td>
+<td headers="X2" class="gt_row gt_left">a,b</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="question-5" class="level3">
 <h3 class="anchored" data-anchor-id="question-5">Question 5</h3>
 <p><strong>Identify what is wrong with each of the following inline CSV files. What happens when you run the code?</strong></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"a,b</span><span class="sc">\n</span><span class="st">1,2,3</span><span class="sc">\n</span><span class="st">4,5,6"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"a,b,c</span><span class="sc">\n</span><span class="st">1,2</span><span class="sc">\n</span><span class="st">1,2,3,4"</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"a,b</span><span class="sc">\n\"</span><span class="st">1"</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"a,b</span><span class="sc">\n</span><span class="st">1,2</span><span class="sc">\n</span><span class="st">a,b"</span>)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"a;b</span><span class="sc">\n</span><span class="st">1;3"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><p><code>read_csv("a,b\n1,2,3\n4,5,6")</code> : This data is not rectangular, there are only two columns in first row, but three in other two rows. Thus, <code>R</code> ends up reading only two columns by default and joins the second and third column values for the two observations.</p>
+<div class="cell" data-hash="Chapter8_cache/html/unnamed-chunk-5_9571d3fb141ce2c8bd1e4ff8cbaa3b22">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"a,b</span><span class="sc">\n</span><span class="st">1,2,3</span><span class="sc">\n</span><span class="st">4,5,6"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: One or more parsing issues, call `problems()` on your data frame for details,
+e.g.:
+  dat &lt;- vroom(...)
+  problems(dat)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 2 Columns: 2
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (1): a
+num (1): b
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+      a     b
+  &lt;dbl&gt; &lt;dbl&gt;
+1     1    23
+2     4    56</code></pre>
+</div>
+</div></li>
+<li><p><code>read_csv("a,b,c\n1,2\n1,2,3,4")</code>: This data is again not rectangular, there are three columns (column names) in first row, but two values in second row, and four in the third row. Thus, <code>R</code> ends up reading three columns by default, creates an <code>NA</code> and joins the second and third column values for the second row.</p>
+<div class="cell" data-hash="Chapter8_cache/html/unnamed-chunk-6_a9c9e075cf3131d9d28c5702d772b409">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"a,b,c</span><span class="sc">\n</span><span class="st">1,2</span><span class="sc">\n</span><span class="st">1,2,3,4"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: One or more parsing issues, call `problems()` on your data frame for details,
+e.g.:
+  dat &lt;- vroom(...)
+  problems(dat)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 2 Columns: 3
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (2): a, b
+num (1): c
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+      a     b     c
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1     1     2    NA
+2     1     2    34</code></pre>
+</div>
+</div></li>
+<li><p><code>read_csv("a,b\n\"1")</code>: This data is entered wrong, as the double quotes don’t match up in pairs, i.e., there are three double quotes (<code>"</code>), so <code>R</code> will read only the data between first two, i.e, <code>a</code> and <code>b</code> as variable names, and the data-frame will be empty. An error with also be displayed, as shown below:---</p>
+<div class="cell" data-hash="Chapter8_cache/html/unnamed-chunk-7_aef3169c6751909876d92fc84765ffe2">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"a,b</span><span class="sc">\n\"</span><span class="st">1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 0 Columns: 2
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): a, b
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 0 × 2
+# ℹ 2 variables: a &lt;chr&gt;, b &lt;chr&gt;</code></pre>
+</div>
+</div></li>
+<li><p><code>read_csv("a,b\n1,2\na,b")</code>: This data is rectangular, but the names of the columns are repeated in the second row, i.e.&nbsp;the second observation. Further, the data in each column is not of a single type, i.e.&nbsp;either <code>&lt;chr&gt;</code> or <code>&lt;dbl&gt;</code> or <code>&lt;int&gt;</code> etc. Thus, each column is not a variable, and each row is not an observation. The data is not tidy.</p>
+<div class="cell" data-hash="Chapter8_cache/html/unnamed-chunk-8_fc757b57c5d013d24fb0c737bfff2ed1">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"a,b</span><span class="sc">\n</span><span class="st">1,2</span><span class="sc">\n</span><span class="st">a,b"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 2 Columns: 2
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): a, b
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  a     b    
+  &lt;chr&gt; &lt;chr&gt;
+1 1     2    
+2 a     b    </code></pre>
+</div>
+</div></li>
+<li><p><code>read_csv("a;b\n1;3")</code>: This data is wrong coded, i.e.&nbsp;it is not a comma-separated data, rather it is a semi-colon-separated data. Thus, <code>read_csv()</code> will end up reading <code>a;b</code> as a single string (i.e., column name) and the <code>1;3</code> as the single observation, i.e.&nbsp;first row. Instead, we should have used <code>read_csv2()</code> here.</p>
+<div class="cell" data-hash="Chapter8_cache/html/unnamed-chunk-9_ff070237d6dfdd9a35b99d11462d0482">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"a;b</span><span class="sc">\n</span><span class="st">1;3"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 1 Columns: 1
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): a;b
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  `a;b`
+  &lt;chr&gt;
+1 1;3  </code></pre>
+</div>
+</div>
+<p>Using <code>read_csv2()</code> , the data is read-in correctly:---</p>
+<div class="cell" data-hash="Chapter8_cache/html/unnamed-chunk-10_3fcdb3cee0dd6d00701661e3d067ddd2">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv2</span>(<span class="st">"a;b</span><span class="sc">\n</span><span class="st">1;3"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+      a     b
+  &lt;dbl&gt; &lt;dbl&gt;
+1     1     3</code></pre>
+</div>
+</div></li>
+</ul>
 </section>
 <section id="question-6" class="level3">
 <h3 class="anchored" data-anchor-id="question-6">Question 6</h3>
 <p><strong>Practice referring to non-syntactic names in the following data frame by:</strong></p>
+<div class="cell" data-hash="Chapter8_cache/html/unnamed-chunk-11_63a19363aa1ff66a0d72d7b1aea563fc">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>annoying <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="sc">*</span> <span class="dv">2</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="fu">length</span>(<span class="st">`</span><span class="at">1</span><span class="st">`</span>))</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>annoying</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 2
+     `1`   `2`
+   &lt;int&gt; &lt;dbl&gt;
+ 1     1  4.42
+ 2     2  5.82
+ 3     3  6.75
+ 4     4  8.48
+ 5     5 10.3 
+ 6     6 12.9 
+ 7     7 14.4 
+ 8     8 16.7 
+ 9     9 16.8 
+10    10 18.6 </code></pre>
+</div>
+</div>
 <ol type="a">
-<li><p><strong>Extracting the variable called <code>1</code>.</strong></p></li>
-<li><p><strong>Plotting a scatterplot of <code>1</code> vs.&nbsp;<code>2</code>.</strong></p></li>
-<li><p><strong>Creating a new column called <code>3</code>, which is <code>2</code> divided by <code>1</code>.</strong></p></li>
-<li><p><strong>Renaming the columns to <code>one</code>, <code>two</code>, and <code>three</code>.</strong></p></li>
+<li><p><strong>Extracting the variable called <code>1</code>.</strong></p>
+<div class="cell" data-hash="Chapter8_cache/html/unnamed-chunk-12_7fd7c7a62daada08936b9e9c528f0dc2">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>annoying <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(<span class="st">`</span><span class="at">1</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+</div>
+</div></li>
+<li><p><strong>Plotting a scatterplot of <code>1</code> vs.&nbsp;<code>2</code>.</strong></p>
+<div class="cell" data-hash="Chapter8_cache/html/unnamed-chunk-13_d093f235f2ee73855081911c925d764e">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>annoying <span class="sc">|&gt;</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">1</span><span class="st">`</span>, <span class="at">y =</span> <span class="st">`</span><span class="at">2</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Chapter8_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div></li>
+<li><p><strong>Creating a new column called <code>3</code>, which is <code>2</code> divided by <code>1</code>.</strong></p>
+<div class="cell" data-hash="Chapter8_cache/html/unnamed-chunk-14_64c7ea5749994f9b1cfedb271319061f">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>annoying <span class="ot">=</span> annoying <span class="sc">|&gt;</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="sc">/</span> <span class="st">`</span><span class="at">1</span><span class="st">`</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>annoying</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 3
+     `1`   `2`   `3`
+   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1     1  4.42  4.42
+ 2     2  5.82  2.91
+ 3     3  6.75  2.25
+ 4     4  8.48  2.12
+ 5     5 10.3   2.05
+ 6     6 12.9   2.14
+ 7     7 14.4   2.06
+ 8     8 16.7   2.09
+ 9     9 16.8   1.86
+10    10 18.6   1.86</code></pre>
+</div>
+</div></li>
+<li><p><strong>Renaming the columns to <code>one</code>, <code>two</code>, and <code>three</code>.</strong></p>
+<div class="cell" data-hash="Chapter8_cache/html/unnamed-chunk-15_a45dcdfbf1287d3fd0c236b4d701f582">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>annoying <span class="sc">|&gt;</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"one"</span> <span class="ot">=</span> <span class="st">`</span><span class="at">1</span><span class="st">`</span>,</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"two"</span> <span class="ot">=</span> <span class="st">`</span><span class="at">2</span><span class="st">`</span>,</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"three"</span> <span class="ot">=</span> <span class="st">`</span><span class="at">3</span><span class="st">`</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 3
+     one   two three
+   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1     1  4.42  4.42
+ 2     2  5.82  2.91
+ 3     3  6.75  2.25
+ 4     4  8.48  2.12
+ 5     5 10.3   2.05
+ 6     6 12.9   2.14
+ 7     7 14.4   2.06
+ 8     8 16.7   2.09
+ 9     9 16.8   1.86
+10    10 18.6   1.86</code></pre>
+</div>
+</div></li>
 </ol>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>annoying <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="sc">*</span> <span class="dv">2</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="fu">length</span>(<span class="st">`</span><span class="at">1</span><span class="st">`</span>))</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-
 </section>
+</section>
+<section id="controlling-column-types" class="level1">
+<h1>8.3 Controlling column types</h1>
+<p>Here’s an example data set to use the arguments <code>col_types</code> and <code>na</code> associated with the powerful <code>read_csv()</code> function.</p>
+<div class="cell" data-hash="Chapter8_cache/html/unnamed-chunk-16_d91ff68a151caea2b464630db3082983">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>raw_df1 <span class="ot">=</span> <span class="st">"Name,Age,Value,DateTime,Flag</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="st">John Doe,25,123.45,2023-08-07 10:30:00,True</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="st">Jane Smith,42,987.65,2023-08-06 15:45:00,False</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="st">Bob Johnson,32,543.21,2023-08-05 08:00:00,True</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="st">Mary Williams,28,.,2023-08-04 12:15:00,False</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="st">Michael Brown,,789.01,2023-08-03 18:30:00,True</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="st">Emily Davis,38,234.56,,False</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="st">David Lee,50,.,2023-08-01 09:45:00,True</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="st">.,22,345.67,2023-07-31 14:00:00,False"</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(raw_df1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 5
+  Name            Age Value  DateTime            Flag 
+  &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;  &lt;dttm&gt;              &lt;lgl&gt;
+1 John Doe         25 123.45 2023-08-07 10:30:00 TRUE 
+2 Jane Smith       42 987.65 2023-08-06 15:45:00 FALSE
+3 Bob Johnson      32 543.21 2023-08-05 08:00:00 TRUE 
+4 Mary Williams    28 .      2023-08-04 12:15:00 FALSE
+5 Michael Brown    NA 789.01 2023-08-03 18:30:00 TRUE 
+6 Emily Davis      38 234.56 NA                  FALSE
+7 David Lee        50 .      2023-08-01 09:45:00 TRUE 
+8 .                22 345.67 2023-07-31 14:00:00 FALSE</code></pre>
+</div>
+</div>
+<p>Here, we see that by default, <code>read_csv()</code> does an amazing job. It identifies most column types, but fails to understand that “.” is a missing value in <code>Value</code> variable, which is otherwise numerical.</p>
+<p>Let’s improve this behavior.</p>
+<div class="cell" data-hash="Chapter8_cache/html/unnamed-chunk-17_1838c81f515a1fe567a6c6e7c597cdad">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  raw_df1,</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">na =</span> <span class="st">"."</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 5
+  Name            Age Value DateTime            Flag 
+  &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;dttm&gt;              &lt;lgl&gt;
+1 John Doe         25  123. 2023-08-07 10:30:00 TRUE 
+2 Jane Smith       42  988. 2023-08-06 15:45:00 FALSE
+3 Bob Johnson      32  543. 2023-08-05 08:00:00 TRUE 
+4 Mary Williams    28   NA  2023-08-04 12:15:00 FALSE
+5 Michael Brown    NA  789. 2023-08-03 18:30:00 TRUE 
+6 Emily Davis      38  235. NA                  FALSE
+7 David Lee        50   NA  2023-08-01 09:45:00 TRUE 
+8 &lt;NA&gt;             22  346. 2023-07-31 14:00:00 FALSE</code></pre>
+</div>
+</div>
+<p>Now, let’s use <code>col_types</code> argument to force some variables into certain classes we desire. Here I will try to force <code>Age</code> into an integer, <code>Value</code> into a number (i.e., <code>&lt;dbl&gt;</code>), and <code>DateTime</code> into a character, and <code>Flag</code> into a character.</p>
+<div class="cell" data-hash="Chapter8_cache/html/unnamed-chunk-18_27c51de8366115e3feb8ae3891d7d009">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  raw_df1,</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">na =</span> <span class="st">"."</span>,</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="fu">list</span>(</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Name =</span> <span class="fu">col_character</span>(),</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Age =</span> <span class="fu">col_integer</span>(),</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Value =</span> <span class="fu">col_double</span>(),</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">DateTime =</span> <span class="fu">col_character</span>()</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 5
+  Name            Age Value DateTime              Flag 
+  &lt;chr&gt;         &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;                 &lt;lgl&gt;
+1 John Doe         25  123. "2023-08-07 10:30:00" TRUE 
+2 Jane Smith       42  988. "2023-08-06 15:45:00" FALSE
+3 Bob Johnson      32  543. "2023-08-05 08:00:00" TRUE 
+4 Mary Williams    28   NA  "2023-08-04 12:15:00" FALSE
+5 Michael Brown    NA  789. "2023-08-03 18:30:00" TRUE 
+6 Emily Davis      38  235. ""                    FALSE
+7 David Lee        50   NA  "2023-08-01 09:45:00" TRUE 
+8 &lt;NA&gt;             22  346. "2023-07-31 14:00:00" FALSE</code></pre>
+</div>
+</div>
+<p>Now, I will try to read-in only a few columns to save on memory space in <code>R</code> by using <code>col_skip()</code>.</p>
+<div class="cell" data-hash="Chapter8_cache/html/unnamed-chunk-19_6163bb3f8d687a006d412f3cb091216f">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  raw_df1,</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">na =</span> <span class="st">"."</span>,</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="fu">list</span>(</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Name =</span> <span class="fu">col_character</span>(),</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Age =</span> <span class="fu">col_integer</span>(),</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Value =</span> <span class="fu">col_double</span>(),</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">DateTime =</span> <span class="fu">col_skip</span>(),</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">Flag =</span> <span class="fu">col_skip</span>()</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 3
+  Name            Age Value
+  &lt;chr&gt;         &lt;int&gt; &lt;dbl&gt;
+1 John Doe         25  123.
+2 Jane Smith       42  988.
+3 Bob Johnson      32  543.
+4 Mary Williams    28   NA 
+5 Michael Brown    NA  789.
+6 Emily Davis      38  235.
+7 David Lee        50   NA 
+8 &lt;NA&gt;             22  346.</code></pre>
+</div>
+</div>
+<p>Now, I will repeat this using <code>cols_only()</code> function:---</p>
+<div class="cell" data-hash="Chapter8_cache/html/unnamed-chunk-20_d768ec6b1118561c11809ed8df6d634f">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  raw_df1,</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">na =</span> <span class="st">"."</span>,</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="fu">cols_only</span>(</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Name =</span> <span class="fu">col_character</span>(), </span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Age =</span> <span class="fu">col_integer</span>(), </span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Value =</span> <span class="fu">col_double</span>())</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 3
+  Name            Age Value
+  &lt;chr&gt;         &lt;int&gt; &lt;dbl&gt;
+1 John Doe         25  123.
+2 Jane Smith       42  988.
+3 Bob Johnson      32  543.
+4 Mary Williams    28   NA 
+5 Michael Brown    NA  789.
+6 Emily Davis      38  235.
+7 David Lee        50   NA 
+8 &lt;NA&gt;             22  346.</code></pre>
+</div>
+</div>
+<p>Now, let’s try to read-in data from three different files at the same time..</p>
+<div class="cell" data-hash="Chapter8_cache/html/unnamed-chunk-21_e59dc40e0f620dd9078e052b5a07b3f4">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://pos.it/r4ds-01-sales"</span>, </span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://pos.it/r4ds-02-sales"</span>, </span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://pos.it/r4ds-03-sales"</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">na =</span> <span class="st">"."</span>,</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">"file"</span></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 19 × 6
+   file                         month     year brand  item     n
+   &lt;chr&gt;                        &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 https://pos.it/r4ds-01-sales January   2019     1  1234     3
+ 2 https://pos.it/r4ds-01-sales January   2019     1  8721     9
+ 3 https://pos.it/r4ds-01-sales January   2019     1  1822     2
+ 4 https://pos.it/r4ds-01-sales January   2019     2  3333     1
+ 5 https://pos.it/r4ds-01-sales January   2019     2  2156     9
+ 6 https://pos.it/r4ds-01-sales January   2019     2  3987     6
+ 7 https://pos.it/r4ds-01-sales January   2019     2  3827     6
+ 8 https://pos.it/r4ds-02-sales February  2019     1  1234     8
+ 9 https://pos.it/r4ds-02-sales February  2019     1  8721     2
+10 https://pos.it/r4ds-02-sales February  2019     1  1822     3
+11 https://pos.it/r4ds-02-sales February  2019     2  3333     1
+12 https://pos.it/r4ds-02-sales February  2019     2  2156     3
+13 https://pos.it/r4ds-02-sales February  2019     2  3987     6
+14 https://pos.it/r4ds-03-sales March     2019     1  1234     3
+15 https://pos.it/r4ds-03-sales March     2019     1  3627     1
+16 https://pos.it/r4ds-03-sales March     2019     1  8820     3
+17 https://pos.it/r4ds-03-sales March     2019     2  7253     1
+18 https://pos.it/r4ds-03-sales March     2019     2  8766     3
+19 https://pos.it/r4ds-03-sales March     2019     2  8288     6</code></pre>
+</div>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->
