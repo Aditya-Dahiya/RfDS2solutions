@@ -9,6 +9,8 @@ date: 2023-08-13
 
 ## 9.1 Google is your friend
 
+We can copy any error; paste and search it on [google.com](www.google.com)
+
 ## 9.2 Making a `reprex`
 
 Here, I try to create a reprex for a deliberate mistake I am making in `ggplot2` :\--
@@ -16,11 +18,11 @@ Here, I try to create a reprex for a deliberate mistake I am making in `ggplot2`
 First, I create the faulty `ggplot2` code:\--
 
 ```{r}
-#|label: ggplot2-faulty
-#|error: false
-#|warning: false
-#|message: false
-#|eval: false
+#| label: ggplot2-faulty
+#| error: false
+#| warning: false
+#| message: false
+#| eval: false
 library(tidyverse)
 library(ggrepel)
 library(gt)
@@ -43,11 +45,11 @@ gtcars |>
 ```
 
 ```{r}
-#|label: ggplot2-reprex
-#|error: false
-#|warning: false
-#|message: false
-#|eval: false
+#| label: ggplot2-reprex
+#| error: false
+#| warning: false
+#| message: false
+#| eval: false
 
 # Copy the code above
 
