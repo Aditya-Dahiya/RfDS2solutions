@@ -6,6 +6,7 @@ execute:
   warning: false
   error: false
   message: false
+  cache: true
 editor_options: 
   chunk_output_type: console
 ---
@@ -309,3 +310,90 @@ d.  **Renaming the columns to `one`, `two`, and `three`.**
         "three" = `3`
       )
     ```
+
+# 8.3 Controlling column types
+
+Here's an example data set to use the arguments `col_types` and `na` associated with the powerful `read_csv()` function.
+
+```{r}
+raw_df1 = "Name,Age,Value,DateTime,Flag
+John Doe,25,123.45,2023-08-07 10:30:00,True
+Jane Smith,42,987.65,2023-08-06 15:45:00,False
+Bob Johnson,32,543.21,2023-08-05 08:00:00,True
+Mary Williams,28,.,2023-08-04 12:15:00,False
+Michael Brown,,789.01,2023-08-03 18:30:00,True
+Emily Davis,38,234.56,,False
+David Lee,50,.,2023-08-01 09:45:00,True
+.,22,345.67,2023-07-31 14:00:00,False"
+
+read_csv(raw_df1)
+```
+
+Here, we see that by default, `read_csv()` does an amazing job. It identifies most column types, but fails to understand that "." is a missing value in `Value` variable, which is otherwise numerical.
+
+Let's improve this behavior.
+
+```{r}
+read_csv(
+  raw_df1,
+  na = "."
+)
+```
+
+Now, let's use `col_types` argument to force some variables into certain classes we desire. Here I will try to force `Age` into an integer, `Value` into a number (i.e., `<dbl>`), and `DateTime` into a character, and `Flag` into a character.
+
+```{r}
+read_csv(
+  raw_df1,
+  na = ".",
+  col_types = list(
+    Name = col_character(),
+    Age = col_integer(),
+    Value = col_double(),
+    DateTime = col_character()
+  )
+)
+```
+
+Now, I will try to read-in only a few columns to save on memory space in `R` by using `col_skip()`.
+
+```{r}
+read_csv(
+  raw_df1,
+  na = ".",
+  col_types = list(
+    Name = col_character(),
+    Age = col_integer(),
+    Value = col_double(),
+    DateTime = col_skip(),
+    Flag = col_skip()
+  )
+)
+```
+
+Now, I will repeat this using `cols_only()` function:\-\--
+
+```{r}
+read_csv(
+  raw_df1,
+  na = ".",
+  col_types = cols_only(
+    Name = col_character(), 
+    Age = col_integer(), 
+    Value = col_double())
+)
+```
+
+Now, let's try to read-in data from three different files at the same time..
+
+```{r}
+read_csv(
+  c(
+    "https://pos.it/r4ds-01-sales", 
+    "https://pos.it/r4ds-02-sales", 
+    "https://pos.it/r4ds-03-sales"
+  ),
+  na = ".",
+  id = "file"
+)
+```
