@@ -1,0 +1,143 @@
+---
+title: "Chapter 9"
+subtitle: "Workflow: getting help"
+author: "Aditya Dahiya"
+editor_options: 
+  chunk_output_type: console
+date: 2023-08-13
+---
+
+## 9.1 Google is your friend
+
+## 9.2 Making a `reprex`
+
+Here, I try to create a reprex for a deliberate mistake I am making in `ggplot2` :\--
+
+First, I create the faulty `ggplot2` code:\--
+
+```{r}
+#|label: ggplot2-faulty
+#|error: false
+#|warning: false
+#|message: false
+#|eval: false
+library(tidyverse)
+library(ggrepel)
+library(gt)
+data("gtcars")
+gtcars |>
+  slice_head(n = 3, 
+             by = ctry_origin) |>
+  ggplot(aes(x = hp,
+             y = mpg_h,
+             color = ctry_origin,
+             label = model)) +
+  geom_point() +
+  geom_text_repel(force = 2) +
+  theme_classic() +
+  labs(x = "Horse Power",
+       y = "Miles per Gallon (Highway)") +
+  theme(legend.position = "bottom",
+        legend.title = element_blank())
+  
+```
+
+```{r}
+#|label: ggplot2-reprex
+#|error: false
+#|warning: false
+#|message: false
+#|eval: false
+
+# Copy the code above
+
+# Then create reprex data set
+gtcars |>
+  slice_head(n = 3, 
+             by = ctry_origin) |>
+  dput()
+
+```
+
+Here's the reprex:
+
+```{r}
+#| eval: false
+
+gtcars = 
+structure(list(mfr = c("Ford", "Chevrolet", "Dodge", "Ferrari", 
+"Ferrari", "Ferrari", "Acura", "Nissan", "Bentley", "Aston Martin", 
+"Aston Martin", "BMW", "BMW", "BMW"), model = c("GT", "Corvette", 
+"Viper", "458 Speciale", "458 Spider", "458 Italia", "NSX", "GT-R", 
+"Continental GT", "DB11", "Rapide S", "6-Series", "i8", "M4"), 
+    year = c(2017, 2016, 2017, 2015, 2015, 2014, 2017, 2016, 
+    2016, 2017, 2016, 2016, 2016, 2016), trim = c("Base Coupe", 
+    "Z06 Coupe", "GT Coupe", "Base Coupe", "Base", "Base Coupe", 
+    "Base Coupe", "Premium Coupe", "V8 Coupe", "Base Coupe", 
+    "Base Sedan", "640 I Coupe", "Mega World Coupe", "Base Coupe"
+    ), bdy_style = c("coupe", "coupe", "coupe", "coupe", "convertible", 
+    "coupe", "coupe", "coupe", "coupe", "coupe", "sedan", "coupe", 
+    "coupe", "coupe"), hp = c(647, 650, 645, 597, 562, 562, 573, 
+    545, 500, 608, 552, 315, 357, 425), hp_rpm = c(6250, 6400, 
+    5000, 9000, 9000, 9000, 6500, 6400, 6000, 6500, 6650, 5800, 
+    5800, 5500), trq = c(550, 650, 600, 398, 398, 398, 476, 436, 
+    487, 516, 465, 330, 420, 406), trq_rpm = c(5900, 3600, 5000, 
+    6000, 6000, 6000, 2000, 3200, 1700, 1500, 5500, 1400, 3700, 
+    1850), mpg_c = c(11, 15, 12, 13, 13, 13, 21, 16, 15, 15, 
+    14, 20, 28, 17), mpg_h = c(18, 22, 19, 17, 17, 17, 22, 22, 
+    25, 21, 21, 30, 29, 24), drivetrain = c("rwd", "rwd", "rwd", 
+    "rwd", "rwd", "rwd", "awd", "awd", "awd", "rwd", "rwd", "rwd", 
+    "awd", "rwd"), trsmn = c("7a", "7m", "6m", "7a", "7a", "7a", 
+    "9a", "6a", "8am", "8am", "8am", "8am", "6am", "6m"), ctry_origin = c("United States", 
+    "United States", "United States", "Italy", "Italy", "Italy", 
+    "Japan", "Japan", "United Kingdom", "United Kingdom", "United Kingdom", 
+    "Germany", "Germany", "Germany"), msrp = c(447000, 88345, 
+    95895, 291744, 263553, 233509, 156000, 101770, 198500, 211195, 
+    205300, 77300, 140700, 65700)), class = c("spec_tbl_df", 
+"tbl_df", "tbl", "data.frame"), row.names = c(NA, -14L), spec = structure(list(
+    cols = list(mfr = structure(list(), class = c("collector_character", 
+    "collector")), model = structure(list(), class = c("collector_character", 
+    "collector")), year = structure(list(), class = c("collector_double", 
+    "collector")), trim = structure(list(), class = c("collector_character", 
+    "collector")), bdy_style = structure(list(), class = c("collector_character", 
+    "collector")), hp = structure(list(), class = c("collector_double", 
+    "collector")), hp_rpm = structure(list(), class = c("collector_double", 
+    "collector")), trq = structure(list(), class = c("collector_double", 
+    "collector")), trq_rpm = structure(list(), class = c("collector_double", 
+    "collector")), mpg_c = structure(list(), class = c("collector_double", 
+    "collector")), mpg_h = structure(list(), class = c("collector_double", 
+    "collector")), drivetrain = structure(list(), class = c("collector_character", 
+    "collector")), trsmn = structure(list(), class = c("collector_character", 
+    "collector")), ctry_origin = structure(list(), class = c("collector_character", 
+    "collector")), msrp = structure(list(), class = c("collector_double", 
+    "collector"))), default = structure(list(), class = c("collector_guess", 
+    "collector")), skip = 1), class = "col_spec"))
+
+reprex::reprex()
+
+```
+
+````         
+``` r
+library(tidyverse)
+library(ggrepel)
+
+gtcars |>
+  slice_head(n = 3, 
+             by = ctry_origin) |>
+  ggplot(aes(x = hp,
+             y = mpg_h,
+             color = ctry_origin,
+             label = model)) +
+  geom_point() +
+  geom_text_repel(force = 2) +
+  theme_classic() +
+  labs(x = "Horse Power",
+       y = "Miles per Gallon (Highway)") +
+  theme(legend.position = "bottom",
+        legend.title = element_blank())
+
+```
+
+<sup>Created on 2023-08-13 with [reprex v2.0.2](https://reprex.tidyverse.org)</sup>
+````

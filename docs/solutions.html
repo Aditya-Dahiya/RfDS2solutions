@@ -71,9 +71,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-author','listing-date','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-title','listing-subtitle','listing-date','listing-author',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
       
-      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description"],
+      searchColumns: ["listing-date","listing-title","listing-author"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -170,204 +170,204 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-listing-date-sort="1690569000000" data-listing-file-modified-sort="1690630193195" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="35">
-<a href="./Chapter2.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="Chapter2_files\figure-html\fig-depthlength-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Chapter 2 (Data Visualization)
-</h5>
-<div class="card-text listing-description">
-The number of rows in <code>penguins</code> data-set is 344 and the number of columns is 8
+<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
+<div class="listing-actions-group">
+   <div class="input-group input-group-sm quarto-listing-sort">
+     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
+     <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+       <option value="" disabled="" selected="" hidden="">Order By</option>
+       <option value="index" data-direction="asc">Default</option>
+         <option value="listing-date-sort" data-direction="asc">
+          Date - Oldest
+        </option>
+         <option value="listing-date-sort" data-direction="desc">
+          Date - Newest
+        </option>
+         <option value="listing-title-sort" data-direction="asc">
+          Title
+        </option>
+         <option value="listing-author" data-direction="asc">
+          Author
+        </option>
+     </select>
+  </div>
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="Filter">
+    </div>
 </div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Aditya Dahiya
-</div>
-<div class="listing-date">
-Jul 29, 2023
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="1" data-listing-date-sort="1690223400000" data-listing-file-modified-sort="1690283541445" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="22">
-<a href="./Chapter29.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="Chapter29_files\figure-html\diamonds1-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Chapter 29: Quarto
-</h5>
-<div class="card-text listing-description">
-The outputs are different in the following ways:--
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Aditya Dahiya
-</div>
-<div class="listing-date">
-Jul 25, 2023
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="2" data-listing-date-sort="1690569000000" data-listing-file-modified-sort="1690634437665" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
-<a href="./Chapter3.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Chapter 3 (Workflow: Basics)
-</h5>
-<div class="card-text listing-description">
-Use <code>Alt + -</code> to write the assignment operator <code>&lt;-</code> in <code>R</code>.
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Aditya Dahiya
-</div>
-<div class="listing-date">
-Jul 29, 2023
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="3" data-listing-date-sort="1690223400000" data-listing-file-modified-sort="1690828660224" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
-<a href="./Chapter30.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Chapter 30 (Quarto Formats)
-</h5>
-<div class="card-text listing-description">
-Let us try to create an interactive map in HTML below Figure&nbsp;1:—̥
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Aditya Dahiya
-</div>
-<div class="listing-date">
-Jul 25, 2023
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="4" data-listing-date-sort="1690569000000" data-listing-file-modified-sort="1690829421129" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="28">
-<a href="./Chapter4.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="Chapter4_files\figure-html\fig-q3-Ex-4.5.7-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Chapter 4 (Data Transformation)
-</h5>
-<div class="card-text listing-description">
-<strong>In a single pipeline for each condition, find all flights that meet the condition:</strong>
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Aditya Dahiya
-</div>
-<div class="listing-date">
-Jul 29, 2023
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="5" data-listing-file-modified-sort="1690830825572" data-listing-reading-time-sort="2">
-<a href="./Chapter5.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Chapter 5
-</h5>
-<div class="card-text listing-description">
-The restyled code is as below:---
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-Aditya Dahiya
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="6" data-listing-file-modified-sort="1691117933589" data-listing-reading-time-sort="4">
-<a href="./Chapter6.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Chapter 6
-</h5>
-<div class="card-text listing-description">
-<strong>For each of the sample tables, describe what each observation and each column represents.</strong>
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-Aditya Dahiya
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="7" data-listing-file-modified-sort="1691160986946" data-listing-reading-time-sort="2">
-<a href="./Chapter7.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Chapter 7
-</h5>
-<div class="card-text listing-description">
-<strong>Go to the RStudio Tips Twitter account, https://twitter.com/rstudiotips and find one tip that looks interesting. Practice using it!</strong>
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-Aditya Dahiya
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="8" data-listing-file-modified-sort="1691383462383" data-listing-reading-time-sort="8">
-<a href="./Chapter8.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="Chapter8_files\figure-html\unnamed-chunk-13-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Chapter 8
-</h5>
-<div class="card-text listing-description">
-<strong>What function would you use to read a file where fields were separated with “|”?</strong>
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-Aditya Dahiya
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-</div>
+
+<table class="quarto-listing-table table table-hover">
+<thead>
+<tr>
+<th>
+<a class="sort" data-sort="listing-title-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Title</a>
+</th>
+<th>
+Subtitle
+</th>
+<th>
+<a class="sort" data-sort="listing-date-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Date</a>
+</th>
+<th>
+<a class="sort" data-sort="listing-author" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Author</a>
+</th>
+</tr>
+</thead>
+<tbody class="list">
+<tr data-index="0" data-listing-date-sort="1690569000000" data-listing-file-modified-sort="1690630193195" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="35" data-listing-title-sort="Chapter 2 (Data Visualization)" data-listing-filename-sort="Chapter2.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="./Chapter2.html" class="title listing-title">Chapter 2 (Data Visualization)</a>
+</td>
+<td>
+<span class="listing-subtitle">undefined</span>
+</td>
+<td>
+<span class="listing-date">Jul 29, 2023</span>
+</td>
+<td>
+<span class="listing-author">Aditya Dahiya</span>
+</td>
+</tr>
+<tr data-index="1" data-listing-date-sort="1690223400000" data-listing-file-modified-sort="1690283541445" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="22" data-listing-title-sort="Chapter 29: Quarto" data-listing-filename-sort="Chapter29.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="./Chapter29.html" class="title listing-title">Chapter 29: Quarto</a>
+</td>
+<td>
+<span class="listing-subtitle">undefined</span>
+</td>
+<td>
+<span class="listing-date">Jul 25, 2023</span>
+</td>
+<td>
+<span class="listing-author">Aditya Dahiya</span>
+</td>
+</tr>
+<tr data-index="2" data-listing-date-sort="1690569000000" data-listing-file-modified-sort="1690634437665" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-title-sort="Chapter 3 (Workflow: Basics)" data-listing-filename-sort="Chapter3.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="./Chapter3.html" class="title listing-title">Chapter 3 (Workflow: Basics)</a>
+</td>
+<td>
+<span class="listing-subtitle">undefined</span>
+</td>
+<td>
+<span class="listing-date">Jul 29, 2023</span>
+</td>
+<td>
+<span class="listing-author">Aditya Dahiya</span>
+</td>
+</tr>
+<tr data-index="3" data-listing-date-sort="1690223400000" data-listing-file-modified-sort="1690828660224" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="Chapter 30 (Quarto Formats)" data-listing-filename-sort="Chapter30.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="./Chapter30.html" class="title listing-title">Chapter 30 (Quarto Formats)</a>
+</td>
+<td>
+<span class="listing-subtitle">undefined</span>
+</td>
+<td>
+<span class="listing-date">Jul 25, 2023</span>
+</td>
+<td>
+<span class="listing-author">Aditya Dahiya</span>
+</td>
+</tr>
+<tr data-index="4" data-listing-date-sort="1690569000000" data-listing-file-modified-sort="1690829421129" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="28" data-listing-title-sort="Chapter 4 (Data Transformation)" data-listing-filename-sort="Chapter4.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="./Chapter4.html" class="title listing-title">Chapter 4 (Data Transformation)</a>
+</td>
+<td>
+<span class="listing-subtitle">undefined</span>
+</td>
+<td>
+<span class="listing-date">Jul 29, 2023</span>
+</td>
+<td>
+<span class="listing-author">Aditya Dahiya</span>
+</td>
+</tr>
+<tr data-index="5" data-listing-date-sort="1690914600000" data-listing-file-modified-sort="1691928012202" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="Chapter 5" data-listing-filename-sort="Chapter5.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="./Chapter5.html" class="title listing-title">Chapter 5</a>
+</td>
+<td>
+<span class="listing-subtitle">Workflow: code style</span>
+</td>
+<td>
+<span class="listing-date">Aug 2, 2023</span>
+</td>
+<td>
+<span class="listing-author">Aditya Dahiya</span>
+</td>
+</tr>
+<tr data-index="6" data-listing-date-sort="1691173800000" data-listing-file-modified-sort="1691928037562" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-title-sort="Chapter 6" data-listing-filename-sort="Chapter6.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="./Chapter6.html" class="title listing-title">Chapter 6</a>
+</td>
+<td>
+<span class="listing-subtitle">Data tidying</span>
+</td>
+<td>
+<span class="listing-date">Aug 5, 2023</span>
+</td>
+<td>
+<span class="listing-author">Aditya Dahiya</span>
+</td>
+</tr>
+<tr data-index="7" data-listing-date-sort="1691433000000" data-listing-file-modified-sort="1691928087718" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="Chapter 7" data-listing-filename-sort="Chapter7.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="./Chapter7.html" class="title listing-title">Chapter 7</a>
+</td>
+<td>
+<span class="listing-subtitle">undefined</span>
+</td>
+<td>
+<span class="listing-date">Aug 8, 2023</span>
+</td>
+<td>
+<span class="listing-author">Aditya Dahiya</span>
+</td>
+</tr>
+<tr data-index="8" data-listing-date-sort="1691605800000" data-listing-file-modified-sort="1691928125332" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-title-sort="Chapter 8" data-listing-filename-sort="Chapter8.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="./Chapter8.html" class="title listing-title">Chapter 8</a>
+</td>
+<td>
+<span class="listing-subtitle">Data Import</span>
+</td>
+<td>
+<span class="listing-date">Aug 10, 2023</span>
+</td>
+<td>
+<span class="listing-author">Aditya Dahiya</span>
+</td>
+</tr>
+<tr data-index="9" data-listing-date-sort="1691865000000" data-listing-file-modified-sort="1691928115781" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-title-sort="Chapter 9" data-listing-filename-sort="Chapter9.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="./Chapter9.html" class="title listing-title">Chapter 9</a>
+</td>
+<td>
+<span class="listing-subtitle">Workflow: getting help</span>
+</td>
+<td>
+<span class="listing-date">Aug 13, 2023</span>
+</td>
+<td>
+<span class="listing-author">Aditya Dahiya</span>
+</td>
+</tr>
+</tbody>
+
+</table>
 <div class="listing-no-matching d-none">
 No matching items
 </div>

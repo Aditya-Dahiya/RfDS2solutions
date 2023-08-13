@@ -1,5 +1,6 @@
 ---
-title: "Chapter 3 (Workflow: Basics)"
+title: "Chapter 3"
+subtitle: "Workflow: Basics"
 author: "Aditya Dahiya"
 bibliography: references.bib
 execute: 

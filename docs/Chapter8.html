@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Aditya Dahiya">
+<meta name="dcterms.date" content="2023-08-10">
 
 <title>RfDS2solutions - Chapter 8</title>
 <style>
@@ -176,6 +177,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </div>
   </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 10, 2023</p>
+    </div>
+  </div>
   
     
   </div>
@@ -2113,7 +2120,7 @@ chr (1): a;b
 </div>
 </div>
 <p>Now, let’s try to read-in data from three different files at the same time..</p>
-<div class="cell" data-hash="Chapter8_cache/html/unnamed-chunk-21_e59dc40e0f620dd9078e052b5a07b3f4">
+<div class="cell" data-hash="Chapter8_cache/html/unnamed-chunk-21_4d7e42623100c005eaf357788bbb8d71">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(</span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://pos.it/r4ds-01-sales"</span>, </span>
@@ -2122,30 +2129,17 @@ chr (1): a;b
 <span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  ),</span>
 <span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">na =</span> <span class="st">"."</span>,</span>
 <span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">"file"</span></span>
-<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 19 × 6
-   file                         month     year brand  item     n
-   &lt;chr&gt;                        &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1 https://pos.it/r4ds-01-sales January   2019     1  1234     3
- 2 https://pos.it/r4ds-01-sales January   2019     1  8721     9
- 3 https://pos.it/r4ds-01-sales January   2019     1  1822     2
- 4 https://pos.it/r4ds-01-sales January   2019     2  3333     1
- 5 https://pos.it/r4ds-01-sales January   2019     2  2156     9
- 6 https://pos.it/r4ds-01-sales January   2019     2  3987     6
- 7 https://pos.it/r4ds-01-sales January   2019     2  3827     6
- 8 https://pos.it/r4ds-02-sales February  2019     1  1234     8
- 9 https://pos.it/r4ds-02-sales February  2019     1  8721     2
-10 https://pos.it/r4ds-02-sales February  2019     1  1822     3
-11 https://pos.it/r4ds-02-sales February  2019     2  3333     1
-12 https://pos.it/r4ds-02-sales February  2019     2  2156     3
-13 https://pos.it/r4ds-02-sales February  2019     2  3987     6
-14 https://pos.it/r4ds-03-sales March     2019     1  1234     3
-15 https://pos.it/r4ds-03-sales March     2019     1  3627     1
-16 https://pos.it/r4ds-03-sales March     2019     1  8820     3
-17 https://pos.it/r4ds-03-sales March     2019     2  7253     1
-18 https://pos.it/r4ds-03-sales March     2019     2  8766     3
-19 https://pos.it/r4ds-03-sales March     2019     2  8288     6</code></pre>
+<pre><code># A tibble: 5 × 6
+  file                         month    year brand  item     n
+  &lt;chr&gt;                        &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 https://pos.it/r4ds-01-sales January  2019     1  1234     3
+2 https://pos.it/r4ds-01-sales January  2019     1  8721     9
+3 https://pos.it/r4ds-01-sales January  2019     1  1822     2
+4 https://pos.it/r4ds-01-sales January  2019     2  3333     1
+5 https://pos.it/r4ds-01-sales January  2019     2  2156     9</code></pre>
 </div>
 </div>
 

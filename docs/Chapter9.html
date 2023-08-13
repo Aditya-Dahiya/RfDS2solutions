@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Aditya Dahiya">
+<meta name="dcterms.date" content="2023-08-13">
+
+<title>RfDS2solutions - Chapter 9</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">RfDS2solutions</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./solutions.html" rel="" target="">
+ <span class="menu-text">Solutions</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#google-is-your-friend" id="toc-google-is-your-friend" class="nav-link active" data-scroll-target="#google-is-your-friend">9.1 Google is your friend</a></li>
+  <li><a href="#making-a-reprex" id="toc-making-a-reprex" class="nav-link" data-scroll-target="#making-a-reprex">9.2 Making a <code>reprex</code></a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Chapter 9</h1>
+<p class="subtitle lead">Workflow: getting help</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Aditya Dahiya </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 13, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="google-is-your-friend" class="level2">
+<h2 class="anchored" data-anchor-id="google-is-your-friend">9.1 Google is your friend</h2>
+</section>
+<section id="making-a-reprex" class="level2">
+<h2 class="anchored" data-anchor-id="making-a-reprex">9.2 Making a <code>reprex</code></h2>
+<p>Here, I try to create a reprex for a deliberate mistake I am making in <code>ggplot2</code> :--</p>
+<p>First, I create the faulty <code>ggplot2</code> code:--</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#|label: ggplot2-faulty</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#|error: false</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#|warning: false</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#|message: false</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#|eval: false</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"gtcars"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>gtcars <span class="sc">|&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">3</span>, </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">by =</span> ctry_origin) <span class="sc">|&gt;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hp,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> mpg_h,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> ctry_origin,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">label =</span> model)) <span class="sc">+</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">force =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Horse Power"</span>,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Miles per Gallon (Highway)"</span>) <span class="sc">+</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Chapter9_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#|label: ggplot2-reprex</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#|error: false</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#|warning: false</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#|message: false</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#|eval: false</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy the code above</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Then create reprex data set</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>gtcars <span class="sc">|&gt;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">3</span>, </span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">by =</span> ctry_origin) <span class="sc">|&gt;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dput</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>structure(list(mfr = c("Ford", "Chevrolet", "Dodge", "Ferrari", 
+"Ferrari", "Ferrari", "Acura", "Nissan", "Bentley", "Aston Martin", 
+"Aston Martin", "BMW", "BMW", "BMW"), model = c("GT", "Corvette", 
+"Viper", "458 Speciale", "458 Spider", "458 Italia", "NSX", "GT-R", 
+"Continental GT", "DB11", "Rapide S", "6-Series", "i8", "M4"), 
+    year = c(2017, 2016, 2017, 2015, 2015, 2014, 2017, 2016, 
+    2016, 2017, 2016, 2016, 2016, 2016), trim = c("Base Coupe", 
+    "Z06 Coupe", "GT Coupe", "Base Coupe", "Base", "Base Coupe", 
+    "Base Coupe", "Premium Coupe", "V8 Coupe", "Base Coupe", 
+    "Base Sedan", "640 I Coupe", "Mega World Coupe", "Base Coupe"
+    ), bdy_style = c("coupe", "coupe", "coupe", "coupe", "convertible", 
+    "coupe", "coupe", "coupe", "coupe", "coupe", "sedan", "coupe", 
+    "coupe", "coupe"), hp = c(647, 650, 645, 597, 562, 562, 573, 
+    545, 500, 608, 552, 315, 357, 425), hp_rpm = c(6250, 6400, 
+    5000, 9000, 9000, 9000, 6500, 6400, 6000, 6500, 6650, 5800, 
+    5800, 5500), trq = c(550, 650, 600, 398, 398, 398, 476, 436, 
+    487, 516, 465, 330, 420, 406), trq_rpm = c(5900, 3600, 5000, 
+    6000, 6000, 6000, 2000, 3200, 1700, 1500, 5500, 1400, 3700, 
+    1850), mpg_c = c(11, 15, 12, 13, 13, 13, 21, 16, 15, 15, 
+    14, 20, 28, 17), mpg_h = c(18, 22, 19, 17, 17, 17, 22, 22, 
+    25, 21, 21, 30, 29, 24), drivetrain = c("rwd", "rwd", "rwd", 
+    "rwd", "rwd", "rwd", "awd", "awd", "awd", "rwd", "rwd", "rwd", 
+    "awd", "rwd"), trsmn = c("7a", "7m", "6m", "7a", "7a", "7a", 
+    "9a", "6a", "8am", "8am", "8am", "8am", "6am", "6m"), ctry_origin = c("United States", 
+    "United States", "United States", "Italy", "Italy", "Italy", 
+    "Japan", "Japan", "United Kingdom", "United Kingdom", "United Kingdom", 
+    "Germany", "Germany", "Germany"), msrp = c(447000, 88345, 
+    95895, 291744, 263553, 233509, 156000, 101770, 198500, 211195, 
+    205300, 77300, 140700, 65700)), class = c("spec_tbl_df", 
+"tbl_df", "tbl", "data.frame"), row.names = c(NA, -14L), spec = structure(list(
+    cols = list(mfr = structure(list(), class = c("collector_character", 
+    "collector")), model = structure(list(), class = c("collector_character", 
+    "collector")), year = structure(list(), class = c("collector_double", 
+    "collector")), trim = structure(list(), class = c("collector_character", 
+    "collector")), bdy_style = structure(list(), class = c("collector_character", 
+    "collector")), hp = structure(list(), class = c("collector_double", 
+    "collector")), hp_rpm = structure(list(), class = c("collector_double", 
+    "collector")), trq = structure(list(), class = c("collector_double", 
+    "collector")), trq_rpm = structure(list(), class = c("collector_double", 
+    "collector")), mpg_c = structure(list(), class = c("collector_double", 
+    "collector")), mpg_h = structure(list(), class = c("collector_double", 
+    "collector")), drivetrain = structure(list(), class = c("collector_character", 
+    "collector")), trsmn = structure(list(), class = c("collector_character", 
+    "collector")), ctry_origin = structure(list(), class = c("collector_character", 
+    "collector")), msrp = structure(list(), class = c("collector_double", 
+    "collector"))), default = structure(list(), class = c("collector_guess", 
+    "collector")), skip = 1), class = "col_spec"))</code></pre>
+</div>
+</div>
+<p>Here’s the reprex:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>gtcars <span class="ot">=</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">structure</span>(<span class="fu">list</span>(<span class="at">mfr =</span> <span class="fu">c</span>(<span class="st">"Ford"</span>, <span class="st">"Chevrolet"</span>, <span class="st">"Dodge"</span>, <span class="st">"Ferrari"</span>, </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="st">"Ferrari"</span>, <span class="st">"Ferrari"</span>, <span class="st">"Acura"</span>, <span class="st">"Nissan"</span>, <span class="st">"Bentley"</span>, <span class="st">"Aston Martin"</span>, </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="st">"Aston Martin"</span>, <span class="st">"BMW"</span>, <span class="st">"BMW"</span>, <span class="st">"BMW"</span>), <span class="at">model =</span> <span class="fu">c</span>(<span class="st">"GT"</span>, <span class="st">"Corvette"</span>, </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="st">"Viper"</span>, <span class="st">"458 Speciale"</span>, <span class="st">"458 Spider"</span>, <span class="st">"458 Italia"</span>, <span class="st">"NSX"</span>, <span class="st">"GT-R"</span>, </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="st">"Continental GT"</span>, <span class="st">"DB11"</span>, <span class="st">"Rapide S"</span>, <span class="st">"6-Series"</span>, <span class="st">"i8"</span>, <span class="st">"M4"</span>), </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">year =</span> <span class="fu">c</span>(<span class="dv">2017</span>, <span class="dv">2016</span>, <span class="dv">2017</span>, <span class="dv">2015</span>, <span class="dv">2015</span>, <span class="dv">2014</span>, <span class="dv">2017</span>, <span class="dv">2016</span>, </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2016</span>, <span class="dv">2017</span>, <span class="dv">2016</span>, <span class="dv">2016</span>, <span class="dv">2016</span>, <span class="dv">2016</span>), <span class="at">trim =</span> <span class="fu">c</span>(<span class="st">"Base Coupe"</span>, </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Z06 Coupe"</span>, <span class="st">"GT Coupe"</span>, <span class="st">"Base Coupe"</span>, <span class="st">"Base"</span>, <span class="st">"Base Coupe"</span>, </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Base Coupe"</span>, <span class="st">"Premium Coupe"</span>, <span class="st">"V8 Coupe"</span>, <span class="st">"Base Coupe"</span>, </span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Base Sedan"</span>, <span class="st">"640 I Coupe"</span>, <span class="st">"Mega World Coupe"</span>, <span class="st">"Base Coupe"</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    ), <span class="at">bdy_style =</span> <span class="fu">c</span>(<span class="st">"coupe"</span>, <span class="st">"coupe"</span>, <span class="st">"coupe"</span>, <span class="st">"coupe"</span>, <span class="st">"convertible"</span>, </span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"coupe"</span>, <span class="st">"coupe"</span>, <span class="st">"coupe"</span>, <span class="st">"coupe"</span>, <span class="st">"coupe"</span>, <span class="st">"sedan"</span>, <span class="st">"coupe"</span>, </span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"coupe"</span>, <span class="st">"coupe"</span>), <span class="at">hp =</span> <span class="fu">c</span>(<span class="dv">647</span>, <span class="dv">650</span>, <span class="dv">645</span>, <span class="dv">597</span>, <span class="dv">562</span>, <span class="dv">562</span>, <span class="dv">573</span>, </span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="dv">545</span>, <span class="dv">500</span>, <span class="dv">608</span>, <span class="dv">552</span>, <span class="dv">315</span>, <span class="dv">357</span>, <span class="dv">425</span>), <span class="at">hp_rpm =</span> <span class="fu">c</span>(<span class="dv">6250</span>, <span class="dv">6400</span>, </span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5000</span>, <span class="dv">9000</span>, <span class="dv">9000</span>, <span class="dv">9000</span>, <span class="dv">6500</span>, <span class="dv">6400</span>, <span class="dv">6000</span>, <span class="dv">6500</span>, <span class="dv">6650</span>, <span class="dv">5800</span>, </span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5800</span>, <span class="dv">5500</span>), <span class="at">trq =</span> <span class="fu">c</span>(<span class="dv">550</span>, <span class="dv">650</span>, <span class="dv">600</span>, <span class="dv">398</span>, <span class="dv">398</span>, <span class="dv">398</span>, <span class="dv">476</span>, <span class="dv">436</span>, </span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="dv">487</span>, <span class="dv">516</span>, <span class="dv">465</span>, <span class="dv">330</span>, <span class="dv">420</span>, <span class="dv">406</span>), <span class="at">trq_rpm =</span> <span class="fu">c</span>(<span class="dv">5900</span>, <span class="dv">3600</span>, <span class="dv">5000</span>, </span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="dv">6000</span>, <span class="dv">6000</span>, <span class="dv">6000</span>, <span class="dv">2000</span>, <span class="dv">3200</span>, <span class="dv">1700</span>, <span class="dv">1500</span>, <span class="dv">5500</span>, <span class="dv">1400</span>, <span class="dv">3700</span>, </span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1850</span>), <span class="at">mpg_c =</span> <span class="fu">c</span>(<span class="dv">11</span>, <span class="dv">15</span>, <span class="dv">12</span>, <span class="dv">13</span>, <span class="dv">13</span>, <span class="dv">13</span>, <span class="dv">21</span>, <span class="dv">16</span>, <span class="dv">15</span>, <span class="dv">15</span>, </span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    <span class="dv">14</span>, <span class="dv">20</span>, <span class="dv">28</span>, <span class="dv">17</span>), <span class="at">mpg_h =</span> <span class="fu">c</span>(<span class="dv">18</span>, <span class="dv">22</span>, <span class="dv">19</span>, <span class="dv">17</span>, <span class="dv">17</span>, <span class="dv">17</span>, <span class="dv">22</span>, <span class="dv">22</span>, </span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="dv">25</span>, <span class="dv">21</span>, <span class="dv">21</span>, <span class="dv">30</span>, <span class="dv">29</span>, <span class="dv">24</span>), <span class="at">drivetrain =</span> <span class="fu">c</span>(<span class="st">"rwd"</span>, <span class="st">"rwd"</span>, <span class="st">"rwd"</span>, </span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"rwd"</span>, <span class="st">"rwd"</span>, <span class="st">"rwd"</span>, <span class="st">"awd"</span>, <span class="st">"awd"</span>, <span class="st">"awd"</span>, <span class="st">"rwd"</span>, <span class="st">"rwd"</span>, <span class="st">"rwd"</span>, </span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"awd"</span>, <span class="st">"rwd"</span>), <span class="at">trsmn =</span> <span class="fu">c</span>(<span class="st">"7a"</span>, <span class="st">"7m"</span>, <span class="st">"6m"</span>, <span class="st">"7a"</span>, <span class="st">"7a"</span>, <span class="st">"7a"</span>, </span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"9a"</span>, <span class="st">"6a"</span>, <span class="st">"8am"</span>, <span class="st">"8am"</span>, <span class="st">"8am"</span>, <span class="st">"8am"</span>, <span class="st">"6am"</span>, <span class="st">"6m"</span>), <span class="at">ctry_origin =</span> <span class="fu">c</span>(<span class="st">"United States"</span>, </span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">"United States"</span>, <span class="st">"United States"</span>, <span class="st">"Italy"</span>, <span class="st">"Italy"</span>, <span class="st">"Italy"</span>, </span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Japan"</span>, <span class="st">"Japan"</span>, <span class="st">"United Kingdom"</span>, <span class="st">"United Kingdom"</span>, <span class="st">"United Kingdom"</span>, </span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Germany"</span>, <span class="st">"Germany"</span>, <span class="st">"Germany"</span>), <span class="at">msrp =</span> <span class="fu">c</span>(<span class="dv">447000</span>, <span class="dv">88345</span>, </span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    <span class="dv">95895</span>, <span class="dv">291744</span>, <span class="dv">263553</span>, <span class="dv">233509</span>, <span class="dv">156000</span>, <span class="dv">101770</span>, <span class="dv">198500</span>, <span class="dv">211195</span>, </span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    <span class="dv">205300</span>, <span class="dv">77300</span>, <span class="dv">140700</span>, <span class="dv">65700</span>)), <span class="at">class =</span> <span class="fu">c</span>(<span class="st">"spec_tbl_df"</span>, </span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="st">"tbl_df"</span>, <span class="st">"tbl"</span>, <span class="st">"data.frame"</span>), <span class="at">row.names =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="sc">-</span>14L), <span class="at">spec =</span> <span class="fu">structure</span>(<span class="fu">list</span>(</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">list</span>(<span class="at">mfr =</span> <span class="fu">structure</span>(<span class="fu">list</span>(), <span class="at">class =</span> <span class="fu">c</span>(<span class="st">"collector_character"</span>, </span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">"collector"</span>)), <span class="at">model =</span> <span class="fu">structure</span>(<span class="fu">list</span>(), <span class="at">class =</span> <span class="fu">c</span>(<span class="st">"collector_character"</span>, </span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>    <span class="st">"collector"</span>)), <span class="at">year =</span> <span class="fu">structure</span>(<span class="fu">list</span>(), <span class="at">class =</span> <span class="fu">c</span>(<span class="st">"collector_double"</span>, </span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">"collector"</span>)), <span class="at">trim =</span> <span class="fu">structure</span>(<span class="fu">list</span>(), <span class="at">class =</span> <span class="fu">c</span>(<span class="st">"collector_character"</span>, </span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>    <span class="st">"collector"</span>)), <span class="at">bdy_style =</span> <span class="fu">structure</span>(<span class="fu">list</span>(), <span class="at">class =</span> <span class="fu">c</span>(<span class="st">"collector_character"</span>, </span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>    <span class="st">"collector"</span>)), <span class="at">hp =</span> <span class="fu">structure</span>(<span class="fu">list</span>(), <span class="at">class =</span> <span class="fu">c</span>(<span class="st">"collector_double"</span>, </span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>    <span class="st">"collector"</span>)), <span class="at">hp_rpm =</span> <span class="fu">structure</span>(<span class="fu">list</span>(), <span class="at">class =</span> <span class="fu">c</span>(<span class="st">"collector_double"</span>, </span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>    <span class="st">"collector"</span>)), <span class="at">trq =</span> <span class="fu">structure</span>(<span class="fu">list</span>(), <span class="at">class =</span> <span class="fu">c</span>(<span class="st">"collector_double"</span>, </span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>    <span class="st">"collector"</span>)), <span class="at">trq_rpm =</span> <span class="fu">structure</span>(<span class="fu">list</span>(), <span class="at">class =</span> <span class="fu">c</span>(<span class="st">"collector_double"</span>, </span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>    <span class="st">"collector"</span>)), <span class="at">mpg_c =</span> <span class="fu">structure</span>(<span class="fu">list</span>(), <span class="at">class =</span> <span class="fu">c</span>(<span class="st">"collector_double"</span>, </span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>    <span class="st">"collector"</span>)), <span class="at">mpg_h =</span> <span class="fu">structure</span>(<span class="fu">list</span>(), <span class="at">class =</span> <span class="fu">c</span>(<span class="st">"collector_double"</span>, </span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>    <span class="st">"collector"</span>)), <span class="at">drivetrain =</span> <span class="fu">structure</span>(<span class="fu">list</span>(), <span class="at">class =</span> <span class="fu">c</span>(<span class="st">"collector_character"</span>, </span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>    <span class="st">"collector"</span>)), <span class="at">trsmn =</span> <span class="fu">structure</span>(<span class="fu">list</span>(), <span class="at">class =</span> <span class="fu">c</span>(<span class="st">"collector_character"</span>, </span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>    <span class="st">"collector"</span>)), <span class="at">ctry_origin =</span> <span class="fu">structure</span>(<span class="fu">list</span>(), <span class="at">class =</span> <span class="fu">c</span>(<span class="st">"collector_character"</span>, </span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>    <span class="st">"collector"</span>)), <span class="at">msrp =</span> <span class="fu">structure</span>(<span class="fu">list</span>(), <span class="at">class =</span> <span class="fu">c</span>(<span class="st">"collector_double"</span>, </span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>    <span class="st">"collector"</span>))), <span class="at">default =</span> <span class="fu">structure</span>(<span class="fu">list</span>(), <span class="at">class =</span> <span class="fu">c</span>(<span class="st">"collector_guess"</span>, </span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>    <span class="st">"collector"</span>)), <span class="at">skip =</span> <span class="dv">1</span>), <span class="at">class =</span> <span class="st">"col_spec"</span>))</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>reprex<span class="sc">::</span><span class="fu">reprex</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>``` r
+library(tidyverse)
+library(ggrepel)
+
+gtcars |&gt;
+  slice_head(n = 3, 
+             by = ctry_origin) |&gt;
+  ggplot(aes(x = hp,
+             y = mpg_h,
+             color = ctry_origin,
+             label = model)) +
+  geom_point() +
+  geom_text_repel(force = 2) +
+  theme_classic() +
+  labs(x = "Horse Power",
+       y = "Miles per Gallon (Highway)") +
+  theme(legend.position = "bottom",
+        legend.title = element_blank())
+
+```
+
+&lt;sup&gt;Created on 2023-08-13 with [reprex v2.0.2](https://reprex.tidyverse.org)&lt;/sup&gt;</code></pre>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

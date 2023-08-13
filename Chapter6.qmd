@@ -7,6 +7,7 @@ execute:
   error: false
 editor_options: 
   chunk_output_type: console
+date: 2023-08-05
 ---
 
 # **6.2.1 Exercises**

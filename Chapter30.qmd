@@ -1,5 +1,6 @@
 ---
-title: "Chapter 30 (Quarto Formats)"
+title: "Chapter 30"
+subtitle: "Quarto Formats"
 author: "Aditya Dahiya"
 date: 2023-07-25
 execute: 

@@ -1,5 +1,6 @@
 ---
-title: "Chapter 4 (Data Transformation)"
+title: "Chapter 4"
+subtitle: "Data Transformation"
 author: "Aditya Dahiya"
 bibliography: references.bib
 execute: 

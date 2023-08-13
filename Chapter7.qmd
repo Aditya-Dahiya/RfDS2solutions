@@ -1,6 +1,11 @@
 ---
 title: "Chapter 7"
 author: "Aditya Dahiya"
+date: 2023-08-08
+execute: 
+  warning: false
+  message: false
+  error: false
 ---
 
 # 7.3 Exercises

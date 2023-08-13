@@ -10,7 +10,13 @@ listing:
     - "Chapter6.qmd"
     - "Chapter7.qmd"
     - "Chapter8.qmd"
+    - "Chapter9.qmd"
     - "Chapter29.qmd"
     - "Chapter30.qmd"
-  type: grid
+  fields: [title, subtitle, date, author]
+  type: table
+  grid-item-border: false
+  table-hover: true
+  image-placeholder: "book-cover.jpg"
+  date-format: "medium"
 ---
