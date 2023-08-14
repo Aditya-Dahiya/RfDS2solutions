@@ -48,7 +48,7 @@ website:
           
 format:
   html:
-    theme: flatly
+    theme: pulse
     css: styles.css
     toc: true
 
