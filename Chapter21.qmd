@@ -2,8 +2,66 @@
 title: "Chapter 21"
 subtitle: "Spreadsheets"
 author: "Aditya Dahiya"
+date: 2023-08-15
 execute: 
   warning: false
   error: false
   message: false
+filters:
+  - social-share
+share:
+  permalink: "https://aditya-dahiya.github.io/RfDS2solutions/Chapter21.html"
+  description: "Solutions: R for Data Science (2e)"
+  twitter: true
+  facebook: true
+  linkedin: true
+  email: true
 ---
+
+# 21.2.9 Exercises
+
+### Question 1.
+
+In an Excel file, create the following dataset and save it as survey.xlsx. Alternatively, you can download it as an Excel file from here.
+
+Then, read it into R, with survey_id as a character variable and n_pets as a numerical variable.
+
+### Question 2.
+
+In another Excel file, create the following dataset and save it as roster.xlsx. Alternatively, you can download it as an Excel file from here.
+
+Then, read it into R. The resulting data frame should be called roster and should look like the following.
+
+### Question 3.
+
+In a new Excel file, create the following dataset and save it as sales.xlsx. Alternatively, you can download it as an Excel file from here.
+
+a.  Read sales.xlsx in and save as sales. The data frame should look like the following, with id and n as column names and with 9 rows.
+
+b.  Modify sales further to get it into the following tidy format with three columns (brand, id, and n) and 7 rows of data. Note that id and n are numeric, brand is a character variable.
+
+### Question 4.
+
+Recreate the bake_sale data frame, write it out to an Excel file using the write.xlsx() function from the openxlsx package.
+
+### Question 5.
+
+In Chapter 8 you learned about the janitor::clean_names() function to turn columns names into snake case. Read the students.xlsx file that we introduced earlier in this section and use this function to "clean" the column names.
+
+### Question 6.
+
+What happens if you try to read in a file with .xlsx extension with read_xls()?
+
+# 21.3.6 Exercises
+
+### Question 1.
+
+Read the students dataset from earlier in the chapter from Excel and also from Google Sheets, with no additional arguments supplied to the read_excel() and read_sheet() functions. Are the resulting data frames in R exactly the same? If not, how are they different?
+
+### Question 2.
+
+Read the Google Sheet titled survey from https://pos.it/r4ds-survey, with survey_id as a character variable and n_pets as a numerical variable.
+
+### Question 3.
+
+Read the Google Sheet titled roster from https://pos.it/r4ds-roster. The resulting data frame should be called roster and should look like the following.

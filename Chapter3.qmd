@@ -8,6 +8,15 @@ execute:
   cache: true
   error: false
 date: 2023-07-29
+filters:
+  - social-share
+share:
+  permalink: "https://aditya-dahiya.github.io/RfDS2solutions/Chapter3.html"
+  description: "Solutions: R for Data Science (2e)"
+  twitter: true
+  facebook: true
+  linkedin: true
+  email: true
 ---
 
 ### Some important t**ips:**

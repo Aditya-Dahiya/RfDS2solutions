@@ -11,6 +11,15 @@ fig-cap-location: "top"
 date: 2023-07-29
 editor_options: 
   chunk_output_type: console
+filters:
+  - social-share
+share:
+  permalink: "https://aditya-dahiya.github.io/RfDS2solutions/Chapter4.html"
+  description: "Solutions: R for Data Science (2e)"
+  twitter: true
+  facebook: true
+  linkedin: true
+  email: true
 ---
 
 # **4.2.5 Exercises**

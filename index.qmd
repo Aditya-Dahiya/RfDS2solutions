@@ -1,5 +1,14 @@
 ---
 title: "Solutions: R for Data Science (2e)"
+filters:
+  - social-share
+share:
+  permalink: "https://aditya-dahiya.github.io/RfDS2solutions/"
+  description: "Solutions: R for Data Science (2e)"
+  twitter: true
+  facebook: true
+  linkedin: true
+  email: true
 ---
 
 ## Solutions for the book R for Data Science, 2nd edition

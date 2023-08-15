@@ -7,6 +7,15 @@ execute:
   warning: false
   message: false
   cache: true
+filters:
+  - social-share
+share:
+  permalink: "https://aditya-dahiya.github.io/RfDS2solutions/Chapter30.html"
+  description: "Solutions: R for Data Science (2e)"
+  twitter: true
+  facebook: true
+  linkedin: true
+  email: true
 ---
 
 # 30.5 Interactivity

@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Aditya Dahiya">
+<meta name="dcterms.date" content="2023-08-15">
 
-<title>solutions - Chapter 21</title>
+<title>Book Solutions - Chapter 21</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -40,6 +41,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/social-share-0.1.0/social-share.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/social-share-0.1.0/all.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -75,7 +78,7 @@ ul.task-list li input[type="checkbox"] {
     <img src="./book-cover.jpg" alt="R for Data Science (2nd Edition)" class="navbar-logo">
     </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">solutions</span>
+    <span class="navbar-title">Book Solutions</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -252,7 +255,27 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link active" data-scroll-target="#exercises">21.2.9 Exercises</a>
+  <ul class="collapse">
+  <li><a href="#question-1." id="toc-question-1." class="nav-link" data-scroll-target="#question-1.">Question 1.</a></li>
+  <li><a href="#question-2." id="toc-question-2." class="nav-link" data-scroll-target="#question-2.">Question 2.</a></li>
+  <li><a href="#question-3." id="toc-question-3." class="nav-link" data-scroll-target="#question-3.">Question 3.</a></li>
+  <li><a href="#question-4." id="toc-question-4." class="nav-link" data-scroll-target="#question-4.">Question 4.</a></li>
+  <li><a href="#question-5." id="toc-question-5." class="nav-link" data-scroll-target="#question-5.">Question 5.</a></li>
+  <li><a href="#question-6." id="toc-question-6." class="nav-link" data-scroll-target="#question-6.">Question 6.</a></li>
+  </ul></li>
+  <li><a href="#exercises-1" id="toc-exercises-1" class="nav-link" data-scroll-target="#exercises-1">21.3.6 Exercises</a>
+  <ul class="collapse">
+  <li><a href="#question-1.-1" id="toc-question-1.-1" class="nav-link" data-scroll-target="#question-1.-1">Question 1.</a></li>
+  <li><a href="#question-2.-1" id="toc-question-2.-1" class="nav-link" data-scroll-target="#question-2.-1">Question 2.</a></li>
+  <li><a href="#question-3.-1" id="toc-question-3.-1" class="nav-link" data-scroll-target="#question-3.-1">Question 3.</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/edit/main/Chapter21.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -274,6 +297,12 @@ ul.task-list li input[type="checkbox"] {
           </div>
   </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 15, 2023</p>
+    </div>
+  </div>
   
     
   </div>
@@ -281,8 +310,56 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<section id="exercises" class="level1">
+<h1>21.2.9 Exercises</h1>
+<section id="question-1." class="level3">
+<h3 class="anchored" data-anchor-id="question-1.">Question 1.</h3>
+<p>In an Excel file, create the following dataset and save it as survey.xlsx. Alternatively, you can download it as an Excel file from here.</p>
+<p>Then, read it into R, with survey_id as a character variable and n_pets as a numerical variable.</p>
+</section>
+<section id="question-2." class="level3">
+<h3 class="anchored" data-anchor-id="question-2.">Question 2.</h3>
+<p>In another Excel file, create the following dataset and save it as roster.xlsx. Alternatively, you can download it as an Excel file from here.</p>
+<p>Then, read it into R. The resulting data frame should be called roster and should look like the following.</p>
+</section>
+<section id="question-3." class="level3">
+<h3 class="anchored" data-anchor-id="question-3.">Question 3.</h3>
+<p>In a new Excel file, create the following dataset and save it as sales.xlsx. Alternatively, you can download it as an Excel file from here.</p>
+<ol type="a">
+<li><p>Read sales.xlsx in and save as sales. The data frame should look like the following, with id and n as column names and with 9 rows.</p></li>
+<li><p>Modify sales further to get it into the following tidy format with three columns (brand, id, and n) and 7 rows of data. Note that id and n are numeric, brand is a character variable.</p></li>
+</ol>
+</section>
+<section id="question-4." class="level3">
+<h3 class="anchored" data-anchor-id="question-4.">Question 4.</h3>
+<p>Recreate the bake_sale data frame, write it out to an Excel file using the write.xlsx() function from the openxlsx package.</p>
+</section>
+<section id="question-5." class="level3">
+<h3 class="anchored" data-anchor-id="question-5.">Question 5.</h3>
+<p>In Chapter 8 you learned about the janitor::clean_names() function to turn columns names into snake case. Read the students.xlsx file that we introduced earlier in this section and use this function to “clean” the column names.</p>
+</section>
+<section id="question-6." class="level3">
+<h3 class="anchored" data-anchor-id="question-6.">Question 6.</h3>
+<p>What happens if you try to read in a file with .xlsx extension with read_xls()?</p>
+</section>
+</section>
+<section id="exercises-1" class="level1">
+<h1>21.3.6 Exercises</h1>
+<section id="question-1.-1" class="level3">
+<h3 class="anchored" data-anchor-id="question-1.-1">Question 1.</h3>
+<p>Read the students dataset from earlier in the chapter from Excel and also from Google Sheets, with no additional arguments supplied to the read_excel() and read_sheet() functions. Are the resulting data frames in R exactly the same? If not, how are they different?</p>
+</section>
+<section id="question-2.-1" class="level3">
+<h3 class="anchored" data-anchor-id="question-2.-1">Question 2.</h3>
+<p>Read the Google Sheet titled survey from https://pos.it/r4ds-survey, with survey_id as a character variable and n_pets as a numerical variable.</p>
+</section>
+<section id="question-3.-1" class="level3">
+<h3 class="anchored" data-anchor-id="question-3.-1">Question 3.</h3>
+<p>Read the Google Sheet titled roster from https://pos.it/r4ds-roster. The resulting data frame should be called roster and should look like the following.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -519,7 +596,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<div class="page-columns page-rows-contents page-layout-article"><div class="social-share"><a href="https://twitter.com/share?url=https://aditya-dahiya.github.io/RfDS2solutions/&amp;text=Solutions: R for Data Science (2e)" target="_blank" class="twitter"><i class="fab fa-twitter fa-fw fa-lg"></i></a><a href="https://www.linkedin.com/shareArticle?url=https://aditya-dahiya.github.io/RfDS2solutions/&amp;title=Solutions: R for Data Science (2e)" target="_blank" class="linkedin"><i class="fa-brands fa-linkedin-in fa-fw fa-lg"></i></a>  <a href="mailto:?subject=Solutions: R for Data Science (2e)&amp;body=Check out this link:https://aditya-dahiya.github.io/RfDS2solutions/" target="_blank" class="email"><i class="fa-solid fa-envelope fa-fw fa-lg"></i></a><a href="https://www.facebook.com/sharer.php?u=https://aditya-dahiya.github.io/RfDS2solutions/" target="_blank" class="facebook"><i class="fab fa-facebook-f fa-fw fa-lg"></i></a></div></div>
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/edit/main/Chapter21.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/issues/new" class="toc-action">Report an issue</a></p></div></div></div></div></footer></body></html>
+</body></html>

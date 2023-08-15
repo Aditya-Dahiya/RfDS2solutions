@@ -10,6 +10,15 @@ execute:
 editor_options: 
   chunk_output_type: console
 date: 2023-08-10
+filters:
+  - social-share
+share:
+  permalink: "https://aditya-dahiya.github.io/RfDS2solutions/Chapter8.html"
+  description: "Solutions: R for Data Science (2e)"
+  twitter: true
+  facebook: true
+  linkedin: true
+  email: true
 ---
 
 # 8.2.4 Exercises

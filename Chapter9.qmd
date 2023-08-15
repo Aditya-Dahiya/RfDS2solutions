@@ -5,6 +5,15 @@ author: "Aditya Dahiya"
 editor_options: 
   chunk_output_type: console
 date: 2023-08-13
+filters:
+  - social-share
+share:
+  permalink: "https://aditya-dahiya.github.io/RfDS2solutions/Chapter9.html"
+  description: "Solutions: R for Data Science (2e)"
+  twitter: true
+  facebook: true
+  linkedin: true
+  email: true
 ---
 
 ## 9.1 Google is your friend
