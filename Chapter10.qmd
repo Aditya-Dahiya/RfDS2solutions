@@ -17,5 +17,123 @@ share:
   email: true
 editor_options: 
   chunk_output_type: console
+bibliography: references.bib
 ---
 
+Important messages from the Chapter:
+
+> "The greatest value of a picture is when it forces us to notice what we never expected to see." --- *John Tukey*
+
+-   `ggplot2` will use maximum 6 shapes at a time. The 7th shape is treated as a missing value.
+
+-   Using `alpha` aesthetic for a discrete variable is not advised.
+
+-   The shapes used in `ggplot2` are as follows[@ggplot2] :\--
+
+    ![Shapes available to use in ggplot2.](https://ggplot2.tidyverse.org/articles/ggplot2-specs_files/figure-html/unnamed-chunk-7-1.png){width="355"}
+
+-   Other points here.
+
+```{r}
+#| label: setup
+#| warning: false
+#| error: false
+
+library(tidyverse)
+data("mpg")
+
+```
+
+# **10.2.1 Exercises**
+
+### Question 1
+
+**Create a scatterplot of `hwy` vs. `displ` where the points are pink filled in triangles.**
+
+The scatter-plot is displayed in @fig-q1-ex1 .
+
+```{r}
+#| label: fig-q1-ex1
+#| fig-cap: "Question 1: Scatterplot of hwy vs. displ"
+#| message: false
+#| error: false
+#| warning: false
+
+mpg |>
+  ggplot(aes(x = hwy, y = displ)) +
+  geom_point(shape = 24, fill = "pink") +
+  theme_bw()
+```
+
+### Question 2
+
+**Why did the following code not result in a plot with blue points?**
+
+```         
+ggplot(mpg) +    
+  geom_point(aes(x = displ, y = hwy, color = "blue"))
+```
+
+The mistakes in this code produces a wrong plot as shown in @fig-q2-ex2-wrong .
+
+```{r}
+#| label: fig-q2-ex2-wrong
+#| fig-cap: "The wrong plot produced by the faulty code"
+ggplot(mpg) +    
+  geom_point(aes(x = displ, y = hwy, color = "blue"))
+```
+
+The code will not result in "blue" points because the argument `color = "blue"` is within the aesthetics brackets, i.e., `aes()`. This is because this treats color as an aesthetic to be mapped to a variable. And, `ggplot2` starts looking for a variable called `blue` which does not exist. Accordingly, it produces a scatter plot which shows legend of color, with a variable called "blue".
+
+The corrected code and results are displayed below in @fig-q2-ex2 .
+
+```{r}
+#| label: fig-q2-ex2
+#| fig-cap: "Corrected code produces blue points in the scatterplot"
+
+mpg |>
+  ggplot() +
+  geom_point(aes(x = displ, y = hwy), 
+             color = "blue") +
+  theme_bw()
+```
+
+### Question 3
+
+**What does the `stroke` aesthetic do? What shapes does it work with? (Hint: use [`?geom_point`](https://ggplot2.tidyverse.org/reference/geom_point.html))**
+
+The `stroke` aesthetic controls the width of the border of the points in the `geom_point` . It works with all the shapes, as I tried, but it would work best with shapes 21, 22, 23 and 24 as shown below :\-\--
+
+[![Shapes available to use in ggplot2.](https://ggplot2.tidyverse.org/articles/ggplot2-specs_files/figure-html/unnamed-chunk-7-1.png){alt="Shapes available to use in ggplot2." width="355"}](https://ggplot2.tidyverse.org/articles/ggplot2-specs_files/figure-html/unnamed-chunk-7-1.png)
+
+```{r}
+#| label: fig-q3-ex2
+#| fig-cap: "Use of stroke aesthetic"
+
+mpg |>
+  ggplot() +
+  geom_point(aes(x = displ, 
+                 y = hwy,
+                 stroke = displ/2),
+             shape = 22) +
+  theme_bw()
+```
+
+### Question 4
+
+**What happens if you map an aesthetic to something other than a variable name, like `aes(color = displ < 5)`? Note, you'll also need to specify x and y.**
+
+In this case, I expect that the aesthetic `color` will be mapped to a logical variable, that can have two values, either `TRUE` (mapped to one colour) or `FALSE` (mapped to a second colour). Thus, the logical expression gets treated like a factor with two levels. The legend to the plot shows the two levels of that factor. For example:\-\--
+
+```{r}
+#| label: fig-q4-ex2
+#| fig-cap: "Use of a logical expression in place of a variable in an aesthetic"
+
+mpg |>
+  ggplot(aes(x = displ, 
+             y = hwy,
+             color = displ < 5)) +
+  geom_point() +
+  theme_bw()
+
+```
