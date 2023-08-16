@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -312,50 +346,299 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="exercises" class="level1">
 <h1>21.2.9 Exercises</h1>
+<p>The two main packages for reading data from and writing data to excel spreadsheets are <code>readxl</code> and <code>writexl</code> . But they are not core-tidyverse, so let us load them first.</p>
+<div class="cell" data-hash="Chapter21_cache/html/setup_bfccee1f79f206ae916e7a8bc8f372e1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(writexl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The few important functions we will use are:</p>
+<ol type="1">
+<li><p><code>read_excel()</code></p></li>
+<li><p><code>excel_sheets()</code></p></li>
+</ol>
 <section id="question-1." class="level3">
 <h3 class="anchored" data-anchor-id="question-1.">Question 1.</h3>
-<p>In an Excel file, create the following dataset and save it as survey.xlsx. Alternatively, you can download it as an Excel file from here.</p>
-<p>Then, read it into R, with survey_id as a character variable and n_pets as a numerical variable.</p>
+<p><strong>In an Excel file, create the following dataset and save it as <code>survey.xlsx</code>. Alternatively, you can download it as an Excel file from <a href="https://docs.google.com/spreadsheets/d/1yc5gL-a2OOBr8M7B3IsDNX5uR17vBHOyWZq6xSTG2G8">here</a>. Then, read it into R, with <code>survey_id</code> as a character variable and <code>n_pets</code> as a numerical variable.</strong></p>
+<div class="cell" data-hash="Chapter21_cache/html/q1-ex2_8c1a51ade1adb618a3ec29c7fb8e17ae">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>survey_df <span class="ot">=</span> <span class="fu">tibble</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">survey_id =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_pets =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="st">"N/A"</span>, <span class="st">"two"</span>, <span class="dv">2</span>, <span class="st">""</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>survey_df <span class="sc">|&gt;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_xlsx</span>(<span class="st">"docs/survey.xlsx"</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read_excel</span>(</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> <span class="st">"docs/survey.xlsx"</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_names =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="fu">c</span>(<span class="st">"text"</span>, <span class="st">"text"</span>),</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"N/A"</span>, <span class="st">""</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_pets =</span> <span class="fu">ifelse</span>(n_pets <span class="sc">==</span> <span class="st">"two"</span>, <span class="dv">2</span>, n_pets),</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_pets =</span> <span class="fu">parse_number</span>(n_pets)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  survey_id n_pets
+  &lt;chr&gt;      &lt;dbl&gt;
+1 1              0
+2 2              1
+3 3             NA
+4 4              2
+5 5              2
+6 6             NA</code></pre>
+</div>
+</div>
 </section>
 <section id="question-2." class="level3">
 <h3 class="anchored" data-anchor-id="question-2.">Question 2.</h3>
-<p>In another Excel file, create the following dataset and save it as roster.xlsx. Alternatively, you can download it as an Excel file from here.</p>
-<p>Then, read it into R. The resulting data frame should be called roster and should look like the following.</p>
+<p><strong>In another Excel file, create the following data-set and save it as <code>roster.xlsx</code>. Alternatively, you can download it as an Excel file from <a href="https://docs.google.com/spreadsheets/d/1LgZ0Bkg9d_NK8uTdP2uHXm07kAlwx8-Ictf8NocebIE">here</a>. Then, read it into R. The resulting data frame should be called roster and should look like the following.</strong></p>
+<p>There are two ways of doing this:</p>
+<ol type="1">
+<li><p>Using the <code>read_excel()</code> function with <code>fill()</code> function of the <code>tidyr</code> package.</p></li>
+<li><p>Using the package <code>openxlsx</code> and its function <code>read.xlsx()</code> which has an argument <code>fillMergedCells = TRUE</code> to do the same task in one go. However, the output is a data.frame, which we must then convert to a tibble.</p></li>
+</ol>
+<div class="cell" data-hash="Chapter21_cache/html/q2-ex2_17b9bfcea119d0c3e6e29bb0a3a83d97">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use readxl package with fill() from tidyr</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">read_excel</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> <span class="st">"docs/roster.xlsx"</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fill</span>(group, subgroup)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 3
+   group subgroup    id
+   &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;
+ 1     1 A            1
+ 2     1 A            2
+ 3     1 A            3
+ 4     1 B            4
+ 5     1 B            5
+ 6     1 B            6
+ 7     1 B            7
+ 8     2 A            8
+ 9     2 A            9
+10     2 B           10
+11     2 B           11
+12     2 B           12</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 2: using the openxlsx package</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">read.xlsx</span>(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlsxFile =</span> <span class="st">"docs/roster.xlsx"</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">fillMergedCells =</span> <span class="cn">TRUE</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 3
+   group subgroup    id
+   &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;
+ 1     1 A            1
+ 2     1 A            2
+ 3     1 A            3
+ 4     1 B            4
+ 5     1 B            5
+ 6     1 B            6
+ 7     1 B            7
+ 8     2 A            8
+ 9     2 A            9
+10     2 B           10
+11     2 B           11
+12     2 B           12</code></pre>
+</div>
+</div>
 </section>
 <section id="question-3." class="level3">
 <h3 class="anchored" data-anchor-id="question-3.">Question 3.</h3>
-<p>In a new Excel file, create the following dataset and save it as sales.xlsx. Alternatively, you can download it as an Excel file from here.</p>
+<p>In a new Excel file, create the following dataset and save it as <code>sales.xlsx</code>. Alternatively, you can download it as an Excel file from <a href="https://docs.google.com/spreadsheets/d/1oCqdXUNO8JR3Pca8fHfiz_WXWxMuZAp3YiYFaKze5V0">here</a>.</p>
 <ol type="a">
-<li><p>Read sales.xlsx in and save as sales. The data frame should look like the following, with id and n as column names and with 9 rows.</p></li>
-<li><p>Modify sales further to get it into the following tidy format with three columns (brand, id, and n) and 7 rows of data. Note that id and n are numeric, brand is a character variable.</p></li>
+<li><p><strong>Read <code>sales.xlsx</code> in and save as <code>sales</code>. The data frame should look like the following, with <code>id</code> and <code>n</code> as column names and with 9 rows.</strong></p>
+<div class="cell" data-hash="Chapter21_cache/html/q3a-ex2_59791a33b3173d818fc9188941136ebe">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sales <span class="ot">=</span> <span class="fu">read_excel</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"docs/sales.xlsx"</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">skip =</span> <span class="dv">4</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">"id"</span>, <span class="st">"n"</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>sales</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 2
+  id      n    
+  &lt;chr&gt;   &lt;chr&gt;
+1 Brand 1 n    
+2 1234.0  8.0  
+3 8721.0  2.0  
+4 1822.0  3.0  
+5 Brand 2 n    
+6 3333.0  1.0  
+7 2156.0  3.0  
+8 3987.0  6.0  
+9 3216.0  5.0  </code></pre>
+</div>
+</div></li>
+<li><p><strong>Modify sales further to get it into the following tidy format with three columns (<code>brand</code>, <code>id</code>, and <code>n</code>) and 7 rows of data. Note that <code>id</code> and <code>n</code> are numeric, <code>brand</code> is a character variable.</strong></p>
+<div class="cell" data-hash="Chapter21_cache/html/q3b-ex2_f971f7fa9ae0f1e2ccfaca7632983a8b">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>sales <span class="sc">|&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">brand =</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(id, <span class="st">"Brand"</span>), id, <span class="cn">NA</span>),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> <span class="fu">parse_number</span>(id),</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">parse_number</span>(n, <span class="at">na =</span> <span class="st">"n"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fill</span>(brand) <span class="sc">|&gt;</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">|&gt;</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(brand)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 3
+  brand      id     n
+  &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;
+1 Brand 1  1234     8
+2 Brand 1  8721     2
+3 Brand 1  1822     3
+4 Brand 2  3333     1
+5 Brand 2  2156     3
+6 Brand 2  3987     6
+7 Brand 2  3216     5</code></pre>
+</div>
+</div></li>
 </ol>
 </section>
 <section id="question-4." class="level3">
 <h3 class="anchored" data-anchor-id="question-4.">Question 4.</h3>
-<p>Recreate the bake_sale data frame, write it out to an Excel file using the write.xlsx() function from the openxlsx package.</p>
+<p>Recreate the <code>bake_sale</code> data frame, write it out to an Excel file using the <code>write.xlsx()</code> function from the <code>openxlsx</code> package.</p>
+<div class="cell" data-hash="Chapter21_cache/html/q4-ex2_b86ac9f0c378e6c978eecc3886bdb3d2">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>bake_sale <span class="ot">=</span> <span class="fu">tibble</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">item =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"brownie"</span>, <span class="st">"cupcake"</span>, <span class="st">"cookie"</span>)),</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">quantity =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">8</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>bake_sale <span class="sc">|&gt;</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write.xlsx</span>(<span class="st">"docs/bake_sale.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="question-5." class="level3">
 <h3 class="anchored" data-anchor-id="question-5.">Question 5.</h3>
-<p>In Chapter 8 you learned about the janitor::clean_names() function to turn columns names into snake case. Read the students.xlsx file that we introduced earlier in this section and use this function to “clean” the column names.</p>
+<p>In Chapter 8 you learned about the <code>janitor::clean_names()</code> function to turn columns names into snake case. Read the <code>students.xlsx</code> file that we introduced earlier in this section and use this function to “clean” the column names.</p>
+<div class="cell" data-hash="Chapter21_cache/html/q5-ex2_c62a3dc69def21c7e245fee5586fde67">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 1: Read in data from the google sheets</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># library(googlesheets4)</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># id = "1V1nPp1tzOuutXFLb3G9Eyxi3qxeEhnOXUzL5_BcCQ0w"</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># For an easy reprex, write in the data now, suing:--</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># read_sheet(id) |&gt;</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   dput()</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>raw_data <span class="ot">=</span> <span class="fu">structure</span>(<span class="fu">list</span>(<span class="st">`</span><span class="at">Student ID</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>), <span class="st">`</span><span class="at">Full Name</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Sunil Huffmann"</span>, <span class="st">"Barclay Lynn"</span>, <span class="st">"Jayendra Lyne"</span>, <span class="st">"Leon Rossini"</span>, <span class="st">"Chidiegwu Dunkel"</span>,<span class="st">"Güvenç Attila"</span>), <span class="at">favourite.food =</span> <span class="fu">c</span>(<span class="st">"Strawberry yoghurt"</span>, <span class="st">"French fries"</span>, <span class="st">"N/A"</span>, <span class="st">"Anchovies"</span>, <span class="st">"Pizza"</span>, <span class="st">"Ice cream"</span>), <span class="at">mealPlan =</span> <span class="fu">c</span>(<span class="st">"Lunch only"</span>, <span class="st">"Lunch only"</span>, <span class="st">"Breakfast and lunch"</span>, <span class="st">"Lunch only"</span>, <span class="st">"Breakfast and lunch"</span>, <span class="st">"Lunch only"</span>), <span class="at">AGE =</span> <span class="fu">list</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="cn">NULL</span>, <span class="st">"five"</span>, <span class="dv">6</span>)), <span class="at">class =</span> <span class="fu">c</span>(<span class="st">"tbl_df"</span>, <span class="st">"tbl"</span>, <span class="st">"data.frame"</span>), <span class="at">row.names =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="sc">-</span>6L))</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>raw_data <span class="sc">|&gt;</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>() <span class="sc">|&gt;</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+  student_id full_name        favourite_food     meal_plan           age      
+       &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;              &lt;chr&gt;               &lt;list&gt;   
+1          1 Sunil Huffmann   Strawberry yoghurt Lunch only          &lt;dbl [1]&gt;
+2          2 Barclay Lynn     French fries       Lunch only          &lt;dbl [1]&gt;
+3          3 Jayendra Lyne    N/A                Breakfast and lunch &lt;dbl [1]&gt;
+4          4 Leon Rossini     Anchovies          Lunch only          &lt;NULL&gt;   
+5          5 Chidiegwu Dunkel Pizza              Breakfast and lunch &lt;chr [1]&gt;
+6          6 Güvenç Attila    Ice cream          Lunch only          &lt;dbl [1]&gt;</code></pre>
+</div>
+</div>
 </section>
 <section id="question-6." class="level3">
 <h3 class="anchored" data-anchor-id="question-6.">Question 6.</h3>
-<p>What happens if you try to read in a file with .xlsx extension with read_xls()?</p>
+<p><strong>What happens if you try to read in a file with .xlsx extension with read_xls()?</strong></p>
+<p>If we try to open a <code>*.xlsx</code> file with <code>read_xls()</code> , an error is displayed that <code>Error:</code> <em>filepath</em> <code>libxls error: Unable to open file</code></p>
+<div class="cell" data-hash="Chapter21_cache/html/q6-ex2_931b8e1cefe8393cb41f5612973e59c7">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_xls</span>(<span class="st">"docs/sales.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 </section>
 <section id="exercises-1" class="level1">
 <h1>21.3.6 Exercises</h1>
 <section id="question-1.-1" class="level3">
 <h3 class="anchored" data-anchor-id="question-1.-1">Question 1.</h3>
-<p>Read the students dataset from earlier in the chapter from Excel and also from Google Sheets, with no additional arguments supplied to the read_excel() and read_sheet() functions. Are the resulting data frames in R exactly the same? If not, how are they different?</p>
+<p><strong>Read the students data set from earlier in the chapter from Excel and also from Google Sheets, with no additional arguments supplied to the <code>read_excel()</code> and <code>read_sheet()</code> functions. Are the resulting data frames in R exactly the same? If not, how are they different?</strong></p>
+<p>The two resulting data frames are not exactly the same. The data frame created from <code>read_excel()</code> , i.e.&nbsp;<code>df_xl</code> has the has variable <code>AGE</code> saved as character because one of the values is written in characters, instead of a number. Whenever some data is <em>numeric</em> and some data is <em>character</em> , <code>read_excel()</code> converts all data within a column into character format.</p>
+<p>On the other hand, the data frame created from <code>read_sheet()</code> of <code>googlesheets4</code> package, i.e.&nbsp;<code>df_gs</code> has this variable stored as a <strong>“list”</strong>, which contains both <code>numeric</code> and <code>character</code> types of data.</p>
+<div class="cell" data-hash="Chapter21_cache/html/q1-ex3_d12a2ef6004f991f1d7ddac9a21e1b38">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df_xl <span class="ot">=</span> <span class="fu">read_excel</span>(<span class="st">"docs/students.xlsx"</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(googlesheets4)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>url_id <span class="ot">=</span> <span class="st">"1V1nPp1tzOuutXFLb3G9Eyxi3qxeEhnOXUzL5_BcCQ0w"</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>df_gs <span class="ot">=</span> <span class="fu">read_sheet</span>(url_id)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparing the types of columns in the two data.frames</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(df_xl, class) <span class="sc">==</span> <span class="fu">sapply</span>(df_gs, class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Student ID      Full Name favourite.food       mealPlan            AGE 
+          TRUE           TRUE           TRUE           TRUE          FALSE </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(df_xl<span class="sc">$</span>AGE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(df_gs<span class="sc">$</span>AGE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "list"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(df_gs<span class="sc">$</span>AGE, class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"   "numeric"   "numeric"   "NULL"      "character" "numeric"  </code></pre>
+</div>
+</div>
 </section>
 <section id="question-2.-1" class="level3">
 <h3 class="anchored" data-anchor-id="question-2.-1">Question 2.</h3>
-<p>Read the Google Sheet titled survey from https://pos.it/r4ds-survey, with survey_id as a character variable and n_pets as a numerical variable.</p>
+<p><strong>Read the Google Sheet titled survey from <a href="https://pos.it/r4ds-survey" class="uri">https://pos.it/r4ds-survey</a>, with survey_id as a character variable and n_pets as a numerical variable.</strong></p>
+<p>When we read Google sheets, using <code>col_types</code> argument, we introduce <code>NA</code>s by coercion.</p>
+<div class="cell" data-hash="Chapter21_cache/html/q2-ex3_3ea3857b934373c1258995cbcae0b0f4">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>url_gs <span class="ot">=</span> <span class="st">"https://docs.google.com/spreadsheets/d/1yc5gL-a2OOBr8M7B3IsDNX5uR17vBHOyWZq6xSTG2G8/edit#gid=0"</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">read_sheet</span>(</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ss =</span> url_gs,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="st">"cd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  survey_id n_pets
+  &lt;chr&gt;      &lt;dbl&gt;
+1 1              0
+2 2              1
+3 3             NA
+4 4             NA
+5 5              2
+6 6             NA</code></pre>
+</div>
+</div>
 </section>
 <section id="question-3.-1" class="level3">
 <h3 class="anchored" data-anchor-id="question-3.-1">Question 3.</h3>
-<p>Read the Google Sheet titled roster from https://pos.it/r4ds-roster. The resulting data frame should be called roster and should look like the following.</p>
+<p><strong>Read the Google Sheet titled roster from <a href="https://pos.it/r4ds-roster" class="uri">https://pos.it/r4ds-roster</a>. The resulting data frame should be called roster and should look like the following.</strong></p>
+<div class="cell" data-hash="Chapter21_cache/html/unnamed-chunk-11_5be1636c0f28ffbd3e5f5d9ddff906c9">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>url_gs1 <span class="ot">=</span> <span class="st">"https://docs.google.com/spreadsheets/d/1LgZ0Bkg9d_NK8uTdP2uHXm07kAlwx8-Ictf8NocebIE/edit#gid=0"</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">read_sheet</span>(</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ss =</span> url_gs1</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="fu">fill</span>(group, subgroup)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 3
+   group subgroup    id
+   &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;
+ 1     1 A            1
+ 2     1 A            2
+ 3     1 A            3
+ 4     1 B            4
+ 5     1 B            5
+ 6     1 B            6
+ 7     1 B            7
+ 8     2 A            8
+ 9     2 A            9
+10     2 B           10
+11     2 B           11
+12     2 B           12</code></pre>
+</div>
+</div>
 
 
 </section>
@@ -596,7 +879,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<div class="page-columns page-rows-contents page-layout-article"><div class="social-share"><a href="https://twitter.com/share?url=https://aditya-dahiya.github.io/RfDS2solutions/&amp;text=Solutions: R for Data Science (2e)" target="_blank" class="twitter"><i class="fab fa-twitter fa-fw fa-lg"></i></a><a href="https://www.linkedin.com/shareArticle?url=https://aditya-dahiya.github.io/RfDS2solutions/&amp;title=Solutions: R for Data Science (2e)" target="_blank" class="linkedin"><i class="fa-brands fa-linkedin-in fa-fw fa-lg"></i></a>  <a href="mailto:?subject=Solutions: R for Data Science (2e)&amp;body=Check out this link:https://aditya-dahiya.github.io/RfDS2solutions/" target="_blank" class="email"><i class="fa-solid fa-envelope fa-fw fa-lg"></i></a><a href="https://www.facebook.com/sharer.php?u=https://aditya-dahiya.github.io/RfDS2solutions/" target="_blank" class="facebook"><i class="fab fa-facebook-f fa-fw fa-lg"></i></a></div></div>
+<div class="page-columns page-rows-contents page-layout-article"><div class="social-share"><a href="https://twitter.com/share?url=https://aditya-dahiya.github.io/RfDS2solutions/Chapter21.html&amp;text=Solutions: R for Data Science (2e)" target="_blank" class="twitter"><i class="fab fa-twitter fa-fw fa-lg"></i></a><a href="https://www.linkedin.com/shareArticle?url=https://aditya-dahiya.github.io/RfDS2solutions/Chapter21.html&amp;title=Solutions: R for Data Science (2e)" target="_blank" class="linkedin"><i class="fa-brands fa-linkedin-in fa-fw fa-lg"></i></a>  <a href="mailto:?subject=Solutions: R for Data Science (2e)&amp;body=Check out this link:https://aditya-dahiya.github.io/RfDS2solutions/Chapter21.html" target="_blank" class="email"><i class="fa-solid fa-envelope fa-fw fa-lg"></i></a><a href="https://www.facebook.com/sharer.php?u=https://aditya-dahiya.github.io/RfDS2solutions/Chapter21.html" target="_blank" class="facebook"><i class="fab fa-facebook-f fa-fw fa-lg"></i></a></div></div>
 
 
 

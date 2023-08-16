@@ -7,6 +7,8 @@ execute:
   warning: false
   error: false
   message: false
+  cache: true
+  output: collapse
 filters:
   - social-share
 share:
@@ -16,52 +18,225 @@ share:
   facebook: true
   linkedin: true
   email: true
+editor_options: 
+  chunk_output_type: console
 ---
 
 # 21.2.9 Exercises
 
+The two main packages for reading data from and writing data to excel spreadsheets are `readxl` and `writexl` . But they are not core-tidyverse, so let us load them first.
+
+```{r}
+#| label: setup
+#| error: false
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(readxl)
+library(writexl)
+```
+
+The few important functions we will use are:
+
+1.  `read_excel()`
+
+2.  `excel_sheets()`
+
 ### Question 1.
 
-In an Excel file, create the following dataset and save it as survey.xlsx. Alternatively, you can download it as an Excel file from here.
+**In an Excel file, create the following dataset and save it as `survey.xlsx`. Alternatively, you can download it as an Excel file from [here](https://docs.google.com/spreadsheets/d/1yc5gL-a2OOBr8M7B3IsDNX5uR17vBHOyWZq6xSTG2G8). Then, read it into R, with `survey_id` as a character variable and `n_pets` as a numerical variable.**
 
-Then, read it into R, with survey_id as a character variable and n_pets as a numerical variable.
+```{r}
+#| label: q1-ex2
+
+survey_df = tibble(
+  survey_id = c(1:6),
+  n_pets = c(0,1,"N/A", "two", 2, "")
+)
+
+survey_df |>
+  write_xlsx("docs/survey.xlsx")
+
+df = read_excel(
+  path = "docs/survey.xlsx",
+  col_names = TRUE,
+  col_types = c("text", "text"),
+  na = c("N/A", "")
+  ) |>
+  mutate(
+    n_pets = ifelse(n_pets == "two", 2, n_pets),
+    n_pets = parse_number(n_pets)
+    )
+
+df
+```
 
 ### Question 2.
 
-In another Excel file, create the following dataset and save it as roster.xlsx. Alternatively, you can download it as an Excel file from here.
+**In another Excel file, create the following data-set and save it as `roster.xlsx`. Alternatively, you can download it as an Excel file from [here](https://docs.google.com/spreadsheets/d/1LgZ0Bkg9d_NK8uTdP2uHXm07kAlwx8-Ictf8NocebIE). Then, read it into R. The resulting data frame should be called roster and should look like the following.**
 
-Then, read it into R. The resulting data frame should be called roster and should look like the following.
+There are two ways of doing this:
+
+1.  Using the `read_excel()` function with `fill()` function of the `tidyr` package.
+
+2.  Using the package `openxlsx` and its function `read.xlsx()` which has an argument `fillMergedCells = TRUE` to do the same task in one go. However, the output is a data.frame, which we must then convert to a tibble.
+
+```{r}
+#| label: q2-ex2
+
+# Use readxl package with fill() from tidyr
+read_excel(
+  path = "docs/roster.xlsx"
+  ) |>
+  fill(group, subgroup)
+
+
+# Option 2: using the openxlsx package
+library(openxlsx)
+read.xlsx(
+  xlsxFile = "docs/roster.xlsx",
+  fillMergedCells = TRUE
+  ) |>
+  as_tibble()
+```
 
 ### Question 3.
 
-In a new Excel file, create the following dataset and save it as sales.xlsx. Alternatively, you can download it as an Excel file from here.
+In a new Excel file, create the following dataset and save it as `sales.xlsx`. Alternatively, you can download it as an Excel file from [here](https://docs.google.com/spreadsheets/d/1oCqdXUNO8JR3Pca8fHfiz_WXWxMuZAp3YiYFaKze5V0).
 
-a.  Read sales.xlsx in and save as sales. The data frame should look like the following, with id and n as column names and with 9 rows.
+a.  **Read `sales.xlsx` in and save as `sales`. The data frame should look like the following, with `id` and `n` as column names and with 9 rows.**
 
-b.  Modify sales further to get it into the following tidy format with three columns (brand, id, and n) and 7 rows of data. Note that id and n are numeric, brand is a character variable.
+    ```{r}
+    #| label: q3a-ex2
+
+    sales = read_excel(
+      "docs/sales.xlsx",
+      skip = 4,
+      col_names = c("id", "n")
+    )
+    sales
+    ```
+
+b.  **Modify sales further to get it into the following tidy format with three columns (`brand`, `id`, and `n`) and 7 rows of data. Note that `id` and `n` are numeric, `brand` is a character variable.**
+
+    ```{r}
+    #| label: q3b-ex2
+
+    sales |>
+      mutate(
+        brand = ifelse(str_detect(id, "Brand"), id, NA),
+        id = parse_number(id),
+        n = parse_number(n, na = "n")) |>
+      fill(brand) |>
+      drop_na() |>
+      relocate(brand)
+
+    ```
 
 ### Question 4.
 
-Recreate the bake_sale data frame, write it out to an Excel file using the write.xlsx() function from the openxlsx package.
+Recreate the `bake_sale` data frame, write it out to an Excel file using the `write.xlsx()` function from the `openxlsx` package.
+
+```{r}
+#| label: q4-ex2
+
+bake_sale = tibble(
+  item = factor(c("brownie", "cupcake", "cookie")),
+  quantity = c(10, 5, 8)
+)
+bake_sale |>
+  write.xlsx("docs/bake_sale.xlsx")
+```
 
 ### Question 5.
 
-In Chapter 8 you learned about the janitor::clean_names() function to turn columns names into snake case. Read the students.xlsx file that we introduced earlier in this section and use this function to "clean" the column names.
+In Chapter 8 you learned about the `janitor::clean_names()` function to turn columns names into snake case. Read the `students.xlsx` file that we introduced earlier in this section and use this function to "clean" the column names.
+
+```{r}
+#| label: q5-ex2
+# Option 1: Read in data from the google sheets
+# library(googlesheets4)
+# id = "1V1nPp1tzOuutXFLb3G9Eyxi3qxeEhnOXUzL5_BcCQ0w"
+
+# For an easy reprex, write in the data now, suing:--
+# read_sheet(id) |>
+#   dput()
+
+raw_data = structure(list(`Student ID` = c(1, 2, 3, 4, 5, 6), `Full Name` = c("Sunil Huffmann", "Barclay Lynn", "Jayendra Lyne", "Leon Rossini", "Chidiegwu Dunkel","Güvenç Attila"), favourite.food = c("Strawberry yoghurt", "French fries", "N/A", "Anchovies", "Pizza", "Ice cream"), mealPlan = c("Lunch only", "Lunch only", "Breakfast and lunch", "Lunch only", "Breakfast and lunch", "Lunch only"), AGE = list(4, 5, 7, NULL, "five", 6)), class = c("tbl_df", "tbl", "data.frame"), row.names = c(NA, -6L))
+
+raw_data |>
+  janitor::clean_names() |>
+  as_tibble()
+```
 
 ### Question 6.
 
-What happens if you try to read in a file with .xlsx extension with read_xls()?
+**What happens if you try to read in a file with .xlsx extension with read_xls()?**
+
+If we try to open a `*.xlsx` file with `read_xls()` , an error is displayed that `Error:` *filepath* `libxls error: Unable to open file`
+
+```{r}
+#| label: q6-ex2
+#| eval: false
+
+read_xls("docs/sales.xlsx")
+```
 
 # 21.3.6 Exercises
 
 ### Question 1.
 
-Read the students dataset from earlier in the chapter from Excel and also from Google Sheets, with no additional arguments supplied to the read_excel() and read_sheet() functions. Are the resulting data frames in R exactly the same? If not, how are they different?
+**Read the students data set from earlier in the chapter from Excel and also from Google Sheets, with no additional arguments supplied to the `read_excel()` and `read_sheet()` functions. Are the resulting data frames in R exactly the same? If not, how are they different?**
+
+The two resulting data frames are not exactly the same. The data frame created from `read_excel()` , i.e. `df_xl` has the has variable `AGE` saved as character because one of the values is written in characters, instead of a number. Whenever some data is *numeric* and some data is *character* , `read_excel()` converts all data within a column into character format.
+
+On the other hand, the data frame created from `read_sheet()` of `googlesheets4` package, i.e. `df_gs` has this variable stored as a **"list"**, which contains both `numeric` and `character` types of data.
+
+```{r}
+#| label: q1-ex3
+
+df_xl = read_excel("docs/students.xlsx")
+
+library(googlesheets4)
+url_id = "1V1nPp1tzOuutXFLb3G9Eyxi3qxeEhnOXUzL5_BcCQ0w"
+
+df_gs = read_sheet(url_id)
+# Comparing the types of columns in the two data.frames
+sapply(df_xl, class) == sapply(df_gs, class)
+
+class(df_xl$AGE)
+class(df_gs$AGE)
+
+sapply(df_gs$AGE, class)
+```
 
 ### Question 2.
 
-Read the Google Sheet titled survey from https://pos.it/r4ds-survey, with survey_id as a character variable and n_pets as a numerical variable.
+**Read the Google Sheet titled survey from <https://pos.it/r4ds-survey>, with survey_id as a character variable and n_pets as a numerical variable.**
+
+When we read Google sheets, using `col_types` argument, we introduce `NA`s by coercion.
+
+```{r}
+#| label: q2-ex3
+
+url_gs = "https://docs.google.com/spreadsheets/d/1yc5gL-a2OOBr8M7B3IsDNX5uR17vBHOyWZq6xSTG2G8/edit#gid=0"
+
+read_sheet(
+  ss = url_gs,
+  col_types = "cd")
+
+```
 
 ### Question 3.
 
-Read the Google Sheet titled roster from https://pos.it/r4ds-roster. The resulting data frame should be called roster and should look like the following.
+**Read the Google Sheet titled roster from <https://pos.it/r4ds-roster>. The resulting data frame should be called roster and should look like the following.**
+
+```{r}
+url_gs1 = "https://docs.google.com/spreadsheets/d/1LgZ0Bkg9d_NK8uTdP2uHXm07kAlwx8-Ictf8NocebIE/edit#gid=0"
+
+read_sheet(
+  ss = url_gs1
+) |>
+fill(group, subgroup)  
+```

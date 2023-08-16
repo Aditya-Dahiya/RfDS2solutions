@@ -38,9 +38,13 @@ website:
           - Chapter7.qmd
           - Chapter8.qmd
           - Chapter9.qmd
+      - section: "Visualize"
+          - Chapter10.qmd
+      - section: "Transform"
       - section: "Import"
         contents:
           - Chapter21.qmd
+      - section: "Program"
       - section: "Communicate"
         contents:
           - Chapter29.qmd
