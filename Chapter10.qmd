@@ -46,7 +46,7 @@ data("mpg")
 
 ```
 
-# **10.2.1 Exercises**
+# 10.2.1 Exercises
 
 ### Question 1
 
@@ -245,4 +245,198 @@ mpg |>
   geom_point(shape = 21,
              color = "white",
              stroke = 1.5)
+```
+
+# 10.4.1 Exercises
+
+### Question 1
+
+**What happens if you facet on a continuous variable?**
+
+Technically, it is possible to facet on a continuous variable. `ggplot2` will be forced to treat each value of a continuous variable as a factor / level, and produce separate graph for it. However, faceting on a continuous variable is not advisable because it produces too many plots, and could end up producing a plot for each value of the continuous variable as shown in the .
+
+Thus, we should always facet on a categorical variable.
+
+```{r}
+#| label: fig-q1-ex4
+#| fig-cap-location: top
+#| fig-cap: "Faceting on a continuous variable like price results in a useless plot"
+data("diamonds")
+diamonds |>
+  # Filter to reduce number of observations to 
+  # avoid overuse of computing power
+  filter(carat > 2.5) |>
+  ggplot(aes(y = price,
+             x = carat)) +
+  geom_point() + 
+  theme_minimal() + 
+  facet_wrap(~price)
+
+```
+
+### Question 2
+
+**What do the empty cells in the plot above with `facet_grid(drv ~ cyl)` mean? Run the following code. How do they relate to the resulting plot?**
+
+[![](https://r4ds.hadley.nz/layers_files/figure-html/unnamed-chunk-22-1.png){fig-align="left" width="428"}](https://r4ds.hadley.nz/layers_files/figure-html/unnamed-chunk-22-1.png)
+
+```         
+ggplot(mpg) +    
+  geom_point(aes(x = drv, 
+                 y = cyl))
+```
+
+The empty cells in the plot above with `facet_grid(drv ~ cyl)` mean that there are no observations for that particular combination of `drv` and `cyl` . For example, there are no cars with 5 `cyl` and 4 `drv` .
+
+### Question 3
+
+**What plots does the following code make? What does `.` do?**
+
+```         
+ggplot(mpg) +    
+  geom_point(aes(x = displ, y = hwy)) +   
+  facet_grid(drv ~ .)  
+
+ggplot(mpg) +    
+  geom_point(aes(x = displ, y = hwy)) +   
+  facet_grid(. ~ cyl)
+```
+
+```{r}
+#| label: fig-q3-ex4
+#| fig-cap: "Plots produced by Code in Question 3, Exercise 10.4.1"
+#| echo: false
+#| message: false
+#| error: false
+#| layout-ncol: 2
+
+ggplot(mpg) +    
+  geom_point(aes(x = displ, y = hwy)) +   
+  facet_grid(drv ~ .)  
+
+ggplot(mpg) +    
+  geom_point(aes(x = displ, y = hwy)) +   
+  facet_grid(. ~ cyl)
+```
+
+The plots generated are displayed above in @fig-q3-ex4 .
+
+Thus, it is clear that the marker "`.`" is used as a filler to decide whether the faceting variable's levels are to be displayed across rows or across columns.
+
+The following @fig-q3a-ex4 displays this in action. When the code in `facet_grid()` is `drv ~ .`, then the plot produced is with levels of `drv` across rows. When the code is `. ~ drv`, then the plot produced is with levels of `drv` across columns. Thus, the "`.`"can be used with `facet_grid()` to create plots like `facet_wrap()` with levels across columns or rows, as per our choosing. The similar output could be achieved with `facet_wrap()` using the option `dir = "v"` or `dir = "h"`.
+
+```{r}
+#| label: fig-q3a-ex4
+#| fig-cap: "Plots to demonstrate use of . in ggplot2"
+#| layout-ncol: 2
+#| error: false
+#| message: false
+#| warning: false
+
+# Plot 1
+ggplot(mpg) +    
+  geom_point(aes(x = displ, y = hwy)) +   
+  facet_grid(drv ~ .) +
+  labs(title = "Plot 1")
+
+# Plot 2
+ggplot(mpg) +    
+  geom_point(aes(x = displ, y = hwy)) +   
+  facet_grid(. ~ drv) + 
+  labs(title = "Plot 2")
+
+```
+
+### Question 4
+
+**Take the first faceted plot in this section:**
+
+```         
+ggplot(mpg) + 
+  geom_point(aes(x = displ, y = hwy)) +
+  facet_wrap(~ class, nrow = 2)
+```
+
+**What are the advantages to using faceting instead of the color aesthetic? What are the disadvantages? How might the balance change if you had a larger data-set?**
+
+Advantages of faceting instead of using color aesthetic:
+
+1.  It can be used in black and white print medium.
+
+2.  When there are too many levels, too many colours can be confusing and make the plot clutter up. Instead, using faceting makes it easier to display as many levels as wanted.
+
+3.  When we want to show difference in relation between x-axis and y-axis variable across different levels of faceting variable, it is better to show the plot with faceting, rather than colour aesthetic. This allows audience to immediately perceive the difference.
+
+4.  If the values of x-axis and y-axis are very different across different levels of faceting variable, then we can allow free scales in faceting. This option is not available in colour aesthetic, as all observations are on the same plot area.
+
+Disadvantages of faceting instead of using color aesthetic:
+
+1.  Faceting makes individual plots smaller, so it is not good for mobile-view websites and smaller size plots.
+
+2.  If we want to compare observations on the same plot area, use of colors is better than using faceting because faceting splits observations across plots.
+
+3.  If the levels of faceting variable are very less, like 1-2; or, if the total observations are very few, then faceting will render plots which are very sparsely populated. Here, we will prefer colours.
+
+If we had a larger data set, use of colours will lead to clutter in the plot. Here, we will prefer faceting.
+
+### Question 5
+
+**Read [`?facet_wrap`](https://ggplot2.tidyverse.org/reference/facet_wrap.html). What does `nrow` do? What does `ncol` do? What other options control the layout of the individual panels? Why doesn't [`facet_grid()`](https://ggplot2.tidyverse.org/reference/facet_grid.html) have `nrow` and `ncol` arguments?**
+
+The `nrow` indicates the number of rows to be created in the faceted plot, and `ncol` indicates the number of columns.
+
+The other options which control the layout of individual panels are:-
+
+1.  `dir` which refers to direction, either `h` where plots are laid horizontally, or `v` where plots are laid vertically.
+
+2.  `as.table` which if `TRUE`, makes the facets to be laid out like a table with the highest values at bottom right. If it is `FALSE`, the highest values are at top right.
+
+3.  `switch` decides where the labels are displayed on the plots.
+
+4.  `drop` , which if `TRUE` , will lead to dropping of plots without any observations.
+
+5.  `scales` : which decides should the scales of plots be fixed (same for all) or free (different, as per data).
+
+### Question 6
+
+**Which of the following plots makes it easier to compare engine size (`displ`) across cars with different drive trains? What does this say about when to place a faceting variable across rows or columns?**
+
+```         
+# First Plot
+ggplot(mpg, aes(x = displ)) +    
+  geom_histogram() +    
+  facet_grid(drv ~ .)  
+
+# Second Plot
+ggplot(mpg, aes(x = displ)) +    
+  geom_histogram() +   
+  facet_grid(. ~ drv)
+```
+
+The first plot makes it easier to compare the compare engine size (`displ`) across cars with different drive trains since we can easily compare `displ` levels across types of drive trains.
+
+This tells us that the faceting variable should be placed across rows, to be easily able to compare. More generally, the variable to be compared should be across a common x-axis or a common y-axis for comparison across plots.
+
+### Question 7
+
+Recreate the following plot using [`facet_wrap()`](https://ggplot2.tidyverse.org/reference/facet_wrap.html) instead of [`facet_grid()`](https://ggplot2.tidyverse.org/reference/facet_grid.html). How do the positions of the facet labels change?
+
+```         
+ggplot(mpg) +    
+  geom_point(aes(x = displ, y = hwy)) +   
+  facet_grid(drv ~ .)
+```
+
+The following code recreates the plot using `facet_wrap()` in @fig-q7-ex4 .
+
+```{r}
+#| label: fig-q7-ex4
+#| fig-cap: "Recreating facet_grid() graph with facet_wrap() using options"
+
+
+ggplot(mpg) +    
+  geom_point(aes(x = displ, y = hwy)) +   
+  facet_wrap(~drv, 
+             dir = "v", 
+             strip.position = "right")
 ```
