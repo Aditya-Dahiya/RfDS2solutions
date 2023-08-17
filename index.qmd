@@ -9,6 +9,10 @@ share:
   facebook: true
   linkedin: true
   email: true
+website:
+  search: 
+    location: navbar
+    type: textbox
 ---
 
 ## Solutions for the book R for Data Science, 2nd edition

@@ -55,7 +55,7 @@ website:
           
 format:
   html:
-    theme: pulse
+    theme: sandstone
     css: styles.css
     toc: true
 

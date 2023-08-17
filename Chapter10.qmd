@@ -6,6 +6,7 @@ date: 2023-08-16
 execute: 
   warning: false
   error: false
+  cache: true
 filters:
   - social-share
 share:
@@ -319,11 +320,11 @@ ggplot(mpg) +
   facet_grid(. ~ cyl)
 ```
 
-The plots generated are displayed above in @fig-q3-ex4 .
+The plots generated are displayed above.
 
 Thus, it is clear that the marker "`.`" is used as a filler to decide whether the faceting variable's levels are to be displayed across rows or across columns.
 
-The following @fig-q3a-ex4 displays this in action. When the code in `facet_grid()` is `drv ~ .`, then the plot produced is with levels of `drv` across rows. When the code is `. ~ drv`, then the plot produced is with levels of `drv` across columns. Thus, the "`.`"can be used with `facet_grid()` to create plots like `facet_wrap()` with levels across columns or rows, as per our choosing. The similar output could be achieved with `facet_wrap()` using the option `dir = "v"` or `dir = "h"`.
+The following figures display this in action. When the code in `facet_grid()` is `drv ~ .`, then the plot produced is with levels of `drv` across rows. When the code is `. ~ drv`, then the plot produced is with levels of `drv` across columns. Thus, the "`.`"can be used with `facet_grid()` to create plots like `facet_wrap()` with levels across columns or rows, as per our choosing. The similar output could be achieved with `facet_wrap()` using the option `dir = "v"` or `dir = "h"`.
 
 ```{r}
 #| label: fig-q3a-ex4

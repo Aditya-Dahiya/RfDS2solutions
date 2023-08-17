@@ -338,7 +338,7 @@ div.csl-indent {
    
   <ul>
   <li><a href="#important-points" id="toc-important-points" class="nav-link active" data-scroll-target="#important-points">Important Points:</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><strong>10.2.1 Exercises</strong></a>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">10.2.1 Exercises</a>
   <ul class="collapse">
   <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1">Question 1</a></li>
   <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2">Question 2</a></li>
@@ -352,7 +352,7 @@ div.csl-indent {
   <li><a href="#question-3-1" id="toc-question-3-1" class="nav-link" data-scroll-target="#question-3-1">Question 3</a></li>
   <li><a href="#question-4-1" id="toc-question-4-1" class="nav-link" data-scroll-target="#question-4-1">Question 4</a></li>
   </ul></li>
-  <li><a href="#exercises-2" id="toc-exercises-2" class="nav-link" data-scroll-target="#exercises-2"><strong>10.4.1 Exercises</strong></a>
+  <li><a href="#exercises-2" id="toc-exercises-2" class="nav-link" data-scroll-target="#exercises-2">10.4.1 Exercises</a>
   <ul class="collapse">
   <li><a href="#question-1-2" id="toc-question-1-2" class="nav-link" data-scroll-target="#question-1-2">Question 1</a></li>
   <li><a href="#question-2-2" id="toc-question-2-2" class="nav-link" data-scroll-target="#question-2-2">Question 2</a></li>
@@ -416,18 +416,18 @@ div.csl-indent {
 <li><p>The best place to explore <code>ggplot2</code> extensions and graphs is the <a href="https://exts.ggplot2.tidyverse.org/gallery/" title="Registered extensions available to explore for ggplot2">ggplot2 extensions gallery</a>.</p></li>
 <li><p>Best place to search for and understand the <code>geoms</code> within <code>ggplot2</code> is ggplot2 <a href="https://ggplot2.tidyverse.org/reference/" title="ggplot2 Official Function Reference Guide">Function Reference</a>.</p></li>
 </ul>
-<div class="cell">
+<div class="cell" data-hash="Chapter10_cache/html/setup_fbb84220ebef66ba5605726862bc37d8">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"mpg"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="exercises" class="level1">
-<h1><strong>10.2.1 Exercises</strong></h1>
+<h1>10.2.1 Exercises</h1>
 <section id="question-1" class="level3">
 <h3 class="anchored" data-anchor-id="question-1">Question 1</h3>
 <p><strong>Create a scatterplot of <code>hwy</code> vs.&nbsp;<code>displ</code> where the points are pink filled in triangles.</strong></p>
 <p>The scatter-plot is displayed in <a href="#fig-q1-ex1">Figure&nbsp;1</a> .</p>
-<div class="cell">
+<div class="cell" data-hash="Chapter10_cache/html/fig-q1-ex1_2abe451374746defda16aa53713a5388">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">|&gt;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hwy, <span class="at">y =</span> displ)) <span class="sc">+</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">24</span>, <span class="at">fill =</span> <span class="st">"pink"</span>) <span class="sc">+</span></span>
@@ -448,7 +448,7 @@ div.csl-indent {
 <pre><code>ggplot(mpg) +    
   geom_point(aes(x = displ, y = hwy, color = "blue"))</code></pre>
 <p>The mistakes in this code produces a wrong plot as shown in <a href="#fig-q2-ex2-wrong">Figure&nbsp;2</a> .</p>
-<div class="cell">
+<div class="cell" data-hash="Chapter10_cache/html/fig-q2-ex2-wrong_efe8b3d28a5de6f0c4c3196a8ab3608a">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span>    </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy, <span class="at">color =</span> <span class="st">"blue"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -462,7 +462,7 @@ div.csl-indent {
 </div>
 <p>The code will not result in “blue” points because the argument <code>color = "blue"</code> is within the aesthetics brackets, i.e., <code>aes()</code>. This is because this treats color as an aesthetic to be mapped to a variable. And, <code>ggplot2</code> starts looking for a variable called <code>blue</code> which does not exist. Accordingly, it produces a scatter plot which shows legend of color, with a variable called “blue”.</p>
 <p>The corrected code and results are displayed below in <a href="#fig-q2-ex2">Figure&nbsp;3</a> .</p>
-<div class="cell">
+<div class="cell" data-hash="Chapter10_cache/html/fig-q2-ex2_b4b4c78c7d4e1043af132fbb2f9ee104">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">|&gt;</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy), </span>
@@ -488,7 +488,7 @@ div.csl-indent {
 <figcaption class="figure-caption">Shapes available to use in ggplot2.</figcaption>
 </figure>
 </div>
-<div class="cell">
+<div class="cell" data-hash="Chapter10_cache/html/fig-q3-ex2_b0a0dcc767f7d6e57e9aaa0c384687f6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">|&gt;</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> displ, </span>
@@ -510,7 +510,7 @@ div.csl-indent {
 <h3 class="anchored" data-anchor-id="question-4">Question 4</h3>
 <p><strong>What happens if you map an aesthetic to something other than a variable name, like <code>aes(color = displ &lt; 5)</code>? Note, you’ll also need to specify x and y.</strong></p>
 <p>In this case, I expect that the aesthetic <code>color</code> will be mapped to a logical variable, that can have two values, either <code>TRUE</code> (mapped to one colour) or <code>FALSE</code> (mapped to a second colour). Thus, the logical expression gets treated like a factor with two levels. The legend to the plot shows the two levels of that factor. For example:---</p>
-<div class="cell">
+<div class="cell" data-hash="Chapter10_cache/html/fig-q4-ex2_7aca682925fa44b51eac0fcfe38a23f5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">|&gt;</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> displ, </span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> hwy,</span>
@@ -576,7 +576,7 @@ div.csl-indent {
 <p>The argument <code>show.legend = TRUE/FALSE</code> decides whether the legend for colour, shape or size aesthetics should be displayed in the plot or not.</p>
 <p>If we remove <code>show.legend = FALSE</code> from the code above, by default, <code>ggplot2</code> will display the legend if it feels that a visual aesthetic has been mapped to a variable. By default, the position of the legend is on the right hand side of the plot.</p>
 <p>I think we used it earlier in the chapter because we were displaying three plots in the same row, side-by-side, and wanted them to be of the same dimensions in the plot area to convey the difference between <code>group</code> and <code>color</code> aesthetics in mapping. If we had not included <code>show.legend = FALSE</code> , the third plot would have been squished due to presence of a legend on the right side. Here, the purpose was not to tell different colours representing <code>drv</code> of the cars, but to show difference between <code>group</code> and <code>color</code> aesthetics in mapping. Hence, we chose to ignore the legend.</p>
-<div class="cell">
+<div class="cell" data-hash="Chapter10_cache/html/q2-ex3_2974bb407520789231ca18638d4a74fd">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">color =</span> drv), <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -640,7 +640,7 @@ div.csl-indent {
 <span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">21</span>,</span>
 <span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"white"</span>,</span>
 <span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>             <span class="at">stroke =</span> <span class="fl">1.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell quarto-layout-panel">
+<div class="cell quarto-layout-panel" data-hash="Chapter10_cache/html/q4-ex3_ca41b17b6622af29246aa0f9c2cd0513">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="Chapter10_files/figure-html/q4-ex3-1.png" class="img-fluid" width="672"></p>
@@ -670,13 +670,13 @@ div.csl-indent {
 </section>
 </section>
 <section id="exercises-2" class="level1">
-<h1><strong>10.4.1 Exercises</strong></h1>
+<h1>10.4.1 Exercises</h1>
 <section id="question-1-2" class="level3">
 <h3 class="anchored" data-anchor-id="question-1-2">Question 1</h3>
 <p><strong>What happens if you facet on a continuous variable?</strong></p>
 <p>Technically, it is possible to facet on a continuous variable. <code>ggplot2</code> will be forced to treat each value of a continuous variable as a factor / level, and produce separate graph for it. However, faceting on a continuous variable is not advisable because it produces too many plots, and could end up producing a plot for each value of the continuous variable as shown in the .</p>
 <p>Thus, we should always facet on a categorical variable.</p>
-<div class="cell fig-cap-location-top">
+<div class="cell fig-cap-location-top" data-hash="Chapter10_cache/html/fig-q1-ex4_6f4a85d7cb9b321ffee882ade87fb2ed">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"diamonds"</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filter to reduce number of observations to </span></span>
@@ -720,7 +720,7 @@ div.csl-indent {
 ggplot(mpg) +    
   geom_point(aes(x = displ, y = hwy)) +   
   facet_grid(. ~ cyl)</code></pre>
-<div class="cell quarto-layout-panel">
+<div class="cell quarto-layout-panel" data-hash="Chapter10_cache/html/fig-q3-ex4_0ab6c7191dbfe4ae93a7ff2471930765">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <div id="fig-q3-ex4-1" class="quarto-figure quarto-figure-center anchored">
@@ -740,9 +740,9 @@ ggplot(mpg) +
 </div>
 </div>
 </div>
-<p>The plots generated are displayed above in <strong>?@fig-q3-ex4</strong> .</p>
+<p>The plots generated are displayed above.</p>
 <p>Thus, it is clear that the marker “<code>.</code>” is used as a filler to decide whether the faceting variable’s levels are to be displayed across rows or across columns.</p>
-<p>The following <strong>?@fig-q3a-ex4</strong> displays this in action. When the code in <code>facet_grid()</code> is <code>drv ~ .</code>, then the plot produced is with levels of <code>drv</code> across rows. When the code is <code>. ~ drv</code>, then the plot produced is with levels of <code>drv</code> across columns. Thus, the “<code>.</code>”can be used with <code>facet_grid()</code> to create plots like <code>facet_wrap()</code> with levels across columns or rows, as per our choosing. The similar output could be achieved with <code>facet_wrap()</code> using the option <code>dir = "v"</code> or <code>dir = "h"</code>.</p>
+<p>The following figures display this in action. When the code in <code>facet_grid()</code> is <code>drv ~ .</code>, then the plot produced is with levels of <code>drv</code> across rows. When the code is <code>. ~ drv</code>, then the plot produced is with levels of <code>drv</code> across columns. Thus, the “<code>.</code>”can be used with <code>facet_grid()</code> to create plots like <code>facet_wrap()</code> with levels across columns or rows, as per our choosing. The similar output could be achieved with <code>facet_wrap()</code> using the option <code>dir = "v"</code> or <code>dir = "h"</code>.</p>
 <div>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot 1</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span>    </span>
@@ -755,7 +755,7 @@ ggplot(mpg) +
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span>   </span>
 <span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> drv) <span class="sc">+</span> </span>
 <span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Plot 2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell quarto-layout-panel">
+<div class="cell quarto-layout-panel" data-hash="Chapter10_cache/html/fig-q3a-ex4_8c04bbc7fd5f7db2b664d5aadfae5960">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <div id="fig-q3a-ex4-1" class="quarto-figure quarto-figure-center anchored">
@@ -834,7 +834,7 @@ ggplot(mpg, aes(x = displ)) +
   geom_point(aes(x = displ, y = hwy)) +   
   facet_grid(drv ~ .)</code></pre>
 <p>The following code recreates the plot using <code>facet_wrap()</code> in <a href="#fig-q7-ex4">Figure&nbsp;11</a> .</p>
-<div class="cell">
+<div class="cell" data-hash="Chapter10_cache/html/fig-q7-ex4_7f2f2730dfec2122fad0dd778e6c7f1b">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span>    </span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span>   </span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>drv, </span>
