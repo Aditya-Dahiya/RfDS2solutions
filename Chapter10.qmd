@@ -44,7 +44,7 @@ bibliography: references.bib
 
 library(tidyverse)
 data("mpg")
-
+data("diamonds")
 ```
 
 # 10.2.1 Exercises
@@ -440,4 +440,65 @@ ggplot(mpg) +
   facet_wrap(~drv, 
              dir = "v", 
              strip.position = "right")
+```
+
+# **10.5.1 Exercises**
+
+### Question 1
+
+**What is the default geom associated with [`stat_summary()`](https://ggplot2.tidyverse.org/reference/stat_summary.html)? How could you rewrite the previous plot to use that geom function instead of the stat function?**
+
+The default geom associated with `stat_summary()` is `geom_pointrange()` . It belongs to a class of functions displaying vertical intervals with lines, crossbars and error-bars. The functions are:
+
+-   `geom_crossbar()`
+
+-   `geom_errorbar()`
+
+-   `geom_linerange()`
+
+-   `geom_pointrange()`
+
+The code shown below recreates the @fig_q1_ex5 using the function `geom_pointrange()` instead of the easier and shorter `stat_summary()` .
+
+```{r}
+#| label: fig_q1_ex5
+#| fig-cap: "Producing same plot with geom_pointrange() instead of stat_summary()"
+diamonds |>
+  group_by(cut) |>
+  summarise(dep = median(depth),
+            dep_min = min(depth),
+            dep_max = max(depth)) |>
+  ggplot() +
+  geom_pointrange(aes(x = cut,
+                      y = dep,
+                      ymin = dep_min,
+                      ymax = dep_max), 
+                  stat = "identity")
+```
+
+### Question 2
+
+**What does [`geom_col()`](https://ggplot2.tidyverse.org/reference/geom_bar.html) do? How is it different from [`geom_bar()`](https://ggplot2.tidyverse.org/reference/geom_bar.html)?**
+
+### Question 3
+
+**Most geoms and stats come in pairs that are almost always used in concert. Make a list of all the pairs. What do they have in common? (Hint: Read through the documentation.)**
+
+### Question 4
+
+**What variables does [`stat_smooth()`](https://ggplot2.tidyverse.org/reference/geom_smooth.html) compute? What arguments control its behavior?**
+
+### Question 5
+
+**In our proportion bar chart, we need to set `group = 1`. Why? In other words, what is the problem with these two graphs?**
+
+``` r
+ggplot(diamonds, aes(x = cut, 
+                     y = after_stat(prop))) +
+  geom_bar()
+
+ggplot(diamonds, aes(x = cut, 
+                     fill = color, 
+                     y = after_stat(prop))) +    
+  geom_bar()
 ```
