@@ -8,3 +8,5 @@ dplyr
 stringr
 forcats
 lubridate
+gt
+googlesheets4

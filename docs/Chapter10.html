@@ -362,6 +362,14 @@ div.csl-indent {
   <li><a href="#question-6" id="toc-question-6" class="nav-link" data-scroll-target="#question-6">Question 6</a></li>
   <li><a href="#question-7" id="toc-question-7" class="nav-link" data-scroll-target="#question-7">Question 7</a></li>
   </ul></li>
+  <li><a href="#exercises-3" id="toc-exercises-3" class="nav-link" data-scroll-target="#exercises-3"><strong>10.5.1 Exercises</strong></a>
+  <ul class="collapse">
+  <li><a href="#question-1-3" id="toc-question-1-3" class="nav-link" data-scroll-target="#question-1-3">Question 1</a></li>
+  <li><a href="#question-2-3" id="toc-question-2-3" class="nav-link" data-scroll-target="#question-2-3">Question 2</a></li>
+  <li><a href="#question-3-3" id="toc-question-3-3" class="nav-link" data-scroll-target="#question-3-3">Question 3</a></li>
+  <li><a href="#question-4-3" id="toc-question-4-3" class="nav-link" data-scroll-target="#question-4-3">Question 4</a></li>
+  <li><a href="#question-5-1" id="toc-question-5-1" class="nav-link" data-scroll-target="#question-5-1">Question 5</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/edit/main/Chapter10.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -416,9 +424,11 @@ div.csl-indent {
 <li><p>The best place to explore <code>ggplot2</code> extensions and graphs is the <a href="https://exts.ggplot2.tidyverse.org/gallery/" title="Registered extensions available to explore for ggplot2">ggplot2 extensions gallery</a>.</p></li>
 <li><p>Best place to search for and understand the <code>geoms</code> within <code>ggplot2</code> is ggplot2 <a href="https://ggplot2.tidyverse.org/reference/" title="ggplot2 Official Function Reference Guide">Function Reference</a>.</p></li>
 </ul>
-<div class="cell" data-hash="Chapter10_cache/html/setup_fbb84220ebef66ba5605726862bc37d8">
+<div class="cell" data-hash="Chapter10_cache/html/setup_4eb6ebd5ebfe7c7d82318714a5a13f66">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"mpg"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"mpg"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"diamonds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="exercises" class="level1">
@@ -849,17 +859,846 @@ ggplot(mpg, aes(x = displ)) +
 </div>
 </div>
 </div>
+</section>
+</section>
+<section id="exercises-3" class="level1">
+<h1><strong>10.5.1 Exercises</strong></h1>
+<section id="question-1-3" class="level3">
+<h3 class="anchored" data-anchor-id="question-1-3">Question 1</h3>
+<p><strong>What is the default geom associated with <a href="https://ggplot2.tidyverse.org/reference/stat_summary.html"><code>stat_summary()</code></a>? How could you rewrite the previous plot to use that geom function instead of the stat function?</strong></p>
+<p>The default geom associated with <code>stat_summary()</code> is <code>geom_pointrange()</code> . It belongs to a class of functions displaying vertical intervals with lines, crossbars and error-bars. The functions in this family are:</p>
+<ul>
+<li><p><code>geom_crossbar()</code></p></li>
+<li><p><code>geom_errorbar()</code></p></li>
+<li><p><code>geom_linerange()</code></p></li>
+<li><p><code>geom_pointrange()</code></p></li>
+</ul>
+<p>The code shown below recreates the <span class="citation" data-cites="fig_q1_ex5">(<a href="#ref-fig_q1_ex5" role="doc-biblioref"><strong>fig_q1_ex5?</strong></a>)</span> using the function <code>geom_pointrange()</code> instead of the easier and shorter <code>stat_summary()</code> .</p>
+<div class="cell" data-hash="Chapter10_cache/html/fig_q1_ex5_fb58516047f12321171f123c6ca0a969">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cut) <span class="sc">|&gt;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">dep =</span> <span class="fu">median</span>(depth),</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">dep_min =</span> <span class="fu">min</span>(depth),</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">dep_max =</span> <span class="fu">max</span>(depth)) <span class="sc">|&gt;</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">x =</span> cut,</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>                      <span class="at">y =</span> dep,</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>                      <span class="at">ymin =</span> dep_min,</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>                      <span class="at">ymax =</span> dep_max), </span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>                  <span class="at">stat =</span> <span class="st">"identity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Chapter10_files/figure-html/fig_q1_ex5-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Producing same plot with geom_pointrange() instead of stat_summary()</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The benefit with <code>stat_summary()</code> is that we can create the summary statistics within the <code>ggplot()</code> function call, and then choose the geom to our liking. Here’s an example in <a href="#fig-q1a-ex5">Figure&nbsp;12</a> .</p>
+<div class="cell" data-hash="Chapter10_cache/html/fig-q1a-ex5_66aeaaf511dec4d11db7ee4431b63324">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>g1 <span class="ot">=</span>  diamonds <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> cut, <span class="at">y =</span> depth)) <span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> median,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">fun.min =</span> <span class="cf">function</span>(x) <span class="fu">mean</span>(x) <span class="sc">-</span> <span class="fu">sd</span>(x),</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">fun.max =</span> <span class="cf">function</span>(x) <span class="fu">mean</span>(x) <span class="sc">+</span> <span class="fu">sd</span>(x),</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">geom =</span> <span class="st">"pointrange"</span>) <span class="sc">+</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Using geom = pointrange"</span>, <span class="at">x =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>g2 <span class="ot">=</span> diamonds <span class="sc">|&gt;</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> cut, <span class="at">y =</span> depth)) <span class="sc">+</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> median,</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>               <span class="at">fun.min =</span> <span class="cf">function</span>(x) <span class="fu">mean</span>(x) <span class="sc">-</span> <span class="fu">sd</span>(x),</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>               <span class="at">fun.max =</span> <span class="cf">function</span>(x) <span class="fu">mean</span>(x) <span class="sc">+</span> <span class="fu">sd</span>(x),</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>               <span class="at">geom =</span> <span class="st">"errorbar"</span>) <span class="sc">+</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Using geom = errorbar"</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">x =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>g3 <span class="ot">=</span> diamonds <span class="sc">|&gt;</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> cut, <span class="at">y =</span> depth)) <span class="sc">+</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> median,</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>               <span class="at">fun.min =</span> <span class="cf">function</span>(x) <span class="fu">mean</span>(x) <span class="sc">-</span> <span class="fu">sd</span>(x),</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>               <span class="at">fun.max =</span> <span class="cf">function</span>(x) <span class="fu">mean</span>(x) <span class="sc">+</span> <span class="fu">sd</span>(x),</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>               <span class="at">geom =</span> <span class="st">"crossbar"</span>) <span class="sc">+</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Using geom = crossbar"</span>) <span class="sc">+</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>g4 <span class="ot">=</span> diamonds <span class="sc">|&gt;</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> cut, <span class="at">y =</span> depth)) <span class="sc">+</span></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> median,</span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>               <span class="at">fun.min =</span> <span class="cf">function</span>(x) <span class="fu">mean</span>(x) <span class="sc">-</span> <span class="fu">sd</span>(x),</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>               <span class="at">fun.max =</span> <span class="cf">function</span>(x) <span class="fu">mean</span>(x) <span class="sc">+</span> <span class="fu">sd</span>(x),</span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>               <span class="at">geom =</span> <span class="st">"linerange"</span>) <span class="sc">+</span></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Using geom = linerange"</span>, <span class="at">y =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(g1, g2, g3, g4,</span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>                        <span class="at">ncol =</span> <span class="dv">2</span> , <span class="at">nrow =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-q1a-ex5" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter10_files/figure-html/fig-q1a-ex5-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;12: Using stat_summary to generate different kinds of plots</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="question-2-3" class="level3">
+<h3 class="anchored" data-anchor-id="question-2-3">Question 2</h3>
+<p><strong>What does <a href="https://ggplot2.tidyverse.org/reference/geom_bar.html"><code>geom_col()</code></a> do? How is it different from <a href="https://ggplot2.tidyverse.org/reference/geom_bar.html"><code>geom_bar()</code></a>?</strong></p>
+<p>The <code>geom_col()</code> does the same job of producing a bar plot like <code>geom_bar()</code> , but it uses the actual values of a y-axis variable to draw the heights / lengths of the bars.</p>
+<p>The <code>geom_bar()</code> uses the number of observations for each categorical variable, and plots the height of bar proportional to number of the observations. It uses <code>stat = "count"</code>.</p>
+<p>The <code>geom_col()</code> , on the other hand, simply uses the actual value of each categorical variable to plot the height of the bar. In other words, it is simply an iteration of <code>geom_bar()</code> which uses <code>stat = "identity"</code> . Here’s an example:---</p>
+<div class="cell" data-hash="Chapter10_cache/html/q2_ex5_642dfedd72d0e4955a253594993c9aa5">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Creating plot using geom_bar to count observations</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(diamonds,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x =</span> cut)) <span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Using geom_bar()"</span>),</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Creating a summary table, and then using geom_col</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  diamonds <span class="sc">|&gt;</span> </span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(cut) <span class="sc">|&gt;</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> cut, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Using geom_col()"</span>),</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="at">ncol =</span> <span class="dv">2</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Chapter10_files/figure-html/q2_ex5-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Using geom_bar() vs.&nbsp;geom_col()</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="question-3-3" class="level3">
+<h3 class="anchored" data-anchor-id="question-3-3">Question 3</h3>
+<p><strong>Most geoms and stats come in pairs that are almost always used in concert. Make a list of all the pairs. What do they have in common? (Hint: Read through the documentation.)</strong></p>
+<p>Some of the common <code>geom</code> - <code>stat</code> pairs in <code>ggplot2</code> are as follows:</p>
+<table class="table">
+<caption>geom-stat pairs in ggplot2</caption>
+<thead>
+<tr class="header">
+<th>geom</th>
+<th>stat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>geom_line()</code></td>
+<td>identity</td>
+</tr>
+<tr class="even">
+<td><code>geom_bar()</code></td>
+<td>count</td>
+</tr>
+<tr class="odd">
+<td><code>geom_col()</code></td>
+<td>identity</td>
+</tr>
+<tr class="even">
+<td><code>geom_area()</code></td>
+<td>align</td>
+</tr>
+<tr class="odd">
+<td><code>geom_bin_2d()</code></td>
+<td>bin_2d</td>
+</tr>
+</tbody>
+</table>
+<p>Here’s a list scraped from web into a Google sheet and then imported using <code>googlesheets4</code> package :--</p>
+<div class="cell" data-hash="Chapter10_cache/html/tbl-q3-ex5_fbc58ac393416a214210054cd76fed97">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(googlesheets4)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">=</span> <span class="fu">read_sheet</span>(</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ss =</span> <span class="st">"1OJkZQyzaEp_hMO0bUZuyqWx5Cw1r4d-MLNDZFDSCBX4"</span>,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">"geom"</span>, <span class="st">"stat"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>),</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">skip =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>temp <span class="sc">|&gt;</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_missing</span>(<span class="at">missing_text =</span> <span class="st">""</span>) <span class="sc">|&gt;</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="fu">md</span>(<span class="st">"List of `geom` - `stat` pairs in `ggplot2`"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(<span class="at">source_note =</span> <span class="fu">md</span>(<span class="st">"From the webpage &lt;http://sape.inf.usi.ch/quick-reference/ggplot2/geom&gt;"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>  gtExtras<span class="sc">::</span><span class="fu">gt_theme_538</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="tbl-q3-ex5" class="anchored">
+
+<div id="iefcdyyjss" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#iefcdyyjss table {
+  font-family: Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#iefcdyyjss thead, #iefcdyyjss tbody, #iefcdyyjss tfoot, #iefcdyyjss tr, #iefcdyyjss td, #iefcdyyjss th {
+  border-style: none;
+}
+
+#iefcdyyjss p {
+  margin: 0;
+  padding: 0;
+}
+
+#iefcdyyjss .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: 300;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: none;
+  border-top-width: 3px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#iefcdyyjss .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#iefcdyyjss .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#iefcdyyjss .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#iefcdyyjss .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#iefcdyyjss .gt_bottom_border {
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#iefcdyyjss .gt_col_headings {
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#iefcdyyjss .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: normal;
+  text-transform: uppercase;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#iefcdyyjss .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: normal;
+  text-transform: uppercase;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#iefcdyyjss .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#iefcdyyjss .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#iefcdyyjss .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#iefcdyyjss .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#iefcdyyjss .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #000000;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#iefcdyyjss .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #000000;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #FFFFFF;
+  vertical-align: middle;
+}
+
+#iefcdyyjss .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#iefcdyyjss .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#iefcdyyjss .gt_row {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#iefcdyyjss .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-right-color: #FFFFFF;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iefcdyyjss .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#iefcdyyjss .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#iefcdyyjss .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#iefcdyyjss .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iefcdyyjss .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#iefcdyyjss .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#iefcdyyjss .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#iefcdyyjss .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iefcdyyjss .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#iefcdyyjss .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#iefcdyyjss .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#iefcdyyjss .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#iefcdyyjss .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#iefcdyyjss .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iefcdyyjss .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#iefcdyyjss .gt_sourcenote {
+  font-size: 12px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iefcdyyjss .gt_left {
+  text-align: left;
+}
+
+#iefcdyyjss .gt_center {
+  text-align: center;
+}
+
+#iefcdyyjss .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#iefcdyyjss .gt_font_normal {
+  font-weight: normal;
+}
+
+#iefcdyyjss .gt_font_bold {
+  font-weight: bold;
+}
+
+#iefcdyyjss .gt_font_italic {
+  font-style: italic;
+}
+
+#iefcdyyjss .gt_super {
+  font-size: 65%;
+}
+
+#iefcdyyjss .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#iefcdyyjss .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#iefcdyyjss .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#iefcdyyjss .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#iefcdyyjss .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#iefcdyyjss .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#iefcdyyjss .gt_indent_5 {
+  text-indent: 25px;
+}
+
+tbody tr:last-child {
+  border-bottom: 2px solid #ffffff00;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Table&nbsp;1:  <p>List of geom - stat pairs</p> </caption>
+  <thead>
+    <tr class="gt_heading">
+      <td colspan="2" class="gt_heading gt_title gt_font_normal gt_bottom_border" style="">List of <code>geom</code> - <code>stat</code> pairs in <code>ggplot2</code></td>
+    </tr>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="geom">geom</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="stat">stat</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="geom" class="gt_row gt_left">blank</td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">abline</td>
+<td headers="stat" class="gt_row gt_left">abline</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left"></td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">hline</td>
+<td headers="stat" class="gt_row gt_left">hline</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left"></td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">vline</td>
+<td headers="stat" class="gt_row gt_left">vline</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left"></td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">text</td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">point</td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">jitter</td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">segment</td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">line</td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">bar</td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left"></td>
+<td headers="stat" class="gt_row gt_left">bin</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">histogram</td>
+<td headers="stat" class="gt_row gt_left">alias for geom_bar</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">area</td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">ribbon</td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">linerange</td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">pointrange</td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">errorbar</td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">errorbarh</td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">crossbar</td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">boxplot</td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left"></td>
+<td headers="stat" class="gt_row gt_left">boxplot</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">path</td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">polygon</td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">rect</td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">rug</td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">step</td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">bin2d</td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left"></td>
+<td headers="stat" class="gt_row gt_left">bin2d</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">tile</td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">hex</td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left"></td>
+<td headers="stat" class="gt_row gt_left">binhex</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">density</td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left"></td>
+<td headers="stat" class="gt_row gt_left">density</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">density2d</td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left"></td>
+<td headers="stat" class="gt_row gt_left">density2d</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">contour</td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left"></td>
+<td headers="stat" class="gt_row gt_left">contour</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">freqpoly</td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left"></td>
+<td headers="stat" class="gt_row gt_left">bin</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">quantile</td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left"></td>
+<td headers="stat" class="gt_row gt_left">quantile</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left">smooth</td>
+<td headers="stat" class="gt_row gt_left">identity</td></tr>
+    <tr><td headers="geom" class="gt_row gt_left"></td>
+<td headers="stat" class="gt_row gt_left">smooth</td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="2">From the webpage <a href="http://sape.inf.usi.ch/quick-reference/ggplot2/geom">http://sape.inf.usi.ch/quick-reference/ggplot2/geom</a></td>
+    </tr>
+  </tfoot>
+  
+</table>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="question-4-3" class="level3">
+<h3 class="anchored" data-anchor-id="question-4-3">Question 4</h3>
+<p><strong>What variables does <a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html"><code>stat_smooth()</code></a> compute? What arguments control its behavior?</strong></p>
+<p>In the <code>ggplot2</code> package in <code>R</code>, the <code>stat_smooth()</code> function is used to add a smoothed line (usually a <strong>loess</strong> line) to a scatter plot. This smoothed line represents the estimated relationship between two continuous variables, along with an associated confidence interval.</p>
+<p>By default, <code>stat_smooth()</code> computes and displays a smoothed line along with its confidence interval based on the relationship between the x and y variables in your plot.</p>
+<p>The main arguments that control the behavior of <strong><code>stat_smooth()</code></strong> are:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<ol type="1">
+<li><p><strong><code>method</code></strong>: the smoothing method used. The default is <strong><code>"auto"</code></strong> which automatically selects the appropriate method based on the number of observations. Other options include <strong><code>"lm"</code></strong> (linear model), <strong><code>"glm"</code></strong> (generalized linear model), <strong><code>"gam"</code></strong> (generalized additive model), <strong><code>"loess"</code></strong> (locally estimated scatter-plot smoothing), and more.</p></li>
+<li><p><strong><code>formula</code></strong>: This argument allows you to specify a formula that describes the relationship between the variables. For example, you can use <strong><code>y ~ poly(x, 2)</code></strong> to fit a quadratic polynomial.</p></li>
+<li><p><strong><code>se</code></strong>: This argument controls whether to display the standard error (confidence interval) around the smoothed line. Setting <strong><code>se = FALSE</code></strong> will remove the confidence interval.</p></li>
+<li><p><strong><code>level</code></strong> : This argument lets you choose the level of confidence interval to display around the smoothed line. The default is 0.95.</p></li>
+<li><p><strong><code>span</code></strong>: This argument is specific to the <strong><code>loess</code></strong> method and controls the amount of smoothing. A smaller value will result in more wiggly curves, while a larger value will result in smoother curves.</p></li>
+<li><p><strong><code>method.args</code></strong>: This argument allows you to pass additional arguments to the smoothing method specified. For example, if you’re using <strong><code>loess</code></strong> method, you can pass arguments like <strong><code>span</code></strong> and <strong><code>degree</code></strong>.</p></li>
+<li><p><strong><code>mapping</code></strong>: This argument allows you to specify how variables from your data are mapped to aesthetics in the plot, such as <strong><code>x</code></strong> and <strong><code>y</code></strong> variables.</p></li>
+</ol>
+</section>
+<section id="question-5-1" class="level3">
+<h3 class="anchored" data-anchor-id="question-5-1">Question 5</h3>
+<p><strong>In our proportion bar chart, we need to set <code>group = 1</code>. Why? In other words, what is the problem with these two graphs?</strong></p>
+<p>In <strong><code>ggplot2</code></strong>, the <strong><code>group</code></strong> aesthetic is used to define different groups within your data. When you specify <strong><code>group = 1</code></strong> within a layer of your plot, you are essentially telling <strong><code>ggplot2</code></strong> to treat all the data points as part of a single group. This can be useful when you want to apply a certain aesthetic or statistic to the entire dataset without distinguishing between different groups.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>Now, lets the take following code:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x =</span> cut, </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> <span class="fu">after_stat</span>(prop))) <span class="sc">+</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This code calculates the statistic proportion of observations within each group, i.e., each type of <code>cut</code>. Of course, the number of observations in each type of <code>cut</code> is all the observations present in the data set of that type of <code>cut</code>. Accordingly each proportion is displayed as one as shown in <a href="#fig-q5-ex5">Figure&nbsp;13</a>.</p>
+<div class="cell" data-hash="Chapter10_cache/html/fig-q5-ex5_93b2b335a8beabe4ed6d91b88af583ce">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(diamonds, </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>         <span class="fu">aes</span>(<span class="at">x =</span> cut, </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="fu">after_stat</span>(prop))) <span class="sc">+</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Without using any grouping argument"</span>),</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(diamonds, </span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>         <span class="fu">aes</span>(<span class="at">x =</span> cut, </span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="fu">after_stat</span>(prop),</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span> </span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Using group = 1 argument within aes()"</span>),</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="at">ncol =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-q5-ex5" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter10_files/figure-html/fig-q5-ex5-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;13: Use of group=1 in plot to resolve calculation error</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Another example showing the need for use of <code>group = 1</code> is below in <strong>?@fig-q5a-ex5</strong> . This plot again calculates the proportion of observations within each group formed by unique combinations of <code>cut</code> and <code>color</code> .</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x =</span> cut, </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">fill =</span> color, </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> <span class="fu">after_stat</span>(prop))) <span class="sc">+</span>    </span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="Chapter10_cache/html/fig-q5a-ex5_c21732f1b18fd5207fad628e9a5c94d3">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x =</span> cut, </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">fill =</span> color, </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> <span class="fu">after_stat</span>(prop))) <span class="sc">+</span>    </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Plot produced by faulty code"</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cut, color) <span class="sc">|&gt;</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">|&gt;</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> cut,</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> n,</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> color)) <span class="sc">+</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Plot produced by tidyverse method to resolve issue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-q5a-ex5-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter10_files/figure-html/fig-q5a-ex5-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;14: Use of group=1 in coloured bar-plot to resolve the error</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="fig-q5a-ex5-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter10_files/figure-html/fig-q5a-ex5-2.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;15: Use of group=1 in coloured bar-plot to resolve the error</figcaption>
+</figure>
+</div>
+</div>
+</div>
 
 
 
 </section>
 </section>
+
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-ggplot2" class="csl-entry" role="listitem">
 Wickham, Hadley. 2016. <span>“Ggplot2: Elegant Graphics for Data Analysis.”</span> <a href="https://ggplot2.tidyverse.org">https://ggplot2.tidyverse.org</a>.
 </div>
-</div></section></div></main> <!-- /main -->
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Written with help from ChatGPT 3.5. OpenAI. (2023). ChatGPT (Aug 22, 2023 version) [Large language model]. <a href="https://chat.openai.com" class="uri">https://chat.openai.com</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>This portion of answer was created using help from ChatGPT 3.5. OpenAI. (2023). ChatGPT (Aug 22, 2023 version) [Large language model]. <a href="https://chat.openai.com" class="uri">https://chat.openai.com</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

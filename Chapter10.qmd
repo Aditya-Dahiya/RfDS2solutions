@@ -43,6 +43,7 @@ bibliography: references.bib
 #| error: false
 
 library(tidyverse)
+library(gt)
 data("mpg")
 data("diamonds")
 ```
@@ -448,7 +449,7 @@ ggplot(mpg) +
 
 **What is the default geom associated with [`stat_summary()`](https://ggplot2.tidyverse.org/reference/stat_summary.html)? How could you rewrite the previous plot to use that geom function instead of the stat function?**
 
-The default geom associated with `stat_summary()` is `geom_pointrange()` . It belongs to a class of functions displaying vertical intervals with lines, crossbars and error-bars. The functions are:
+The default geom associated with `stat_summary()` is `geom_pointrange()` . It belongs to a class of functions displaying vertical intervals with lines, crossbars and error-bars. The functions in this family are:
 
 -   `geom_crossbar()`
 
@@ -476,29 +477,332 @@ diamonds |>
                   stat = "identity")
 ```
 
+The benefit with `stat_summary()` is that we can create the summary statistics within the `ggplot()` function call, and then choose the geom to our liking. Here's an example in @fig-q1a-ex5 .
+
+```{r}
+#| label: fig-q1a-ex5
+#| fig-cap: "Using stat_summary to generate different kinds of plots"
+#| code-fold: true
+
+g1 =  diamonds |>
+  ggplot(aes(x = cut, y = depth)) +
+  stat_summary(fun = median,
+               fun.min = function(x) mean(x) - sd(x),
+               fun.max = function(x) mean(x) + sd(x),
+               geom = "pointrange") +
+  labs(subtitle = "Using geom = pointrange", x = NULL) +
+  theme_classic()
+g2 = diamonds |>
+  ggplot(aes(x = cut, y = depth)) +
+  stat_summary(fun = median,
+               fun.min = function(x) mean(x) - sd(x),
+               fun.max = function(x) mean(x) + sd(x),
+               geom = "errorbar") +
+  labs(subtitle = "Using geom = errorbar", y = NULL, x = NULL) +
+  theme_classic()
+g3 = diamonds |>
+  ggplot(aes(x = cut, y = depth)) +
+  stat_summary(fun = median,
+               fun.min = function(x) mean(x) - sd(x),
+               fun.max = function(x) mean(x) + sd(x),
+               geom = "crossbar") +
+  labs(subtitle = "Using geom = crossbar") +
+  theme_classic()
+g4 = diamonds |>
+  ggplot(aes(x = cut, y = depth)) +
+  stat_summary(fun = median,
+               fun.min = function(x) mean(x) - sd(x),
+               fun.max = function(x) mean(x) + sd(x),
+               geom = "linerange") +
+  labs(subtitle = "Using geom = linerange", y = NULL) +
+  theme_classic()
+gridExtra::grid.arrange(g1, g2, g3, g4,
+                        ncol = 2 , nrow = 2)
+```
+
 ### Question 2
 
 **What does [`geom_col()`](https://ggplot2.tidyverse.org/reference/geom_bar.html) do? How is it different from [`geom_bar()`](https://ggplot2.tidyverse.org/reference/geom_bar.html)?**
+
+The `geom_col()` does the same job of producing a bar plot like `geom_bar()` , but it uses the actual values of a y-axis variable to draw the heights / lengths of the bars.
+
+The `geom_bar()` uses the number of observations for each categorical variable, and plots the height of bar proportional to number of the observations. It uses `stat = "count"`.
+
+The `geom_col()` , on the other hand, simply uses the actual value of each categorical variable to plot the height of the bar. In other words, it is simply an iteration of `geom_bar()` which uses `stat = "identity"` . Here's an example:\-\--
+
+```{r}
+#| label: q2_ex5
+#| fig-cap: "Using geom_bar() vs. geom_col()"
+gridExtra::grid.arrange(
+  # Creating plot using geom_bar to count observations
+  ggplot(diamonds,
+            aes(x = cut)) +
+  geom_bar() +
+  theme_classic() +
+  labs(subtitle = "Using geom_bar()"),
+  # Creating a summary table, and then using geom_col
+  diamonds |> 
+  count(cut) |>
+  ggplot(aes(x = cut, y = n)) +
+  geom_col() +
+  theme_classic() +
+  labs(subtitle = "Using geom_col()"),
+ncol = 2
+)
+
+```
 
 ### Question 3
 
 **Most geoms and stats come in pairs that are almost always used in concert. Make a list of all the pairs. What do they have in common? (Hint: Read through the documentation.)**
 
+Some of the common `geom` - `stat` pairs in `ggplot2` are as follows:
+
+| geom            | stat     |
+|-----------------|----------|
+| `geom_line()`   | identity |
+| `geom_bar()`    | count    |
+| `geom_col()`    | identity |
+| `geom_area()`   | align    |
+| `geom_bin_2d()` | bin_2d   |
+
+: geom-stat pairs in ggplot2
+
+Here's a list scraped from web into a Google sheet and then imported using `googlesheets4` package :\--
+
+```{r}
+#| label: tbl-q3-ex5
+#| tbl-cap: "List of geom - stat pairs"
+library(googlesheets4)
+library(gt)
+temp = read_sheet(
+  ss = "1OJkZQyzaEp_hMO0bUZuyqWx5Cw1r4d-MLNDZFDSCBX4",
+  col_names = c("geom", "stat", "a", "b", "c"),
+  skip = 1) |>
+  select(1:2)
+
+temp |>
+  gt() |>
+  fmt_missing(missing_text = "") |>
+  tab_header(title = md("List of `geom` - `stat` pairs in `ggplot2`")) |>
+  tab_source_note(source_note = md("From the webpage <http://sape.inf.usi.ch/quick-reference/ggplot2/geom>")) |>
+  gtExtras::gt_theme_538()
+```
+
 ### Question 4
 
 **What variables does [`stat_smooth()`](https://ggplot2.tidyverse.org/reference/geom_smooth.html) compute? What arguments control its behavior?**
+
+In the `ggplot2` package in `R`, the `stat_smooth()` function is used to add a smoothed line (usually a **loess** line) to a scatter plot. This smoothed line represents the estimated relationship between two continuous variables, along with an associated confidence interval.
+
+By default, `stat_smooth()` computes and displays a smoothed line along with its confidence interval based on the relationship between the x and y variables in your plot.
+
+The main arguments that control the behavior of **`stat_smooth()`** are:[^1]
+
+[^1]: Written with help from ChatGPT 3.5. OpenAI. (2023). ChatGPT (Aug 22, 2023 version) \[Large language model\]. <https://chat.openai.com>
+
+1.  **`method`**: the smoothing method used. The default is **`"auto"`** which automatically selects the appropriate method based on the number of observations. Other options include **`"lm"`** (linear model), **`"glm"`** (generalized linear model), **`"gam"`** (generalized additive model), **`"loess"`** (locally estimated scatter-plot smoothing), and more.
+
+2.  **`formula`**: This argument allows you to specify a formula that describes the relationship between the variables. For example, you can use **`y ~ poly(x, 2)`** to fit a quadratic polynomial.
+
+3.  **`se`**: This argument controls whether to display the standard error (confidence interval) around the smoothed line. Setting **`se = FALSE`** will remove the confidence interval.
+
+4.  **`level`** : This argument lets you choose the level of confidence interval to display around the smoothed line. The default is 0.95.
+
+5.  **`span`**: This argument is specific to the **`loess`** method and controls the amount of smoothing. A smaller value will result in more wiggly curves, while a larger value will result in smoother curves.
+
+6.  **`method.args`**: This argument allows you to pass additional arguments to the smoothing method specified. For example, if you're using **`loess`** method, you can pass arguments like **`span`** and **`degree`**.
+
+7.  **`mapping`**: This argument allows you to specify how variables from your data are mapped to aesthetics in the plot, such as **`x`** and **`y`** variables.
 
 ### Question 5
 
 **In our proportion bar chart, we need to set `group = 1`. Why? In other words, what is the problem with these two graphs?**
 
+In **`ggplot2`**, the **`group`** aesthetic is used to define different groups within your data. When you specify **`group = 1`** within a layer of your plot, you are essentially telling **`ggplot2`** to treat all the data points as part of a single group. This can be useful when you want to apply a certain aesthetic or statistic to the entire dataset without distinguishing between different groups.[^2]
+
+[^2]: This portion of answer was created using help from ChatGPT 3.5. OpenAI. (2023). ChatGPT (Aug 22, 2023 version) \[Large language model\]. <https://chat.openai.com>
+
+Now, lets the take following code:
+
 ``` r
 ggplot(diamonds, aes(x = cut, 
                      y = after_stat(prop))) +
   geom_bar()
+```
 
+This code calculates the statistic proportion of observations within each group, i.e., each type of `cut`. Of course, the number of observations in each type of `cut` is all the observations present in the data set of that type of `cut`. Accordingly each proportion is displayed as one as shown in @fig-q5-ex5.
+
+```{r}
+#| label: fig-q5-ex5
+#| fig-cap: "Use of group=1 in plot to resolve calculation error"
+
+gridExtra::grid.arrange(
+
+  ggplot(diamonds, 
+         aes(x = cut, 
+             y = after_stat(prop))) +
+    geom_bar() +
+    labs(title = "Without using any grouping argument"),
+
+  ggplot(diamonds, 
+         aes(x = cut, 
+             y = after_stat(prop),
+             group = 1)) +
+  geom_bar() + 
+  labs(title = "Using group = 1 argument within aes()"),
+
+ncol = 2)
+```
+
+Another example showing the need for use of `group = 1` is below in @fig-q5a-ex5 . This plot again calculates the proportion of observations within each group formed by unique combinations of `cut` and `color` .
+
+``` r
 ggplot(diamonds, aes(x = cut, 
                      fill = color, 
                      y = after_stat(prop))) +    
   geom_bar()
 ```
+
+```{r}
+#| label: fig-q5a-ex5
+#| fig-cap: "Use of group=1 in coloured bar-plot to resolve the error"
+
+ggplot(diamonds, aes(x = cut, 
+                     fill = color, 
+                     y = after_stat(prop))) +    
+  geom_bar() +
+  labs(title = "Plot produced by faulty code")
+
+diamonds |>
+  group_by(cut, color) |>
+  count() |>
+  ggplot(aes(x = cut,
+             y = n,
+             fill = color)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Plot produced by tidyverse method to resolve issue")
+```
+
+# **10.6.1 Exercises**
+
+### Question 1
+
+**What is the problem with the following plot? How could you improve it?**
+
+```         
+ggplot(mpg, aes(x = cty, y = hwy)) +    
+  geom_point()
+```
+
+This plot (shown in @fig-q1-ex6) suffers from over-plotting, since there are only 78 points displayed, against a total of 234 observations. So, we don't know if there are multiple observations of one type or many tpes, and where are the most observations located.
+
+We can improve the plot as shown in the code below, and the resulting right-hand side plot in @fig-q1-ex6 solves the problem.
+
+```{r}
+#| label: fig-q1-ex6
+#| fig-cap: "Correcting plot problems with position"
+#| code-fold: true
+
+# Total number of observations in mpg dataset
+nrow(mpg)
+
+# Total number of points (unique values) which are displayed by the faulty code
+mpg |>
+  group_by(cty, hwy) |>
+  count() |>
+  nrow()
+
+# The faulty code and corrected plots
+gridExtra::grid.arrange(
+  ggplot(mpg, aes(x = cty, y = hwy)) +    
+    geom_point() +
+    labs(subtitle = "Faulty code: Overplotting"),
+
+  ggplot(mpg, aes(x = cty, y = hwy)) +    
+    geom_point(position = "jitter") +
+    labs(subtitle = "Problem resolved by position = \"jitter\""),
+
+  ncol = 2
+)
+
+```
+
+### Question 2
+
+**What, if anything, is the difference between the two plots? Why?**
+
+```         
+ggplot(mpg, aes(x = displ, y = hwy)) +   
+  geom_point() 
+
+ggplot(mpg, aes(x = displ, y = hwy)) +   
+  geom_point(position = "identity")
+```
+
+There is no difference between the two plots because by default, `geom_point()` uses the `position = "identity"` only. That is because in scatter plots, the position of the dot is displayed at the actual values of x-axis and y-axis variables, i.e. position is "identity" (the actual value).
+
+### Question 3
+
+**What parameters to [`geom_jitter()`](https://ggplot2.tidyverse.org/reference/geom_jitter.html) control the amount of jittering?**
+
+In ggplot2, the **`geom_jitter()`** function is used to create a scatter plot where points are randomly displaced to avoid overlap and make it easier to visualize the overlapping data points' actual distribution.
+
+We can control the amount of jittering using the following parameters:
+
+1.  **`width`**: This parameter controls the amount of horizontal jittering. A larger value will result in more spread-out points along the x-axis, reducing overlap. Smaller values will result in less spread-out points.
+
+2.  **`height`**: This parameter controls the amount of vertical jittering. Similar to **`width`**, a larger value will spread the points more along the y-axis, reducing overlap, while smaller values will lead to less spread.
+
+3.  **`seed`**: This parameter allows you to set a random seed for the jittering process. Using the same seed value ensures that the jittered points remain consistent across multiple plots or sessions.
+
+Here's an example to depict the impact of changing these in @fig-q3-ex6.
+
+```{r}
+#| label: fig-q3-ex6
+#| fig-cap: "Use of arguments to control jittering in scatterplots"
+g = ggplot(mpg, aes(x = displ, y = hwy)) +
+  theme_classic() +
+  labs(x = NULL, y = NULL)
+
+gridExtra::grid.arrange(
+  g + geom_point() + 
+    labs(title = "geom_point()"),
+
+  g + geom_jitter() + 
+    labs(title = "geom_jitter()"),
+
+  g + geom_jitter(width = 0.1, height = 1) + 
+    labs(title = "jitter width = 0.1, height = 1"),
+
+  g + geom_jitter(width = 1, height = 0.1) + 
+    labs(title = "jitter width = 1, height = 0.1"),
+
+ncol = 2, 
+nrow = 2)
+```
+
+### Question 4
+
+**Compare and contrast [`geom_jitter()`](https://ggplot2.tidyverse.org/reference/geom_jitter.html) with [`geom_count()`](https://ggplot2.tidyverse.org/reference/geom_count.html).**
+
+```{r}
+#| label: fig-q4-ex6
+#| 
+gridExtra::grid.arrange(
+  g + 
+    geom_count() +
+    labs(title = "geom_count()"),
+
+  g + 
+    geom_jitter() +
+    labs(title = "geom_jitter()"),
+  
+ncol = 2
+)
+
+```
+
+### Question 5
+
+**What\'s the default position adjustment for [`geom_boxplot()`](https://ggplot2.tidyverse.org/reference/geom_boxplot.html)? Create a visualization of the `mpg` dataset that demonstrates it.**
