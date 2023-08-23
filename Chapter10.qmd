@@ -2,7 +2,7 @@
 title: "Chapter 10"
 subtitle: "Layers"
 author: "Aditya Dahiya"
-date: 2023-08-16
+date: 2023-08-22
 execute: 
   warning: false
   error: false
@@ -52,7 +52,7 @@ data("diamonds")
 
 ### Question 1
 
-**Create a scatterplot of `hwy` vs. `displ` where the points are pink filled in triangles.**
+**Create a scatter-plot of `hwy` vs. `displ` where the points are pink filled in triangles.**
 
 The scatter-plot is displayed in @fig-q1-ex1 .
 
@@ -146,7 +146,7 @@ mpg |>
 
 ### Question 1
 
-**What geom would you use to draw a line chart? A boxplot? A histogram? An area chart?**
+**What geom would you use to draw a line chart? A box-plot? A histogram? An area chart?**
 
 We would use the following geoms:
 
@@ -619,7 +619,7 @@ The main arguments that control the behavior of **`stat_smooth()`** are:[^1]
 
 **In our proportion bar chart, we need to set `group = 1`. Why? In other words, what is the problem with these two graphs?**
 
-In **`ggplot2`**, the **`group`** aesthetic is used to define different groups within your data. When you specify **`group = 1`** within a layer of your plot, you are essentially telling **`ggplot2`** to treat all the data points as part of a single group. This can be useful when you want to apply a certain aesthetic or statistic to the entire dataset without distinguishing between different groups.[^2]
+In **`ggplot2`**, the **`group`** aesthetic is used to define different groups within your data. When you specify **`group = 1`** within a layer of your plot, you are essentially telling **`ggplot2`** to treat all the data points as part of a single group. This can be useful when you want to apply a certain aesthetic or statistic to the entire data-set without distinguishing between different groups.[^2]
 
 [^2]: This portion of answer was created using help from ChatGPT 3.5. OpenAI. (2023). ChatGPT (Aug 22, 2023 version) \[Large language model\]. <https://chat.openai.com>
 
@@ -643,19 +643,19 @@ gridExtra::grid.arrange(
          aes(x = cut, 
              y = after_stat(prop))) +
     geom_bar() +
-    labs(title = "Without using any grouping argument"),
+    labs(subtitle = "Without using any grouping argument"),
 
   ggplot(diamonds, 
          aes(x = cut, 
              y = after_stat(prop),
              group = 1)) +
   geom_bar() + 
-  labs(title = "Using group = 1 argument within aes()"),
+  labs(subtitle = "Using group = 1 argument within aes()"),
 
 ncol = 2)
 ```
 
-Another example showing the need for use of `group = 1` is below in @fig-q5a-ex5 . This plot again calculates the proportion of observations within each group formed by unique combinations of `cut` and `color` .
+Another example showing the need for use of `group = 1` is below. This plot again calculates the proportion of observations within each group formed by unique combinations of `cut` and `color` .
 
 ``` r
 ggplot(diamonds, aes(x = cut, 
@@ -666,13 +666,17 @@ ggplot(diamonds, aes(x = cut,
 
 ```{r}
 #| label: fig-q5a-ex5
-#| fig-cap: "Use of group=1 in coloured bar-plot to resolve the error"
+#| fig-cap: "Plot produced by faulty code"
 
 ggplot(diamonds, aes(x = cut, 
                      fill = color, 
                      y = after_stat(prop))) +    
-  geom_bar() +
-  labs(title = "Plot produced by faulty code")
+  geom_bar()
+```
+
+```{r}
+#| label: fig-q5a-ex5
+#| fig-cap: "Plot produced by tidyverse method to resolve issue"
 
 diamonds |>
   group_by(cut, color) |>
@@ -680,8 +684,7 @@ diamonds |>
   ggplot(aes(x = cut,
              y = n,
              fill = color)) +
-  geom_bar(stat = "identity") +
-  labs(title = "Plot produced by tidyverse method to resolve issue")
+  geom_bar(stat = "identity")
 ```
 
 # **10.6.1 Exercises**
@@ -695,7 +698,7 @@ ggplot(mpg, aes(x = cty, y = hwy)) +
   geom_point()
 ```
 
-This plot (shown in @fig-q1-ex6) suffers from over-plotting, since there are only 78 points displayed, against a total of 234 observations. So, we don't know if there are multiple observations of one type or many tpes, and where are the most observations located.
+This plot (shown in @fig-q1-ex6) suffers from over-plotting, since there are only 78 points displayed, against a total of 234 observations. So, we don't know if there are multiple observations of one type or many types, and where are the most observations located.
 
 We can improve the plot as shown in the code below, and the resulting right-hand side plot in @fig-q1-ex6 solves the problem.
 
@@ -761,6 +764,8 @@ Here's an example to depict the impact of changing these in @fig-q3-ex6.
 ```{r}
 #| label: fig-q3-ex6
 #| fig-cap: "Use of arguments to control jittering in scatterplots"
+
+
 g = ggplot(mpg, aes(x = displ, y = hwy)) +
   theme_classic() +
   labs(x = NULL, y = NULL)
@@ -786,9 +791,25 @@ nrow = 2)
 
 **Compare and contrast [`geom_jitter()`](https://ggplot2.tidyverse.org/reference/geom_jitter.html) with [`geom_count()`](https://ggplot2.tidyverse.org/reference/geom_count.html).**
 
+A comparison table is as follows:\--
+
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+|            | `geom_jitter()`                                                                                                                                   | `geom_count()`                                                                                                  |
++============+===================================================================================================================================================+=================================================================================================================+
+| Purpose    | To create a jitter plot, which is a scatter plot where the data points are slightly offset from their original positions to avoid over-plotting.  | To create a scatter plot where the size fo the dots indicate the density of points occurring at any location.   |
+|            |                                                                                                                                                   |                                                                                                                 |
+|            | It is done when dealing with dense data points.                                                                                                   | It is also done when dealing with dense data points.                                                            |
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+| Aesthetics | It uses x and y aesthetics, and adds a random noise to the,                                                                                       | It uses x, y, and size aesthetic. The size aesthetic depends on the count of data-point overlapping each other. |
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+
+: Comparison table for geom_jitter() and geom_count()
+
 ```{r}
 #| label: fig-q4-ex6
-#| 
+#| fig-cap: "Comparison of geom_jitter() and geom_count()"
+
+
 gridExtra::grid.arrange(
   g + 
     geom_count() +
@@ -800,9 +821,64 @@ gridExtra::grid.arrange(
   
 ncol = 2
 )
-
 ```
 
 ### Question 5
 
-**What\'s the default position adjustment for [`geom_boxplot()`](https://ggplot2.tidyverse.org/reference/geom_boxplot.html)? Create a visualization of the `mpg` dataset that demonstrates it.**
+**What's the default position adjustment for [`geom_boxplot()`](https://ggplot2.tidyverse.org/reference/geom_boxplot.html)? Create a visualization of the `mpg` data-set that demonstrates it.**
+
+The default position adjustment for `geom_boxplot()` is `"dodge2"`. This means that when you create box-plots for multiple groups, the boxes for each group will be placed side by side. This helps to visually compare the distribution of data between different groups.
+
+An example visualization using `mpg` data-set is in shown in @fig-q5-ex6.
+
+```{r}
+#| label: fig-q5-ex6
+#| fig-cap: "An example of boxplot with mpg dataset showing dodge2 position"
+
+mpg |>
+  str()
+mpg |>
+  ggplot(aes(x = class, 
+             y = hwy,
+             fill = drv)) +
+  geom_boxplot() +
+  theme_minimal()
+```
+
+# **10.7.1 Exercises**
+
+### Question 1 
+
+**Turn a stacked bar chart into a pie chart using [`coord_polar()`](https://ggplot2.tidyverse.org/reference/coord_polar.html)**.
+
+The `coord_polar()` is used to create pie charts. In ggplot2 terms, pie charts are a stacked bar chart in polar coordinates.
+
+To create a stacked bar chart, we use the aesthetic `fill` , and then covert the cartesian coordinates into polar coordinates, using `coord_polar()` with the argument `theta = "y"`. The
+
+```{r}
+#| label: fig-q1-ex7
+#| fig-cap: "Turning a staacked bar chart into a pie chart"
+
+library(gt)
+
+gtcars |>
+  ggplot(aes(x = 1,
+             fill = bdy_style)) +
+  geom_bar(color = "white") +
+  coord_polar(theta = "y") +
+  theme_void() +
+  theme(legend.position = "bottom") +
+  labs(fill = "Body Style")
+```
+
+### Question 2
+
+**What\'s the difference between [`coord_quickmap()`](https://ggplot2.tidyverse.org/reference/coord_map.html) and [`coord_map()`](https://ggplot2.tidyverse.org/reference/coord_map.html)?**
+
+### Question 3
+
+**What does the following plot tell you about the relationship between city and highway mpg? Why is [`coord_fixed()`](https://ggplot2.tidyverse.org/reference/coord_fixed.html) important? What does [`geom_abline()`](https://ggplot2.tidyverse.org/reference/geom_abline.html) do?**
+
+```         
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +   geom_point() +    geom_abline() +   coord_fixed()
+```
