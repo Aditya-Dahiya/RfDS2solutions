@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Aditya Dahiya">
-<meta name="dcterms.date" content="2023-08-16">
+<meta name="dcterms.date" content="2023-08-22">
 
 <title>Book Solutions - Chapter 10</title>
 <style>
@@ -370,6 +370,20 @@ div.csl-indent {
   <li><a href="#question-4-3" id="toc-question-4-3" class="nav-link" data-scroll-target="#question-4-3">Question 4</a></li>
   <li><a href="#question-5-1" id="toc-question-5-1" class="nav-link" data-scroll-target="#question-5-1">Question 5</a></li>
   </ul></li>
+  <li><a href="#exercises-4" id="toc-exercises-4" class="nav-link" data-scroll-target="#exercises-4"><strong>10.6.1 Exercises</strong></a>
+  <ul class="collapse">
+  <li><a href="#question-1-4" id="toc-question-1-4" class="nav-link" data-scroll-target="#question-1-4">Question 1</a></li>
+  <li><a href="#question-2-4" id="toc-question-2-4" class="nav-link" data-scroll-target="#question-2-4">Question 2</a></li>
+  <li><a href="#question-3-4" id="toc-question-3-4" class="nav-link" data-scroll-target="#question-3-4">Question 3</a></li>
+  <li><a href="#question-4-4" id="toc-question-4-4" class="nav-link" data-scroll-target="#question-4-4">Question 4</a></li>
+  <li><a href="#question-5-2" id="toc-question-5-2" class="nav-link" data-scroll-target="#question-5-2">Question 5</a></li>
+  </ul></li>
+  <li><a href="#exercises-5" id="toc-exercises-5" class="nav-link" data-scroll-target="#exercises-5"><strong>10.7.1 Exercises</strong></a>
+  <ul class="collapse">
+  <li><a href="#question-1-5" id="toc-question-1-5" class="nav-link" data-scroll-target="#question-1-5">Question 1</a></li>
+  <li><a href="#question-2-5" id="toc-question-2-5" class="nav-link" data-scroll-target="#question-2-5">Question 2</a></li>
+  <li><a href="#question-3-5" id="toc-question-3-5" class="nav-link" data-scroll-target="#question-3-5">Question 3</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/edit/main/Chapter10.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -396,7 +410,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 16, 2023</p>
+      <p class="date">August 22, 2023</p>
     </div>
   </div>
   
@@ -435,7 +449,7 @@ div.csl-indent {
 <h1>10.2.1 Exercises</h1>
 <section id="question-1" class="level3">
 <h3 class="anchored" data-anchor-id="question-1">Question 1</h3>
-<p><strong>Create a scatterplot of <code>hwy</code> vs.&nbsp;<code>displ</code> where the points are pink filled in triangles.</strong></p>
+<p><strong>Create a scatter-plot of <code>hwy</code> vs.&nbsp;<code>displ</code> where the points are pink filled in triangles.</strong></p>
 <p>The scatter-plot is displayed in <a href="#fig-q1-ex1">Figure&nbsp;1</a> .</p>
 <div class="cell" data-hash="Chapter10_cache/html/fig-q1-ex1_2abe451374746defda16aa53713a5388">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">|&gt;</span></span>
@@ -542,7 +556,7 @@ div.csl-indent {
 <h1>10.3.1 Exercises</h1>
 <section id="question-1-1" class="level3">
 <h3 class="anchored" data-anchor-id="question-1-1">Question 1</h3>
-<p><strong>What geom would you use to draw a line chart? A boxplot? A histogram? An area chart?</strong></p>
+<p><strong>What geom would you use to draw a line chart? A box-plot? A histogram? An area chart?</strong></p>
 <p>We would use the following geoms:</p>
 <table class="table">
 <caption>The geoms to use for different graph types</caption>
@@ -873,8 +887,8 @@ ggplot(mpg, aes(x = displ)) +
 <li><p><code>geom_linerange()</code></p></li>
 <li><p><code>geom_pointrange()</code></p></li>
 </ul>
-<p>The code shown below recreates the <span class="citation" data-cites="fig_q1_ex5">(<a href="#ref-fig_q1_ex5" role="doc-biblioref"><strong>fig_q1_ex5?</strong></a>)</span> using the function <code>geom_pointrange()</code> instead of the easier and shorter <code>stat_summary()</code> .</p>
-<div class="cell" data-hash="Chapter10_cache/html/fig_q1_ex5_fb58516047f12321171f123c6ca0a969">
+<p>The code shown below recreates the <a href="#fig-q1-ex5">Figure&nbsp;12</a> using the function <code>geom_pointrange()</code> instead of the easier and shorter <code>stat_summary()</code> .</p>
+<div class="cell" data-hash="Chapter10_cache/html/fig-q1-ex5_465778c9e61724ef76bfa9314b241dbb">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cut) <span class="sc">|&gt;</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">dep =</span> <span class="fu">median</span>(depth),</span>
@@ -887,15 +901,15 @@ ggplot(mpg, aes(x = displ)) +
 <span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>                      <span class="at">ymax =</span> dep_max), </span>
 <span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>                  <span class="at">stat =</span> <span class="st">"identity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div id="fig-q1-ex5" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="Chapter10_files/figure-html/fig_q1_ex5-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Producing same plot with geom_pointrange() instead of stat_summary()</figcaption>
+<p><img src="Chapter10_files/figure-html/fig-q1-ex5-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;12: Producing same plot with geom_pointrange() instead of stat_summary()</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>The benefit with <code>stat_summary()</code> is that we can create the summary statistics within the <code>ggplot()</code> function call, and then choose the geom to our liking. Here’s an example in <a href="#fig-q1a-ex5">Figure&nbsp;12</a> .</p>
+<p>The benefit with <code>stat_summary()</code> is that we can create the summary statistics within the <code>ggplot()</code> function call, and then choose the geom to our liking. Here’s an example in <a href="#fig-q1a-ex5">Figure&nbsp;13</a> .</p>
 <div class="cell" data-hash="Chapter10_cache/html/fig-q1a-ex5_66aeaaf511dec4d11db7ee4431b63324">
 <details>
 <summary>Code</summary>
@@ -938,7 +952,7 @@ ggplot(mpg, aes(x = displ)) +
 <div id="fig-q1a-ex5" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="Chapter10_files/figure-html/fig-q1a-ex5-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;12: Using stat_summary to generate different kinds of plots</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;13: Using stat_summary to generate different kinds of plots</figcaption>
 </figure>
 </div>
 </div>
@@ -1612,75 +1626,286 @@ tbody tr:last-child {
 <section id="question-5-1" class="level3">
 <h3 class="anchored" data-anchor-id="question-5-1">Question 5</h3>
 <p><strong>In our proportion bar chart, we need to set <code>group = 1</code>. Why? In other words, what is the problem with these two graphs?</strong></p>
-<p>In <strong><code>ggplot2</code></strong>, the <strong><code>group</code></strong> aesthetic is used to define different groups within your data. When you specify <strong><code>group = 1</code></strong> within a layer of your plot, you are essentially telling <strong><code>ggplot2</code></strong> to treat all the data points as part of a single group. This can be useful when you want to apply a certain aesthetic or statistic to the entire dataset without distinguishing between different groups.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>In <strong><code>ggplot2</code></strong>, the <strong><code>group</code></strong> aesthetic is used to define different groups within your data. When you specify <strong><code>group = 1</code></strong> within a layer of your plot, you are essentially telling <strong><code>ggplot2</code></strong> to treat all the data points as part of a single group. This can be useful when you want to apply a certain aesthetic or statistic to the entire data-set without distinguishing between different groups.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <p>Now, lets the take following code:</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x =</span> cut, </span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> <span class="fu">after_stat</span>(prop))) <span class="sc">+</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This code calculates the statistic proportion of observations within each group, i.e., each type of <code>cut</code>. Of course, the number of observations in each type of <code>cut</code> is all the observations present in the data set of that type of <code>cut</code>. Accordingly each proportion is displayed as one as shown in <a href="#fig-q5-ex5">Figure&nbsp;13</a>.</p>
-<div class="cell" data-hash="Chapter10_cache/html/fig-q5-ex5_93b2b335a8beabe4ed6d91b88af583ce">
+<p>This code calculates the statistic proportion of observations within each group, i.e., each type of <code>cut</code>. Of course, the number of observations in each type of <code>cut</code> is all the observations present in the data set of that type of <code>cut</code>. Accordingly each proportion is displayed as one as shown in <a href="#fig-q5-ex5">Figure&nbsp;14</a>.</p>
+<div class="cell" data-hash="Chapter10_cache/html/fig-q5-ex5_7ef231feeeb63ff0e7180d6de581c826">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(diamonds, </span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>         <span class="fu">aes</span>(<span class="at">x =</span> cut, </span>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="fu">after_stat</span>(prop))) <span class="sc">+</span></span>
 <span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Without using any grouping argument"</span>),</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Without using any grouping argument"</span>),</span>
 <span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(diamonds, </span>
 <span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>         <span class="fu">aes</span>(<span class="at">x =</span> cut, </span>
 <span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="fu">after_stat</span>(prop),</span>
 <span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
 <span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span> </span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Using group = 1 argument within aes()"</span>),</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Using group = 1 argument within aes()"</span>),</span>
 <span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="at">ncol =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-q5-ex5" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="Chapter10_files/figure-html/fig-q5-ex5-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;13: Use of group=1 in plot to resolve calculation error</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;14: Use of group=1 in plot to resolve calculation error</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Another example showing the need for use of <code>group = 1</code> is below in <strong>?@fig-q5a-ex5</strong> . This plot again calculates the proportion of observations within each group formed by unique combinations of <code>cut</code> and <code>color</code> .</p>
+<p>Another example showing the need for use of <code>group = 1</code> is below. This plot again calculates the proportion of observations within each group formed by unique combinations of <code>cut</code> and <code>color</code> .</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x =</span> cut, </span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">fill =</span> color, </span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> <span class="fu">after_stat</span>(prop))) <span class="sc">+</span>    </span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell" data-hash="Chapter10_cache/html/fig-q5a-ex5_c21732f1b18fd5207fad628e9a5c94d3">
+<div class="cell" data-hash="Chapter10_cache/html/fig-q5a-ex5_d43d311d60dead4cc7d9a6e7ca27396e">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x =</span> cut, </span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">fill =</span> color, </span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> <span class="fu">after_stat</span>(prop))) <span class="sc">+</span>    </span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Plot produced by faulty code"</span>)</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cut, color) <span class="sc">|&gt;</span></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">|&gt;</span></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> cut,</span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> n,</span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> color)) <span class="sc">+</span></span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Plot produced by tidyverse method to resolve issue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-q5a-ex5-1" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-q5a-ex5" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="Chapter10_files/figure-html/fig-q5a-ex5-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;14: Use of group=1 in coloured bar-plot to resolve the error</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;15: Plot produced by faulty code</figcaption>
 </figure>
 </div>
 </div>
+</div>
+<div class="cell" data-hash="Chapter10_cache/html/fig-q5b-ex5_e8397ee7cf96d61ab6a16816cd3940e7">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cut, color) <span class="sc">|&gt;</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">|&gt;</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> cut,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> n,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> color)) <span class="sc">+</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-q5a-ex5-2" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-q5b-ex5" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="Chapter10_files/figure-html/fig-q5a-ex5-2.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;15: Use of group=1 in coloured bar-plot to resolve the error</figcaption>
+<p><img src="Chapter10_files/figure-html/fig-q5b-ex5-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;16: Plot produced by tidyverse method to resolve issue</figcaption>
 </figure>
 </div>
 </div>
 </div>
+</section>
+</section>
+<section id="exercises-4" class="level1">
+<h1><strong>10.6.1 Exercises</strong></h1>
+<section id="question-1-4" class="level3">
+<h3 class="anchored" data-anchor-id="question-1-4">Question 1</h3>
+<p><strong>What is the problem with the following plot? How could you improve it?</strong></p>
+<pre><code>ggplot(mpg, aes(x = cty, y = hwy)) +    
+  geom_point()</code></pre>
+<p>This plot (shown in <a href="#fig-q1-ex6">Figure&nbsp;17</a>) suffers from over-plotting, since there are only 78 points displayed, against a total of 234 observations. So, we don’t know if there are multiple observations of one type or many types, and where are the most observations located.</p>
+<p>We can improve the plot as shown in the code below, and the resulting right-hand side plot in <a href="#fig-q1-ex6">Figure&nbsp;17</a> solves the problem.</p>
+<div class="cell" data-hash="Chapter10_cache/html/fig-q1-ex6_d9ef7cb02a574b3583fdf21add9919c1">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Total number of observations in mpg dataset</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(mpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 234</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Total number of points (unique values) which are displayed by the faulty code</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">|&gt;</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cty, hwy) <span class="sc">|&gt;</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">|&gt;</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 78</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The faulty code and corrected plots</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> cty, <span class="at">y =</span> hwy)) <span class="sc">+</span>    </span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Faulty code: Overplotting"</span>),</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> cty, <span class="at">y =</span> hwy)) <span class="sc">+</span>    </span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="st">"jitter"</span>) <span class="sc">+</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Problem resolved by position = </span><span class="sc">\"</span><span class="st">jitter</span><span class="sc">\"</span><span class="st">"</span>),</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">2</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-q1-ex6" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter10_files/figure-html/fig-q1-ex6-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;17: Correcting plot problems with position</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="question-2-4" class="level3">
+<h3 class="anchored" data-anchor-id="question-2-4">Question 2</h3>
+<p><strong>What, if anything, is the difference between the two plots? Why?</strong></p>
+<pre><code>ggplot(mpg, aes(x = displ, y = hwy)) +   
+  geom_point() 
+
+ggplot(mpg, aes(x = displ, y = hwy)) +   
+  geom_point(position = "identity")</code></pre>
+<p>There is no difference between the two plots because by default, <code>geom_point()</code> uses the <code>position = "identity"</code> only. That is because in scatter plots, the position of the dot is displayed at the actual values of x-axis and y-axis variables, i.e.&nbsp;position is “identity” (the actual value).</p>
+</section>
+<section id="question-3-4" class="level3">
+<h3 class="anchored" data-anchor-id="question-3-4">Question 3</h3>
+<p><strong>What parameters to <a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html"><code>geom_jitter()</code></a> control the amount of jittering?</strong></p>
+<p>In ggplot2, the <strong><code>geom_jitter()</code></strong> function is used to create a scatter plot where points are randomly displaced to avoid overlap and make it easier to visualize the overlapping data points’ actual distribution.</p>
+<p>We can control the amount of jittering using the following parameters:</p>
+<ol type="1">
+<li><p><strong><code>width</code></strong>: This parameter controls the amount of horizontal jittering. A larger value will result in more spread-out points along the x-axis, reducing overlap. Smaller values will result in less spread-out points.</p></li>
+<li><p><strong><code>height</code></strong>: This parameter controls the amount of vertical jittering. Similar to <strong><code>width</code></strong>, a larger value will spread the points more along the y-axis, reducing overlap, while smaller values will lead to less spread.</p></li>
+<li><p><strong><code>seed</code></strong>: This parameter allows you to set a random seed for the jittering process. Using the same seed value ensures that the jittered points remain consistent across multiple plots or sessions.</p></li>
+</ol>
+<p>Here’s an example to depict the impact of changing these in <a href="#fig-q3-ex6">Figure&nbsp;18</a>.</p>
+<div class="cell" data-hash="Chapter10_cache/html/fig-q3-ex6_3c48c6b2e2c3da10ad185e6706773cdb">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> <span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  g <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"geom_point()"</span>),</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>  g <span class="sc">+</span> <span class="fu">geom_jitter</span>() <span class="sc">+</span> </span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"geom_jitter()"</span>),</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>  g <span class="sc">+</span> <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">height =</span> <span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"jitter width = 0.1, height = 1"</span>),</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>  g <span class="sc">+</span> <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="dv">1</span>, <span class="at">height =</span> <span class="fl">0.1</span>) <span class="sc">+</span> </span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"jitter width = 1, height = 0.1"</span>),</span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a><span class="at">ncol =</span> <span class="dv">2</span>, </span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a><span class="at">nrow =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-q3-ex6" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter10_files/figure-html/fig-q3-ex6-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;18: Use of arguments to control jittering in scatterplots</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="question-4-4" class="level3">
+<h3 class="anchored" data-anchor-id="question-4-4">Question 4</h3>
+<p><strong>Compare and contrast <a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html"><code>geom_jitter()</code></a> with <a href="https://ggplot2.tidyverse.org/reference/geom_count.html"><code>geom_count()</code></a>.</strong></p>
+<p>A comparison table is as follows:--</p>
+<table class="table">
+<caption>Comparison table for geom_jitter() and geom_count()</caption>
+<colgroup>
+<col style="width: 4%">
+<col style="width: 53%">
+<col style="width: 41%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><code>geom_jitter()</code></th>
+<th><code>geom_count()</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Purpose</td>
+<td><p>To create a jitter plot, which is a scatter plot where the data points are slightly offset from their original positions to avoid over-plotting.</p>
+<p>It is done when dealing with dense data points.</p></td>
+<td><p>To create a scatter plot where the size fo the dots indicate the density of points occurring at any location.</p>
+<p>It is also done when dealing with dense data points.</p></td>
+</tr>
+<tr class="even">
+<td>Aesthetics</td>
+<td>It uses x and y aesthetics, and adds a random noise to the,</td>
+<td>It uses x, y, and size aesthetic. The size aesthetic depends on the count of data-point overlapping each other.</td>
+</tr>
+</tbody>
+</table>
+<div class="cell" data-hash="Chapter10_cache/html/fig-q4-ex6_4106c8dfaf9fe7c0f6f9849b4e42307d">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  g <span class="sc">+</span> </span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_count</span>() <span class="sc">+</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"geom_count()"</span>),</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  g <span class="sc">+</span> </span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"geom_jitter()"</span>),</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="at">ncol =</span> <span class="dv">2</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-q4-ex6" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter10_files/figure-html/fig-q4-ex6-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;19: Comparison of geom_jitter() and geom_count()</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="question-5-2" class="level3">
+<h3 class="anchored" data-anchor-id="question-5-2">Question 5</h3>
+<p><strong>What’s the default position adjustment for <a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html"><code>geom_boxplot()</code></a>? Create a visualization of the <code>mpg</code> data-set that demonstrates it.</strong></p>
+<p>The default position adjustment for <code>geom_boxplot()</code> is <code>"dodge2"</code>. This means that when you create box-plots for multiple groups, the boxes for each group will be placed side by side. This helps to visually compare the distribution of data between different groups.</p>
+<p>An example visualization using <code>mpg</code> data-set is in shown in <a href="#fig-q5-ex6">Figure&nbsp;20</a>.</p>
+<div class="cell" data-hash="Chapter10_cache/html/fig-q5-ex6_ff39d42459457a29f18576979344cf42">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">|&gt;</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> class, </span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> hwy,</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> drv)) <span class="sc">+</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-q5-ex6" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter10_files/figure-html/fig-q5-ex6-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;20: An example of boxplot with mpg dataset showing dodge2 position</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="exercises-5" class="level1">
+<h1><strong>10.7.1 Exercises</strong></h1>
+<section id="question-1-5" class="level3">
+<h3 class="anchored" data-anchor-id="question-1-5">Question 1</h3>
+<p><strong>Turn a stacked bar chart into a pie chart using <a href="https://ggplot2.tidyverse.org/reference/coord_polar.html"><code>coord_polar()</code></a></strong>.</p>
+<p>The <code>coord_polar()</code> is used to create pie charts. In ggplot2 terms, pie charts are a stacked bar chart in polar coordinates.</p>
+<p>To create a stacked bar chart, we use the aesthetic <code>fill</code> , and then covert the cartesian coordinates into polar coordinates, using <code>coord_polar()</code> with the argument <code>theta = "y"</code>. The</p>
+<div class="cell" data-hash="Chapter10_cache/html/fig-q1-ex7_785dd037fdcb3d96b9eb6f415edee9b2">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>gtcars <span class="sc">|&gt;</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">1</span>,</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> bdy_style)) <span class="sc">+</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_polar</span>(<span class="at">theta =</span> <span class="st">"y"</span>) <span class="sc">+</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) <span class="sc">+</span></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Body Style"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-q1-ex7" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter10_files/figure-html/fig-q1-ex7-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;21: Turning a staacked bar chart into a pie chart</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="question-2-5" class="level3">
+<h3 class="anchored" data-anchor-id="question-2-5">Question 2</h3>
+<p><strong>What’s the difference between <a href="https://ggplot2.tidyverse.org/reference/coord_map.html"><code>coord_quickmap()</code></a> and <a href="https://ggplot2.tidyverse.org/reference/coord_map.html"><code>coord_map()</code></a>?</strong></p>
+</section>
+<section id="question-3-5" class="level3">
+<h3 class="anchored" data-anchor-id="question-3-5">Question 3</h3>
+<p><strong>What does the following plot tell you about the relationship between city and highway mpg? Why is <a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html"><code>coord_fixed()</code></a> important? What does <a href="https://ggplot2.tidyverse.org/reference/geom_abline.html"><code>geom_abline()</code></a> do?</strong></p>
+<pre><code>ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +   geom_point() +    geom_abline() +   coord_fixed()</code></pre>
 
 
 

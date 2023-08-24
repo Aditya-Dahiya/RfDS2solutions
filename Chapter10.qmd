@@ -459,10 +459,10 @@ The default geom associated with `stat_summary()` is `geom_pointrange()` . It be
 
 -   `geom_pointrange()`
 
-The code shown below recreates the @fig_q1_ex5 using the function `geom_pointrange()` instead of the easier and shorter `stat_summary()` .
+The code shown below recreates the @fig-q1-ex5 using the function `geom_pointrange()` instead of the easier and shorter `stat_summary()` .
 
 ```{r}
-#| label: fig_q1_ex5
+#| label: fig-q1-ex5
 #| fig-cap: "Producing same plot with geom_pointrange() instead of stat_summary()"
 diamonds |>
   group_by(cut) |>
@@ -675,7 +675,7 @@ ggplot(diamonds, aes(x = cut,
 ```
 
 ```{r}
-#| label: fig-q5a-ex5
+#| label: fig-q5b-ex5
 #| fig-cap: "Plot produced by tidyverse method to resolve issue"
 
 diamonds |>
@@ -705,7 +705,6 @@ We can improve the plot as shown in the code below, and the resulting right-hand
 ```{r}
 #| label: fig-q1-ex6
 #| fig-cap: "Correcting plot problems with position"
-#| code-fold: true
 
 # Total number of observations in mpg dataset
 nrow(mpg)
@@ -793,15 +792,15 @@ nrow = 2)
 
 A comparison table is as follows:\--
 
-+------------+---------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
-|            | `geom_jitter()`                                                                                                                                   | `geom_count()`                                                                                                  |
-+============+===================================================================================================================================================+=================================================================================================================+
-| Purpose    | To create a jitter plot, which is a scatter plot where the data points are slightly offset from their original positions to avoid over-plotting.  | To create a scatter plot where the size fo the dots indicate the density of points occurring at any location.   |
-|            |                                                                                                                                                   |                                                                                                                 |
-|            | It is done when dealing with dense data points.                                                                                                   | It is also done when dealing with dense data points.                                                            |
-+------------+---------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
-| Aesthetics | It uses x and y aesthetics, and adds a random noise to the,                                                                                       | It uses x, y, and size aesthetic. The size aesthetic depends on the count of data-point overlapping each other. |
-+------------+---------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
++------------+--------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+|            | `geom_jitter()`                                                                                                                                  | `geom_count()`                                                                                                  |
++============+==================================================================================================================================================+=================================================================================================================+
+| Purpose    | To create a jitter plot, which is a scatter plot where the data points are slightly offset from their original positions to avoid over-plotting. | To create a scatter plot where the size fo the dots indicate the density of points occurring at any location.   |
+|            |                                                                                                                                                  |                                                                                                                 |
+|            | It is done when dealing with dense data points.                                                                                                  | It is also done when dealing with dense data points.                                                            |
++------------+--------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+| Aesthetics | It uses x and y aesthetics, and adds a random noise to the,                                                                                      | It uses x, y, and size aesthetic. The size aesthetic depends on the count of data-point overlapping each other. |
++------------+--------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
 
 : Comparison table for geom_jitter() and geom_count()
 
@@ -836,8 +835,6 @@ An example visualization using `mpg` data-set is in shown in @fig-q5-ex6.
 #| fig-cap: "An example of boxplot with mpg dataset showing dodge2 position"
 
 mpg |>
-  str()
-mpg |>
   ggplot(aes(x = class, 
              y = hwy,
              fill = drv)) +
@@ -847,7 +844,7 @@ mpg |>
 
 # **10.7.1 Exercises**
 
-### Question 1 
+### Question 1
 
 **Turn a stacked bar chart into a pie chart using [`coord_polar()`](https://ggplot2.tidyverse.org/reference/coord_polar.html)**.
 
@@ -873,7 +870,7 @@ gtcars |>
 
 ### Question 2
 
-**What\'s the difference between [`coord_quickmap()`](https://ggplot2.tidyverse.org/reference/coord_map.html) and [`coord_map()`](https://ggplot2.tidyverse.org/reference/coord_map.html)?**
+**What's the difference between [`coord_quickmap()`](https://ggplot2.tidyverse.org/reference/coord_map.html) and [`coord_map()`](https://ggplot2.tidyverse.org/reference/coord_map.html)?**
 
 ### Question 3
 
