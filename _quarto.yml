@@ -41,6 +41,7 @@ website:
       - section: "Visualize"
         contents:
           - Chapter10.qmd
+          - Chapter11.qmd
       - section: "Transform"
         contents:
       - section: "Import"

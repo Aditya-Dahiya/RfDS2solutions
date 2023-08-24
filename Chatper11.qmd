@@ -1,0 +1,23 @@
+---
+title: "Chapter 11"
+subtitle: "Layers"
+author: "Aditya Dahiya"
+date: 2023-08-24
+execute: 
+  warning: false
+  error: false
+  cache: true
+filters:
+  - social-share
+share:
+  permalink: "https://aditya-dahiya.github.io/RfDS2solutions/Chapter11.html"
+  description: "Solutions: R for Data Science (2e)"
+  twitter: true
+  facebook: true
+  linkedin: true
+  email: true
+editor_options: 
+  chunk_output_type: console
+bibliography: references.bib
+---
+

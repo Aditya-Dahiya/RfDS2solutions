@@ -1901,11 +1901,112 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 <section id="question-2-5" class="level3">
 <h3 class="anchored" data-anchor-id="question-2-5">Question 2</h3>
 <p><strong>What’s the difference between <a href="https://ggplot2.tidyverse.org/reference/coord_map.html"><code>coord_quickmap()</code></a> and <a href="https://ggplot2.tidyverse.org/reference/coord_map.html"><code>coord_map()</code></a>?</strong></p>
+<p>The function <code>coorp_map()</code> <em>projects a portion of the earth, which is approximately spherical, onto a flat 2D plane using any projection defined by the <code>mapproj</code> package. Map projections do not, in general, preserve straight lines, so this requires considerable computation.</em><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> The default projection used by <code>coord_map()</code> is the <a href="https://en.wikipedia.org/wiki/Mercator_projection">Mercator projection</a>.</p>
+<p>On the other hand, <code>coord_quickmap()</code>&nbsp;is a quick approximation that does preserve straight lines. It works best for smaller areas closer to the equator. This approximation will ignore Earth’s curvature and adjust for the latitude to longitude ratio. It is faster tha <code>coord_map()</code> because:</p>
+<ul>
+<li><p>the projection is computationally easier, and</p></li>
+<li><p>coordinates of the individual geoms do not need to be transformed like in <code>coord_map()</code> .</p></li>
+</ul>
+<p>The Mercator projection doesn’t preserve straight lines, as is shown in this image from Wikipedia article: –</p>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><a href="https://en.wikipedia.org/wiki/Mercator_projection"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Rhumb_line_vs_great-circle_arc.png" class="img-fluid figure-img" width="247"></a></p>
+<figcaption class="figure-caption">Straight lines are not preserved in Mercator projection</figcaption>
+</figure>
+</div>
+<p>The <a href="#fig-q2a-ex7">Figure&nbsp;22</a> to demonstrate the difference for areas <strong>away from the equator</strong>, such as Canada.</p>
+<div class="cell" data-fig.asp="0.4" data-hash="Chapter10_cache/html/fig-q2a-ex7_a99a1445a2a8273d170b39b2a67f37dd">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>cn <span class="ot">=</span> <span class="fu">map_data</span>(<span class="st">"world"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(region <span class="sc">==</span> <span class="st">"Canada"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> long,</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> lat,</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">group =</span> group)) <span class="sc">+</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">fill =</span> <span class="st">"lightgrey"</span>,</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">"darkgrey"</span>) <span class="sc">+</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  ggthemes<span class="sc">::</span><span class="fu">theme_map</span>()</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>cn <span class="sc">+</span> </span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_map</span>() <span class="sc">+</span> </span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Canada's map with coord_map()"</span>),</span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>cn <span class="sc">+</span> <span class="fu">coord_quickmap</span>() <span class="sc">+</span></span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Canada's map with coord_quickmap()"</span>),</span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a><span class="at">ncol =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-q2a-ex7" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter10_files/figure-html/fig-q2a-ex7-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;22: Depicting difference away from equator: Canada</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The <a href="#fig-q2b-ex7">Figure&nbsp;23</a> to demonstrate the difference for areas <strong>near the equator</strong>, such as Democratic Republic of the Congo.</p>
+<div class="cell" data-fig.asp="0.4" data-hash="Chapter10_cache/html/fig-q2b-ex7_dbcee945f11ec7422f8a7f9422e5b3f9">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>cg <span class="ot">=</span> <span class="fu">map_data</span>(<span class="st">"world"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(region <span class="sc">==</span> <span class="st">"Democratic Republic of the Congo"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> long,</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> lat,</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">group =</span> group)) <span class="sc">+</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">fill =</span> <span class="st">"lightgrey"</span>,</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">"darkgrey"</span>) <span class="sc">+</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>  ggthemes<span class="sc">::</span><span class="fu">theme_map</span>()</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>cg <span class="sc">+</span> </span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_map</span>() <span class="sc">+</span> </span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Map with coord_map()"</span>),</span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>cg <span class="sc">+</span> <span class="fu">coord_quickmap</span>() <span class="sc">+</span></span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Map with coord_quickmap()"</span>),</span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a><span class="at">ncol =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-q2b-ex7" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter10_files/figure-html/fig-q2b-ex7-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;23: Almost no difference near equator: Democratic Republic of the Congo</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="question-3-5" class="level3">
 <h3 class="anchored" data-anchor-id="question-3-5">Question 3</h3>
 <p><strong>What does the following plot tell you about the relationship between city and highway mpg? Why is <a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html"><code>coord_fixed()</code></a> important? What does <a href="https://ggplot2.tidyverse.org/reference/geom_abline.html"><code>geom_abline()</code></a> do?</strong></p>
-<pre><code>ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +   geom_point() +    geom_abline() +   coord_fixed()</code></pre>
+<pre><code>ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +   
+  geom_point() +    
+  geom_abline() +   
+  coord_fixed()</code></pre>
+<p>The plot generated from this code is shown below in <a href="#fig-q3-ex7">Figure&nbsp;24</a> . This plot tells us that for all cars, the highway mileage (miles per gallon) is greater than the city mileage (miles per gallon).</p>
+<p>The <code>coord_fixed()</code> is important because here we want to compare values on x-axis vs.&nbsp;values on y-axis. A fixed scale coordinate system generated by <code>coord_fixed()</code> forces a specified ratio between the physical representation of data units on the axes. The ratio represents the number of units on the y-axis equivalent to one unit on the x-axis. The default, <code>ratio = 1</code>, ensures that one unit on the x-axis is the same length as one unit on the y-axis.</p>
+<p>The <code>geom_abline()</code> adds a reference line to the plot, here in this case a diagonal (specified by slope and intercept). This the line of equality, i.e., the line where <code>hwy</code> = <code>cty</code>. Since all observations lie above this line, we conclude that the highway mileage (miles per gallon) is greater than the city mileage (miles per gallon).</p>
+<div class="cell" data-hash="Chapter10_cache/html/fig-q3-ex7_c3c71c708c8f9d9efa3a3ead225c5b2d">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> cty, </span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">y =</span> hwy)) <span class="sc">+</span>   </span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>    </span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>() <span class="sc">+</span>   </span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_fixed</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-q3-ex7" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter10_files/figure-html/fig-q3-ex7-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;24: Figure depicting importance of coord_fixed()</figcaption>
+</figure>
+</div>
+</div>
+</div>
 
 
 
@@ -1922,6 +2023,7 @@ Wickham, Hadley. 2016. <span>“Ggplot2: Elegant Graphics for Data Analysis.”<
 <ol>
 <li id="fn1"><p>Written with help from ChatGPT 3.5. OpenAI. (2023). ChatGPT (Aug 22, 2023 version) [Large language model]. <a href="https://chat.openai.com" class="uri">https://chat.openai.com</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>This portion of answer was created using help from ChatGPT 3.5. OpenAI. (2023). ChatGPT (Aug 22, 2023 version) [Large language model]. <a href="https://chat.openai.com" class="uri">https://chat.openai.com</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>ggplot2, <strong>Map projections.</strong> <a href="https://ggplot2.tidyverse.org/reference/coord_map.html" class="uri">https://ggplot2.tidyverse.org/reference/coord_map.html</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
