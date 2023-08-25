@@ -1,5 +1,6 @@
 ---
 title: "Chapter 7"
+subtitle: "Workflow: scripts and projects"
 author: "Aditya Dahiya"
 date: 2023-08-08
 execute: 
