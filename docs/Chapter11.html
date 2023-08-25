@@ -164,7 +164,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Chapter10.html">Visualize</a></li><li class="breadcrumb-item"><a href="./Chatper11.html">Chapter 11</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Chapter10.html">Visualize</a></li><li class="breadcrumb-item"><a href="./Chapter11.html">Chapter 11</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -260,7 +260,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Chatper11.html" class="sidebar-item-text sidebar-link active">
+  <a href="./Chapter11.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Chapter 11</span></a>
   </div>
 </li>
@@ -347,7 +347,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#question-6" id="toc-question-6" class="nav-link" data-scroll-target="#question-6">Question 6</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/edit/main/Chatper11.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/edit/main/Chapter11.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -382,9 +382,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<div class="cell" data-hash="Chatper11_cache/html/setup_e9b50eea2f75ebd81bffc9897a452a82">
+<div class="cell" data-hash="Chapter11_cache/html/setup_c03b0d479bc4ec741064eec24dad334f">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="exercises" class="level1">
 <h1><strong>11.3.3 Exercises</strong></h1>
@@ -400,7 +401,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>The mean values of <code>x</code> , <code>y</code> and <code>z</code> are 5.73, 5.73 and 3.54. Thus, it is possible that <code>x</code> and <code>y</code> represent either of length and width, while <code>z</code> represents depth.</p></li>
 <li><p>Now, upon visualizing the density plots of <code>x</code> , <code>y</code> and <code>z</code> , we see that <code>x</code> and <code>y</code> are similar distributed so, they must be length and breadth, but <code>z</code> is smaller in value. So, <code>z</code> must be depth.</p></li>
 </ul>
-<div class="cell" data-hash="Chatper11_cache/html/q1-ex3_c0a512fc266fc565370319047d19b98e">
+<div class="cell" data-hash="Chapter11_cache/html/q1-ex3_cdd254c65a4d81941172de97eaf063c0">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"diamonds"</span>)</span>
@@ -449,7 +450,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="question-2">Question 2</h3>
 <p><strong>Explore the distribution of <code>price</code>. Do you discover anything unusual or surprising? (Hint: Carefully think about the <code>binwidth</code> and make sure you try a wide range of values.)</strong></p>
 <p>The distribution of price shows a surprising fact in <a href="#fig-q2-ex3">Figure&nbsp;1</a> that there are no diamonds priced between $1,450 and $1,550.</p>
-<div class="cell" data-hash="Chatper11_cache/html/fig-q2-ex3_c4c25f265c2bbaed9917767df679e3ec">
+<div class="cell" data-hash="Chapter11_cache/html/fig-q2-ex3_60caa392e0a666e7965e54c53b52c49d">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(price)) <span class="sc">+</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">10</span>, </span>
@@ -461,7 +462,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div id="fig-q2-ex3" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="Chatper11_files/figure-html/fig-q2-ex3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Chapter11_files/figure-html/fig-q2-ex3-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption class="figure-caption">Figure&nbsp;1: The hisotgram of diamonds’ prices, focussed in area around $1500 price tag</figcaption>
 </figure>
 </div>
@@ -473,7 +474,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>How many diamonds are 0.99 carat? How many are 1 carat? What do you think is the cause of the difference?</strong></p>
 <p>There are only 23 diamonds of 0.99 carat, but 1,558 diamonds of 1 carat.</p>
 <p>The possible cause of this difference is that the weight recorder or measurement instrument rounded off to the nearest integer, especially if <code>carat</code> was 0.99.</p>
-<div class="cell" data-hash="Chatper11_cache/html/unnamed-chunk-4_48b456a61cd1906e78cd278ba0982d9a">
+<div class="cell" data-hash="Chapter11_cache/html/unnamed-chunk-4_547218ef8214983acf9f2265006bf406">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(carat) <span class="sc">|&gt;</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(carat <span class="sc">==</span> <span class="fl">0.99</span> <span class="sc">|</span> carat <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
@@ -522,9 +523,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Comparison</strong></p>
 <table class="table">
 <colgroup>
-<col style="width: 19%">
-<col style="width: 26%">
-<col style="width: 53%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -571,7 +572,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<div class="cell" data-fig.asp="0.5" data-hash="Chatper11_cache/html/fig-q4-ex3_f64a71b36dd8dbbd35b2c0afe0fe6721">
+<div class="cell" data-fig.asp="0.5" data-hash="Chapter11_cache/html/fig-q4-ex3_afc0840dfd384315502582520e6e3860">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> y)) <span class="sc">+</span></span>
@@ -591,7 +592,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div id="fig-q4-ex3" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="Chatper11_files/figure-html/fig-q4-ex3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Chapter11_files/figure-html/fig-q4-ex3-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption class="figure-caption">Figure&nbsp;2: Difference between coord_cartesian() and xlim()/ylim()</figcaption>
 </figure>
 </div>
@@ -612,7 +613,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>Bar charts</strong>, on the other hand, are used to compare the frequency or count of different categories. Missing values are treated as a category themselves.</p></li>
 </ul>
 <p>In summary, the distinction in handling missing values is based on the type of data being visualized and the purpose of each plot. Histograms focus on the distribution of non-missing numeric data, while bar charts emphasize the comparison of categorical data, including missing values as a separate category.</p>
-<div class="cell" data-hash="Chatper11_cache/html/q1_d330e96b0cb21b90309305fc0f527e32">
+<div class="cell" data-hash="Chapter11_cache/html/q1_ec1effea721cec73903231b61d6adf87">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set a random seed for reproducibility</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -643,7 +644,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Chatper11_files/figure-html/q1-1.png" class="img-fluid" width="672"></p>
+<p><img src="Chapter11_files/figure-html/q1-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -652,7 +653,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>What does <code>na.rm = TRUE</code> do in <a href="https://rdrr.io/r/base/mean.html"><code>mean()</code></a> and <a href="https://rdrr.io/r/base/sum.html"><code>sum()</code></a>?</strong></p>
 <p>When <strong><code>na.rm</code></strong> is set to <strong><code>TRUE</code></strong>, the function will remove any <code>NA</code> values from the input vector before performing the calculation. This means that the resulting mean or sum will only consider the non-missing values.</p>
 <p>This is important because in <code>R</code> , NAs cannot be added or subtrated or operated upon, for example, <code>NA + 1 = NA</code>. Thus, even if one observation is <code>NA</code>, the mean or sum of the entire vector will be <code>NA</code> . Hence, using <code>na.rm = TRUE</code> is important.</p>
-<div class="cell" data-hash="Chatper11_cache/html/unnamed-chunk-7_0c3ec3bf607f36464e084ea3b401c165">
+<div class="cell" data-hash="Chapter11_cache/html/unnamed-chunk-7_24f52dc036e5d2b091cf8c5ef01750fc">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df<span class="sc">$</span>Value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA</code></pre>
@@ -675,7 +676,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="question-3-1">Question 3</h3>
 <p><strong>Recreate the frequency plot of <code>scheduled_dep_time</code> colored by whether the flight was cancelled or not. Also facet by the <code>cancelled</code> variable. Experiment with different values of the <code>scales</code> variable in the faceting function to mitigate the effect of more non-cancelled flights than cancelled flights.</strong></p>
 <p>The best value of scales to use is <code>scales = "free_y"</code> so that the two facets’ y-axis are completely free and we can compare the distribution of cancelled flights vs.&nbsp;non-cancelled flights in <a href="#fig-q3-ex4">Figure&nbsp;3</a>.</p>
-<div class="cell" data-hash="Chatper11_cache/html/fig-q3-ex4_e757150cd1d9ab211ebca4894fe776dd">
+<div class="cell" data-hash="Chapter11_cache/html/fig-q3-ex4_aea0fea1783bffe2b1b8277e0748bb62">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>nycflights13<span class="sc">::</span>flights <span class="sc">|&gt;</span> </span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cancelled =</span> <span class="fu">is.na</span>(dep_time),</span>
@@ -698,7 +699,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div id="fig-q3-ex4" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="Chatper11_files/figure-html/fig-q3-ex4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Chapter11_files/figure-html/fig-q3-ex4-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption class="figure-caption">Figure&nbsp;3: Comparison of cancelled vs.&nbsp;non-cancelled flights by faceting</figcaption>
 </figure>
 </div>
@@ -712,7 +713,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="question-1-2">Question 1</h3>
 <p><strong>Use what you’ve learned to improve the visualization of the departure times of cancelled vs.&nbsp;non-cancelled flights.</strong></p>
 <p>The <a href="#fig-q1-ex5.1">Figure&nbsp;4</a> shows an example to demonstrate exploratory data analysis in missing values in data-set <code>flights</code> of the package <code>nycflights13</code> . It shows that as the day progresses, more flights get cancelled. Evening flights are more likely to get cancelled than morning flights.</p>
-<div class="cell" data-hash="Chatper11_cache/html/fig-q1-ex5.1_2970b37f8dc1b8d2bdb466cbe57790e0">
+<div class="cell" data-hash="Chapter11_cache/html/fig-q1-ex5.1_1304adc11fbf63fb48b969937abfc554">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>nycflights13<span class="sc">::</span>flights <span class="sc">|&gt;</span> </span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cancelled =</span> <span class="fu">is.na</span>(dep_time),</span>
@@ -734,14 +735,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div id="fig-q1-ex5.1" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="Chatper11_files/figure-html/fig-q1-ex5.1-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Chapter11_files/figure-html/fig-q1-ex5.1-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption class="figure-caption">Figure&nbsp;4: Visualizing departure times of cancelled vs.&nbsp;non-cancelled flights</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>Another method to visualize it is shown using <code>stat = "density"</code> argument in the <code>geom_freqpoly()</code> in <a href="#fig-q1a-ex5.1">Figure&nbsp;5</a> below.</p>
-<div class="cell" data-hash="Chatper11_cache/html/fig-q1a-ex5.1_579c1438ed2180b16685e7d7a5239131">
+<div class="cell" data-hash="Chapter11_cache/html/fig-q1a-ex5.1_89b5c339f2ee81ba7e48657e718ded13">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>nycflights13<span class="sc">::</span>flights <span class="sc">|&gt;</span> </span>
@@ -766,14 +767,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div id="fig-q1a-ex5.1" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="Chatper11_files/figure-html/fig-q1a-ex5.1-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Chapter11_files/figure-html/fig-q1a-ex5.1-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption class="figure-caption">Figure&nbsp;5: Another method of visualizing departure times of cancelled vs.&nbsp;non-cancelled flights</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>Lastly, we can also work on the data set, compute the percentage of flights that are cancelled within each hour and plot the percentage as shown in <a href="#fig-q1b-ex5.1">Figure&nbsp;6</a> .</p>
-<div class="cell" data-hash="Chatper11_cache/html/fig-q1b-ex5.1_39bff1b3f327bf6d174aa2ef76b4b434">
+<div class="cell" data-hash="Chapter11_cache/html/fig-q1b-ex5.1_5be8771921226195ada7a43ec8a6f4c0">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>nycflights13<span class="sc">::</span>flights <span class="sc">|&gt;</span> </span>
@@ -803,7 +804,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div id="fig-q1b-ex5.1" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="Chatper11_files/figure-html/fig-q1b-ex5.1-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Chapter11_files/figure-html/fig-q1b-ex5.1-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption class="figure-caption">Figure&nbsp;6: Percentage of flights cancelled each hour</figcaption>
 </figure>
 </div>
@@ -812,29 +813,292 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="question-2-2" class="level3">
 <h3 class="anchored" data-anchor-id="question-2-2">Question 2</h3>
-<p><strong>Based on EDA, what variable in the diamonds dataset appears to be most important for predicting the price of a diamond? How is that variable correlated with cut? Why does the combination of those two relationships lead to lower quality diamonds being more expensive?</strong></p>
+<p><strong>Based on EDA, what variable in the diamonds data-set appears to be most important for predicting the price of a diamond? How is that variable correlated with cut? Why does the combination of those two relationships lead to lower quality diamonds being more expensive?</strong></p>
+<p>As we can see from the correlation plot in <a href="#fig-q2-ex5.1">Figure&nbsp;7</a>, the variable most important for predicting the price of a diamond is <strong><code>carat</code></strong> , i.e.&nbsp;the weight of the diamond.</p>
+<div class="cell" data-hash="Chapter11_cache/html/fig-q2-ex5.1_2fa162918e02686237d8cafa3dc5df12">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(cut, color, clarity)) <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>() <span class="sc">|&gt;</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  corrplot<span class="sc">::</span><span class="fu">corrplot</span>(<span class="at">method =</span> <span class="st">"number"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-q2-ex5.1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter11_files/figure-html/fig-q2-ex5.1-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;7: Correlation plot to check which variable is most important predicting price of the diamond</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The variable <code>cut</code> is an ordinal variable, so we cant do numerical correlation test, rather we can observe the graphical relation as shown in <a href="#fig-q2a-ex5.1">Figure&nbsp;8</a>. There appears to be a slight negative correlation, as is indicated by decreasing medians. It is apparent that poorer quality diamonds, i.e.&nbsp;lower <code>cut</code> have larger weight, i.e.&nbsp;<code>carat</code>. Thus, the combination of these two relationships, i.e.,</p>
+<ul>
+<li><p>Higher <code>carat</code> diamonds having higher price.</p></li>
+<li><p>Lower <code>cut</code> diamonds having higher <code>carat</code>.</p></li>
+</ul>
+<p>lead to lower quality diamonds being more expensive (since they are heavier, i.e of higher <code>carat</code>).</p>
+<div class="cell" data-hash="Chapter11_cache/html/fig-q2a-ex5.1_085b4973d61bb501644472fe4a5f0bca">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> cut,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> carat)) <span class="sc">+</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">notch =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">varwidth =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> <span class="st">"lightgrey"</span>,</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">outlier.alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Cut of the diamond"</span>,</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Carat of the diamond"</span>,</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Note 1: Width of boxplot is proportional to square root of the number of observations.</span><span class="sc">\n</span><span class="st">Note 2: The notches don't overlap indicating that medians are significantly different"</span>,</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Relation between cut and carat"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-q2a-ex5.1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter11_files/figure-html/fig-q2a-ex5.1-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;8: Relation between cut and carat of a diamond</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="question-3-2" class="level3">
 <h3 class="anchored" data-anchor-id="question-3-2">Question 3</h3>
-<p><strong>Instead of exchanging the x and y variables, add <a href="https://ggplot2.tidyverse.org/reference/coord_flip.html"><code>coord_flip()</code></a> as a new layer to the vertical boxplot to create a horizontal one. How does this compare to exchanging the variables?</strong></p>
+<p><strong>Instead of exchanging the x and y variables, add <a href="https://ggplot2.tidyverse.org/reference/coord_flip.html"><code>coord_flip()</code></a> as a new layer to the vertical box-plot to create a horizontal one. How does this compare to exchanging the variables?</strong></p>
+<p>When we add <code>coord_flip()</code> to the previous answer’s code we get a horizontal box-plot shown below in <a href="#fig-q3-ex5.1">Figure&nbsp;9</a>.</p>
+<p>Using <code>coord_flip()</code> is easier than the approach of changing variables, as we don’t need to manually change the variables’ assignment in the entire code.</p>
+<div class="cell" data-hash="Chapter11_cache/html/fig-q3-ex5.1_052edd30e7780013f827ecb35c246456">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> cut,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> carat)) <span class="sc">+</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">notch =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">varwidth =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> <span class="st">"lightgrey"</span>,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">outlier.alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Cut of the diamond"</span>,</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Carat of the diamond"</span>,</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Note 1: Width of boxplot is proportional to square root of the number of observations.</span><span class="sc">\n</span><span class="st">Note 2: The notches don't overlap indicating that medians are significantly different"</span>,</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Relation between cut and carat"</span>) <span class="sc">+</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-q3-ex5.1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter11_files/figure-html/fig-q3-ex5.1-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;9: Use of coord_flip() to flip the coordinates</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="question-4-1" class="level3">
 <h3 class="anchored" data-anchor-id="question-4-1">Question 4</h3>
-<p><strong>One problem with boxplots is that they were developed in an era of much smaller datasets and tend to display a prohibitively large number of “outlying values”. One approach to remedy this problem is the letter value plot. Install the lvplot package, and try using <code>geom_lv()</code> to display the distribution of price vs.&nbsp;cut. What do you learn? How do you interpret the plots?</strong></p>
+<p><strong>One problem with boxplots is that they were developed in an era of much smaller data-sets and tend to display a prohibitively large number of “outlying values”. One approach to remedy this problem is the letter value plot. Install the lvplot package, and try using <code>geom_lv()</code> to display the distribution of <code>price</code> vs.&nbsp;<code>cut</code>. What do you learn? How do you interpret the plots?</strong></p>
+<p>The <strong>letter-value box plot</strong> is an extension of the traditional boxplot method. While conventional boxplots provide a basic overview of the central 50% of data and its spread, they might not offer accurate information about data points outside the quartiles, especially for larger data sets.</p>
+<p>For larger data-sets (around 10,000 to 100,000 observations), more precise estimates of quantiles beyond the quartiles can be obtained, and a higher number of “outliers” are likely to be present (approximately 0.4 plus 0.007 times the sample size).</p>
+<p>The letter-value box plot tackles these limitations by conveying more detailed information about the tails of the data using letter values. These letter values are utilized as reliable estimates of their corresponding quantiles only up to a certain depth into the tails. Additionally, “outliers” are defined based on the most extreme letter value depicted in the plot.</p>
+<p>From my comprehension, the widest box encompasses letter values that correspond to (rough) quartiles. Subsequent wider boxes encompass letter values spanning from (rough) quartiles to (rough) octiles and further, extending in both directions. This pattern continues iteratively.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>However, in my view, a <strong>violin plot</strong>, like the one shown in <a href="#fig-q4b-ex5.1">Figure&nbsp;11</a>, is more intuitive and easier to understand.</p>
+<div class="cell" data-hash="Chapter11_cache/html/fig-q4a-ex5.1_162ef5a21787b350cfbb0d43893ce616">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lvplot)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> cut,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> price)) <span class="sc">+</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_lv</span>(<span class="at">fill =</span> <span class="st">"lightgrey"</span>) <span class="sc">+</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Cut of the diamond"</span>,</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Price of the diamond"</span>,</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Relation between cut and price with an LV-Plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-q4a-ex5.1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter11_files/figure-html/fig-q4a-ex5.1-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;10: LV Plot of price and cut</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-hash="Chapter11_cache/html/fig-q4b-ex5.1_a652065255d7aee499cb198a02f6cb6a">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> cut,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> price)) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="at">fill =</span> <span class="st">"lightgrey"</span>) <span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Cut of the diamond"</span>,</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Price of the diamond"</span>,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Note : Width of lvplot is proportional to square root of the number of observations"</span>,</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Relation between cut and price with a Violin Plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-q4b-ex5.1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter11_files/figure-html/fig-q4b-ex5.1-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;11: Violin Plot of price and cut</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="question-5" class="level3">
 <h3 class="anchored" data-anchor-id="question-5">Question 5</h3>
 <p><strong>Create a visualization of diamond prices vs.&nbsp;a categorical variable from the <code>diamonds</code> data-set using <a href="https://ggplot2.tidyverse.org/reference/geom_violin.html"><code>geom_violin()</code></a>, then a faceted <a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html"><code>geom_histogram()</code></a>, then a colored <a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html"><code>geom_freqpoly()</code></a>, and then a colored <a href="https://ggplot2.tidyverse.org/reference/geom_density.html"><code>geom_density()</code></a>. Compare and contrast the four plots. What are the pros and cons of each method of visualizing the distribution of a numerical variable based on the levels of a categorical variable?</strong></p>
+<p>Let us choose to study the relation between <code>cut</code> (a categorical variable) and <code>price</code>. The four methods — <code>geom_violin()</code>, faceted <code>geom_histogram()</code>, colored <code>geom_freqpoly()</code>, and colored <code>geom_density()</code> — each have their own strengths and limitations.</p>
+<ol type="1">
+<li><p><strong><code>geom_violin()</code>:</strong></p>
+<div class="cell" data-hash="Chapter11_cache/html/unnamed-chunk-17_48da0e8873768d1a4c7fcb02c79ee51c">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Violin Plot</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> cut,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> price)) <span class="sc">+</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span> </span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Cut of the diamond"</span>,</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Price of the diamond"</span>) <span class="sc">+</span> </span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Violin Plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Chapter11_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li><strong>Pros:</strong>
+<ul>
+<li>Provides a combination of a box plot and a kernel density plot.</li>
+<li>Displays the distribution’s shape, range, and density all in one plot.</li>
+<li>Suitable for showing multi-modal distributions and comparing the distributions of multiple categorical levels.</li>
+</ul></li>
+<li><strong>Cons:</strong>
+<ul>
+<li>Can become cluttered when comparing too many categories.</li>
+<li>Might be less familiar to some audiences compared to more traditional plots like histograms.</li>
+</ul></li>
+</ul></li>
+<li><p><strong>Faceted <code>geom_histogram()</code>:</strong></p>
+<div class="cell" data-hash="Chapter11_cache/html/unnamed-chunk-18_805c31ec7b93e3648a0258f89aa236e0">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Faceted histogram</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(price)) <span class="sc">+</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>cut, </span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">scales =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Faceted histogram"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Chapter11_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li><strong>Pros:</strong>
+<ul>
+<li>Shows the distribution of each category using separate histograms.</li>
+<li>Easy to compare the distributions across categories.</li>
+<li>Good for identifying differences in central tendency and spread.</li>
+</ul></li>
+<li><strong>Cons:</strong>
+<ul>
+<li>Can be space-consuming when there are many categories.</li>
+<li>Difficult to compare shapes of distributions directly due to varying bin widths.</li>
+</ul></li>
+</ul></li>
+<li><p><strong>Colored <code>geom_freqpoly()</code>:</strong></p>
+<div class="cell" data-hash="Chapter11_cache/html/unnamed-chunk-19_c12fb73eb060c8e8234b44206e523284">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Coloured frequency polygon</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(price)) <span class="sc">+</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_freqpoly</span>(<span class="fu">aes</span>(<span class="at">color =</span> cut),</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">lwd =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Coloured frequency polygon"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Chapter11_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li><strong>Pros:</strong>
+<ul>
+<li>Overlaid frequency polygons for each category allow for easy visual comparison.</li>
+</ul></li>
+<li><strong>Cons:</strong>
+<ul>
+<li>Over-plotting might occur if there are many categories.</li>
+<li>Might not clearly display the density of the distributions.</li>
+</ul></li>
+</ul></li>
+<li><p><strong>Colored <code>geom_density()</code>:</strong></p>
+<div class="cell" data-hash="Chapter11_cache/html/unnamed-chunk-20_f10e95eb5a297f3881d0c043db4829cc">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Coloured density plot</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(price)) <span class="sc">+</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">color =</span> cut),</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">lwd =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Coloured density plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Chapter11_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li><strong>Pros:</strong>
+<ul>
+<li>Provides smoothed density plots for each category.</li>
+<li>Offers a continuous representation of the distribution, aiding in identifying patterns and modes.</li>
+</ul></li>
+<li><strong>Cons:</strong>
+<ul>
+<li>May require familiarity with density plots for proper interpretation.</li>
+<li>Not as effective for identifying specific data values (peaks, tails, etc.).</li>
+</ul></li>
+</ul></li>
+</ol>
+<p>Overall, the choice of visualization method depends on</p>
+<ul>
+<li><p>the goals of your analysis,</p></li>
+<li><p>the number of categorical levels, and</p></li>
+<li><p>the level of detail we want to convey.</p></li>
+</ul>
+<p>If we’re aiming to show the overall distribution shape and density, <code>geom_violin()</code> and <code>geom_density()</code> are good options.</p>
+<p>For comparing distributions more directly, especially when you have few categories, <code>colored geom_freqpoly()</code> might be useful.</p>
+<p>Lastly, if you want to control bin-widths manually and compare median etc. more explicitly, faceted <code>geom_histogram()</code> can be effective.</p>
 </section>
 <section id="question-6" class="level3">
 <h3 class="anchored" data-anchor-id="question-6">Question 6</h3>
-<p><strong>If you have a small data-set, it’s sometimes useful to use <a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html"><code>geom_jitter()</code></a> to avoid overplotting to more easily see the relationship between a continuous and categorical variable. The ggbeeswarm package provides a number of methods similar to <a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html"><code>geom_jitter()</code></a>. List them and briefly describe what each one does.</strong></p>
+<p><strong>If you have a small data-set, it’s sometimes useful to use <a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html"><code>geom_jitter()</code></a> to avoid over-plotting to more easily see the relationship between a continuous and categorical variable. The ggbeeswarm package provides a number of methods similar to <a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html"><code>geom_jitter()</code></a>. List them and briefly describe what each one does.</strong></p>
 
 
 </section>
 </section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>This my my interpretation, and needs confirmation. Please comment or leave a pull request / issue on GitHub.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
