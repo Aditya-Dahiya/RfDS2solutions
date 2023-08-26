@@ -170,7 +170,7 @@ Both `coord_cartesian()` and `xlim()` / `ylim()` serve a similar purpose of adju
 **Comparison**
 
 | **Aspect**                     | **`coord_cartesian()`**                    | **`xlim()`**/**`ylim()`**                                                               |
-|------------------|------------------|-----------------------------------|
+|-------------------|-------------------|----------------------------------|
 | **Purpose**                    | Adjust visible range without altering data | Set specific data range to be displayed, removes data outside the range                 |
 | **Data Integrity**             | Maintains original data and scaling        | Can exclude data points outside range                                                   |
 | **Context**                    | Preserves overall data context             | May lose context due to excluded data; or reveal new insights upon removal of outliers. |
@@ -637,7 +637,7 @@ The package `ggbeeswarm` uses two main functions:
     The functions **`geom_quasirandom()`**, **`geom_beeswarm()`**, and **`geom_jitter()`** are used to deal with overplotting, where multiple data points in a plot share the same coordinates, making it hard to discern the individual points.
 
 |                        | **`geom_jitter()`**              | **`geom_quasirandom()`**                                                     | **`geom_beeswarm()`**                            |
-|--------------|--------------------|--------------------|--------------------|
+|------------------|------------------|------------------|------------------|
 | Purpose                | Introduce random noise to points | Spread points with controlled randomness along the categorical variable axis | Systematically arrange points to prevent overlap |
 | Data Distribution      | Less accurate due to randomness  | Maintains data distribution                                                  | Maintains data distribution                      |
 | Overplotting Reduction | Moderate                         | Moderate                                                                     | High                                             |
@@ -799,11 +799,197 @@ gridExtra::grid.arrange(
   g1 + geom_beeswarm(method = "centre", cex = a) + 
   labs(title = "method = centre"), 
 
-  g1 + geom_beeswarm(corral = "gutter", cex = a) + 
-  labs(title = "corral = gutter"), 
+  g1 + geom_beeswarm(side = 1L, cex = a) + 
+  labs(title = "side = 1L"), 
   
   ncol = 2,
   nrow = 3
 
 )
+```
+
+# 11.5.2.1 Exercises
+
+### Question 1
+
+**How could you rescale the count dataset above to more clearly show the distribution of cut within color, or color within cut?**
+
+Let us begin by recreating the dataset in @tbl-q1-ex5.2 as follows: --
+
+```{r}
+#| code-fold: true
+#| label: tbl-q1-ex5.2
+#| tbl-cap: "Using a table to display correlation between two categorical variables"
+
+data("diamonds")
+diamonds |>
+  count(cut, color) |>
+  pivot_wider(names_from = color,
+              values_from = n) |>
+  gt(rowname_col = "cut") |>
+  tab_header(title = "Distribution of color with cut")  |>
+  tab_spanner(label = "Color",
+              columns = everything()) |>
+  tab_stubhead(label = "Cut") |>
+  fmt_number(sep_mark = ",",
+             decimals = 0)
+```
+
+We can rescale the count dataset above to more clearly show the distribution of color within cut as shown in @fig-q1-ex5.2 .
+
+```{r}
+#| label: fig-q1-ex5.2
+#| fig-cap: "Using different scale to better show the correlation"
+
+diamonds |>
+  count(cut, color) |>
+  ggplot(aes(x = color,
+             y = cut)) +
+  geom_tile(aes(fill = n)) +
+  scale_fill_continuous(type = "viridis") +
+  labs(x = "Color", y = "Cut", fill = "Number of Diamonds") +
+  geom_text(aes(label = n),
+            color = "white")
+```
+
+### Question 2
+
+**What different data insights do you get with a segmented bar chart if color is mapped to the `x` aesthetic and `cut` is mapped to the `fill` aesthetic? Calculate the counts that fall into each of the segments.**
+
+If we use a segmented bar chart, like the one shown below in @fig-q2-ex5.2 , we are able to see the proportional number of diamonds of each cut, within each colour of the diamonds. Thus, a segmented bar chart allows us to do proportional comparison and see relative distribution.
+
+The calculated counts for each segment is displayed within the @fig-q2-ex5.2 .
+
+```{r}
+#| label: fig-q2-ex5.2
+#| fig-cap-location: top
+#| fig-cap: "Segmented bar chart with color mapped to the x aesthetic and cut mapped to the fill aesthetic"
+
+diamonds |>
+  count(cut, color) |>
+  # Create a factor to use for colouring the text 
+  # (since some colours in fil are darker)
+  mutate(col_n = if_else(cut %in% c("Fair", "Good"),
+                         true = "Group1",
+                         false = "Group2")
+         ) |>
+  ggplot(aes(x = color,
+             y = n,
+             fill = cut,
+             label = n)) +
+  geom_bar(position = "fill",
+           stat = "identity") +
+  geom_text(
+    aes(color = col_n),
+    # adjust position so that numbers appear in middle of each segment
+    position = position_fill(vjust = 0.5)
+    ) +
+  theme_classic() +
+  scale_color_manual(values = c("white", "black")) +
+  labs(x = "Colour of the diamonds",
+       y = "Proportion of Diamonds",
+       fill = "Cut") +
+  guides(color = "none")
+
+```
+
+### Question 3
+
+**Use [`geom_tile()`](https://ggplot2.tidyverse.org/reference/geom_tile.html) together with `dplyr` to explore how average flight departure delays vary by destination and month of year. What makes the plot difficult to read? How could you improve it?**
+
+I have created a tile plot of average flight departure delays by destination and month of year using `geom_tile()` in @fig-q3-ex5.2 . There are too many destinations, and human eye can only perceive so many colour patterns, so the plot has too much information and is thus difficult to read.
+
+Overall, I see that highest average departure delays occur in June - July and then in December. Also, some destinations have higher average departure delays across most months.
+
+```{r}
+#| label: fig-q3-ex5.2
+#| fig-cap: "Tile plot of average flight departure delays by destination and month of year"
+#| fig-cap-location: top
+#| fig-asp: 1.5
+#| code-fold: true
+
+df = nycflights13::flights |>
+  group_by(month, dest) |>
+  summarise(avg_dep_delay = mean(dep_delay, na.rm = TRUE)) |>
+  ungroup() |>
+  
+  # Removing destinations which have data missing for any one or more
+  # months, so that our tile plot appears nice
+  pivot_wider(names_from = month,
+              values_from = avg_dep_delay) |>
+  drop_na() |>
+  pivot_longer(cols = -dest,
+               names_to = "Month",
+               values_to = "avg_dep_delay") |>
+  mutate(Month = as.numeric(Month)) |>
+  mutate(month = as.factor(Month))
+  
+df |>
+  ggplot(aes(y = dest,
+             x = month,
+             fill = avg_dep_delay)) +
+  geom_tile(aes(group = month)) +
+  scale_fill_viridis_c() +
+  labs(x = "Month of the Year",
+       y = "Destinations" ,
+       fill = "Avg. Dep. Delay \n(in minutes)") +
+  theme(axis.text.y = element_text(size = 5))
+```
+
+Also, only to detect delays across months ignoring the destinations, we could draw a simple plot of average departure delay for each month as shown in @fig-q3a-ex5.2 .
+
+```{r}
+#| label: fig-q3a-ex5.2
+#| fig-cap: "Simple plot of average flight departure delays by month of year"
+#| fig-cap-location: top
+#| code-fold: true
+
+df |>
+  group_by(Month) |>
+  summarize(avg_dep_delay = mean(avg_dep_delay)) |>
+  mutate(avg_dep_delay = round(avg_dep_delay, digits = 1)) |>
+  ggplot(aes(x = Month,
+             y = avg_dep_delay,
+             label = avg_dep_delay)) +
+  geom_line() +
+  geom_point() + 
+  geom_text(position = position_nudge(y = 1)) +
+  scale_x_continuous(breaks = c(1:12)) + 
+  labs(x = "Month",
+       y = "Avg. Dep. Delay (in minutes)") +
+  theme_minimal()
+```
+
+We could improve the tile plot produced earlier by using the facility of package `seriation` which allows us to pick the following trends in the heat map shown in @fig-q3b-ex5.2: --
+
+-   Months 6, 7 and 12 have highest average departure delays
+
+-   Highest average departure delay airports are at bottom in @fig-q3b-ex5.2
+
+```{r}
+#| label: fig-q3b-ex5.2
+#| fig-cap: "Improved heatmap to detect patterns in the Tile Plot"
+#| fig-cap-location: top
+#| fig-asp: 1.5
+#| code-fold: true
+
+# install.packages("seriation")
+# library(seriation)
+
+df |>
+  select(-Month) |>
+  pivot_wider(names_from = month,
+              values_from = avg_dep_delay) |>
+  drop_na() |>
+  column_to_rownames(var = "dest") |>
+  as.matrix() |>
+  seriation::gghmap(
+    row_labels = TRUE,
+    col_labels = TRUE,
+    Rowv =  get_rank(o, 1), Colv =  get_rank(o, 2)) +
+  labs(x = "Month of the Year",
+       y = "Destinations" ,
+       fill = "Avg. Dep. Delay \n(in minutes)") +
+  theme(axis.text.y = element_text(size = 5))
+
 ```

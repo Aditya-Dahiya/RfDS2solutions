@@ -346,6 +346,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#question-5" id="toc-question-5" class="nav-link" data-scroll-target="#question-5">Question 5</a></li>
   <li><a href="#question-6" id="toc-question-6" class="nav-link" data-scroll-target="#question-6">Question 6</a></li>
   </ul></li>
+  <li><a href="#exercises-3" id="toc-exercises-3" class="nav-link" data-scroll-target="#exercises-3">11.5.2.1 Exercises</a>
+  <ul class="collapse">
+  <li><a href="#question-1-3" id="toc-question-1-3" class="nav-link" data-scroll-target="#question-1-3">Question 1</a></li>
+  <li><a href="#question-2-3" id="toc-question-2-3" class="nav-link" data-scroll-target="#question-2-3">Question 2</a></li>
+  <li><a href="#question-3-3" id="toc-question-3-3" class="nav-link" data-scroll-target="#question-3-3">Question 3</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/edit/main/Chapter11.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -523,9 +529,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Comparison</strong></p>
 <table class="table">
 <colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 49%">
+<col style="width: 26%">
+<col style="width: 26%">
+<col style="width: 47%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1094,10 +1100,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <table class="table">
 <colgroup>
-<col style="width: 18%">
-<col style="width: 27%">
-<col style="width: 27%">
-<col style="width: 27%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1271,23 +1277,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Results in tightly-packed layout.</p></li>
 <li><p>Prioritization used for breaking ties.</p></li>
 </ul></li>
-<li><p>The other 3 methods first discretise the values along the data axis, in order to create more efficient packing.</p></li>
-<li><p><strong><code>square</code></strong> method:</p>
-<ul>
-<li>Places points on a square grid.</li>
-</ul></li>
-<li><p><strong><code>hex</code></strong> method:</p>
-<ul>
-<li>Places points on a hexagonal grid.</li>
-</ul></li>
-<li><p><strong><code>centre</code></strong>/<strong><code>center</code></strong> method:</p>
-<ul>
-<li>Uses square grid for symmetric swarm.</li>
-</ul></li>
+<li><p>The other 3 methods first discretise the values along the data axis, in order to create more efficient packing.</p>
+<ol type="i">
+<li><p><strong><code>square</code></strong> method: Places points on a square grid.</p></li>
+<li><p><strong><code>hex</code></strong> method: Places points on a hexagonal grid.</p></li>
+<li><p><strong><code>centre</code></strong>/<strong><code>center</code></strong> method: Uses square grid for symmetric swarm.</p></li>
+</ol></li>
 </ol>
 <p>Note: The <code>square</code>, <code>hex</code> and <code>centre</code> methods discretize values along data axis. The number of breakpoints determined by available area and spacing argument</p>
 <p>The <a href="#fig-q6-3">Figure&nbsp;14</a> <em>(axis labels and values removed to focus on points’ distribution)</em> demonstrates methods in <code>geom_beeswarm()</code> : –</p>
-<div class="cell fig-cap-location-top" data-hash="Chapter11_cache/html/fig-q6-3_2b393efcebca4c3680d630b594ec11d2">
+<div class="cell fig-cap-location-top" data-hash="Chapter11_cache/html/fig-q6-3_a81460e1c7206d5ae000aea195f9005c">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="dv">3</span></span>
@@ -1309,8 +1308,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>  g1 <span class="sc">+</span> <span class="fu">geom_beeswarm</span>(<span class="at">method =</span> <span class="st">"centre"</span>, <span class="at">cex =</span> a) <span class="sc">+</span> </span>
 <span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"method = centre"</span>), </span>
 <span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>  g1 <span class="sc">+</span> <span class="fu">geom_beeswarm</span>(<span class="at">corral =</span> <span class="st">"gutter"</span>, <span class="at">cex =</span> a) <span class="sc">+</span> </span>
-<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"corral = gutter"</span>), </span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>  g1 <span class="sc">+</span> <span class="fu">geom_beeswarm</span>(<span class="at">side =</span> 1L, <span class="at">cex =</span> a) <span class="sc">+</span> </span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"side = 1L"</span>), </span>
 <span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">2</span>,</span>
 <span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow =</span> <span class="dv">3</span></span>
@@ -1322,6 +1321,715 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figure class="figure">
 <p><img src="Chapter11_files/figure-html/fig-q6-3-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption class="figure-caption">Figure&nbsp;14: Avaialable methods in geom_beeswarm()</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="exercises-3" class="level1">
+<h1>11.5.2.1 Exercises</h1>
+<section id="question-1-3" class="level3">
+<h3 class="anchored" data-anchor-id="question-1-3">Question 1</h3>
+<p><strong>How could you rescale the count dataset above to more clearly show the distribution of cut within color, or color within cut?</strong></p>
+<p>Let us begin by recreating the dataset in <a href="#tbl-q1-ex5.2">Table&nbsp;1</a> as follows: –</p>
+<div class="cell" data-hash="Chapter11_cache/html/tbl-q1-ex5.2_5a3ef0aad3cdafb87758a9b45e96b801">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"diamonds"</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(cut, color) <span class="sc">|&gt;</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> color,</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> n) <span class="sc">|&gt;</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>(<span class="at">rowname_col =</span> <span class="st">"cut"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">"Distribution of color with cut"</span>)  <span class="sc">|&gt;</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_spanner</span>(<span class="at">label =</span> <span class="st">"Color"</span>,</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">columns =</span> <span class="fu">everything</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_stubhead</span>(<span class="at">label =</span> <span class="st">"Cut"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">sep_mark =</span> <span class="st">","</span>,</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">decimals =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="tbl-q1-ex5.2" class="anchored">
+
+<div id="cunbdzazuj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#cunbdzazuj table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#cunbdzazuj thead, #cunbdzazuj tbody, #cunbdzazuj tfoot, #cunbdzazuj tr, #cunbdzazuj td, #cunbdzazuj th {
+  border-style: none;
+}
+
+#cunbdzazuj p {
+  margin: 0;
+  padding: 0;
+}
+
+#cunbdzazuj .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#cunbdzazuj .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#cunbdzazuj .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#cunbdzazuj .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#cunbdzazuj .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#cunbdzazuj .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cunbdzazuj .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#cunbdzazuj .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#cunbdzazuj .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#cunbdzazuj .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#cunbdzazuj .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#cunbdzazuj .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#cunbdzazuj .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#cunbdzazuj .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#cunbdzazuj .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#cunbdzazuj .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#cunbdzazuj .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#cunbdzazuj .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#cunbdzazuj .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cunbdzazuj .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#cunbdzazuj .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#cunbdzazuj .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#cunbdzazuj .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cunbdzazuj .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#cunbdzazuj .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#cunbdzazuj .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cunbdzazuj .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cunbdzazuj .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#cunbdzazuj .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cunbdzazuj .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#cunbdzazuj .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cunbdzazuj .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#cunbdzazuj .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cunbdzazuj .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#cunbdzazuj .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cunbdzazuj .gt_left {
+  text-align: left;
+}
+
+#cunbdzazuj .gt_center {
+  text-align: center;
+}
+
+#cunbdzazuj .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#cunbdzazuj .gt_font_normal {
+  font-weight: normal;
+}
+
+#cunbdzazuj .gt_font_bold {
+  font-weight: bold;
+}
+
+#cunbdzazuj .gt_font_italic {
+  font-style: italic;
+}
+
+#cunbdzazuj .gt_super {
+  font-size: 65%;
+}
+
+#cunbdzazuj .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#cunbdzazuj .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#cunbdzazuj .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#cunbdzazuj .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#cunbdzazuj .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#cunbdzazuj .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#cunbdzazuj .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Table&nbsp;1:  <p>Using a table to display correlation between two categorical
+variables</p> </caption>
+  <thead>
+    <tr class="gt_heading">
+      <td colspan="8" class="gt_heading gt_title gt_font_normal gt_bottom_border" style="">Distribution of color with cut</td>
+    </tr>
+    
+    <tr class="gt_col_headings gt_spanner_row">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id="Cut">Cut</th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="7" scope="colgroup" id="Color">
+        <span class="gt_column_spanner">Color</span>
+      </th>
+    </tr>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="D">D</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="E">E</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="F">F</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="G">G</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="H">H</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="I">I</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="J">J</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><th id="stub_1_1" scope="row" class="gt_row gt_center gt_stub">Fair</th>
+<td headers="stub_1_1 D" class="gt_row gt_right">163</td>
+<td headers="stub_1_1 E" class="gt_row gt_right">224</td>
+<td headers="stub_1_1 F" class="gt_row gt_right">312</td>
+<td headers="stub_1_1 G" class="gt_row gt_right">314</td>
+<td headers="stub_1_1 H" class="gt_row gt_right">303</td>
+<td headers="stub_1_1 I" class="gt_row gt_right">175</td>
+<td headers="stub_1_1 J" class="gt_row gt_right">119</td></tr>
+    <tr><th id="stub_1_2" scope="row" class="gt_row gt_center gt_stub">Good</th>
+<td headers="stub_1_2 D" class="gt_row gt_right">662</td>
+<td headers="stub_1_2 E" class="gt_row gt_right">933</td>
+<td headers="stub_1_2 F" class="gt_row gt_right">909</td>
+<td headers="stub_1_2 G" class="gt_row gt_right">871</td>
+<td headers="stub_1_2 H" class="gt_row gt_right">702</td>
+<td headers="stub_1_2 I" class="gt_row gt_right">522</td>
+<td headers="stub_1_2 J" class="gt_row gt_right">307</td></tr>
+    <tr><th id="stub_1_3" scope="row" class="gt_row gt_center gt_stub">Very Good</th>
+<td headers="stub_1_3 D" class="gt_row gt_right">1,513</td>
+<td headers="stub_1_3 E" class="gt_row gt_right">2,400</td>
+<td headers="stub_1_3 F" class="gt_row gt_right">2,164</td>
+<td headers="stub_1_3 G" class="gt_row gt_right">2,299</td>
+<td headers="stub_1_3 H" class="gt_row gt_right">1,824</td>
+<td headers="stub_1_3 I" class="gt_row gt_right">1,204</td>
+<td headers="stub_1_3 J" class="gt_row gt_right">678</td></tr>
+    <tr><th id="stub_1_4" scope="row" class="gt_row gt_center gt_stub">Premium</th>
+<td headers="stub_1_4 D" class="gt_row gt_right">1,603</td>
+<td headers="stub_1_4 E" class="gt_row gt_right">2,337</td>
+<td headers="stub_1_4 F" class="gt_row gt_right">2,331</td>
+<td headers="stub_1_4 G" class="gt_row gt_right">2,924</td>
+<td headers="stub_1_4 H" class="gt_row gt_right">2,360</td>
+<td headers="stub_1_4 I" class="gt_row gt_right">1,428</td>
+<td headers="stub_1_4 J" class="gt_row gt_right">808</td></tr>
+    <tr><th id="stub_1_5" scope="row" class="gt_row gt_center gt_stub">Ideal</th>
+<td headers="stub_1_5 D" class="gt_row gt_right">2,834</td>
+<td headers="stub_1_5 E" class="gt_row gt_right">3,903</td>
+<td headers="stub_1_5 F" class="gt_row gt_right">3,826</td>
+<td headers="stub_1_5 G" class="gt_row gt_right">4,884</td>
+<td headers="stub_1_5 H" class="gt_row gt_right">3,115</td>
+<td headers="stub_1_5 I" class="gt_row gt_right">2,093</td>
+<td headers="stub_1_5 J" class="gt_row gt_right">896</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</div>
+<p>We can rescale the count dataset above to more clearly show the distribution of color within cut as shown in <a href="#fig-q1-ex5.2">Figure&nbsp;15</a> .</p>
+<div class="cell" data-hash="Chapter11_cache/html/fig-q1-ex5.2_28a78505f91eb88024bb6a4cbf419c98">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(cut, color) <span class="sc">|&gt;</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> color,</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> cut)) <span class="sc">+</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill =</span> n)) <span class="sc">+</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_continuous</span>(<span class="at">type =</span> <span class="st">"viridis"</span>) <span class="sc">+</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Color"</span>, <span class="at">y =</span> <span class="st">"Cut"</span>, <span class="at">fill =</span> <span class="st">"Number of Diamonds"</span>) <span class="sc">+</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> n),</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">"white"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-q1-ex5.2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter11_files/figure-html/fig-q1-ex5.2-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;15: Using different scale to better show the correlation</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="question-2-3" class="level3">
+<h3 class="anchored" data-anchor-id="question-2-3">Question 2</h3>
+<p><strong>What different data insights do you get with a segmented bar chart if color is mapped to the <code>x</code> aesthetic and <code>cut</code> is mapped to the <code>fill</code> aesthetic? Calculate the counts that fall into each of the segments.</strong></p>
+<p>If we use a segmented bar chart, like the one shown below in <a href="#fig-q2-ex5.2">Figure&nbsp;16</a> , we are able to see the proportional number of diamonds of each cut, within each colour of the diamonds. Thus, a segmented bar chart allows us to do proportional comparison and see relative distribution.</p>
+<p>The calculated counts for each segment is displayed within the <a href="#fig-q2-ex5.2">Figure&nbsp;16</a> .</p>
+<div class="cell fig-cap-location-top" data-hash="Chapter11_cache/html/fig-q2-ex5.2_8ae7e3228b58fb60f493d8fd8323b9cb">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(cut, color) <span class="sc">|&gt;</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create a factor to use for colouring the text </span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># (since some colours in fil are darker)</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">col_n =</span> <span class="fu">if_else</span>(cut <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Fair"</span>, <span class="st">"Good"</span>),</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">true =</span> <span class="st">"Group1"</span>,</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>                         <span class="at">false =</span> <span class="st">"Group2"</span>)</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>         ) <span class="sc">|&gt;</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> color,</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> n,</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> cut,</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">label =</span> n)) <span class="sc">+</span></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>,</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>           <span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">color =</span> col_n),</span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># adjust position so that numbers appear in middle of each segment</span></span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_fill</span>(<span class="at">vjust =</span> <span class="fl">0.5</span>)</span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"white"</span>, <span class="st">"black"</span>)) <span class="sc">+</span></span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Colour of the diamonds"</span>,</span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Proportion of Diamonds"</span>,</span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Cut"</span>) <span class="sc">+</span></span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-q2-ex5.2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter11_files/figure-html/fig-q2-ex5.2-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;16: Segmented bar chart with color mapped to the x aesthetic and cut mapped to the fill aesthetic</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="question-3-3" class="level3">
+<h3 class="anchored" data-anchor-id="question-3-3">Question 3</h3>
+<p><strong>Use <a href="https://ggplot2.tidyverse.org/reference/geom_tile.html"><code>geom_tile()</code></a> together with <code>dplyr</code> to explore how average flight departure delays vary by destination and month of year. What makes the plot difficult to read? How could you improve it?</strong></p>
+<p>I have created a tile plot of average flight departure delays by destination and month of year using <code>geom_tile()</code> in <a href="#fig-q3-ex5.2">Figure&nbsp;17</a> . There are too many destinations, and human eye can only perceive so many colour patterns, so the plot has too much information and is thus difficult to read.</p>
+<p>Overall, I see that highest average departure delays occur in June - July and then in December. Also, some destinations have higher average departure delays across most months.</p>
+<div class="cell fig-cap-location-top" data-fig.asp="1.5" data-hash="Chapter11_cache/html/fig-q3-ex5.2_7f4f44ccf35cb93ee3450ea4ba60bf61">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> nycflights13<span class="sc">::</span>flights <span class="sc">|&gt;</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month, dest) <span class="sc">|&gt;</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_dep_delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Removing destinations which have data missing for any one or more</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># months, so that our tile plot appears nice</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> month,</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> avg_dep_delay) <span class="sc">|&gt;</span></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">|&gt;</span></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>dest,</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"Month"</span>,</span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"avg_dep_delay"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Month =</span> <span class="fu">as.numeric</span>(Month)) <span class="sc">|&gt;</span></span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">as.factor</span>(Month))</span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> dest,</span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>             <span class="at">x =</span> month,</span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> avg_dep_delay)) <span class="sc">+</span></span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">group =</span> month)) <span class="sc">+</span></span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>() <span class="sc">+</span></span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Month of the Year"</span>,</span>
+<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Destinations"</span> ,</span>
+<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Avg. Dep. Delay </span><span class="sc">\n</span><span class="st">(in minutes)"</span>) <span class="sc">+</span></span>
+<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-q3-ex5.2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter11_files/figure-html/fig-q3-ex5.2-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;17: Tile plot of average flight departure delays by destination and month of year</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Also, only to detect delays across months ignoring the destinations, we could draw a simple plot of average departure delay for each month as shown in <a href="#fig-q3a-ex5.2">Figure&nbsp;18</a> .</p>
+<div class="cell fig-cap-location-top" data-hash="Chapter11_cache/html/fig-q3a-ex5.2_c37cb8a16a9fda51a7d0c90586fafa48">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Month) <span class="sc">|&gt;</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_dep_delay =</span> <span class="fu">mean</span>(avg_dep_delay)) <span class="sc">|&gt;</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">avg_dep_delay =</span> <span class="fu">round</span>(avg_dep_delay, <span class="at">digits =</span> <span class="dv">1</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Month,</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> avg_dep_delay,</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">label =</span> avg_dep_delay)) <span class="sc">+</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">position =</span> <span class="fu">position_nudge</span>(<span class="at">y =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>)) <span class="sc">+</span> </span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Month"</span>,</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Avg. Dep. Delay (in minutes)"</span>) <span class="sc">+</span></span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-q3a-ex5.2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter11_files/figure-html/fig-q3a-ex5.2-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;18: Simple plot of average flight departure delays by month of year</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>We could improve the tile plot produced earlier by using the facility of package <code>seriation</code> which allows us to pick the following trends in the heat map shown in <a href="#fig-q3b-ex5.2">Figure&nbsp;19</a>: –</p>
+<ul>
+<li><p>Months 6, 7 and 12 have highest average departure delays</p></li>
+<li><p>Highest average departure delay airports are at bottom in <a href="#fig-q3b-ex5.2">Figure&nbsp;19</a></p></li>
+</ul>
+<div class="cell fig-cap-location-top" data-fig.asp="1.5" data-hash="Chapter11_cache/html/fig-q3b-ex5.2_098c3d35b42f7c9ba9dd5d52f1da3f1c">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("seriation")</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co"># library(seriation)</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>Month) <span class="sc">|&gt;</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> month,</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> avg_dep_delay) <span class="sc">|&gt;</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">|&gt;</span></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_to_rownames</span>(<span class="at">var =</span> <span class="st">"dest"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.matrix</span>() <span class="sc">|&gt;</span></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>  seriation<span class="sc">::</span><span class="fu">gghmap</span>(</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">row_labels =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">col_labels =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">Rowv =</span>  <span class="fu">get_rank</span>(o, <span class="dv">1</span>), <span class="at">Colv =</span>  <span class="fu">get_rank</span>(o, <span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Month of the Year"</span>,</span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Destinations"</span> ,</span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Avg. Dep. Delay </span><span class="sc">\n</span><span class="st">(in minutes)"</span>) <span class="sc">+</span></span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-q3b-ex5.2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter11_files/figure-html/fig-q3b-ex5.2-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;19: Improved heatmap to detect patterns in the Tile Plot</figcaption>
 </figure>
 </div>
 </div>
