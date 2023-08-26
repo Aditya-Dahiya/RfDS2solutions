@@ -170,7 +170,7 @@ Both `coord_cartesian()` and `xlim()` / `ylim()` serve a similar purpose of adju
 **Comparison**
 
 | **Aspect**                     | **`coord_cartesian()`**                    | **`xlim()`**/**`ylim()`**                                                               |
-|------------------|------------------|------------------------------------|
+|------------------|------------------|-----------------------------------|
 | **Purpose**                    | Adjust visible range without altering data | Set specific data range to be displayed, removes data outside the range                 |
 | **Data Integrity**             | Maintains original data and scaling        | Can exclude data points outside range                                                   |
 | **Context**                    | Preserves overall data context             | May lose context due to excluded data; or reveal new insights upon removal of outliers. |
@@ -540,7 +540,7 @@ Let us choose to study the relation between `cut` (a categorical variable) and `
     -   **Pros:**
         -   Provides a combination of a box plot and a kernel density plot.
         -   Displays the distribution's shape, range, and density all in one plot.
-        -   Suitable for showing multi-modal distributions and comparing the distributions of multiple categorical levels.
+        -   Suitable for showing multimodal distributions and comparing the distributions of multiple categorical levels.
     -   **Cons:**
         -   Can become cluttered when comparing too many categories.
         -   Might be less familiar to some audiences compared to more traditional plots like histograms.
@@ -562,8 +562,7 @@ Let us choose to study the relation between `cut` (a categorical variable) and `
 
     -   **Pros:**
         -   Shows the distribution of each category using separate histograms.
-        -   Easy to compare the distributions across categories.
-        -   Good for identifying differences in central tendency and spread.
+        -   Good for identifying differences in central tendency (mean, median etc.) and spread (variance etc.).
     -   **Cons:**
         -   Can be space-consuming when there are many categories.
         -   Difficult to compare shapes of distributions directly due to varying bin widths.
@@ -627,4 +626,184 @@ Lastly, if you want to control bin-widths manually and compare median etc. more 
 
 ### Question 6
 
-**If you have a small data-set, it's sometimes useful to use [`geom_jitter()`](https://ggplot2.tidyverse.org/reference/geom_jitter.html) to avoid over-plotting to more easily see the relationship between a continuous and categorical variable. The ggbeeswarm package provides a number of methods similar to [`geom_jitter()`](https://ggplot2.tidyverse.org/reference/geom_jitter.html). List them and briefly describe what each one does.**
+**If you have a small data-set, it's sometimes useful to use [`geom_jitter()`](https://ggplot2.tidyverse.org/reference/geom_jitter.html) to avoid over-plotting to more easily see the relationship between a continuous and categorical variable. The `ggbeeswarm` package provides a number of methods similar to [`geom_jitter()`](https://ggplot2.tidyverse.org/reference/geom_jitter.html). List them and briefly describe what each one does.**
+
+The package `ggbeeswarm` uses two main functions:
+
+1.  `geom_quasirandom()`
+
+2.  `geom_beeswarm()`
+
+    The functions **`geom_quasirandom()`**, **`geom_beeswarm()`**, and **`geom_jitter()`** are used to deal with overplotting, where multiple data points in a plot share the same coordinates, making it hard to discern the individual points.
+
+|                        | **`geom_jitter()`**              | **`geom_quasirandom()`**                                                     | **`geom_beeswarm()`**                            |
+|--------------|--------------------|--------------------|--------------------|
+| Purpose                | Introduce random noise to points | Spread points with controlled randomness along the categorical variable axis | Systematically arrange points to prevent overlap |
+| Data Distribution      | Less accurate due to randomness  | Maintains data distribution                                                  | Maintains data distribution                      |
+| Overplotting Reduction | Moderate                         | Moderate                                                                     | High                                             |
+| Data Integrity         | May compromise                   | Preserved                                                                    | Preserved                                        |
+| Customization          | Amount of jitter, direction      | Degree of randomness, separation                                             | Alignment, spacing, orientation                  |
+| Control                | Less control over point spacing  | More control over distribution                                               | More control over arrangement                    |
+| Use Cases              | Quick visualization              | Balance of distribution and overplotting                                     | Precise representation with reduced overplotting |
+| Complexity             | Simple                           | Moderate                                                                     | Moderate                                         |
+
+If we prioritize accurate data representation and control over the distribution of points, `geom_quasirandom()` or `geom_beeswarm()` might be more suitable. On the other hand, if we're looking for a quick and simple solution, `geom_jitter()` can still be effective, though it may lack some of the finer controls of the other options.
+
+Now, I demonstrate the difference in @fig-q6-1 between these using a subset *(88 observations)* of diamonds data-set with diamonds larger than 2.5 `carat`, and only of `Very Good`, `Premium`, `Ideal` cuts: --
+
+```{r}
+#| label: fig-q6-1
+#| fig-cap: "Comparison of four methods: geom_point(), geom_jitter(), geom_quasirandom() and geom_beeswarm() in defauly settings"
+#| code-fold: true
+#| fig-cap-location: top
+
+# intall.packages("ggbeeswarm")
+library(ggbeeswarm)
+g = diamonds |>
+  filter(carat > 2.5) |>
+  filter(cut %in% c("Very Good", "Premium", "Ideal")) |>
+  ggplot(aes(x = cut,
+            y = price)) +
+  theme_light() + 
+  labs(x = "Cut", y = "Price")
+
+gridExtra::grid.arrange(
+  
+  g + geom_point(alpha = 0.5) + labs(title = "geom_point()"),
+  
+  g + geom_jitter(alpha = 0.5) + labs(title = "geom_jitter"),
+  
+  g + geom_quasirandom(alpha = 0.5) + labs(title = "geom_quasirandom"),
+  
+  g + geom_beeswarm(alpha = 0.5) + labs(title = "geom_beeswarm")
+  
+)
+```
+
+The methods used by `geom_pseudorandom()` of the `ggbeeswarm` package, as studied from the package's [GitHub repo](https://github.com/eclarke/ggbeeswarm "https://github.com/eclarke/ggbeeswarm"), are: --
+
+1.  `quasirandom`: points are distributed within a kernel density estimate of the distribution with offset determined by quasirandom Van der Corput noise
+
+2.  `pseudorandom`: points are distributed within a kernel density estimate of the distribution with offset determined by pseudorandom noise a la jitter
+
+3.  `maxout`: points are distributed within a kernel density with points in a band distributed with highest value points on the outside and lowest in the middle
+
+4.  `minout`: points are distributed within a kernel density with points in a band distributed with highest value points in the middle and lowest on the outside
+
+5.  `tukey`: points are distributed as described in Tukey and Tukey "Strips displaying empirical distributions: I. textured dot strips"
+
+6.  `tukeyDense`: points are distributed as described in Tukey and Tukey but are constrained with the kernel density estimate
+
+The @fig-q6-2 *(axis labels and values removed to focus on points' distribution)* demonstrates these methods in `geom_quasirandom()` : --
+
+```{r}
+#| label: fig-q6-2
+#| fig-cap: "Avaialable methods in geom_quasirandom()"
+#| fig-cap-location: top
+#| code-fold: true
+
+g1 = g + 
+  labs(x = NULL, y = NULL) +
+  theme(axis.title = element_blank(),
+        axis.text = element_blank()
+        )
+
+gridExtra::grid.arrange(
+  
+  g1 + geom_quasirandom(method = "quasirandom") + 
+  labs(title = "method = quasirandom"),  
+  
+  g1 + geom_quasirandom(method = "tukey") + 
+  labs(title = "method = tukey"),
+
+  g1 + geom_quasirandom(method = "maxout") + 
+  labs(title = "method = maxout"),
+  
+  g1 + geom_quasirandom(method = "minout") + 
+  labs(title = "method = minout"),
+
+  g1 + geom_quasirandom(method = "tukey") + 
+  labs(title = "method = tukey"),
+
+  g1 + geom_quasirandom(method = "tukeyDense") + 
+  labs(title = "method = tukeyDense"),
+  
+  g1 + geom_quasirandom(method = "frowney") + 
+  labs(title = "method = frowney"),
+  
+  g1 + geom_quasirandom(method = "smiley") + 
+  labs(title = "method = smiley"),
+  
+  ncol = 2,
+  nrow = 4
+
+)
+```
+
+The methods used by `geom_beeswarm()` function are: --
+
+1.  **`swarm`** method:
+
+    -   Places points in increasing order.
+
+    -   Shifts overlapping points sideways to avoid overlap.
+
+2.  **`swarm2`** method:
+
+    -   Similar to "swarm" but follows beeswarm package method.
+
+3.  **`compactswarm`** method:
+
+    -   Uses greedy strategy for point placement.
+
+    -   Chooses point closest to non-data axis on each iteration.
+
+    -   Results in tightly-packed layout.
+
+    -   Prioritization used for breaking ties.
+
+4.  The other 3 methods first discretise the values along the data axis, in order to create more efficient packing.
+
+    i.  **`square`** method: Places points on a square grid.
+
+    ii. **`hex`** method: Places points on a hexagonal grid.
+
+    iii. **`centre`**/**`center`** method: Uses square grid for symmetric swarm.
+
+Note: The `square`, `hex` and `centre` methods discretize values along data axis. The number of breakpoints determined by available area and spacing argument
+
+The @fig-q6-3 *(axis labels and values removed to focus on points' distribution)* demonstrates methods in `geom_beeswarm()` : --
+
+```{r}
+#| label: fig-q6-3
+#| fig-cap: "Avaialable methods in geom_beeswarm()"
+#| fig-cap-location: top
+#| code-fold: true
+
+a = 3
+
+gridExtra::grid.arrange(
+  
+  g1 + geom_beeswarm(method = "swarm", cex = a) + 
+  labs(title = "method = swarm"),  
+ 
+  g1 + geom_beeswarm(method = "compactswarm", cex = a) + 
+  labs(title = "method = compactswarm"), 
+  
+  g1 + geom_beeswarm(method = "square", cex = a) + 
+  labs(title = "method = square"), 
+  
+  g1 + geom_beeswarm(method = "hex", cex = a) + 
+  labs(title = "method = hex"), 
+  
+  g1 + geom_beeswarm(method = "centre", cex = a) + 
+  labs(title = "method = centre"), 
+
+  g1 + geom_beeswarm(corral = "gutter", cex = a) + 
+  labs(title = "corral = gutter"), 
+  
+  ncol = 2,
+  nrow = 3
+
+)
+```

@@ -11,3 +11,4 @@ lubridate
 gt
 RColorBrewer
 lvplot
+ggbeeswarm
