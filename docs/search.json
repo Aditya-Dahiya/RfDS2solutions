@@ -193,7 +193,7 @@
     "href": "Chapter11.html",
     "title": "Chapter 11",
     "section": "",
-    "text": "library(tidyverse)\nlibrary(gt)\nlibrary(RColorBrewer)"
+    "text": "library(tidyverse)\nlibrary(gt)\nlibrary(RColorBrewer)\ndata(\"diamonds\")"
   },
   {
     "objectID": "Chapter11.html#footnotes",

@@ -28,6 +28,7 @@ bibliography: references.bib
 library(tidyverse)
 library(gt)
 library(RColorBrewer)
+data("diamonds")
 ```
 
 # **11.3.3 Exercises**
@@ -1100,14 +1101,14 @@ nrow = 2)
 
 **Visualize the distribution of `carat`, partitioned by `price`.**
 
-The distribution of `carat`, partitioned by `price` is shown below in
+The distribution of `carat`, partitioned by `price` is shown below in @fig-q2-ex5.3 .
 
 ```{r}
 #| label: fig-q2-ex5.3
 #| fig-cap: "The distribution of carat, partitioned by price"
 #| code-fold: true
 #| fig-cap-location: top
-#| fig-asp: 1.5
+#| fig-asp: 2
 
 gridExtra::grid.arrange(
   
@@ -1134,19 +1135,111 @@ gridExtra::grid.arrange(
          color = "Price (in $)", 
          y = "Number of diamonds",
          title = "Frequency Polygon") +
-    scale_y_continuous(n.breaks = 4),
+    scale_y_continuous(n.breaks = 4)
+    ,
   
   nrow = 2)
 
+    #  labels = c("$326 - $723",
+     #            "$723 - $1,050",
+      #           "$1.05K - $1.85K",
+       #          "$1.85K - $3.1K",
+        #         "$3.1K - $4.82K",
+         #        "$4.82K - $7.9K",
+          #       "$7.9K - $18.8K")
 ```
 
 ### Question 3
 
 **How does the price distribution of very large diamonds compare to small diamonds? Is it as you expect, or does it surprise you?**
 
+The @fig-q3-ex5.3 depicts the Price distribution of very large diamonds compared to small diamonds through a box-plot by binning the price. It is not expected, rather we find no positive correlation between price and carat (weight) of the diamond for larger diamonds, greater than 3 carats.
+
+The @fig-q3a-ex5.3 explains this strange phenomenon partially. There are very few diamonds in the category \> 3 carats and most of them near 3 carats are still priced differently. Thus, it is likely that the price of larger diamonds is more affected by other variables than simply the weight (`carat`) of the diamond.
+
+```{r}
+#| label: fig-q3-ex5.3
+#| fig-cap-location: top
+#| fig-cap: "Price distribution of very large diamonds compared to small diamonds"
+#| code-fold: true
+
+diamonds |>
+    mutate(big_c = ifelse(carat < 3, 
+                          "Small Diamonds < 3 carats",
+                          "Big Diamonds > 3 Carats")
+           ) |>
+    mutate(big_c = factor(big_c,
+                          levels = c("Small Diamonds < 3 carats",
+                          "Big Diamonds > 3 Carats"))) |>
+    ggplot(aes(x = price,
+               y = carat)) +
+    geom_boxplot(aes(group = cut_width(price, width = 2000)),
+                 outlier.alpha = 0.2) +
+    theme_minimal() +
+    labs(x = "Price (in $)",
+         y = "Carats") +
+    coord_flip() +
+  facet_wrap(~big_c, 
+             ncol = 2,
+             scales = "free_x")
+```
+
+```{r}
+#| label: fig-q3a-ex5.3
+#| fig-cap-location: top
+#| fig-cap: "Scatter-plot of price & carat of very large diamonds compared to small diamonds"
+#| code-fold: true
+
+diamonds |>
+    mutate(big_c = ifelse(carat < 3, 
+                          "Small Diamonds < 3 carats",
+                          "Big Diamonds > 3 Carats")
+           ) |>
+    mutate(big_c = factor(big_c,
+                          levels = c("Small Diamonds < 3 carats",
+                          "Big Diamonds > 3 Carats"))) |>
+    ggplot(aes(x = price,
+               y = carat)) +
+    geom_point(aes(colour = big_c,
+                   fill = big_c),
+               alpha = 0.5) +
+    theme_minimal() +
+    labs(x = "Price (in $)",
+         y = "Carats") +
+    coord_flip() +
+    facet_wrap(~big_c, 
+             ncol = 2,
+             scales = "free_x") +
+    theme(legend.title = element_blank(),
+          legend.position = "bottom")
+```
+
 ### Question 4
 
-**Combine two of the techniques you've learned to visualize the combined distribution of cut, carat, and price.**
+**Combine two of the techniques you've learned to visualize the combined distribution of `cut`, `carat`, and `price`.**
+
+The @fig-q4-ex5.3 shows the combined distribution of cut, carat, and price of diamonds.
+
+The price rise with increasing `carat` seems to be steeper for `Good`, `Very Good` and `Premium` cut diamonds, as compared to others.
+
+```{r}
+#| label: fig-q4-ex5.3
+#| fig-cap-location: top
+#| fig-cap: "The combined distribution of cut, carat, and price of diamonds"
+#| fig-asp: 2
+
+diamonds |>
+  ggplot(aes(x = price,
+               y = carat)) +
+  geom_boxplot(aes(group = cut_width(price, width = 2000)),
+                 outlier.alpha = 0.2) +
+  geom_smooth(se = FALSE, color = "darkgrey", 
+              lwd = 1.5, alpha = 0.3) +
+  facet_wrap(~cut, nrow = 5) +
+  scale_x_continuous(labels = scales::comma_format(prefix = "$")) +
+  coord_flip() +
+  labs(x = "Carat", y = "Price")
+```
 
 ### Question 5
 
