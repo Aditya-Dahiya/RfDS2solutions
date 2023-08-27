@@ -966,6 +966,10 @@ We could improve the tile plot produced earlier by using the facility of package
 
 -   Highest average departure delay airports are at bottom in @fig-q3b-ex5.2
 
+-   We are able to see that the highest average delays in June - July occur in airport like OKC, TUL, CAE, BHM, TYS
+
+-   We also observe that the airport DSM has highest delays from Jan - Apr and in June - July.
+
 ```{r}
 #| label: fig-q3b-ex5.2
 #| fig-cap: "Improved heatmap to detect patterns in the Tile Plot"
@@ -990,6 +994,172 @@ df |>
   labs(x = "Month of the Year",
        y = "Destinations" ,
        fill = "Avg. Dep. Delay \n(in minutes)") +
-  theme(axis.text.y = element_text(size = 5))
+  theme(axis.text.y = element_text(size = 5)) +
+   scale_fill_viridis_c()
 
+```
+
+# 11.5.3.1 Exercises
+
+### Question 1
+
+**Instead of summarizing the conditional distribution with a boxplot, you could use a frequency polygon. What do you need to consider when using [`cut_width()`](https://ggplot2.tidyverse.org/reference/cut_interval.html) vs. [`cut_number()`](https://ggplot2.tidyverse.org/reference/cut_interval.html)? How does that impact a visualization of the 2d distribution of `carat` and `price`?**
+
+Yes, instead of summarizing the conditional distribution with a boxplot, we could use a frequency polygon. Here, we can compare differently colored frequency polygons by binning the carat, as shown in @fig-q1-ex5.3 . As we observe in @fig-q1-ex5.3, the difference between `cut_width()` and `cut_number()` is : --
+
+| **`cut_width()`**                                                                                                                                                                           | **`cut_number()`**                                                                                                                                 |
+|----------------------------------------|--------------------------------|
+| `cut_width()` is used to divide the range of our data into equal-width bins. We specify the desired width of each bin, and the function automatically determines the appropriate bin edges. | `cut_number()` divides the data into a specified number of bins, trying to ensure that each bin has approximately the same number of observations. |
+| It is useful when we want to ensure that each bin covers a specific range of values, regardless of the distribution of our data.                                                            | This can be helpful when we want to maintain consistent bin sizes, while dealing with data that might not have a uniform distribution.             |
+
+When choosing between **`cut_width()`** and **`cut_number()`**, we need to consider the following:
+
+-   **Data Distribution**:
+
+    -   If your data is evenly distributed and we want equal-width bins, `cut_width()` might be a good choice.
+
+    -   If our data has an uneven distribution, `cut_number()` could help create bins with more consistent representation of observations.
+
+-   **Interpretability**:
+
+    -   Consider how well the bin edges align with meaningful values in your data. If having bin edges at specific points is important for interpretation, `cut_width()` might be more suitable.
+
+-   **Data Density**:
+
+    -   If we have a large number of data points, using `cut_number()` might help in creating more evenly populated bins.
+
+The impact of the choice between `cut_width()` and `cut_number()` on the visualization of the 2d distribution of `carat` and `price` is clear in @fig-q1-ex5.3 . The use of `cut_number()` is preferred as each of our frequency polygons now has equal number of observations, and is hence easily comparable.
+
+```{r}
+#| label: fig-q1-ex5.3
+#| fig-cap: "Impact of the choice between cut_width() and cut_number() on the visualization of the 2d distribution of carat and price"
+#| code-fold: true
+#| fig-cap-location: top
+#| fig-asp: 1
+
+gridExtra::grid.arrange(
+
+  diamonds |>
+    filter(carat < 3) |>
+    ggplot(aes(x = price)) +
+    geom_freqpoly(aes(color = cut_width(carat, width = 0.5)),
+                  lwd = 1, alpha  = 0.8) +
+    theme_minimal() +
+    scale_color_brewer(palette = "Greens") +
+    labs(x = "Price", color = "Carat", y = "Number of diamonds") +
+    scale_y_continuous(n.breaks = 4),
+
+  diamonds |>
+    filter(carat < 3) |>
+    ggplot(aes(x = price)) +
+    geom_freqpoly(aes(color = cut_number(carat, n = 7)),
+                  lwd = 1, alpha  = 0.8) +
+    theme_minimal() +
+    scale_color_brewer(palette = "Greens") +
+    labs(x = "Price", color = "Carat", y = "Number of diamonds") +
+    scale_y_continuous(n.breaks = 4),
+  
+  nrow = 2)
+
+```
+
+The use of `cut_width()` and `cut_number()` and their impact on the visualization of the 2d distribution of `carat` and `price` using boxplots is less obvious as shown here in @fig-q1a-ex5.3 . Variable widths in `cut_number()` boxplots can be misinterpreted as number of observations by a novice reader who doesn't pay attention to the x-axis.
+
+```{r}
+#| label: fig-q1a-ex5.3
+#| fig-cap: "Impact of cut_width() and cut_number() on boxplots' visualization of the 2d distribution of carat and price"
+#| code-fold: true
+#| fig-cap-location: top
+#| fig-asp: 1
+
+gridExtra::grid.arrange(
+  
+diamonds |>
+  filter(carat < 3) |>
+  ggplot(aes(x = carat,
+             y = price)) +
+  geom_boxplot(aes(group = cut_width(carat, width = 0.1)),
+               outlier.alpha = 0.2) +
+  theme_minimal() +
+  labs(x = NULL, subtitle = "cut_width", y = "Price"),
+
+diamonds |>
+  filter(carat < 3) |>
+  ggplot(aes(x = carat,
+             y = price)) +
+  geom_boxplot(aes(group = cut_number(carat, n = 20)),
+               outlier.alpha = 0.2) +
+  theme_minimal() +
+  labs(x = "Carat", subtitle = "cut_number", y = "Price"),
+
+nrow = 2)
+
+```
+
+### Question 2
+
+**Visualize the distribution of `carat`, partitioned by `price`.**
+
+The distribution of `carat`, partitioned by `price` is shown below in
+
+```{r}
+#| label: fig-q2-ex5.3
+#| fig-cap: "The distribution of carat, partitioned by price"
+#| code-fold: true
+#| fig-cap-location: top
+#| fig-asp: 1.5
+
+gridExtra::grid.arrange(
+  
+  diamonds |>
+    filter(carat < 3) |>
+    ggplot(aes(x = price,
+               y = carat)) +
+    geom_boxplot(aes(group = cut_width(price, width = 2000)),
+                 outlier.alpha = 0.2) +
+    theme_minimal() +
+    labs(x = "Price (in $)",
+         title = "Boxplot",
+         y = "Carat") +
+    coord_flip(), 
+
+  diamonds |>
+    filter(carat < 3) |>
+    ggplot(aes(x = carat)) +
+    geom_freqpoly(aes(color = cut_number(price, n = 7)),
+                  lwd = 1, alpha  = 0.8) +
+    theme_minimal() +
+    scale_color_brewer(palette = "YlOrRd") +
+    labs(x = "Carat of the Diamond", 
+         color = "Price (in $)", 
+         y = "Number of diamonds",
+         title = "Frequency Polygon") +
+    scale_y_continuous(n.breaks = 4),
+  
+  nrow = 2)
+
+```
+
+### Question 3
+
+**How does the price distribution of very large diamonds compare to small diamonds? Is it as you expect, or does it surprise you?**
+
+### Question 4
+
+**Combine two of the techniques you've learned to visualize the combined distribution of cut, carat, and price.**
+
+### Question 5
+
+**Two dimensional plots reveal outliers that are not visible in one dimensional plots. For example, some points in the following plot have an unusual combination of `x` and `y` values, which makes the points outliers even though their `x` and `y` values appear normal when examined separately. Why is a scatterplot a better display than a binned plot for this case?**
+
+```         
+diamonds |>    filter(x >= 4) |>    ggplot(aes(x = x, y = y)) +   geom_point() +   coord_cartesian(xlim = c(4, 11), ylim = c(4, 11))
+```
+
+### Question 6
+
+**Instead of creating boxes of equal width with [`cut_width()`](https://ggplot2.tidyverse.org/reference/cut_interval.html), we could create boxes that contain roughly equal number of points with [`cut_number()`](https://ggplot2.tidyverse.org/reference/cut_interval.html). What are the advantages and disadvantages of this approach?**
+
+```         
+ggplot(smaller, aes(x = carat, y = price)) +    geom_boxplot(aes(group = cut_number(carat, 20)))
 ```

@@ -352,6 +352,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#question-2-3" id="toc-question-2-3" class="nav-link" data-scroll-target="#question-2-3">Question 2</a></li>
   <li><a href="#question-3-3" id="toc-question-3-3" class="nav-link" data-scroll-target="#question-3-3">Question 3</a></li>
   </ul></li>
+  <li><a href="#exercises-4" id="toc-exercises-4" class="nav-link" data-scroll-target="#exercises-4">11.5.3.1 Exercises</a>
+  <ul class="collapse">
+  <li><a href="#question-1-4" id="toc-question-1-4" class="nav-link" data-scroll-target="#question-1-4">Question 1</a></li>
+  <li><a href="#question-2-4" id="toc-question-2-4" class="nav-link" data-scroll-target="#question-2-4">Question 2</a></li>
+  <li><a href="#question-3-4" id="toc-question-3-4" class="nav-link" data-scroll-target="#question-3-4">Question 3</a></li>
+  <li><a href="#question-4-2" id="toc-question-4-2" class="nav-link" data-scroll-target="#question-4-2">Question 4</a></li>
+  <li><a href="#question-5-1" id="toc-question-5-1" class="nav-link" data-scroll-target="#question-5-1">Question 5</a></li>
+  <li><a href="#question-6-1" id="toc-question-6-1" class="nav-link" data-scroll-target="#question-6-1">Question 6</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/edit/main/Chapter11.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -529,9 +538,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Comparison</strong></p>
 <table class="table">
 <colgroup>
+<col style="width: 19%">
 <col style="width: 26%">
-<col style="width: 26%">
-<col style="width: 47%">
+<col style="width: 53%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1100,10 +1109,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <table class="table">
 <colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
+<col style="width: 12%">
+<col style="width: 18%">
+<col style="width: 41%">
+<col style="width: 26%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -2002,8 +2011,10 @@ variables</p> </caption>
 <ul>
 <li><p>Months 6, 7 and 12 have highest average departure delays</p></li>
 <li><p>Highest average departure delay airports are at bottom in <a href="#fig-q3b-ex5.2">Figure&nbsp;19</a></p></li>
+<li><p>We are able to see that the highest average delays in June - July occur in airport like OKC, TUL, CAE, BHM, TYS</p></li>
+<li><p>We also observe that the airport DSM has highest delays from Jan - Apr and in June - July.</p></li>
 </ul>
-<div class="cell fig-cap-location-top" data-fig.asp="1.5" data-hash="Chapter11_cache/html/fig-q3b-ex5.2_098c3d35b42f7c9ba9dd5d52f1da3f1c">
+<div class="cell fig-cap-location-top" data-fig.asp="1.5" data-hash="Chapter11_cache/html/fig-q3b-ex5.2_7b26f8d391cf26d663623f2de2ff854a">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("seriation")</span></span>
@@ -2023,7 +2034,8 @@ variables</p> </caption>
 <span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Month of the Year"</span>,</span>
 <span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Destinations"</span> ,</span>
 <span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Avg. Dep. Delay </span><span class="sc">\n</span><span class="st">(in minutes)"</span>) <span class="sc">+</span></span>
-<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>   <span class="fu">scale_fill_viridis_c</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-q3b-ex5.2" class="quarto-figure quarto-figure-center anchored">
@@ -2034,6 +2046,188 @@ variables</p> </caption>
 </div>
 </div>
 </div>
+</section>
+</section>
+<section id="exercises-4" class="level1">
+<h1>11.5.3.1 Exercises</h1>
+<section id="question-1-4" class="level3">
+<h3 class="anchored" data-anchor-id="question-1-4">Question 1</h3>
+<p><strong>Instead of summarizing the conditional distribution with a boxplot, you could use a frequency polygon. What do you need to consider when using <a href="https://ggplot2.tidyverse.org/reference/cut_interval.html"><code>cut_width()</code></a> vs.&nbsp;<a href="https://ggplot2.tidyverse.org/reference/cut_interval.html"><code>cut_number()</code></a>? How does that impact a visualization of the 2d distribution of <code>carat</code> and <code>price</code>?</strong></p>
+<p>Yes, instead of summarizing the conditional distribution with a boxplot, we could use a frequency polygon. Here, we can compare differently colored frequency polygons by binning the carat, as shown in <a href="#fig-q1-ex5.3">Figure&nbsp;20</a> . As we observe in <a href="#fig-q1-ex5.3">Figure&nbsp;20</a>, the difference between <code>cut_width()</code> and <code>cut_number()</code> is : –</p>
+<table class="table">
+<colgroup>
+<col style="width: 56%">
+<col style="width: 43%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong><code>cut_width()</code></strong></th>
+<th><strong><code>cut_number()</code></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>cut_width()</code> is used to divide the range of our data into equal-width bins. We specify the desired width of each bin, and the function automatically determines the appropriate bin edges.</td>
+<td><code>cut_number()</code> divides the data into a specified number of bins, trying to ensure that each bin has approximately the same number of observations.</td>
+</tr>
+<tr class="even">
+<td>It is useful when we want to ensure that each bin covers a specific range of values, regardless of the distribution of our data.</td>
+<td>This can be helpful when we want to maintain consistent bin sizes, while dealing with data that might not have a uniform distribution.</td>
+</tr>
+</tbody>
+</table>
+<p>When choosing between <strong><code>cut_width()</code></strong> and <strong><code>cut_number()</code></strong>, we need to consider the following:</p>
+<ul>
+<li><p><strong>Data Distribution</strong>:</p>
+<ul>
+<li><p>If your data is evenly distributed and we want equal-width bins, <code>cut_width()</code> might be a good choice.</p></li>
+<li><p>If our data has an uneven distribution, <code>cut_number()</code> could help create bins with more consistent representation of observations.</p></li>
+</ul></li>
+<li><p><strong>Interpretability</strong>:</p>
+<ul>
+<li>Consider how well the bin edges align with meaningful values in your data. If having bin edges at specific points is important for interpretation, <code>cut_width()</code> might be more suitable.</li>
+</ul></li>
+<li><p><strong>Data Density</strong>:</p>
+<ul>
+<li>If we have a large number of data points, using <code>cut_number()</code> might help in creating more evenly populated bins.</li>
+</ul></li>
+</ul>
+<p>The impact of the choice between <code>cut_width()</code> and <code>cut_number()</code> on the visualization of the 2d distribution of <code>carat</code> and <code>price</code> is clear in <a href="#fig-q1-ex5.3">Figure&nbsp;20</a> . The use of <code>cut_number()</code> is preferred as each of our frequency polygons now has equal number of observations, and is hence easily comparable.</p>
+<div class="cell fig-cap-location-top" data-fig.asp="1" data-hash="Chapter11_cache/html/fig-q1-ex5.3_7532c2717b1d0f865ef77c3891cc705f">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  diamonds <span class="sc">|&gt;</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(carat <span class="sc">&lt;</span> <span class="dv">3</span>) <span class="sc">|&gt;</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> price)) <span class="sc">+</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_freqpoly</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="fu">cut_width</span>(carat, <span class="at">width =</span> <span class="fl">0.5</span>)),</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">lwd =</span> <span class="dv">1</span>, <span class="at">alpha  =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Greens"</span>) <span class="sc">+</span></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Price"</span>, <span class="at">color =</span> <span class="st">"Carat"</span>, <span class="at">y =</span> <span class="st">"Number of diamonds"</span>) <span class="sc">+</span></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">n.breaks =</span> <span class="dv">4</span>),</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>  diamonds <span class="sc">|&gt;</span></span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(carat <span class="sc">&lt;</span> <span class="dv">3</span>) <span class="sc">|&gt;</span></span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> price)) <span class="sc">+</span></span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_freqpoly</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="fu">cut_number</span>(carat, <span class="at">n =</span> <span class="dv">7</span>)),</span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>                  <span class="at">lwd =</span> <span class="dv">1</span>, <span class="at">alpha  =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Greens"</span>) <span class="sc">+</span></span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Price"</span>, <span class="at">color =</span> <span class="st">"Carat"</span>, <span class="at">y =</span> <span class="st">"Number of diamonds"</span>) <span class="sc">+</span></span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">n.breaks =</span> <span class="dv">4</span>),</span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-q1-ex5.3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter11_files/figure-html/fig-q1-ex5.3-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;20: Impact of the choice between cut_width() and cut_number() on the visualization of the 2d distribution of carat and price</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The use of <code>cut_width()</code> and <code>cut_number()</code> and their impact on the visualization of the 2d distribution of <code>carat</code> and <code>price</code> using boxplots is less obvious as shown here in <a href="#fig-q1a-ex5.3">Figure&nbsp;21</a> . Variable widths in <code>cut_number()</code> boxplots can be misinterpreted as number of observations by a novice reader who doesn’t pay attention to the x-axis.</p>
+<div class="cell fig-cap-location-top" data-fig.asp="1" data-hash="Chapter11_cache/html/fig-q1a-ex5.3_a5a8faf37edd4936a1ab7ff294d194b8">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(carat <span class="sc">&lt;</span> <span class="dv">3</span>) <span class="sc">|&gt;</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> carat,</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> price)) <span class="sc">+</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="fu">cut_width</span>(carat, <span class="at">width =</span> <span class="fl">0.1</span>)),</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">outlier.alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">subtitle =</span> <span class="st">"cut_width"</span>, <span class="at">y =</span> <span class="st">"Price"</span>),</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span></span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(carat <span class="sc">&lt;</span> <span class="dv">3</span>) <span class="sc">|&gt;</span></span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> carat,</span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> price)) <span class="sc">+</span></span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="fu">cut_number</span>(carat, <span class="at">n =</span> <span class="dv">20</span>)),</span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>               <span class="at">outlier.alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Carat"</span>, <span class="at">subtitle =</span> <span class="st">"cut_number"</span>, <span class="at">y =</span> <span class="st">"Price"</span>),</span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a><span class="at">nrow =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-q1a-ex5.3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter11_files/figure-html/fig-q1a-ex5.3-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;21: Impact of cut_width() and cut_number() on boxplots’ visualization of the 2d distribution of carat and price</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="question-2-4" class="level3">
+<h3 class="anchored" data-anchor-id="question-2-4">Question 2</h3>
+<p><strong>Visualize the distribution of <code>carat</code>, partitioned by <code>price</code>.</strong></p>
+<p>The distribution of <code>carat</code>, partitioned by <code>price</code> is shown below in</p>
+<div class="cell fig-cap-location-top" data-fig.asp="1.5" data-hash="Chapter11_cache/html/fig-q2-ex5.3_198faee54906be4af4e37f58962b3184">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  diamonds <span class="sc">|&gt;</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(carat <span class="sc">&lt;</span> <span class="dv">3</span>) <span class="sc">|&gt;</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> price,</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">y =</span> carat)) <span class="sc">+</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="fu">cut_width</span>(price, <span class="at">width =</span> <span class="dv">2000</span>)),</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">outlier.alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Price (in $)"</span>,</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">title =</span> <span class="st">"Boxplot"</span>,</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Carat"</span>) <span class="sc">+</span></span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_flip</span>(), </span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>  diamonds <span class="sc">|&gt;</span></span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(carat <span class="sc">&lt;</span> <span class="dv">3</span>) <span class="sc">|&gt;</span></span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> carat)) <span class="sc">+</span></span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_freqpoly</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="fu">cut_number</span>(price, <span class="at">n =</span> <span class="dv">7</span>)),</span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a>                  <span class="at">lwd =</span> <span class="dv">1</span>, <span class="at">alpha  =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"YlOrRd"</span>) <span class="sc">+</span></span>
+<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Carat of the Diamond"</span>, </span>
+<span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a>         <span class="at">color =</span> <span class="st">"Price (in $)"</span>, </span>
+<span id="cb40-24"><a href="#cb40-24" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Number of diamonds"</span>,</span>
+<span id="cb40-25"><a href="#cb40-25" aria-hidden="true" tabindex="-1"></a>         <span class="at">title =</span> <span class="st">"Frequency Polygon"</span>) <span class="sc">+</span></span>
+<span id="cb40-26"><a href="#cb40-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">n.breaks =</span> <span class="dv">4</span>),</span>
+<span id="cb40-27"><a href="#cb40-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb40-28"><a href="#cb40-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-q2-ex5.3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter11_files/figure-html/fig-q2-ex5.3-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;22: The distribution of carat, partitioned by price</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="question-3-4" class="level3">
+<h3 class="anchored" data-anchor-id="question-3-4">Question 3</h3>
+<p><strong>How does the price distribution of very large diamonds compare to small diamonds? Is it as you expect, or does it surprise you?</strong></p>
+</section>
+<section id="question-4-2" class="level3">
+<h3 class="anchored" data-anchor-id="question-4-2">Question 4</h3>
+<p><strong>Combine two of the techniques you’ve learned to visualize the combined distribution of cut, carat, and price.</strong></p>
+</section>
+<section id="question-5-1" class="level3">
+<h3 class="anchored" data-anchor-id="question-5-1">Question 5</h3>
+<p><strong>Two dimensional plots reveal outliers that are not visible in one dimensional plots. For example, some points in the following plot have an unusual combination of <code>x</code> and <code>y</code> values, which makes the points outliers even though their <code>x</code> and <code>y</code> values appear normal when examined separately. Why is a scatterplot a better display than a binned plot for this case?</strong></p>
+<pre><code>diamonds |&gt;    filter(x &gt;= 4) |&gt;    ggplot(aes(x = x, y = y)) +   geom_point() +   coord_cartesian(xlim = c(4, 11), ylim = c(4, 11))</code></pre>
+</section>
+<section id="question-6-1" class="level3">
+<h3 class="anchored" data-anchor-id="question-6-1">Question 6</h3>
+<p><strong>Instead of creating boxes of equal width with <a href="https://ggplot2.tidyverse.org/reference/cut_interval.html"><code>cut_width()</code></a>, we could create boxes that contain roughly equal number of points with <a href="https://ggplot2.tidyverse.org/reference/cut_interval.html"><code>cut_number()</code></a>. What are the advantages and disadvantages of this approach?</strong></p>
+<pre><code>ggplot(smaller, aes(x = carat, y = price)) +    geom_boxplot(aes(group = cut_number(carat, 20)))</code></pre>
 
 
 </section>
