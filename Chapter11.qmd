@@ -171,7 +171,7 @@ Both `coord_cartesian()` and `xlim()` / `ylim()` serve a similar purpose of adju
 **Comparison**
 
 | **Aspect**                     | **`coord_cartesian()`**                    | **`xlim()`**/**`ylim()`**                                                               |
-|-------------------|-------------------|----------------------------------|
+|--------------------------------|--------------------------------------------|-----------------------------------------------------------------------------------------|
 | **Purpose**                    | Adjust visible range without altering data | Set specific data range to be displayed, removes data outside the range                 |
 | **Data Integrity**             | Maintains original data and scaling        | Can exclude data points outside range                                                   |
 | **Context**                    | Preserves overall data context             | May lose context due to excluded data; or reveal new insights upon removal of outliers. |
@@ -638,7 +638,7 @@ The package `ggbeeswarm` uses two main functions:
     The functions **`geom_quasirandom()`**, **`geom_beeswarm()`**, and **`geom_jitter()`** are used to deal with overplotting, where multiple data points in a plot share the same coordinates, making it hard to discern the individual points.
 
 |                        | **`geom_jitter()`**              | **`geom_quasirandom()`**                                                     | **`geom_beeswarm()`**                            |
-|------------------|------------------|------------------|------------------|
+|------------------------|----------------------------------|------------------------------------------------------------------------------|--------------------------------------------------|
 | Purpose                | Introduce random noise to points | Spread points with controlled randomness along the categorical variable axis | Systematically arrange points to prevent overlap |
 | Data Distribution      | Less accurate due to randomness  | Maintains data distribution                                                  | Maintains data distribution                      |
 | Overplotting Reduction | Moderate                         | Moderate                                                                     | High                                             |
@@ -1009,7 +1009,7 @@ df |>
 Yes, instead of summarizing the conditional distribution with a boxplot, we could use a frequency polygon. Here, we can compare differently colored frequency polygons by binning the carat, as shown in @fig-q1-ex5.3 . As we observe in @fig-q1-ex5.3, the difference between `cut_width()` and `cut_number()` is : --
 
 | **`cut_width()`**                                                                                                                                                                           | **`cut_number()`**                                                                                                                                 |
-|----------------------------------------|--------------------------------|
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
 | `cut_width()` is used to divide the range of our data into equal-width bins. We specify the desired width of each bin, and the function automatically determines the appropriate bin edges. | `cut_number()` divides the data into a specified number of bins, trying to ensure that each bin has approximately the same number of observations. |
 | It is useful when we want to ensure that each bin covers a specific range of values, regardless of the distribution of our data.                                                            | This can be helpful when we want to maintain consistent bin sizes, while dealing with data that might not have a uniform distribution.             |
 
@@ -1423,7 +1423,7 @@ nrow = 3)
 In summary, the following table compares the 3 approaches: --
 
 |                                | **`cut_width()`**                                              | **`cut_width(varwidth = TRUE)`**                               | **`cut_number()`**                                                                                                               |
-|---------------|---------------|---------------|----------------------------|
+|--------------------------------|----------------------------------------------------------------|----------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------|
 | **Bin Width Control**          | All bin widths are equal in width.                             | Bin widths can vary with square root of sample size.           | Bin widths vary for balanced sample size.                                                                                        |
 | **Reflects Data Distribution** | May not always capture underlying distribution                 | Can better capture data density and distribution               | Can better capture data density and distribution.                                                                                |
 | **Visual Comparison**          | Equal bin widths facilitate easy visual comparison             | Variable bin widths might distort visual comparison            | Variable bin widths might distort visual comparison                                                                              |
