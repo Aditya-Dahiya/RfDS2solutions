@@ -42,6 +42,7 @@ website:
         contents:
           - Chapter10.qmd
           - Chapter11.qmd
+          - Chapter12.qmd
       - section: "Transform"
         contents:
       - section: "Import"

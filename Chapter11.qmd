@@ -2,7 +2,7 @@
 title: "Chapter 11"
 subtitle: "Exploratory data analysis"
 author: "Aditya Dahiya"
-date: 2023-08-24
+date: 2023-08-28
 execute: 
   warning: false
   error: false
@@ -1203,6 +1203,43 @@ diamonds |>
     geom_point(aes(colour = big_c,
                    fill = big_c),
                alpha = 0.5) +
+    geom_smooth(se = FALSE,
+                col = "black") +
+    theme_minimal() +
+    labs(x = "Price (in $)",
+         y = "Carats") +
+    coord_flip() +
+    facet_wrap(~big_c, 
+             ncol = 2,
+             scales = "free_x") +
+    theme(legend.title = element_blank(),
+          legend.position = "bottom")
+```
+
+However, an important thing to note is most of larger diamonds are of exactly 3 Carats here, and we see a consistent pattern of more diamonds at exact integer values of Carats - thus indicating an observation bias - tendency of observation recorder to round off to nearest integer, perhaps. If we remove the exactly 3 carat diamonds, the rise in price with carat is similar, or even faster in larger diamonds than small diamonds (@fig-q3b-ex5.3) Thus, there is nothing surprising in the price distribution.
+
+```{r}
+#| label: fig-q3b-ex5.3
+#| fig-cap-location: top
+#| fig-cap: "Scatter-plot of price & carat of large diamonds vs. small diamonds, with 3.1 Carats as cut-off"
+#| code-fold: true
+
+
+diamonds |>
+    mutate(big_c = ifelse(carat < 3.1, 
+                          "Small Diamonds < 3.1 carats",
+                          "Big Diamonds > 3.1 Carats")
+           ) |>
+    mutate(big_c = factor(big_c,
+                          levels = c("Small Diamonds < 3.1 carats",
+                          "Big Diamonds > 3.1 Carats"))) |>
+    ggplot(aes(x = price,
+               y = carat)) +
+    geom_point(aes(colour = big_c,
+                   fill = big_c),
+               alpha = 0.5) +
+     geom_smooth(se = FALSE,
+                 col = "black") +
     theme_minimal() +
     labs(x = "Price (in $)",
          y = "Carats") +
@@ -1243,10 +1280,68 @@ diamonds |>
 
 ### Question 5
 
-**Two dimensional plots reveal outliers that are not visible in one dimensional plots. For example, some points in the following plot have an unusual combination of `x` and `y` values, which makes the points outliers even though their `x` and `y` values appear normal when examined separately. Why is a scatterplot a better display than a binned plot for this case?**
+**Two dimensional plots reveal outliers that are not visible in one dimensional plots. For example, some points in the following plot have an unusual combination of `x` and `y` values, which makes the points outliers even though their `x` and `y` values appear normal when examined separately. Why is a scatter-plot a better display than a binned plot for this case?**
 
 ```         
-diamonds |>    filter(x >= 4) |>    ggplot(aes(x = x, y = y)) +   geom_point() +   coord_cartesian(xlim = c(4, 11), ylim = c(4, 11))
+diamonds |>    
+  filter(x >= 4) |>   
+  ggplot(aes(x = x, y = y)) +   
+  geom_point() +   
+  coord_cartesian(xlim = c(4, 11), ylim = c(4, 11))
+```
+
+A scatter plot is a better display than a binned plot for revealing outliers that are not visible in one-dimensional plots, because: --
+
+1.  **Multivariate Visualization**: A scatter plot (shown in @fig-q5-ex5.3) displays data points in a two-dimensional space, where each point corresponds to a combination of values from two variables (for example, here in this example, `x` and `y`). This allows us to visualize the relationships and interactions between these variables.
+
+    In contrast, a binned plot (shown in @fig-q5-ex5.3) typically aggregates data into bins on a single axis, losing the individual data point information.
+
+    Thus, unusual combinations of `x` and `y` values are more easily detectable in a scatter plot.
+
+2.  **Pattern Recognition**: Scatter plots enable the identification of patterns, clusters, trends, or correlations between outliers and rest of the data. Outliers might be associated with specific patterns. For example, in @fig-q5-ex5.3 **we can label the individual outliers in a scatter-plot** using the ID of the diamonds in the data-set and observe whether outliers tend to cluster together. As we can see, outliers are having higher `x` than `y` , i.e. there are some abnormally long diamonds *(*`x` *= length in mm, in this data-set).*
+
+    On the other hand, Binned plots group data into bins or intervals, which can hide the underlying density and distribution of individual data points.
+
+3.  **Quantitative Assessment**: Scatter plots allow for quantitative assessment of the distance of outliers from the main cluster of data points. This distance can provide insight into the magnitude of deviation from the expected values.
+
+    In binned plots, like a box-plot, this visual quantitative assessment is lost as individual data points are binned together.
+
+In summary, a scatter plot are a superior choice when the goal is to identify outliers based on combined values of two variables.
+
+```{r}
+#| label: fig-q5-ex5.3
+#| fig-cap-location: top
+#| fig-cap: "Scatter-plot vs. Binned Plot for detecting outliers in a two-dimensional plot"
+#| fig-asp: 1
+
+gridExtra::grid.arrange(
+  
+  diamonds |>    
+    mutate(res_lm = (lm(diamonds$y ~ diamonds$x)$residuals)) |>
+    filter(x >= 4) |>
+    mutate(res_lm = res_lm < -1 | res_lm > 1) |>
+    rowid_to_column() |>
+    mutate(rowid = ifelse(res_lm, rowid, NA)) |>
+    ggplot(aes(x = x, 
+               y = y,
+               label = rowid)) +   
+    geom_point(alpha = 0.2) +
+    coord_cartesian(xlim = c(4, 11), ylim = c(4, 11)) +
+    ggrepel::geom_text_repel(size = 3) +
+    labs(x = "x", y = "y",
+         subtitle = "Scatter-Plot for detecting outliers"),
+
+  diamonds |>
+    mutate(x_group = cut_width(x, width = 1)) |>
+    ggplot(aes(y = y, x = x_group)) +
+    geom_boxplot() +
+    coord_cartesian(ylim = c(4, 11)) +
+    labs(x = "x", y = "y",
+         subtitle = "Binned Plot for detecting outliers"),
+
+nrow = 2)
+
+
 ```
 
 ### Question 6
@@ -1254,5 +1349,84 @@ diamonds |>    filter(x >= 4) |>    ggplot(aes(x = x, y = y)) +   geom_point() +
 **Instead of creating boxes of equal width with [`cut_width()`](https://ggplot2.tidyverse.org/reference/cut_interval.html), we could create boxes that contain roughly equal number of points with [`cut_number()`](https://ggplot2.tidyverse.org/reference/cut_interval.html). What are the advantages and disadvantages of this approach?**
 
 ```         
-ggplot(smaller, aes(x = carat, y = price)) +    geom_boxplot(aes(group = cut_number(carat, 20)))
+ggplot(smaller, aes(x = carat, y = price)) +    
+  geom_boxplot(aes(group = cut_number(carat, 20)))
 ```
+
+Let us recreate the @fig-q1a-ex5.3 below to explain the advantages and disadvantages of `cut_number()` over the approach of `cut_width()` : --
+
+```{r}
+#| label: fig-q6-ex5.3
+#| fig-cap: "Advantages and disadvantages of cut_width() vs. cut_number()"
+#| code-fold: true
+#| fig-cap-location: top
+#| fig-asp: 1.5
+
+gridExtra::grid.arrange(
+  
+diamonds |>
+  filter(carat < 3) |>
+  ggplot(aes(x = carat,
+             y = price)) +
+  geom_boxplot(aes(group = cut_width(carat, width = 0.1)),
+               outlier.alpha = 0.2) +
+  theme_minimal() +
+  labs(x = NULL, 
+       title = "cut_width", 
+       subtitle = "Each boxplot is of equal width, i.e. interval, but contains different number of observations",
+       y = "Price"),
+
+diamonds |>
+  filter(carat < 3) |>
+  ggplot(aes(x = carat,
+             y = price)) +
+  geom_boxplot(aes(group = cut_width(carat, width = 0.1)),
+               varwidth = TRUE,
+               outlier.alpha = 0.2) +
+  theme_minimal() +
+  labs(x = NULL, 
+       title = "cut_width with varwidth = TRUE",
+       subtitle = "Each boxplot is of equal interval, but width reflects the square root of number of observations",
+       y = "Price"),
+
+diamonds |>
+  filter(carat < 3) |>
+  ggplot(aes(x = carat,
+             y = price)) +
+  geom_boxplot(aes(group = cut_number(carat, n = 20)),
+               outlier.alpha = 0.2) +
+  theme_minimal() +
+  labs(x = "Carat", 
+       title = "cut_number",
+       subtitle = "Each boxplot has equal number of observations, and the width reflects the interval covered",
+       y = "Price"),
+
+nrow = 3)
+```
+
+**Advantages of `cut_number()` for equal number of points in each bin:**
+
+1.  **Balanced Bin Sizes:** The primary advantage of using `cut_number()` is that it results in bins that contain roughly equal numbers of data points. This is useful when we want to ensure that each bin has a similar sample size, which can provide more stable statistical comparisons and analyses.
+
+2.  **Reflects distribution better for skewed data:** Binning by equal number of points can be useful when dealing with skewed or unevenly distributed data. This approach ensures that each bin captures a representative sample from different parts of the data distribution.
+
+3.  **Incorporates data density:** `cut_number()` takes data density into account. In areas of high density, bins might be narrower, and in areas of low density, bins might be wider. This can provide a more granular view of data variations.
+
+**Disadvantages of `cut_number()`:**
+
+1.  **Uneven Bin Widths makes visual comparison tough**: While `cut_number()` results in bins with roughly equal numbers of points, the bin widths can vary significantly. This might make it harder to visually compare the distribution across different bins.
+
+2.  **Skewed Data Presentation**: Uneven bin widths result in skewed visual presentations of data. For example, if one bin contains a large range of values, the visualization gives undue importance to the larger range. For example, in @fig-q1a-ex5.3, the rhird graph has the last bin abnormally wide.
+
+3.  **Potential loss of information**: If our data has distinct clusters, or regions of interest that span different value ranges, using `cut_number()` could lead to the loss of this information in favor of equalizing the bin sizes.
+
+In summary, the following table compares the 3 approaches: --
+
+|                                | **`cut_width()`**                                              | **`cut_width(varwidth = TRUE)`**                               | **`cut_number()`**                                                                                                               |
+|---------------|---------------|---------------|----------------------------|
+| **Bin Width Control**          | All bin widths are equal in width.                             | Bin widths can vary with square root of sample size.           | Bin widths vary for balanced sample size.                                                                                        |
+| **Reflects Data Distribution** | May not always capture underlying distribution                 | Can better capture data density and distribution               | Can better capture data density and distribution.                                                                                |
+| **Visual Comparison**          | Equal bin widths facilitate easy visual comparison             | Variable bin widths might distort visual comparison            | Variable bin widths might distort visual comparison                                                                              |
+| **Sensitive to Data Density**  | Less sensitive to data density                                 | More sensitive to data density                                 | More sensitive to data density                                                                                                   |
+| **Potential Overplotting**     | May lead to overplotting if bin widths are too small           | Variable bin widths may alleviate overplotting                 | Variable bin widths may alleviate overplotting                                                                                   |
+| **Potential Information Loss** | All bins are of equal interval, so information well presented. | All bins are of equal interval, so information well presented. | Unequal bin widths might obscure data distribution in wider bins. Possibility of losing outliers, as evident in @fig-q1a-ex5.3 . |

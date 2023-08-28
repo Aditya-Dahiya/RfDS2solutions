@@ -1,0 +1,48 @@
+---
+title: "Chapter 12"
+author: "Aditya Dahiya"
+subtitle: "Communication"
+date: 2023-08-28
+execute: 
+  warning: false
+  error: false
+  cache: true
+filters:
+  - social-share
+share:
+  permalink: "https://aditya-dahiya.github.io/RfDS2solutions/Chapter12.html"
+  description: "Solutions: R for Data Science (2e)"
+  twitter: true
+  facebook: true
+  linkedin: true
+  email: true
+editor_options: 
+  chunk_output_type: console
+bibliography: references.bib
+---
+
+```{r}
+#| label: setup
+
+library(tidyverse)
+library(scales)
+library(ggrepel)
+library(patchwork)
+
+```
+
+# **12.2.1 Exercises**
+
+### Question 1
+
+**Create one plot on the fuel economy data with customized `title`, `subtitle`, `caption`, `x`, `y`, and `color` labels.**
+
+### Question 2
+
+**Recreate the following plot using the fuel economy data. Note that both the colors and shapes of points vary by type of drive train.**
+
+![Scatterplot of highway versus city fuel efficiency. Shapes and colors of points are determined by type of drive train.](https://r4ds.hadley.nz/communication_files/figure-html/unnamed-chunk-5-1.png){alt="Scatterplot of highway versus city fuel efficiency. Shapes and colors of points are determined by type of drive train." width="381"}
+
+### Question 3
+
+**Take an exploratory graphic that you\'ve created in the last month, and add informative titles to make it easier for others to understand.**
