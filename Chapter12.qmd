@@ -306,6 +306,8 @@ gtcars |>
 #| label: fig-q3c-ex3
 #| fig-cap: "Scatter-plot of highway mileage vs. horsepower, for different body type of cars - with different annotations in each facet"
 #| code-fold: true
+#| fig-width: 8
+
 
 annt_con = "Convertibles generally have lower HP"
 annt_cup = "Fuel efficiency decreases with rising HP"
@@ -345,7 +347,8 @@ gtcars |>
                   label = annt),
     color = "#454647",
     fontface = "bold",
-    label.size = 0.1
+    label.size = 0.1,
+    size = 3
   ) +
   theme_light() +
   theme(legend.position = "bottom") +
@@ -390,3 +393,78 @@ tibble(x = 1:10,
 ### Question 5
 
 **What are the four arguments to [`arrow()`](https://rdrr.io/r/grid/arrow.html)? How do they work? Create a series of plots that demonstrate the most important options.**
+
+In `ggplot2` and `R`, the `arrow()` function is used to customize the appearance of arrowheads in line segments. As the results show in @fig-q5-ex3, the `arrow()` function has four main arguments that we can use to control the arrowheads:
+
+1.  **`type`:** This argument specifies the type of arrowhead. There are three main types:
+
+    -   `"closed"`: A closed arrowhead with a triangular shape.
+
+    -   `"open"`: An open arrowhead with a triangular shape.
+
+2.  **`length`:** This argument controls the length of the arrowhead. We can specify it using a numeric value or a `unit()` object, which allows you to define the length in various units such as `"inches"`, `"cm"`, etc.
+
+3.  **`ends`**: This argument determines which end of the line segment the arrowhead should appear on. It can take two values:
+
+    -   `"last"`: Arrowhead is placed at the end of the segment (default behavior).
+
+    -   `"first"`: Arrowhead is placed at the start of the segment.
+
+    -   `"both"`: Arrowhead appears at both the start and end of the segment.
+
+4.  **`angle`**: This argument controls the angle of the arrow head in degrees *(smaller numbers produce narrower, pointier arrows)*. It describes the width of the arrow head.
+
+```{r}
+#| label: fig-q5-ex3
+#| fig-cap: "Customizing the arrows in geom_segment() using the 4 main arguments to arrow()"
+#| fig-cap-location: top
+#| fig-asp: 1
+  
+nos = 8                                     # Number of spokes to create
+angle = seq(0, 7/4 * pi, length.out = nos)  # Angles for 8 directions
+arrow_length = 0.8                          # Length of line segment
+
+g = tibble(
+    x_start = rep(0, nos),              # Common starting point
+    y_start = rep(0, nos),
+    x_end = cos(angle) * arrow_length,  # Calculate end points based on angles
+    y_end = sin(angle) * arrow_length
+    ) |>
+    ggplot(aes(x = x_start,
+               y = y_start,
+               xend = x_end,
+               yend = y_end)) +
+  theme_void() 
+
+gridExtra::grid.arrange(
+  
+  g + geom_segment(arrow = arrow(type = "open")) + 
+    labs(subtitle = "arrow(type = open)"),
+
+  g + geom_segment(arrow = arrow(type = "closed")) + 
+    labs(subtitle = "arrow(type = closed)"),  
+  
+  g + geom_segment(arrow = arrow(angle = 15)) + 
+    labs(subtitle = "arrow(angle = 15)"),
+
+  g + geom_segment(arrow = arrow(angle = 90)) + 
+    labs(subtitle = "arrow(angle = 90)"),  
+    
+  g + geom_segment(arrow = arrow(ends = "first")) + 
+    labs(subtitle = "arrow(ends = first)"),
+
+  g + geom_segment(arrow = arrow(ends = "last")) + 
+    labs(subtitle = "arrow(ends = last)"),
+
+  g + geom_segment(arrow = arrow(ends = "both")) + 
+    labs(subtitle = "arrow(ends = both)"),
+  
+  g + geom_segment(arrow = arrow(length = unit(1, "cm"))) + 
+    labs(subtitle = "arrow(length = unit(1, cm)"),
+  
+  g + geom_segment(arrow = arrow(length = unit(0.5, "cm"))) + 
+    labs(subtitle = "arrow(length = unit(0.5, cm)"),
+  
+  ncol = 3
+)
+```

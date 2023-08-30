@@ -334,6 +334,26 @@
             "title": "ggplot2: Elegant graphics for data analysis",
             "title-short": "ggplot2",
             "type": "article-journal"
+        },
+        {
+            "URL": "https://CRAN.R-project.org/package=ggrepel",
+            "author": [
+                {
+                    "family": "Slowikowski",
+                    "given": "Kamil"
+                }
+            ],
+            "id": "ggrepel",
+            "issued": {
+                "date-parts": [
+                    [
+                        2023
+                    ]
+                ]
+            },
+            "title": "Ggrepel: Automatically position non-overlapping text labels with ’ggplot2’",
+            "title-short": "Ggrepel",
+            "type": "article-journal"
         }
     ],
     "project_biblios": []
