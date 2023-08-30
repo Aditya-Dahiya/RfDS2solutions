@@ -56,7 +56,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -336,6 +355,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2">Question 2</a></li>
   <li><a href="#question-3" id="toc-question-3" class="nav-link" data-scroll-target="#question-3">Question 3</a></li>
   </ul></li>
+  <li><a href="#exercises-1" id="toc-exercises-1" class="nav-link" data-scroll-target="#exercises-1"><strong>12.3.1 Exercises</strong></a>
+  <ul class="collapse">
+  <li><a href="#question-1-1" id="toc-question-1-1" class="nav-link" data-scroll-target="#question-1-1">Question 1</a></li>
+  <li><a href="#question-2-1" id="toc-question-2-1" class="nav-link" data-scroll-target="#question-2-1">Question 2</a></li>
+  <li><a href="#question-3-1" id="toc-question-3-1" class="nav-link" data-scroll-target="#question-3-1">Question 3</a></li>
+  <li><a href="#question-4" id="toc-question-4" class="nav-link" data-scroll-target="#question-4">Question 4</a></li>
+  <li><a href="#question-5" id="toc-question-5" class="nav-link" data-scroll-target="#question-5">Question 5</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/edit/main/Chapter12.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -376,11 +403,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <blockquote class="blockquote">
 <p><strong>The purpose of a plot title is to summarize the main finding</strong>. Avoid titles that just describe what the plot is, e.g., <em>“A scatterplot of engine displacement vs.&nbsp;fuel economy”</em>.</p>
 </blockquote>
-<div class="cell" data-hash="Chapter12_cache/html/setup_af9abcd7fc09fdeb905f22846400c83c">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="Chapter12_cache/html/setup_928c72a854729c9a47ac6450febf5d7c">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)   <span class="co"># the tidyverse</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)      <span class="co"># to adjust display of numbers</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)     <span class="co"># to clearly position text labels</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)   <span class="co"># to display multiple plots</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)          <span class="co"># to display beautiful tables in Quarto</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="exercises" class="level1">
 <h1><strong>12.2.1 Exercises</strong></h1>
@@ -441,7 +469,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="question-3" class="level3">
 <h3 class="anchored" data-anchor-id="question-3">Question 3</h3>
 <p><strong>Take an exploratory graphic that you’ve created in the last month, and add informative titles to make it easier for others to understand.</strong></p>
-<p>I use a figure produced for Question 5 of Exercise 11.5.3.1 to demonstrate outliers in the <code>diamonds</code> dataset, based on a combination of <code>x</code> and <code>y</code> attributes of various diamonds.</p>
+<p>I use a figure produced for Question 5 of Exercise 11.5.3.1 to demonstrate outliers in the <code>diamonds</code> dataset, based on a combination of <code>x</code> and <code>y</code> attributes of various diamonds. I use the <code>ggrepel</code> package<span class="citation" data-cites="ggrepel">(<a href="#ref-ggrepel" role="doc-biblioref">Slowikowski 2023</a>)</span> to label the outliers.</p>
 <div class="cell fig-cap-location-top" data-hash="Chapter12_cache/html/fid-q3-ex2_bc63c7818a9da464b6e2ca8689d47ba7">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span>    </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">res_lm =</span> (<span class="fu">lm</span>(diamonds<span class="sc">$</span>y <span class="sc">~</span> diamonds<span class="sc">$</span>x)<span class="sc">$</span>residuals)) <span class="sc">|&gt;</span></span>
@@ -470,12 +498,308 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+</section>
+</section>
+<section id="exercises-1" class="level1">
+<h1><strong>12.3.1 Exercises</strong></h1>
+<section id="question-1-1" class="level3">
+<h3 class="anchored" data-anchor-id="question-1-1">Question 1</h3>
+<p><strong>Use <a href="https://ggplot2.tidyverse.org/reference/geom_text.html"><code>geom_text()</code></a> with infinite positions to place text at the four corners of the plot.</strong></p>
+<p>The <a href="#fig-q1-ex3">Figure&nbsp;3</a> show the plot produced. The important thing to understand is the use of arguments <code>hjust</code> and <code>vjust</code> to the function <code>geom_text()</code> : –</p>
+<ol type="1">
+<li><p><strong><code>hjust</code> (Horizontal Justification):</strong></p>
+<ul>
+<li><p>The <code>hjust</code> argument controls the horizontal alignment or justification of the text relative to its specified x-coordinate.</p></li>
+<li><p>It takes values between 0 and 1, where 0 means left-aligned, 1 means right-aligned, and 0.5 means centered.</p></li>
+<li><p>Values less than 0 or greater than 1 can be used to align the text outside the range of the plot area.</p></li>
+<li><p>Negative values shift the text label to the left, and values greater than 1 shift it to the right.</p></li>
+</ul></li>
+<li><p><strong><code>vjust</code> (Vertical Justification):</strong></p>
+<ul>
+<li><p>The <code>vjust</code> argument controls the vertical alignment or justification of the text relative to its specified y-coordinate.</p></li>
+<li><p>Like <code>hjust</code>, it takes values between 0 and 1, where 0 means bottom-aligned, 1 means top-aligned, and 0.5 means centered.</p></li>
+<li><p>Values less than 0 or greater than 1 can be used to align the text outside the range of the plot area.</p></li>
+<li><p>Negative values shift the text label downward, and values greater than 1 shift it upward.</p></li>
+</ul></li>
+</ol>
+<div class="cell" data-hash="Chapter12_cache/html/fig-q1-ex3_e8fa83114ec511b7d11553a1aae47bb3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> mpg <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> displ,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">seed =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>g <span class="sc">+</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add text labels at the four corners using infinite positions</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="cn">Inf</span>, <span class="at">y =</span> <span class="cn">Inf</span>, </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">label =</span> <span class="st">"High mileage, high displacement"</span>),</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">vjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">y =</span> <span class="sc">-</span><span class="cn">Inf</span>, </span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>                <span class="at">label =</span> <span class="st">"Low mileage, low displacement"</span>),</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="cn">Inf</span>, <span class="at">y =</span> <span class="sc">-</span><span class="cn">Inf</span>, </span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>                <span class="at">label =</span> <span class="st">"Low mileage, high displacement"</span>),</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">y =</span> <span class="cn">Inf</span>, </span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>                <span class="at">label =</span> <span class="st">"High mileage, Low displacement"</span>),</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">vjust =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-q1-ex3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter12_files/figure-html/fig-q1-ex3-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;3: <strong>?(caption)</strong></figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="question-2-1" class="level3">
+<h3 class="anchored" data-anchor-id="question-2-1">Question 2</h3>
+<p><strong>Use <a href="https://ggplot2.tidyverse.org/reference/annotate.html"><code>annotate()</code></a> to add a point geom in the middle of your last plot without having to create a tibble. Customize the shape, size, or color of the point.</strong></p>
+<div class="cell" data-hash="Chapter12_cache/html/unnamed-chunk-6_02977d3ea942e74bc7891bf3a10f21ed">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute middle of x and y axis</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>x_mid <span class="ot">=</span> (<span class="fu">min</span>(mpg<span class="sc">$</span>displ) <span class="sc">+</span> <span class="fu">max</span>(mpg<span class="sc">$</span>displ))<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>y_mid <span class="ot">=</span> (<span class="fu">min</span>(mpg<span class="sc">$</span>hwy) <span class="sc">+</span> <span class="fu">max</span>(mpg<span class="sc">$</span>hwy))<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>lbl_grph <span class="ot">=</span> <span class="fu">str_wrap</span>(<span class="st">"This is a point in the middle of the previous graph"</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">width =</span> <span class="dv">30</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>g <span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">"point"</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> x_mid,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> y_mid,</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">shape =</span> <span class="dv">23</span>,</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">6</span>,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"red"</span>,</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"pink"</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">"text"</span>,</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> lbl_grph,</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> x_mid,</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> y_mid,</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"red"</span>,</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="dv">0</span>,</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>,</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">6</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Chapter12_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="question-3-1" class="level3">
+<h3 class="anchored" data-anchor-id="question-3-1">Question 3</h3>
+<p><strong>How do labels with <a href="https://ggplot2.tidyverse.org/reference/geom_text.html"><code>geom_text()</code></a> interact with faceting? How can you add a label to a single facet? How can you put a different label in each facet? (Hint: Think about the dataset that is being passed to <a href="https://ggplot2.tidyverse.org/reference/geom_text.html"><code>geom_text()</code></a>.)</strong></p>
+<p>In <code>ggplot2</code>, the <code>geom_text()</code> function is used to add text labels to a plot. Labels added using <code>geom_text()</code> can interact with faceting. Faceting involves creating multiple plots based on different subsets of the data. The following points clarify the interaction methods: –</p>
+<p><strong>Interaction between <code>geom_text()</code> labels and faceting:</strong> When we use faceting in ggplot2 (with functions like <code>facet_wrap()</code> or <code>facet_grid()</code>), the labels created by <code>geom_text()</code> are typically placed in each facet based on the data corresponding to that specific facet. This means that the labels are positioned within each facet’s coordinate system. <a href="#fig-q3a-ex3">Figure&nbsp;4</a> is an example using <code>gtcars</code> dataset from <code>gt</code> package to display the name (<code>geom_text</code>) of <em>most fuel efficient car on higway within each body style</em>: –</p>
+<div class="cell" data-hash="Chapter12_cache/html/fig-q3a-ex3_a313ba6178d0131825a6581ac950cbcb">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"gtcars"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>gtcars <span class="sc">|&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove NAs, else they will be treated as maximum </span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">|&gt;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Cosmetic improvements for labelling in plot</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bdy_style =</span> <span class="fu">str_to_title</span>(bdy_style)) <span class="sc">|&gt;</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">drivetrain =</span> <span class="fu">case_when</span>(</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    drivetrain <span class="sc">==</span> <span class="st">"awd"</span> <span class="sc">~</span> <span class="st">"All-Wheel Drive"</span>,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    drivetrain <span class="sc">==</span> <span class="st">"rwd"</span> <span class="sc">~</span> <span class="st">"Rear-Wheel Drive"</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">|&gt;</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Determine car with maximum Highway mileage in each group</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(bdy_style) <span class="sc">|&gt;</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">high_cat =</span> <span class="fu">ifelse</span>(mpg_h <span class="sc">==</span> <span class="fu">max</span>(mpg_h),</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>                      <span class="at">yes =</span> <span class="fu">paste0</span>(mfr, <span class="st">" "</span>, model),</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>                      <span class="at">no =</span> <span class="cn">NA</span>)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hp,</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> mpg_h,</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> drivetrain,</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>             <span class="at">label =</span> high_cat)) <span class="sc">+</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">color =</span> <span class="st">"#454647"</span>) <span class="sc">+</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># To makr mpg_h comparable visually across facets,</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># we select layout of 4 columns</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>bdy_style, <span class="at">ncol =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) <span class="sc">+</span></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Horsepower"</span>, </span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Highway Fuel efficiency (miles per gallon)"</span>,</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Car's drivetrain"</span>,</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Most fuel efficient car in each category has the least HP"</span>,</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Data grom gt package (gtcars)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-q3a-ex3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter12_files/figure-html/fig-q3a-ex3-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;4: Scatter-plot of highway mileage vs.&nbsp;horsepower, for different body type of cars - with most fuel efficient car in each categry labelled</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Adding a label to a single facet:</strong> If you want to add a label to only one specific facet, you can do so by adding a new data frame containing the label information for that facet; or, by creating a new column with the value stored only for the observation to be labelled, and rest as <code>NA</code>s. <a href="#fig-q3b-ex3">Figure&nbsp;5</a> is an example using <code>gtcars</code> dataset from <code>gt</code> package to display the name (<code>geom_text</code>) of <em>most fuel efficient car on the highway in the entire data set</em>: –</p>
+<div class="cell" data-hash="Chapter12_cache/html/fig-q3b-ex3_735110f8f38bda1e9705a8b2321dee9a">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>gtcars <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove NAs, else they will be treated as maximum </span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">|&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Cosmetic improvements for labelling in plot</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bdy_style =</span> <span class="fu">str_to_title</span>(bdy_style)) <span class="sc">|&gt;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">drivetrain =</span> <span class="fu">case_when</span>(</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    drivetrain <span class="sc">==</span> <span class="st">"awd"</span> <span class="sc">~</span> <span class="st">"All-Wheel Drive"</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    drivetrain <span class="sc">==</span> <span class="st">"rwd"</span> <span class="sc">~</span> <span class="st">"Rear-Wheel Drive"</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">|&gt;</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Determine car with maximum Highway mileage (so, no need to Group)</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># group_by(bdy_style) |&gt;</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">high_cat =</span> <span class="fu">ifelse</span>(mpg_h <span class="sc">==</span> <span class="fu">max</span>(mpg_h),</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>                      <span class="at">yes =</span> <span class="fu">paste0</span>(mfr, <span class="st">" "</span>, model),</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>                      <span class="at">no =</span> <span class="cn">NA</span>)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hp,</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> mpg_h,</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> drivetrain,</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>             <span class="at">label =</span> high_cat)) <span class="sc">+</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">color =</span> <span class="st">"#454647"</span>) <span class="sc">+</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># To makr mpg_h comparable visually across facets,</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># we select layout of 4 columns</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>bdy_style, <span class="at">ncol =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) <span class="sc">+</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Horsepower"</span>, </span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Highway Fuel efficiency (miles per gallon)"</span>,</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Car's drivetrain"</span>,</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Most fuel efficient car in the data-set is BMW 6-Series"</span>,</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Data grom gt package (gtcars)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-q3b-ex3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter12_files/figure-html/fig-q3b-ex3-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;5: Scatter-plot of highway mileage vs.&nbsp;horsepower, for different body type of cars - with most fuel efficient car in dataset labelled</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Putting a different label in each facet:</strong> The easiest way to annotate for each facet separately is to create a dataframe with a row for each facet. For example, in <a href="#fig-q3c-ex3">Figure&nbsp;6</a>, I create the same plot as above, with an annotation in each facet of the plot, highlighting my main message for that body style. I create these annotations using <code>geom_label()</code>. I could do the same with <code>geom_text()</code> as well.</p>
+<div class="cell" data-hash="Chapter12_cache/html/fig-q3c-ex3_44baa79d59806b68128d40a937ce0802">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>annt_con <span class="ot">=</span> <span class="st">"Convertibles generally have lower HP"</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>annt_cup <span class="ot">=</span> <span class="st">"Fuel efficiency decreases with rising HP"</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>annt_sed <span class="ot">=</span> <span class="st">"Sedans generally have lower HP"</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>annt_hbk <span class="ot">=</span> <span class="st">"Data-set has only two hatchbacks"</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>annt_df <span class="ot">=</span> <span class="fu">tibble</span>(</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">bdy_style =</span> <span class="fu">as_vector</span>(<span class="fu">distinct</span>(gtcars, bdy_style)),</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">annt =</span> <span class="fu">str_wrap</span>(<span class="fu">c</span>(annt_con, annt_cup, annt_sed, annt_hbk), </span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>                  <span class="at">width =</span> <span class="dv">15</span>),</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">x_annt =</span> <span class="dv">800</span>,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">y_annt =</span> <span class="fl">27.5</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bdy_style =</span> <span class="fu">str_to_title</span>(bdy_style))</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>gtcars <span class="sc">|&gt;</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Cosmetic improvements for labelling in plot</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bdy_style =</span> <span class="fu">str_to_title</span>(bdy_style)) <span class="sc">|&gt;</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">drivetrain =</span> <span class="fu">case_when</span>(</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    drivetrain <span class="sc">==</span> <span class="st">"awd"</span> <span class="sc">~</span> <span class="st">"All-Wheel Drive"</span>,</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    drivetrain <span class="sc">==</span> <span class="st">"rwd"</span> <span class="sc">~</span> <span class="st">"Rear-Wheel Drive"</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">|&gt;</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hp,</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> mpg_h,</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> drivetrain)) <span class="sc">+</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># To make mpg_h comparable visually across facets,</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># we select layout of 4 columns</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>bdy_style, <span class="at">ncol =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> annt_df,</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> x_annt,</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>                  <span class="at">y =</span> y_annt,</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>                  <span class="at">label =</span> annt),</span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"#454647"</span>,</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">fontface =</span> <span class="st">"bold"</span>,</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">label.size =</span> <span class="fl">0.1</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) <span class="sc">+</span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Horsepower"</span>, </span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Highway Fuel efficiency (miles per gallon)"</span>,</span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Car's drivetrain"</span>,</span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Higher HP lowers highway mileage"</span>,</span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Data grom gt package (gtcars)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-q3c-ex3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter12_files/figure-html/fig-q3c-ex3-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;6: Scatter-plot of highway mileage vs.&nbsp;horsepower, for different body type of cars - with different annotations in each facet</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="question-4" class="level3">
+<h3 class="anchored" data-anchor-id="question-4">Question 4</h3>
+<p><strong>What arguments to <a href="https://ggplot2.tidyverse.org/reference/geom_text.html"><code>geom_label()</code></a> control the appearance of the background box?</strong></p>
+<p>In ggplot2, the <code>geom_label()</code> function is used to add labeled annotations to a plot, as shown above in <a href="#fig-q3c-ex3">Figure&nbsp;6</a>. To control the appearance of the background box of these labels, we can use the following arguments:</p>
+<ol type="1">
+<li><p><code>label.padding</code>: This argument controls the padding around the label text within the background box, with a default value of 0.25.</p></li>
+<li><p><code>label.size</code>: This argument defines the size of the label border, in mm.</p></li>
+<li><p><code>label.r</code>: This argument sets the radius of the rounded corners of the background box, with a default value of 0.15.</p></li>
+</ol>
+<p>An example of how we can use these arguments in the <code>geom_label()</code> function is shown below in :</p>
+<div class="cell fig-cap-location-top" data-hash="Chapter12_cache/html/fig-q4-ex3_445a1b905ac7852b23310bc6992916a3">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="dv">2</span><span class="sc">*</span>x <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> x), </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">label.padding =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"lines"</span>),  <span class="co"># Adjust padding</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">label.size =</span> <span class="dv">2</span>,                    <span class="co"># Set text size</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">label.r =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"lines"</span>)) <span class="sc">+</span>      <span class="co"># Set corner radius</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-q4-ex3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter12_files/figure-html/fig-q4-ex3-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;7: A simple scatterplot with background of the label changed</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="question-5" class="level3">
+<h3 class="anchored" data-anchor-id="question-5">Question 5</h3>
+<p><strong>What are the four arguments to <a href="https://rdrr.io/r/grid/arrow.html"><code>arrow()</code></a>? How do they work? Create a series of plots that demonstrate the most important options.</strong></p>
+
 
 
 </section>
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-ggrepel" class="csl-entry" role="listitem">
+Slowikowski, Kamil. 2023. <span>“Ggrepel: Automatically Position Non-Overlapping Text Labels with ’Ggplot2’.”</span> <a href="https://CRAN.R-project.org/package=ggrepel">https://CRAN.R-project.org/package=ggrepel</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
