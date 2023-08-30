@@ -28,10 +28,11 @@ Important lessons from [R for Data Science 2nd Edition](https://r4ds.hadley.nz/)
 ```{r}
 #| label: setup
 
-library(tidyverse)
-library(scales)
-library(ggrepel)
-library(patchwork)
+library(tidyverse)   # the tidyverse
+library(scales)      # to adjust display of numbers
+library(ggrepel)     # to clearly position text labels
+library(patchwork)   # to display multiple plots
+library(gt)          # to display beautiful tables in Quarto
 ```
 
 # **12.2.1 Exercises**
@@ -88,7 +89,7 @@ mpg |>
 
 **Take an exploratory graphic that you've created in the last month, and add informative titles to make it easier for others to understand.**
 
-I use a figure produced for Question 5 of Exercise 11.5.3.1 to demonstrate outliers in the `diamonds` dataset, based on a combination of `x` and `y` attributes of various diamonds.
+I use a figure produced for Question 5 of Exercise 11.5.3.1 to demonstrate outliers in the `diamonds` dataset, based on a combination of `x` and `y` attributes of various diamonds. I use the `ggrepel` package[@ggrepel] to label the outliers.
 
 ```{r}
 #| label: fid-q3-ex2
@@ -121,13 +122,197 @@ diamonds |>
 
 **Use [`geom_text()`](https://ggplot2.tidyverse.org/reference/geom_text.html) with infinite positions to place text at the four corners of the plot.**
 
+The @fig-q1-ex3 show the plot produced. The important thing to understand is the use of arguments `hjust` and `vjust` to the function `geom_text()` : --
+
+1.  **`hjust` (Horizontal Justification):**
+
+    -   The `hjust` argument controls the horizontal alignment or justification of the text relative to its specified x-coordinate.
+
+    -   It takes values between 0 and 1, where 0 means left-aligned, 1 means right-aligned, and 0.5 means centered.
+
+    -   Values less than 0 or greater than 1 can be used to align the text outside the range of the plot area.
+
+    -   Negative values shift the text label to the left, and values greater than 1 shift it to the right.
+
+2.  **`vjust` (Vertical Justification):**
+
+    -   The `vjust` argument controls the vertical alignment or justification of the text relative to its specified y-coordinate.
+
+    -   Like `hjust`, it takes values between 0 and 1, where 0 means bottom-aligned, 1 means top-aligned, and 0.5 means centered.
+
+    -   Values less than 0 or greater than 1 can be used to align the text outside the range of the plot area.
+
+    -   Negative values shift the text label downward, and values greater than 1 shift it upward.
+
+```{r}
+#| label: fig-q1-ex3
+g = mpg |>
+  ggplot(aes(x = displ,
+             y = hwy)) +
+  geom_point(position = position_jitter(seed = 1)) +
+  theme_light()
+  
+g +
+  # Add text labels at the four corners using infinite positions
+  geom_text(aes(x = Inf, y = Inf, 
+                label = "High mileage, high displacement"),
+            hjust = 1, vjust = 1) +
+  geom_text(aes(x = -Inf, y = -Inf, 
+                label = "Low mileage, low displacement"),
+            hjust = 0, vjust = -0.2) +
+  geom_text(aes(x = Inf, y = -Inf, 
+                label = "Low mileage, high displacement"),
+            hjust = 1, vjust = -0.2) +
+  geom_text(aes(x = -Inf, y = Inf, 
+                label = "High mileage, Low displacement"),
+            hjust = 0, vjust = 1)
+```
+
 ### Question 2
 
 **Use [`annotate()`](https://ggplot2.tidyverse.org/reference/annotate.html) to add a point geom in the middle of your last plot without having to create a tibble. Customize the shape, size, or color of the point.**
 
+```{r}
+# Compute middle of x and y axis
+x_mid = (min(mpg$displ) + max(mpg$displ))/2
+y_mid = (min(mpg$hwy) + max(mpg$hwy))/2
+lbl_grph = str_wrap("This is a point in the middle of the previous graph",
+                    width = 30)
+
+g +
+  annotate(
+    geom = "point",
+    x = x_mid,
+    y = y_mid,
+    shape = 23,
+    size = 6,
+    color = "red",
+    fill = "pink"
+  ) +
+  annotate(
+    geom = "text",
+    label = lbl_grph,
+    x = x_mid,
+    y = y_mid,
+    color = "red",
+    hjust = 0,
+    vjust = -0.5,
+    size = 6
+  )
+```
+
 ### Question 3
 
 **How do labels with [`geom_text()`](https://ggplot2.tidyverse.org/reference/geom_text.html) interact with faceting? How can you add a label to a single facet? How can you put a different label in each facet? (Hint: Think about the dataset that is being passed to [`geom_text()`](https://ggplot2.tidyverse.org/reference/geom_text.html).)**
+
+In `ggplot2`, the `geom_text()` function is used to add text labels to a plot. Labels added using `geom_text()` can interact with faceting. Faceting involves creating multiple plots based on different subsets of the data. The following points clarify the interaction methods: --
+
+**Interaction between `geom_text()` labels and faceting:** When we use faceting in ggplot2 (with functions like `facet_wrap()` or `facet_grid()`), the labels created by `geom_text()` are typically placed in each facet based on the data corresponding to that specific facet. This means that the labels are positioned within each facet's coordinate system. Here's an example using `gtcars` dataset from `gt` package to display the name (`geom_text`) of most fuel efficient car in each body style: --
+
+```{r}
+#| label: fig-q3a-ex3
+#| fig-cap: "Scatter-plot of highway mileage vs. horsepower, for different body type of cars - with most fuel efficient car in each categry labelled"
+#| code-fold: true
+
+data("gtcars")
+
+gtcars |>
+  # Remove NAs, else they will be treated as maximum 
+  drop_na() |>
+  
+  # Cosmetic improvements for labelling in plot
+  mutate(bdy_style = str_to_title(bdy_style)) |>
+  mutate(drivetrain = case_when(
+    drivetrain == "awd" ~ "All-Wheel Drive",
+    drivetrain == "rwd" ~ "Rear-Wheel Drive"
+  )) |>
+  
+  # Determine car with maximum Highway mileage in each group
+  group_by(bdy_style) |>
+  mutate(
+    high_cat = ifelse(mpg_h == max(mpg_h),
+                      yes = paste0(mfr, " ", model),
+                      no = NA)
+    ) |>
+  ggplot(aes(x = hp,
+             y = mpg_h,
+             color = drivetrain,
+             label = high_cat)) +
+  geom_point(size = 1.5) +
+  geom_text_repel(color = "#454647") +
+  
+  # To makr mpg_h comparable visually across facets
+  facet_wrap(~bdy_style, ncol = 4) +
+  
+  theme_light() +
+  theme(legend.position = "bottom") +
+  labs(x = "Horsepower", 
+       y = "Highway Fuel efficiency (miles per gallon)",
+       color = "Car's drivetrain",
+       title = "Most fuel efficient car in each category has the least HP",
+       caption = "Data grom gt package (gtcars)")
+```
+
+**Adding a label to a single facet:** If you want to add a label to only one specific facet, you can do so by adding a new data frame containing the label information for that facet; or, by creating a new column with the value stored only for the observation to be labelled, and rest as `NA`s. Here's an example using `gtcars` dataset from `gt` package to display the name (`geom_text`) of most fuel efficient car in the entire data set: --
+
+```{r}
+#| label: fig-q3b-ex3
+#| fig-cap: "Scatter-plot of highway mileage vs. horsepower, for different body type of cars - with most fuel efficient car in dataset labelled"
+#| code-fold: true
+
+gtcars |>
+  # Remove NAs, else they will be treated as maximum 
+  drop_na() |>
+  
+  # Cosmetic improvements for labelling in plot
+  mutate(bdy_style = str_to_title(bdy_style)) |>
+  mutate(drivetrain = case_when(
+    drivetrain == "awd" ~ "All-Wheel Drive",
+    drivetrain == "rwd" ~ "Rear-Wheel Drive"
+  )) |>
+  
+  # Determine car with maximum Highway mileage (so, no need to Group)
+  # group_by(bdy_style) |>
+  mutate(
+    high_cat = ifelse(mpg_h == max(mpg_h),
+                      yes = paste0(mfr, " ", model),
+                      no = NA)
+    ) |>
+  ggplot(aes(x = hp,
+             y = mpg_h,
+             color = drivetrain,
+             label = high_cat)) +
+  geom_point(size = 1.5) +
+  geom_text_repel(color = "#454647") +
+  
+  # To makr mpg_h comparable visually across facets
+  facet_wrap(~bdy_style, ncol = 4) +
+  
+  theme_light() +
+  theme(legend.position = "bottom") +
+  labs(x = "Horsepower", 
+       y = "Highway Fuel efficiency (miles per gallon)",
+       color = "Car's drivetrain",
+       title = "Most fuel efficient car in the data-set is BMW 6-Series",
+       caption = "Data grom gt package (gtcars)")
+
+```
+
+**Putting a different label in each facet:**
+To add different labels to each facet, you need to include the label information in your original dataset. You can create a column for labels and specify the label content for each facet. Here's an example:
+
+The easiest way to annotate for each facet separately is to create a dataframe with a row for each facet
+
+```{r}
+annt_con = "Convertibles generally have lower HP"
+annt_cup = "Fuel efficiency decreases with rising HP"
+annt_sed = "Sedans generally have lower HP"
+annt_hbk = "Data-set has only two hatchbacks"
+
+
+
+
+```
 
 ### Question 4
 
