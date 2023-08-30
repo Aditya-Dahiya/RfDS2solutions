@@ -207,7 +207,7 @@ g +
 
 In `ggplot2`, the `geom_text()` function is used to add text labels to a plot. Labels added using `geom_text()` can interact with faceting. Faceting involves creating multiple plots based on different subsets of the data. The following points clarify the interaction methods: --
 
-**Interaction between `geom_text()` labels and faceting:** When we use faceting in ggplot2 (with functions like `facet_wrap()` or `facet_grid()`), the labels created by `geom_text()` are typically placed in each facet based on the data corresponding to that specific facet. This means that the labels are positioned within each facet's coordinate system. Here's an example using `gtcars` dataset from `gt` package to display the name (`geom_text`) of most fuel efficient car in each body style: --
+**Interaction between `geom_text()` labels and faceting:** When we use faceting in ggplot2 (with functions like `facet_wrap()` or `facet_grid()`), the labels created by `geom_text()` are typically placed in each facet based on the data corresponding to that specific facet. This means that the labels are positioned within each facet's coordinate system. @fig-q3a-ex3 is an example using `gtcars` dataset from `gt` package to display the name (`geom_text`) of *most fuel efficient car on higway within each body style*: --
 
 ```{r}
 #| label: fig-q3a-ex3
@@ -241,7 +241,8 @@ gtcars |>
   geom_point(size = 1.5) +
   geom_text_repel(color = "#454647") +
   
-  # To makr mpg_h comparable visually across facets
+  # To makr mpg_h comparable visually across facets,
+  # we select layout of 4 columns
   facet_wrap(~bdy_style, ncol = 4) +
   
   theme_light() +
@@ -253,7 +254,7 @@ gtcars |>
        caption = "Data grom gt package (gtcars)")
 ```
 
-**Adding a label to a single facet:** If you want to add a label to only one specific facet, you can do so by adding a new data frame containing the label information for that facet; or, by creating a new column with the value stored only for the observation to be labelled, and rest as `NA`s. Here's an example using `gtcars` dataset from `gt` package to display the name (`geom_text`) of most fuel efficient car in the entire data set: --
+**Adding a label to a single facet:** If you want to add a label to only one specific facet, you can do so by adding a new data frame containing the label information for that facet; or, by creating a new column with the value stored only for the observation to be labelled, and rest as `NA`s. @fig-q3b-ex3 is an example using `gtcars` dataset from `gt` package to display the name (`geom_text`) of *most fuel efficient car on the highway in the entire data set*: --
 
 ```{r}
 #| label: fig-q3b-ex3
@@ -285,7 +286,8 @@ gtcars |>
   geom_point(size = 1.5) +
   geom_text_repel(color = "#454647") +
   
-  # To makr mpg_h comparable visually across facets
+  # To makr mpg_h comparable visually across facets,
+  # we select layout of 4 columns
   facet_wrap(~bdy_style, ncol = 4) +
   
   theme_light() +
@@ -298,25 +300,92 @@ gtcars |>
 
 ```
 
-**Putting a different label in each facet:**
-To add different labels to each facet, you need to include the label information in your original dataset. You can create a column for labels and specify the label content for each facet. Here's an example:
-
-The easiest way to annotate for each facet separately is to create a dataframe with a row for each facet
+**Putting a different label in each facet:** The easiest way to annotate for each facet separately is to create a dataframe with a row for each facet. For example, in @fig-q3c-ex3, I create the same plot as above, with an annotation in each facet of the plot, highlighting my main message for that body style. I create these annotations using `geom_label()`. I could do the same with `geom_text()` as well.
 
 ```{r}
+#| label: fig-q3c-ex3
+#| fig-cap: "Scatter-plot of highway mileage vs. horsepower, for different body type of cars - with different annotations in each facet"
+#| code-fold: true
+
 annt_con = "Convertibles generally have lower HP"
 annt_cup = "Fuel efficiency decreases with rising HP"
 annt_sed = "Sedans generally have lower HP"
 annt_hbk = "Data-set has only two hatchbacks"
 
+annt_df = tibble(
+  bdy_style = as_vector(distinct(gtcars, bdy_style)),
+  annt = str_wrap(c(annt_con, annt_cup, annt_sed, annt_hbk), 
+                  width = 15),
+  x_annt = 800,
+  y_annt = 27.5
+  ) |>
+  mutate(bdy_style = str_to_title(bdy_style))
 
-
-
+gtcars |>
+  
+  # Cosmetic improvements for labelling in plot
+  mutate(bdy_style = str_to_title(bdy_style)) |>
+  mutate(drivetrain = case_when(
+    drivetrain == "awd" ~ "All-Wheel Drive",
+    drivetrain == "rwd" ~ "Rear-Wheel Drive"
+  )) |>
+  
+  ggplot(aes(x = hp,
+             y = mpg_h,
+             color = drivetrain)) +
+  geom_point(size = 1.5) +
+  
+  # To make mpg_h comparable visually across facets,
+  # we select layout of 4 columns
+  facet_wrap(~bdy_style, ncol = 4) +
+  geom_label(
+    data = annt_df,
+    mapping = aes(x = x_annt,
+                  y = y_annt,
+                  label = annt),
+    color = "#454647",
+    fontface = "bold",
+    label.size = 0.1
+  ) +
+  theme_light() +
+  theme(legend.position = "bottom") +
+  labs(x = "Horsepower", 
+       y = "Highway Fuel efficiency (miles per gallon)",
+       color = "Car's drivetrain",
+       title = "Higher HP lowers highway mileage",
+       caption = "Data grom gt package (gtcars)")
 ```
 
 ### Question 4
 
 **What arguments to [`geom_label()`](https://ggplot2.tidyverse.org/reference/geom_text.html) control the appearance of the background box?**
+
+In ggplot2, the `geom_label()` function is used to add labeled annotations to a plot, as shown above in @fig-q3c-ex3. To control the appearance of the background box of these labels, we can use the following arguments:
+
+1.  `label.padding`: This argument controls the padding around the label text within the background box, with a default value of 0.25.
+
+2.  `label.size`: This argument defines the size of the label border, in mm.
+
+3.  `label.r`: This argument sets the radius of the rounded corners of the background box, with a default value of 0.15.
+
+An example of how we can use these arguments in the `geom_label()` function is shown below in :
+
+```{r}
+#| label: fig-q4-ex3
+#| fig-cap: "A simple scatterplot with background of the label changed"
+#| fig-cap-location: top
+
+tibble(x = 1:10, 
+       y = 2*x + rnorm(10)) |>
+  
+  ggplot(aes(x = x, y = y)) +
+  geom_label(aes(label = x), 
+             label.padding = unit(1, "lines"),  # Adjust padding
+             label.size = 2,                    # Set text size
+             label.r = unit(1, "lines")) +      # Set corner radius
+  theme_void()
+
+```
 
 ### Question 5
 
