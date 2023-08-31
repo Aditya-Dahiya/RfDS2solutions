@@ -363,6 +363,13 @@ div.csl-indent {
   <li><a href="#question-4" id="toc-question-4" class="nav-link" data-scroll-target="#question-4">Question 4</a></li>
   <li><a href="#question-5" id="toc-question-5" class="nav-link" data-scroll-target="#question-5">Question 5</a></li>
   </ul></li>
+  <li><a href="#exercises-2" id="toc-exercises-2" class="nav-link" data-scroll-target="#exercises-2"><strong>12.4.6 Exercises</strong></a>
+  <ul class="collapse">
+  <li><a href="#question-1-2" id="toc-question-1-2" class="nav-link" data-scroll-target="#question-1-2">Question 1</a></li>
+  <li><a href="#question-2-2" id="toc-question-2-2" class="nav-link" data-scroll-target="#question-2-2">Question 2</a></li>
+  <li><a href="#question-3-2" id="toc-question-3-2" class="nav-link" data-scroll-target="#question-3-2">Question 3</a></li>
+  <li><a href="#question-4-1" id="toc-question-4-1" class="nav-link" data-scroll-target="#question-4-1">Question 4</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/edit/main/Chapter12.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -863,6 +870,129 @@ div.csl-indent {
 </div>
 </div>
 </div>
+</section>
+</section>
+<section id="exercises-2" class="level1">
+<h1><strong>12.4.6 Exercises</strong></h1>
+<section id="question-1-2" class="level3">
+<h3 class="anchored" data-anchor-id="question-1-2">Question 1</h3>
+<p><strong>Why doesn’t the following code override the default scale?</strong></p>
+<pre><code>df &lt;- tibble(   
+  x = rnorm(10000),   
+  y = rnorm(10000) 
+  )  
+
+ggplot(df, aes(x, y)) +   
+  geom_hex() +   
+  scale_color_gradient(low = "white", high = "red") +   
+  coord_fixed()</code></pre>
+<p>In the code provided, we’re using the <code>geom_hex()</code> function to create a hexbin plot. However, the <code>scale_color_gradient()</code> function is used to adjust the color scale of a continuous color aesthetic.</p>
+<p>In present case, the <code>geom_hex()</code> function uses the <strong><code>fill</code> aesthetic</strong> to represent the density of points in each hexagonal bin, but we’re trying to adjust the color scale using <code>scale_color_gradient()</code>. So, to adjust the color scale of the hex-bin plot, we should use the <strong><code>scale_fill_gradient()</code></strong> function. Here’s the corrected version of the code:</p>
+<div class="cell" data-hash="Chapter12_cache/html/unnamed-chunk-12_cc51a6d9e854473584b1cb9dff0a4fa0">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(   </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">rnorm</span>(<span class="dv">10000</span>),   </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">rnorm</span>(<span class="dv">10000</span>) </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  )  </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(x, y)) <span class="sc">+</span>   </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hex</span>() <span class="sc">+</span>   </span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"white"</span>, </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>                      <span class="at">high =</span> <span class="st">"red"</span>) <span class="sc">+</span>   </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_fixed</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Chapter12_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="question-2-2" class="level3">
+<h3 class="anchored" data-anchor-id="question-2-2">Question 2</h3>
+<p><strong>What is the first argument to every scale? How does it compare to <a href="https://ggplot2.tidyverse.org/reference/labs.html"><code>labs()</code></a>?</strong></p>
+<p>The first argument to every scale function is <code>name</code> . It is used as the axis or legend title.</p>
+<ul>
+<li><p>If <code>name = waiver()</code>, the default, then the name of the scale is taken from the first mapping used for that aesthetic.</p></li>
+<li><p>If <code>name = NULL</code>, then then legend title will be omitted.</p></li>
+</ul>
+<p>The <code>labs()</code> can also be used to name a legend, with use the aesthetic name to define the new name. For example, <code>labs(x = NULL)</code>. The output will be the same.</p>
+<p>However, when we use <code>scale_</code> functions, we are customizing how a specific aesthetic is represented in the plot. It allows us to modify the scale, transformation, and appearance of the aesthetic. On the other hand, <code>labs()</code>is specifically designed for modifying the text labels and titles of different plot components. It’s not concerned with how an aesthetic is represented or scaled in the plot.</p>
+</section>
+<section id="question-3-2" class="level3">
+<h3 class="anchored" data-anchor-id="question-3-2">Question 3</h3>
+<p><strong>Change the display of the presidential terms by:</strong></p>
+<ol type="a">
+<li><p><strong>Combining the two variants that customize colors and x axis breaks.</strong></p>
+<div class="cell" data-hash="Chapter12_cache/html/fig-q3a-ex4_2083a034d803e3a36b7b47d9d7ca68df">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"presidential"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>x_labs <span class="ot">=</span> </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  presidential <span class="sc">|&gt;</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(start) <span class="sc">|&gt;</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_vector</span>() <span class="sc">|&gt;</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_date</span>()</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> presidential <span class="sc">|&gt;</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="dv">33</span> <span class="sc">+</span> <span class="fu">row_number</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> start, <span class="at">xend =</span> end, </span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> id, <span class="at">yend =</span> id, </span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> party,</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>             <span class="at">label =</span> name)) <span class="sc">+</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">lwd =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.05</span>,</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Democratic"</span> <span class="ot">=</span> <span class="st">"blue"</span>,</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Republican"</span> <span class="ot">=</span> <span class="st">"red"</span>)) <span class="sc">+</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_reverse</span>() <span class="sc">+</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rect</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> start,</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>                <span class="at">xmax =</span> end,</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>                <span class="at">ymin =</span> <span class="fl">33.5</span>,</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>                <span class="at">ymax =</span> <span class="fl">45.5</span>,</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>                <span class="at">fill =</span> party),</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>            <span class="at">alpha =</span> <span class="fl">0.3</span>,</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Democratic"</span> <span class="ot">=</span> <span class="st">"blue"</span>,</span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Republican"</span> <span class="ot">=</span> <span class="st">"red"</span>))</span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>g <span class="sc">+</span></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"President's Political Party"</span>,</span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">x =</span> <span class="st">"Year"</span>) <span class="sc">+</span></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) <span class="sc">+</span></span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> x_labs,</span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">year</span>(x_labs)) <span class="sc">+</span></span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major.x =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"darkgrey"</span>),</span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-q3a-ex4" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter12_files/figure-html/fig-q3a-ex4-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;9: Customizing Colours and x-Axis breaks</figcaption>
+</figure>
+</div>
+</div>
+</div></li>
+<li><p><strong>Improving the display of the y axis.</strong></p></li>
+<li><p><strong>Labeling each term with the name of the president.</strong></p></li>
+<li><p><strong>Adding informative plot labels.</strong></p></li>
+<li><p><strong>Placing breaks every 4 years (this is trickier than it seems!).</strong></p></li>
+</ol>
+</section>
+<section id="question-4-1" class="level3">
+<h3 class="anchored" data-anchor-id="question-4-1">Question 4</h3>
+<p><strong>First, create the following plot. Then, modify the code using <code>override.aes</code> to make the legend easier to see.</strong></p>
+<pre><code>ggplot(diamonds, 
+       aes(x = carat, y = price)) +   
+  geom_point(aes(color = cut), 
+             alpha = 1/20)</code></pre>
 
 
 

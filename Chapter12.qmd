@@ -468,3 +468,131 @@ gridExtra::grid.arrange(
   ncol = 3
 )
 ```
+
+# **12.4.6 Exercises**
+
+### Question 1
+
+**Why doesn't the following code override the default scale?**
+
+```         
+df <- tibble(   
+  x = rnorm(10000),   
+  y = rnorm(10000) 
+  )  
+
+ggplot(df, aes(x, y)) +   
+  geom_hex() +   
+  scale_color_gradient(low = "white", high = "red") +   
+  coord_fixed()
+```
+
+In the code provided, we're using the `geom_hex()` function to create a hexbin plot. However, the `scale_color_gradient()` function is used to adjust the color scale of a continuous color aesthetic.
+
+In present case, the `geom_hex()` function uses the **`fill` aesthetic** to represent the density of points in each hexagonal bin, but we're trying to adjust the color scale using `scale_color_gradient()`. So, to adjust the color scale of the hex-bin plot, we should use the **`scale_fill_gradient()`** function. Here's the corrected version of the code:
+
+```{r}
+#| code-fold: true
+
+df <- tibble(   
+  x = rnorm(10000),   
+  y = rnorm(10000) 
+  )  
+
+ggplot(df, aes(x, y)) +   
+  geom_hex() +   
+  scale_fill_gradient(low = "white", 
+                      high = "red") +   
+  coord_fixed()
+```
+
+### Question 2
+
+**What is the first argument to every scale? How does it compare to [`labs()`](https://ggplot2.tidyverse.org/reference/labs.html)?**
+
+The first argument to every scale function is `name` . It is used as the axis or legend title.
+
+-   If `name = waiver()`, the default, then the name of the scale is taken from the first mapping used for that aesthetic.
+
+-   If `name = NULL`, then then legend title will be omitted.
+
+The `labs()` can also be used to name a legend, with use the aesthetic name to define the new name. For example, `labs(x = NULL)`. The output will be the same.
+
+However, when we use `scale_` functions, we are customizing how a specific aesthetic is represented in the plot. It allows us to modify the scale, transformation, and appearance of the aesthetic. On the other hand, `labs()`is specifically designed for modifying the text labels and titles of different plot components. It's not concerned with how an aesthetic is represented or scaled in the plot.
+
+### Question 3
+
+**Change the display of the presidential terms by:**
+
+a.  **Combining the two variants that customize colors and x axis breaks.**
+
+    ```{r}
+    #| label: fig-q3a-ex4
+    #| fig-cap: "Customizing Colours and x-Axis breaks"
+    #| code-fold: true
+
+    data("presidential")
+
+    x_labs = 
+      presidential |>
+      select(start) |>
+      as_vector() |>
+      as_date()
+
+
+    g = presidential |>
+      as_tibble() |>
+      mutate(id = 33 + row_number()) |>
+      ggplot(aes(x = start, xend = end, 
+                 y = id, yend = id, 
+                 col = party,
+                 label = name)) +
+      geom_segment(lwd = 10) +
+      geom_text(hjust = -0.05,
+                vjust = -1.5) +
+      theme_minimal() +
+      scale_color_manual(values = c("Democratic" = "blue",
+                                    "Republican" = "red")) +
+      scale_y_reverse() +
+      geom_rect(aes(xmin = start,
+                    xmax = end,
+                    ymin = 33.5,
+                    ymax = 45.5,
+                    fill = party),
+                alpha = 0.3,
+                col = NA) +
+        scale_fill_manual(values = c("Democratic" = "blue",
+                                    "Republican" = "red"))
+    g +
+      labs(color = "President's Political Party",
+           y = NULL, x = "Year") +
+      theme(legend.position = "bottom") +
+      scale_x_continuous(breaks = x_labs,
+                         labels = year(x_labs)) +
+      theme(panel.grid.major.x = element_line(color = "darkgrey"),
+            panel.grid.minor.x = element_blank(),
+            panel.grid.major.y = element_blank(),
+            panel.grid.minor.y = element_blank(),
+            axis.text.y = element_blank()) +
+      guides(fill = "none")
+      
+    ```
+
+b.  **Improving the display of the y axis.**
+
+c.  **Labeling each term with the name of the president.**
+
+d.  **Adding informative plot labels.**
+
+e.  **Placing breaks every 4 years (this is trickier than it seems!).**
+
+### Question 4
+
+**First, create the following plot. Then, modify the code using `override.aes` to make the legend easier to see.**
+
+```         
+ggplot(diamonds, 
+       aes(x = carat, y = price)) +   
+  geom_point(aes(color = cut), 
+             alpha = 1/20)
+```
