@@ -18,7 +18,7 @@ listing:
     - "Chapter21.qmd"
     - "Chapter29.qmd"
     - "Chapter30.qmd"
-  fields: [title, subtitle, date, author]
+  fields: [title, subtitle, date]
   sort: 
     - "title"
   type: table

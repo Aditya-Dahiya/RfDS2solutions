@@ -370,6 +370,16 @@ div.csl-indent {
   <li><a href="#question-3-2" id="toc-question-3-2" class="nav-link" data-scroll-target="#question-3-2">Question 3</a></li>
   <li><a href="#question-4-1" id="toc-question-4-1" class="nav-link" data-scroll-target="#question-4-1">Question 4</a></li>
   </ul></li>
+  <li><a href="#exercises-3" id="toc-exercises-3" class="nav-link" data-scroll-target="#exercises-3"><strong>12.5.1 Exercises</strong></a>
+  <ul class="collapse">
+  <li><a href="#question-1-3" id="toc-question-1-3" class="nav-link" data-scroll-target="#question-1-3">Question 1</a></li>
+  <li><a href="#question-2-3" id="toc-question-2-3" class="nav-link" data-scroll-target="#question-2-3">Question 2</a></li>
+  </ul></li>
+  <li><a href="#exercises-4" id="toc-exercises-4" class="nav-link" data-scroll-target="#exercises-4"><strong>12.6.1 Exercises</strong></a>
+  <ul class="collapse">
+  <li><a href="#question-1-4" id="toc-question-1-4" class="nav-link" data-scroll-target="#question-1-4">Question 1</a></li>
+  <li><a href="#question-2-4" id="toc-question-2-4" class="nav-link" data-scroll-target="#question-2-4">Question 2</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/edit/main/Chapter12.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -922,69 +932,119 @@ ggplot(df, aes(x, y)) +
 <h3 class="anchored" data-anchor-id="question-3-2">Question 3</h3>
 <p><strong>Change the display of the presidential terms by:</strong></p>
 <ol type="a">
-<li><p><strong>Combining the two variants that customize colors and x axis breaks.</strong></p>
-<div class="cell" data-hash="Chapter12_cache/html/fig-q3a-ex4_2083a034d803e3a36b7b47d9d7ca68df">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"presidential"</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>x_labs <span class="ot">=</span> </span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  presidential <span class="sc">|&gt;</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(start) <span class="sc">|&gt;</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_vector</span>() <span class="sc">|&gt;</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_date</span>()</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> presidential <span class="sc">|&gt;</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="dv">33</span> <span class="sc">+</span> <span class="fu">row_number</span>()) <span class="sc">|&gt;</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> start, <span class="at">xend =</span> end, </span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> id, <span class="at">yend =</span> id, </span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> party,</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>             <span class="at">label =</span> name)) <span class="sc">+</span></span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">lwd =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.05</span>,</span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Democratic"</span> <span class="ot">=</span> <span class="st">"blue"</span>,</span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Republican"</span> <span class="ot">=</span> <span class="st">"red"</span>)) <span class="sc">+</span></span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_reverse</span>() <span class="sc">+</span></span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rect</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> start,</span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>                <span class="at">xmax =</span> end,</span>
-<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>                <span class="at">ymin =</span> <span class="fl">33.5</span>,</span>
-<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>                <span class="at">ymax =</span> <span class="fl">45.5</span>,</span>
-<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>                <span class="at">fill =</span> party),</span>
-<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>            <span class="at">alpha =</span> <span class="fl">0.3</span>,</span>
-<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Democratic"</span> <span class="ot">=</span> <span class="st">"blue"</span>,</span>
-<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Republican"</span> <span class="ot">=</span> <span class="st">"red"</span>))</span>
-<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>g <span class="sc">+</span></span>
-<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"President's Political Party"</span>,</span>
-<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">x =</span> <span class="st">"Year"</span>) <span class="sc">+</span></span>
-<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) <span class="sc">+</span></span>
-<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> x_labs,</span>
-<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">year</span>(x_labs)) <span class="sc">+</span></span>
-<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major.x =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"darkgrey"</span>),</span>
-<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
-<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div id="fig-q3a-ex4" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="Chapter12_files/figure-html/fig-q3a-ex4-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;9: Customizing Colours and x-Axis breaks</figcaption>
-</figure>
-</div>
-</div>
-</div></li>
+<li><p><strong>Combining the two variants that customize colors and x axis breaks.</strong></p></li>
 <li><p><strong>Improving the display of the y axis.</strong></p></li>
 <li><p><strong>Labeling each term with the name of the president.</strong></p></li>
 <li><p><strong>Adding informative plot labels.</strong></p></li>
-<li><p><strong>Placing breaks every 4 years (this is trickier than it seems!).</strong></p></li>
 </ol>
+<p>I have attempted to answer the first four of these sub-questions simultaneously, in the code below. The resulting plot is at <a href="#fig-q3a-ex4">Figure&nbsp;9</a> .</p>
+<div class="cell" data-hash="Chapter12_cache/html/fig-q3a-ex4_35457daee607fda8dbfdd3a59f02b23e">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"presidential"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a vector of years where a new president takes office</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># to allow plotting it on the x-axis</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>x_labs <span class="ot">=</span> </span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  presidential <span class="sc">|&gt;</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(start) <span class="sc">|&gt;</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_vector</span>() <span class="sc">|&gt;</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_date</span>()</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>y_labs <span class="ot">=</span> <span class="fu">seq</span>(</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">33</span>,</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">to =</span> <span class="fu">nrow</span>(presidential) <span class="sc">+</span> <span class="dv">33</span>,</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="dv">1</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> </span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>presidential <span class="sc">|&gt;</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="dv">33</span> <span class="sc">+</span> <span class="fu">row_number</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> start, <span class="at">xend =</span> end, </span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> id, <span class="at">yend =</span> id, </span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> party,</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>             <span class="at">label =</span> name)) <span class="sc">+</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">lwd =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># (a) Combining the two variants that customize colors and x axis breaks.</span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Democratic"</span> <span class="ot">=</span> <span class="st">"blue"</span>,</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Republican"</span> <span class="ot">=</span> <span class="st">"red"</span>)) <span class="sc">+</span></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> x_labs,</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">year</span>(x_labs)) <span class="sc">+</span></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>  <span class="co"># (b) Improving the display of the y axis.</span></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_reverse</span>(<span class="at">breaks =</span> y_labs,</span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>                  <span class="at">labels =</span> y_labs) <span class="sc">+</span></span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>  <span class="co"># (c) Labeling each term with the name of the president.</span></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.05</span>,</span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rect</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> start,</span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>                <span class="at">xmax =</span> end,</span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>                <span class="at">ymin =</span> <span class="fl">33.5</span>,</span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>                <span class="at">ymax =</span> <span class="fl">45.5</span>,</span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>                <span class="at">fill =</span> party),</span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>            <span class="at">alpha =</span> <span class="fl">0.3</span>,</span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Democratic"</span> <span class="ot">=</span> <span class="st">"blue"</span>,</span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Republican"</span> <span class="ot">=</span> <span class="st">"red"</span>)) <span class="sc">+</span></span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a>  <span class="co"># (d) Adding informative plot labels.</span></span>
+<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"President's Political Party"</span>,</span>
+<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Table of Precedence Number"</span>, </span>
+<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Year"</span>) <span class="sc">+</span></span>
+<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) <span class="sc">+</span></span>
+<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major.x =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"darkgrey"</span>),</span>
+<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>()) <span class="sc">+</span></span>
+<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>)</span>
+<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(g) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-q3a-ex4" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter12_files/figure-html/fig-q3a-ex4-1.png" class="img-fluid figure-img" width="960"></p>
+<figcaption class="figure-caption">Figure&nbsp;9: Changing the display of the presidential terms by customizing colours, axes and labels</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<ol start="5" type="a">
+<li><strong>Placing breaks every 4 years (this is trickier than it seems!).</strong></li>
+</ol>
+<p>To place breaks after every four years, I create a new vector of dates, called <code>x_4yr_labs</code> and then use it, as shown below with <code>scale_x_continuous()</code>. The resulting figure is at <a href="#fig-q3b-ex4">Figure&nbsp;10</a>.</p>
+<div class="cell" data-hash="Chapter12_cache/html/fig-q3b-ex4_fbb474261aa6c53595d149acd9c4e6fb">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>x_4yr_labs <span class="ot">=</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  presidential <span class="sc">|&gt;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(start) <span class="sc">|&gt;</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_vector</span>() <span class="sc">|&gt;</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_date</span>()</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>x_4yr_labs <span class="ot">=</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fu">ymd</span>(x_4yr_labs[<span class="dv">1</span>]),</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">to =</span> <span class="fu">ymd</span>(x_4yr_labs[<span class="fu">length</span>(x_4yr_labs)]),</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">by =</span> <span class="st">"4 years"</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>g <span class="sc">+</span> </span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> x_4yr_labs,</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">year</span>(x_4yr_labs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-q3b-ex4" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter12_files/figure-html/fig-q3b-ex4-1.png" class="img-fluid figure-img" width="960"></p>
+<figcaption class="figure-caption">Figure&nbsp;10: Customizing plots by placing breaks every 4 years</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="question-4-1" class="level3">
 <h3 class="anchored" data-anchor-id="question-4-1">Question 4</h3>
@@ -993,17 +1053,185 @@ ggplot(df, aes(x, y)) +
        aes(x = carat, y = price)) +   
   geom_point(aes(color = cut), 
              alpha = 1/20)</code></pre>
+<p>In the code below, I’ve improved the original plot. I used some extra code: <code>guides(color = guide_legend(override.aes = list(size = 5, alpha = 0.5)))</code>. This changes how the point marks look in the legend, making them a bit darker so the legend colors are easier to notice. Also, I made the points a bit bigger to help see them better. You can see the final plot in <a href="#fig-q4-ex4">Figure&nbsp;11</a>. I also changed the background to white so that the transaprent points are clearer.</p>
+<div class="cell" data-hash="Chapter12_cache/html/fig-q4-ex4_053f3c903d642685f82d17bafeab4bae">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price)) <span class="sc">+</span>   </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> cut), <span class="at">alpha =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">override.aes =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">5</span>,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>                                                  <span class="at">alpha =</span> <span class="fl">0.5</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-q4-ex4" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter12_files/figure-html/fig-q4-ex4-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;11: Modifying the code using override.aes to make the legend easier to see</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="exercises-3" class="level1">
+<h1><strong>12.5.1 Exercises</strong></h1>
+<section id="question-1-3" class="level3">
+<h3 class="anchored" data-anchor-id="question-1-3">Question 1</h3>
+<p>Pick a theme offered by the <code>ggthemes</code> package and apply it to the last plot you made.</p>
+<p>Here in <a href="#fig-q1-ex5">Figure&nbsp;12</a>, I use the <code>theme_wsj()</code> (Theme based on the plots in&nbsp;<em>The Wall Street Journal</em>) offered by <code>ggthemes</code> package<span class="citation" data-cites="ggthemes">(<a href="#ref-ggthemes" role="doc-biblioref">Arnold 2021</a>)</span> and apply it to the plot made above in <a href="#fig-q4-ex4">Figure&nbsp;11</a>.</p>
+<div class="cell fig-cap-location-top" data-hash="Chapter12_cache/html/fig-q1-ex5_3d2f29e68fc92fd3c5b6af373330a8f5">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price)) <span class="sc">+</span>   </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> cut), <span class="at">alpha =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">override.aes =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">5</span>,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>                                                  <span class="at">alpha =</span> <span class="fl">0.5</span>))) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  ggthemes<span class="sc">::</span><span class="fu">theme_wsj</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-q1-ex5" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter12_files/figure-html/fig-q1-ex5-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;12: Using the theme_wsj() offered by ggthemes package</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="question-2-3" class="level3">
+<h3 class="anchored" data-anchor-id="question-2-3">Question 2</h3>
+<p><strong>Make the axis labels of your plot blue and bolded.</strong></p>
+<p>I do so by adding the following code to my previous plot: <code>theme(axis.text = element_text(face = "bold", color = "blue", size = 6))</code> . The resulting plot is displayed in <a href="#fig-q2-ex5">Figure&nbsp;13</a> .</p>
+<div class="cell fig-cap-location-top" data-hash="Chapter12_cache/html/fig-q2-ex5_6e908c9511dc0dff1676a135c0c95483">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price)) <span class="sc">+</span>   </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> cut), <span class="at">alpha =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">override.aes =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">5</span>,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>                                                  <span class="at">alpha =</span> <span class="fl">0.5</span>))) <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>,</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">color =</span> <span class="st">"blue"</span>,</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">size =</span> <span class="dv">12</span>)) <span class="sc">+</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-q2-ex5" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter12_files/figure-html/fig-q2-ex5-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;13: Figure make the axis labels blue and bold.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="exercises-4" class="level1">
+<h1><strong>12.6.1 Exercises</strong></h1>
+<section id="question-1-4" class="level3">
+<h3 class="anchored" data-anchor-id="question-1-4">Question 1</h3>
+<p><strong>What happens if you omit the parentheses in the following plot layout. Can you explain why this happens?</strong></p>
+<div class="cell" data-hash="Chapter12_cache/html/fig-q1-ex6_7889fc071a4a8178e96fafb612a5e8bb">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span>    </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span>    </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Plot 1"</span>) </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> drv, <span class="at">y =</span> hwy)) <span class="sc">+</span>    </span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span>    </span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Plot 2"</span>) </span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> cty, <span class="at">y =</span> hwy)) <span class="sc">+</span>    </span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span>    </span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Plot 3"</span>)  </span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>(p1 <span class="sc">|</span> p2) <span class="sc">/</span> p3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-q1-ex6" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter12_files/figure-html/fig-q1-ex6-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;14: Plot produced by the code given in the question</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In <code>patchwork</code>, the pipe operator <code>|</code> is used to arrange plots side by side, and the <code>/</code> operator is used to arrange plots vertically. Thus, with parenthesis, as shown above in <a href="#fig-q1-ex6">Figure&nbsp;14</a> .</p>
+<ol type="1">
+<li><p><code>(p1 | p2)</code> arranges plots <code>p1</code> and <code>p2</code> side by side because of the <code>|</code> operator.</p></li>
+<li><p>The result of <code>(p1 | p2)</code> (a combined plot of <code>p1</code> and <code>p2</code>) is then combined with plot <code>p3</code> vertically using the <code>/</code> operator.</p></li>
+</ol>
+<p><strong>Now, when we omit the parentheses,</strong> as we can see in <a href="#fig-q1a-ex6">Figure&nbsp;15</a> ,</p>
+<ol type="1">
+<li><p><code>p2 / p3</code> is evaluated first because <code>/</code> has a higher precedence than <code>|</code>.</p></li>
+<li><p><code>p2 / p3</code> arranges plots <code>p2</code> and <code>p3</code> vertically because of the <code>/</code> operator.</p></li>
+<li><p>The result of <code>p2 / p3</code> is then combined with plot <code>p1</code> using the <code>|</code> operator.</p></li>
+</ol>
+<p>This is because the <code>/</code> has a higher precedence than <code>|</code> , in other words, <code>R</code> applies <strong><em>BODMAS rules (or, PEMDAS)</em></strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> to take the division operator <code>/</code> before the <code>|</code> (pipe) operator, and we get Plot 2 above Plot 3, while Plot 1 stays in a separate column. This happens perhaps because division comes before addition in normal mathematics, and the <code>patchwork</code> creators have followed that convention.</p>
+<div class="cell" data-hash="Chapter12_cache/html/fig-q1a-ex6_d674edadad5414d61f65049d42f79863">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span>    </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span>    </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Plot 1"</span>) </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> drv, <span class="at">y =</span> hwy)) <span class="sc">+</span>    </span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span>    </span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Plot 2"</span>) </span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> cty, <span class="at">y =</span> hwy)) <span class="sc">+</span>    </span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span>    </span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Plot 3"</span>)  </span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>p1 <span class="sc">|</span> p2 <span class="sc">/</span> p3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-q1a-ex6" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter12_files/figure-html/fig-q1a-ex6-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;15: Plot produced by the code when the parenthesis are omitted</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="question-2-4" class="level3">
+<h3 class="anchored" data-anchor-id="question-2-4">Question 2</h3>
+<p><strong>Using the three plots from the previous exercise, recreate the following patchwork.</strong></p>
+<p>Using <code>patchwork</code><span class="citation" data-cites="patchwork">(<a href="#ref-patchwork" role="doc-biblioref">Pedersen 2022</a>)</span> is simple, and we can create <a href="#fig-q2-ex6">Figure&nbsp;16</a> by the code shown below: –</p>
+<div class="cell fig-cap-location-top" data-hash="Chapter12_cache/html/fig-q2-ex6_5b958ba6edc0a6e812021c567fea8cd2">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="sc">/</span> (p2 <span class="sc">|</span> p3) <span class="sc">+</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(<span class="at">tag_levels =</span> <span class="st">'A'</span>,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">tag_prefix =</span> <span class="st">"Fig. "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-q2-ex6" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter12_files/figure-html/fig-q2-ex6-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;16: Recreating the plot given in Question 2, Exerise 12.6.1 using the patchwork package</figcaption>
+</figure>
+</div>
+</div>
+</div>
 
 
 
 </section>
 </section>
+
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-ggthemes" class="csl-entry" role="listitem">
+Arnold, Jeffrey B. 2021. <span>“Ggthemes: Extra Themes, Scales and Geoms for ’Ggplot2’.”</span> <a href="https://CRAN.R-project.org/package=ggthemes">https://CRAN.R-project.org/package=ggthemes</a>.
+</div>
+<div id="ref-patchwork" class="csl-entry" role="listitem">
+Pedersen, Thomas Lin. 2022. <span>“Patchwork: The Composer of Plots.”</span> <a href="https://CRAN.R-project.org/package=patchwork">https://CRAN.R-project.org/package=patchwork</a>.
+</div>
 <div id="ref-ggrepel" class="csl-entry" role="listitem">
 Slowikowski, Kamil. 2023. <span>“Ggrepel: Automatically Position Non-Overlapping Text Labels with ’Ggplot2’.”</span> <a href="https://CRAN.R-project.org/package=ggrepel">https://CRAN.R-project.org/package=ggrepel</a>.
 </div>
-</div></section></div></main> <!-- /main -->
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><blockquote class="blockquote">
+<p>Note: The BODMAS rules (also known as PEMDAS or PEDMAS in different regions) are a set of rules that dictate the order of operations to be followed when evaluating mathematical expressions. These rules ensure that mathematical expressions are evaluated consistently and accurately. BODMAS stands for:</p>
+<ol type="1">
+<li><p><strong>B</strong>rackets: Evaluate expressions inside brackets first.</p></li>
+<li><p><strong>O</strong>rders: Evaluate exponential or power operations.</p></li>
+<li><p><strong>D</strong>ivision and <strong>M</strong>ultiplication: Perform division and multiplication.</p></li>
+<li><p><strong>A</strong>ddition and <strong>S</strong>ubtraction: Perform addition and subtraction operations from left to right.</p></li>
+</ol>
+</blockquote>
+<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

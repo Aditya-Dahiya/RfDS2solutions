@@ -354,6 +354,46 @@
             "title": "Ggrepel: Automatically position non-overlapping text labels with ’ggplot2’",
             "title-short": "Ggrepel",
             "type": "article-journal"
+        },
+        {
+            "URL": "https://CRAN.R-project.org/package=patchwork",
+            "author": [
+                {
+                    "family": "Pedersen",
+                    "given": "Thomas Lin"
+                }
+            ],
+            "id": "patchwork",
+            "issued": {
+                "date-parts": [
+                    [
+                        2022
+                    ]
+                ]
+            },
+            "title": "Patchwork: The composer of plots",
+            "title-short": "Patchwork",
+            "type": "article-journal"
+        },
+        {
+            "URL": "https://CRAN.R-project.org/package=ggthemes",
+            "author": [
+                {
+                    "family": "Arnold",
+                    "given": "Jeffrey B."
+                }
+            ],
+            "id": "ggthemes",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021
+                    ]
+                ]
+            },
+            "title": "Ggthemes: Extra themes, scales and geoms for ’ggplot2’",
+            "title-short": "Ggthemes",
+            "type": "article-journal"
         }
     ],
     "project_biblios": []
