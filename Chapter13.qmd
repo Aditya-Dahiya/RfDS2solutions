@@ -1,0 +1,133 @@
+---
+title: "Chapter 13"
+author: "Aditya Dahiya"
+subtitle: "Logical Vectors"
+date: 2023-09-03
+execute: 
+  echo: true
+  warning: false
+  error: false
+  cache: true
+filters:
+  - social-share
+share:
+  permalink: "https://aditya-dahiya.github.io/RfDS2solutions/Chapter13.html"
+  description: "Solutions: R for Data Science (2e)"
+  twitter: true
+  facebook: true
+  linkedin: true
+  email: true
+editor_options: 
+  chunk_output_type: console
+bibliography: references.bib
+---
+
+Some important take-away points
+
+-   Use `near()` instead of `==` when comparing numbers to ignore very small differences due to the way computers store numbers.
+
+-   Since, `NA != NA` , we have to use another function to find `NAs` in the data, i.e., `is.na()` . For example, `filter(flights,dep_time == NA)` will not yield any row. Instead, we should use `filter(flights, is.na(dep_time))` .
+
+-   To shown missing values first, we will have to use `arrange(<DF>, desc(is.na(<Var_Name>)), <Var_Name>)`
+
+```{r}
+#| label: setup
+
+library(tidyverse)
+library(nycflights13)
+data("flights")
+```
+
+# **13.2.4 Exercises**
+
+## Question 1
+
+**How does [`dplyr::near()`](https://dplyr.tidyverse.org/reference/near.html) work? Type `near` to see the source code. Is `sqrt(2)^2` near 2?**
+
+`dplyr::near()` is used for testing whether two numeric values are close to each other within a certain **tolerance**. This is useful when working with floating-point numbers, where exact equality can be problematic due to precision limitations. It takes three arguments:
+
+-   `x`: The first numeric value to compare.
+
+-   `y`: The second numeric value to compare.
+
+-   `tol`: Tolerance level, which is a small positive numeric value that defines how close `x` and `y` need to be to be considered "near." By default, it uses `.Machine$double.eps^0.5`, which is a good default for most cases.
+
+Note 1: The variable `.Machine` contains data concerning the numerical attributes of the computer system where `R` is currently operating. This information encompasses details like the maximum values for double, and integer types, as well as the machine's precision.
+
+Note 2: The `double.eps` value represents the smallest positive floating-point number `x` for which the equation `1 + x != 1` holds true. Its calculation involves the base of the double data type and the number of significant digits (`ulp.digits`). Specifically, if the base is 2 or the rounding method is 0, it equals `double.base ^ ulp.digits`. In other cases, it is `(double.base ^ double.ulp.digits) / 2`. Typically, this value is approximately `2.220446e-16`.
+
+```{r}
+#| collapse: true
+#| label: q1-ex2
+
+near
+.Machine$double.eps
+.Machine$double.eps^0.5
+```
+
+Thus, `dplyr::near()` works by checking whether the absolute value of the difference between `x` and `y` is less that the square-root of `.Machine$double.eps` or not.
+
+As shown in the code below, yes, `sqrt(2)^2` is near 2.
+
+```{r}
+#| label: q1a-ex2
+#| collapse: true
+near(sqrt(2)^2, 2)
+```
+
+## Question 2
+
+**Use [`mutate()`](https://dplyr.tidyverse.org/reference/mutate.html), [`is.na()`](https://rdrr.io/r/base/NA.html), and [`count()`](https://dplyr.tidyverse.org/reference/count.html) together to describe how the missing values in `dep_time`, `sched_dep_time` and `dep_delay` are connected.**
+
+First, let us try to compute the number of rows where, as it should be, `sched_dep_time - dep_time == dep_delay`. As we see below, the results is `NA` since `NAs` are contagious in addition, the result returns `NA` .
+
+```{r}
+flights |>
+  select(dep_time, sched_dep_time, dep_delay) |>
+  mutate(check1 = sched_dep_time - dep_time == dep_delay) |>
+  summarise(
+    n = n(),
+    equal = sum(check1)
+  )
+```
+
+Now, let us rework the maths with using `is.na()` to remove missing values of departure time, i.e. cancelled flights. We can use `filter(!is.na(dep_time))` . The results indicate that 69.% of flights, the departure delay is equal to difference between departure time and scheduled departure time.
+
+```{r}
+flights |>
+  select(dep_time, sched_dep_time, dep_delay) |>
+  filter(!is.na(dep_time)) |>
+  mutate(check1 = dep_time - sched_dep_time == dep_delay) |>
+  summarise(
+    total = n(),
+    equal = sum(check1)
+  ) |>
+  mutate(perc_equal = (equal*100)/total)
+```
+
+Now, onto checking the relation between missing values. We observe that none of the Scheduled Departure Time values are missing. There are 8,255 missing Departure Time values, which indicate a cancelled flight. There are also 8,255 missing Departure Delay values, and we show below that these are the exact same flights for which the departure time is missing. Thus, the missing values in `dep_delay` and `dep_time` are connected and exaclty occurring for same rows.
+
+```{r}
+# Number of row with missing Scheduled Departure Time
+flights |>
+  filter(is.na(sched_dep_time)) |>
+  count() |>
+  as.numeric()
+
+# The number of rows with missing Departure Time
+flights |>
+  filter(is.na(dep_time)) |>
+  count() |>
+  as.numeric()
+
+# The number of rows with missing Departure Delay
+flights |>
+  filter(is.na(dep_delay)) |>
+  count() |>
+  as.numeric()
+
+# Checking whether the exact same rows have missing values
+# for Departure Time and Departure Delay
+sum(which(is.na(flights$dep_time)) != which(is.na(flights$dep_delay)))
+
+```
