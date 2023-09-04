@@ -97,6 +97,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+<script src="site_libs/core-js-2.5.3/shim.min.js"></script>
+<script src="site_libs/react-17.0.0/react.min.js"></script>
+<script src="site_libs/react-17.0.0/react-dom.min.js"></script>
+<script src="site_libs/reactwidget-1.0.0/react-tools.js"></script>
+<script src="site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="site_libs/reactable-0.4.4/reactable.css" rel="stylesheet">
+<script src="site_libs/reactable-binding-0.4.4/reactable.js"></script>
+
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -335,6 +343,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1">Question 1</a></li>
   <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2">Question 2</a></li>
   </ul></li>
+  <li><a href="#exercises-1" id="toc-exercises-1" class="nav-link" data-scroll-target="#exercises-1"><strong>13.3.4 Exercises</strong></a>
+  <ul class="collapse">
+  <li><a href="#question-1-1" id="toc-question-1-1" class="nav-link" data-scroll-target="#question-1-1">Question 1</a></li>
+  <li><a href="#question-2-1" id="toc-question-2-1" class="nav-link" data-scroll-target="#question-2-1">Question 2</a></li>
+  <li><a href="#question-3" id="toc-question-3" class="nav-link" data-scroll-target="#question-3">Question 3</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/edit/main/Chapter13.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -377,10 +391,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Since, <code>NA != NA</code> , we have to use another function to find <code>NAs</code> in the data, i.e., <code>is.na()</code> . For example, <code>filter(flights,dep_time == NA)</code> will not yield any row. Instead, we should use <code>filter(flights, is.na(dep_time))</code> .</p></li>
 <li><p>To shown missing values first, we will have to use <code>arrange(&lt;DF&gt;, desc(is.na(&lt;Var_Name&gt;)), &lt;Var_Name&gt;)</code></p></li>
 </ul>
-<div class="cell" data-hash="Chapter13_cache/html/setup_0ae3c5c7f40cc19ec49baf5c734a982d">
+<div class="cell" data-hash="Chapter13_cache/html/setup_7b974d4072c02883d86c04c675b1c03c">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nycflights13)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"flights"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"flights"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="exercises" class="level1">
 <h1><strong>13.2.4 Exercises</strong></h1>
@@ -395,13 +410,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>Note 1: The variable <code>.Machine</code> contains data concerning the numerical attributes of the computer system where <code>R</code> is currently operating. This information encompasses details like the maximum values for double, and integer types, as well as the machine’s precision.</p>
 <p>Note 2: The <code>double.eps</code> value represents the smallest positive floating-point number <code>x</code> for which the equation <code>1 + x != 1</code> holds true. Its calculation involves the base of the double data type and the number of significant digits (<code>ulp.digits</code>). Specifically, if the base is 2 or the rounding method is 0, it equals <code>double.base ^ ulp.digits</code>. In other cases, it is <code>(double.base ^ double.ulp.digits) / 2</code>. Typically, this value is approximately <code>2.220446e-16</code>.</p>
-<div class="cell" data-hash="Chapter13_cache/html/q1-ex2_a38fc0004381a63db158ca70a28e2cc8">
+<div class="cell" data-hash="Chapter13_cache/html/q1-ex2_42d8d185e4b1834441972d9e09bcee4a">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>near</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="do">## function (x, y, tol = .Machine$double.eps^0.5) </span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="do">## {</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="do">##     abs(x - y) &lt; tol</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="do">## }</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="do">## &lt;bytecode: 0x000002a2b6e4b2d8&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="do">## &lt;bytecode: 0x000001b2a68444a8&gt;</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="do">## &lt;environment: namespace:dplyr&gt;</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>.Machine<span class="sc">$</span>double.eps</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2.220446e-16</span></span>
@@ -410,7 +425,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Thus, <code>dplyr::near()</code> works by checking whether the absolute value of the difference between <code>x</code> and <code>y</code> is less that the square-root of <code>.Machine$double.eps</code> or not.</p>
 <p>As shown in the code below, yes, <code>sqrt(2)^2</code> is near 2.</p>
-<div class="cell" data-hash="Chapter13_cache/html/q1a-ex2_1888767349802a3dd964e3bfc6b5f5ca">
+<div class="cell" data-hash="Chapter13_cache/html/q1a-ex2_fc91bdea85304f1c731061a464812b42">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">near</span>(<span class="fu">sqrt</span>(<span class="dv">2</span>)<span class="sc">^</span><span class="dv">2</span>, <span class="dv">2</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] TRUE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -419,7 +434,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="question-2">Question 2</h2>
 <p><strong>Use <a href="https://dplyr.tidyverse.org/reference/mutate.html"><code>mutate()</code></a>, <a href="https://rdrr.io/r/base/NA.html"><code>is.na()</code></a>, and <a href="https://dplyr.tidyverse.org/reference/count.html"><code>count()</code></a> together to describe how the missing values in <code>dep_time</code>, <code>sched_dep_time</code> and <code>dep_delay</code> are connected.</strong></p>
 <p>First, let us try to compute the number of rows where, as it should be, <code>sched_dep_time - dep_time == dep_delay</code>. As we see below, the results is <code>NA</code> since <code>NAs</code> are contagious in addition, the result returns <code>NA</code> .</p>
-<div class="cell" data-hash="Chapter13_cache/html/unnamed-chunk-4_c537fd1a7cb4d864058655f8b6d95d17">
+<div class="cell" data-hash="Chapter13_cache/html/unnamed-chunk-4_c59aa6a766c73d231646d4a7382ac889">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(dep_time, sched_dep_time, dep_delay) <span class="sc">|&gt;</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">check1 =</span> sched_dep_time <span class="sc">-</span> dep_time <span class="sc">==</span> dep_delay) <span class="sc">|&gt;</span></span>
@@ -435,7 +450,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Now, let us rework the maths with using <code>is.na()</code> to remove missing values of departure time, i.e.&nbsp;cancelled flights. We can use <code>filter(!is.na(dep_time))</code> . The results indicate that 69.% of flights, the departure delay is equal to difference between departure time and scheduled departure time.</p>
-<div class="cell" data-hash="Chapter13_cache/html/unnamed-chunk-5_4676b2ebbc9208f347da8c87beff44df">
+<div class="cell" data-hash="Chapter13_cache/html/unnamed-chunk-5_d8aeef2b5960471a0579f740c859e60b">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(dep_time, sched_dep_time, dep_delay) <span class="sc">|&gt;</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(dep_time)) <span class="sc">|&gt;</span></span>
@@ -453,7 +468,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Now, onto checking the relation between missing values. We observe that none of the Scheduled Departure Time values are missing. There are 8,255 missing Departure Time values, which indicate a cancelled flight. There are also 8,255 missing Departure Delay values, and we show below that these are the exact same flights for which the departure time is missing. Thus, the missing values in <code>dep_delay</code> and <code>dep_time</code> are connected and exaclty occurring for same rows.</p>
-<div class="cell" data-hash="Chapter13_cache/html/unnamed-chunk-6_66047bd4161dd459f7c1e555206931f1">
+<div class="cell" data-hash="Chapter13_cache/html/unnamed-chunk-6_ee1fd12f0ee6e32f2aa7fecc2d6b1f21">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of row with missing Scheduled Departure Time</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(sched_dep_time)) <span class="sc">|&gt;</span></span>
@@ -483,6 +498,1102 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">which</span>(<span class="fu">is.na</span>(flights<span class="sc">$</span>dep_time)) <span class="sc">!=</span> <span class="fu">which</span>(<span class="fu">is.na</span>(flights<span class="sc">$</span>dep_delay)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="exercises-1" class="level1">
+<h1><strong>13.3.4 Exercises</strong></h1>
+<section id="question-1-1" class="level2">
+<h2 class="anchored" data-anchor-id="question-1-1">Question 1</h2>
+<p><strong>Find all flights where <code>arr_delay</code> is missing but <code>dep_delay</code> is not. Find all flights where neither <code>arr_time</code> nor <code>sched_arr_time</code> are missing, but <code>arr_delay</code> is.</strong></p>
+<p>The following code displays all flights where <code>arr_delay</code> is missing but <code>dep_delay</code> is not in <a href="#fig-q1-ex3">Figure&nbsp;1</a>. There are 1,175 such flights.</p>
+<div class="cell" data-hash="Chapter13_cache/html/fig-q1-ex3_bf97ac01155da4537b71e2db71b1b8b0">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(arr_delay) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(dep_delay)) <span class="sc">|&gt;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(flight, arr_delay, dep_delay) <span class="sc">|&gt;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(<span class="at">flight =</span> <span class="st">"Flight Number"</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">arr_delay =</span> <span class="st">"Arrival Delay (in min)"</span>,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">dep_delay =</span> <span class="st">"Departure Delay (in min)"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_interactive</span>(<span class="at">pagination_type =</span> <span class="st">"jump"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-q1-ex3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+
+<div id="ipjdbaujul" class=".gt_table" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ipjdbaujul table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ipjdbaujul thead, #ipjdbaujul tbody, #ipjdbaujul tfoot, #ipjdbaujul tr, #ipjdbaujul td, #ipjdbaujul th {
+  border-style: none;
+}
+
+#ipjdbaujul p {
+  margin: 0;
+  padding: 0;
+}
+
+#ipjdbaujul .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ipjdbaujul .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ipjdbaujul .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ipjdbaujul .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ipjdbaujul .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ipjdbaujul .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ipjdbaujul .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ipjdbaujul .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ipjdbaujul .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ipjdbaujul .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ipjdbaujul .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ipjdbaujul .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ipjdbaujul .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ipjdbaujul .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ipjdbaujul .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ipjdbaujul .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ipjdbaujul .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ipjdbaujul .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ipjdbaujul .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ipjdbaujul .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ipjdbaujul .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ipjdbaujul .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ipjdbaujul .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ipjdbaujul .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ipjdbaujul .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ipjdbaujul .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ipjdbaujul .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ipjdbaujul .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ipjdbaujul .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ipjdbaujul .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ipjdbaujul .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ipjdbaujul .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ipjdbaujul .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ipjdbaujul .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ipjdbaujul .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ipjdbaujul .gt_left {
+  text-align: left;
+}
+
+#ipjdbaujul .gt_center {
+  text-align: center;
+}
+
+#ipjdbaujul .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ipjdbaujul .gt_font_normal {
+  font-weight: normal;
+}
+
+#ipjdbaujul .gt_font_bold {
+  font-weight: bold;
+}
+
+#ipjdbaujul .gt_font_italic {
+  font-style: italic;
+}
+
+#ipjdbaujul .gt_super {
+  font-size: 65%;
+}
+
+#ipjdbaujul .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ipjdbaujul .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ipjdbaujul .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ipjdbaujul .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ipjdbaujul .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ipjdbaujul .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ipjdbaujul .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<div id="ipjdbaujul" class="reactable html-widget " style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="ipjdbaujul">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"flight":[4525,3806,4413,1228,3325,4333,4204,4140,3658,3325,4321,3401,147,1299,4255,1705,3375,4532,3375,3369,4257,4638,1493,3325,3856,3375,29,677,4171,4372,721,743,1600,4129,4411,4204,4698,4519,4298,3375,4204,4521,3375,512,738,3833,499,1702,145,738,1357,662,304,3375,1762,1415,1601,1275,721,4090,4181,2179,3393,512,3325,4702,1010,4636,4348,743,1853,745,1612,883,337,685,3325,983,401,1947,4087,1508,3375,3452,185,1599,4364,5309,5287,341,523,3492,3353,2053,343,3478,5298,4422,3496,3550,3611,4204,1175,3418,4522,797,3486,185,95,375,235,1516,65,3285,1185,3325,5242,235,681,16,23,885,161,422,407,223,1,19,323,483,423,2067,523,4471,23,183,1581,323,185,3363,3591,3525,2219,2931,1643,2280,119,169,1054,2921,4580,89,67,1692,1715,4510,6074,654,325,172,4191,3486,1105,605,3815,4935,802,3230,1416,3621,970,1,1529,301,2488,1185,497,427,5333,857,3357,303,1581,654,4333,6073,3547,4691,4419,1511,4274,23,698,413,3812,213,423,413,4885,2924,29,1284,415,915,4571,23,300,997,213,360,352,4099,1998,213,3386,2185,3425,2931,4312,2590,4278,398,4155,4407,4537,3771,839,3466,2134,464,1205,3604,430,2915,3827,2903,2927,2949,2933,2599,417,2593,1519,2243,4171,3689,424,1634,2903,1464,2134,486,2927,97,362,3843,3370,2214,884,2942,2915,29,5677,1071,884,362,2169,3370,312,643,3644,4195,403,1205,1117,3762,963,461,1889,1773,677,4646,4381,4661,4204,2119,4537,4204,3375,4413,389,593,4099,1558,2122,4625,3272,4241,2163,2165,3815,2167,3405,3792,2128,305,4543,2139,537,1695,985,3375,3835,3375,4326,1838,4383,727,3768,715,712,4670,4403,3375,4561,4636,366,3375,4264,3375,4525,1415,1740,1589,615,2267,4087,2124,3325,3375,4333,1643,701,3697,1544,3375,587,687,4561,3695,353,2119,3375,132,951,4309,361,715,4322,316,3525,413,4357,2116,1597,405,2034,3514,1721,815,785,1621,4065,3209,3354,675,1654,4662,503,1621,4333,4122,569,458,91,452,4547,387,4241,2347,357,1942,847,95,4661,4357,4705,2331,3783,1292,645,1680,1895,1200,4086,4381,987,878,1589,27,3810,4689,523,4370,4019,353,3817,2167,2161,139,5670,4490,887,119,33,19,3325,677,1552,2098,179,645,4204,4204,363,781,4352,303,905,301,583,1739,4564,5673,545,4091,4540,3881,2019,4583,489,4120,4413,4202,4484,4674,4059,4601,4626,4517,4700,4333,4153,503,4241,4409,3335,1643,157,4625,15,4535,3867,3334,3765,621,1680,1153,2231,917,2131,301,711,33,848,457,2165,1097,4193,128,972,4224,1043,3580,2183,2185,5038,4517,4555,4649,645,5168,345,329,377,1164,4204,4085,1769,1635,479,4193,4202,4342,1747,4657,4298,1101,1871,1485,977,1186,703,61,505,1073,71,1925,1534,212,1112,487,926,717,4120,677,21,857,691,1272,743,4553,4413,4518,3823,2171,4129,4413,6,1600,4203,533,706,4471,4657,4147,785,1431,1152,2075,3805,1621,177,1819,4975,4998,2395,2044,977,4309,3825,4413,1433,1709,2139,561,3410,21,321,319,1739,1731,4517,4059,3285,2185,5038,378,4247,4117,717,394,331,2223,4429,4646,4669,4104,4681,5486,1075,335,1905,785,1523,21,781,883,1447,2223,4596,2279,4299,518,3325,763,4667,773,785,1608,4579,2171,4411,3853,4204,3744,5215,4502,1024,17,1121,1815,4205,739,4255,4305,4534,4269,4255,1499,2042,771,4705,1925,1769,677,580,4195,4294,768,611,77,375,1170,930,1471,61,4679,505,1242,1769,1925,1982,1085,1973,38,4649,3416,1686,226,1170,4552,3944,4287,4532,1601,2134,3523,3694,2625,1491,1177,625,4224,363,1711,353,371,3879,2083,715,2165,3407,4511,3608,1293,615,262,4280,1485,3660,739,1060,580,377,3365,5254,1919,4181,1611,1120,711,5818,3367,4280,5550,38,1069,383,1847,1983,636,3817,1751,573,1765,4381,3621,1919,165,1548,1939,493,580,512,4543,4407,3391,1498,3532,4152,4352,5599,4596,4978,3357,253,257,1677,353,569,3574,331,905,1751,4111,1899,4171,3793,3301,3044,273,120,3319,3694,1973,5615,349,3540,3615,4202,1611,5769,4225,3476,305,1879,1338,4275,4280,1129,2181,297,675,408,681,2267,3407,4097,971,15,413,3658,253,791,15,580,179,23,187,1677,317,1284,4572,623,415,915,4097,15,4701,5841,3310,3698,2231,4411,4382,3932,4352,847,915,415,5254,3540,4120,3357,3393,5824,5038,108,1643,3493,431,2815,3836,759,3391,3532,4502,2223,341,3669,363,4576,3199,6002,763,343,3678,3694,3622,3459,5091,1618,221,3540,1901,1666,3525,1105,177,3310,21,4361,1625,411,4065,753,759,883,5841,3466,781,1117,1078,4202,301,1779,1601,1171,402,3585,1325,1107,4949,1677,4998,5806,405,3367,1403,3572,824,3325,4682,763,1507,1499,847,1942,3854,301,1216,403,1171,1982,4576,2183,3,1855,387,743,3622,105,4209,2043,781,2247,4140,604,883,1769,3134,3644,4171,4572,451,4336,1942,1403,3231,4115,779,2223,3532,706,3926,1284,3440,345,4013,2138,4091,1067,1625,1666,883,543,4519,3493,236,3540,1141,1437,4583,1621,664,2395,348,2247,4336,1295,318,4382,3622,4078,5841,6002,343,1507,3926,4245,3385,618,5109,4245,4471,4679,363,3216,207,1191,1173,1107,2269,1185,1503,1902,841,1581,3926,2019,3349,1629,4243,1258,1242,1621,85,1151,3416,503,181,1284,167,1022,5812,3807,4204,1841,1707,6002,3325,773,509,4191,4552,2085,5940,3676,3478,4952,1031,883,759,618,3325,4312,1883,1289,1178,4720,3928,347,4111,1257,443,1751,4388,212,4905,4918,325,403,1787,1635,4471,1641,3525,2099,1902,249,1708,1733,5713,4535,3052,689,1585,4247,783,1123,3301,449,316,283,843,1119,3301,4211,5085,4720,3359,503,4166,1338,119,471,2134,2279,745,4328,291,3070,53,927,1592,745,997,1139,347,2136,1873,4395,4576,4705,3556,3044,3555,3433,3395,3572,6177,507,5378,1170,1151,3493,491,337,5044,4687,3588,3231,4171,4381,1231,5675,4181,4596,4684,3532,3357,3202,256,1350,1410,3075,1078,320,2187,27,4572,1695,415,3320,4537,3555,3,1529,1107,1499,3525,2173,3493,2319,441,301,1246,1401,3488,1185,527,3325,2391,1193,1591,307,3616,745,4580,3846,3525,544,3531,375,347,15,331,5306,5068,4510,4412,300,327,464],"arr_delay":["NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA"],"dep_delay":[-5,29,-5,29,59,22,46,43,120,8,85,-3,-4,16,-7,-2,125,0,-4,10,6,-2,-2,7,0,-1,-14,2,-6,-3,-3,-4,14,17,153,68,26,40,9,-1,-5,-3,187,-7,5,-9,5,-2,-1,23,-3,86,-9,-1,10,-11,-1,0,0,15,2,-8,-8,-1,84,220,0,-8,72,-6,-6,-3,-6,-6,-4,12,-6,230,43,47,52,175,174,4,4,-8,-5,119,-5,-8,2,7,-2,1,-1,1,-5,-1,-5,32,-11,24,-3,34,-6,-5,7,127,-2,35,-11,59,3,22,2,20,101,-9,19,0,-6,-3,-10,-4,-3,-8,15,-5,-6,42,82,96,12,-5,-6,-2,-4,-1,-1,-2,-6,-9,54,210,-3,-5,-2,20,-3,-5,3,12,-4,26,-3,-2,0,-4,44,-2,23,-2,166,-7,-4,-7,-5,-2,4,-7,37,-6,-5,20,-5,-5,-3,0,43,-3,-5,6,9,9,-3,108,-6,-10,-3,-5,13,8,-2,5,25,3,9,-6,46,3,-1,-3,0,13,-6,25,-1,5,50,8,169,77,4,-1,155,-1,12,64,74,122,222,-9,46,122,152,72,0,-7,-9,2,9,65,7,35,16,231,204,125,219,143,28,42,7,5,16,231,-5,-8,128,-7,-4,-1,19,27,235,60,17,-3,38,84,0,12,12,95,41,125,-5,-3,4,0,-8,194,-1,76,2,0,-9,0,-2,28,83,6,75,0,55,1,-9,30,91,-5,8,123,20,1,-4,-9,-10,-3,-5,-4,7,-4,227,98,-5,-7,-10,0,22,-3,-7,-12,-5,39,-1,-9,14,6,0,-4,154,-7,-3,-1,66,-7,-1,-4,-1,12,236,-2,7,127,166,-4,-5,-7,-2,-4,-7,-4,7,23,49,-9,140,83,91,95,29,172,-7,7,0,308,-7,-1,97,14,131,-4,-3,-5,22,33,-4,0,43,-3,-9,20,118,170,2,27,73,12,15,-7,59,-6,24,0,-1,2,0,64,91,1,64,-6,-3,23,-4,30,75,145,65,119,168,103,8,5,59,-7,-11,177,39,46,12,-6,-8,27,-7,103,47,-8,-7,41,-8,-7,142,-8,-8,-6,46,9,-3,-1,60,16,189,72,62,0,96,-1,1,32,2,-1,-8,10,117,-2,3,4,1,109,52,66,-1,51,-3,-2,12,56,51,105,-7,109,131,-6,138,127,-4,0,25,-7,8,-5,-10,-3,39,65,66,-10,0,80,-1,-5,-3,1,51,14,12,6,-3,-4,24,113,54,156,86,61,50,65,-9,85,87,117,0,66,40,11,87,217,-5,28,-4,199,140,-2,189,0,-5,-6,-5,-3,-9,-2,-4,0,20,-8,5,-1,36,15,151,-3,-5,-1,-7,20,1,-5,5,-2,-4,-9,110,3,0,262,320,64,232,74,-12,13,-3,-7,10,22,25,94,86,67,28,6,33,-3,63,8,-1,1,-4,-9,24,37,48,27,81,-5,116,-1,-6,41,85,40,-11,10,47,63,10,276,0,96,-4,2,45,-6,9,206,22,203,193,102,176,-1,68,25,45,-1,3,-4,-6,-6,0,-4,65,3,0,-7,56,-3,-4,40,-6,-7,12,115,16,-4,33,-6,-4,-3,-5,0,201,14,-4,49,42,-9,-10,1,21,0,53,-2,-4,79,2,17,108,11,-3,-4,-9,1,-6,12,-1,1,-3,-2,0,56,20,39,-5,77,45,140,-2,-7,401,41,72,112,-3,-3,-6,27,38,-1,8,2,16,14,8,211,180,31,-6,-5,-6,-6,-1,2,120,32,142,79,178,138,51,12,-2,-7,34,-4,82,-6,32,27,43,-4,82,64,-4,145,3,40,132,-6,32,-4,-10,40,6,36,-6,-2,4,-1,26,6,3,393,97,46,-2,-8,15,-7,36,-6,37,12,58,0,98,-3,1,130,-2,0,-3,13,-3,58,26,115,128,-4,35,-3,1,-3,60,-6,114,261,161,24,124,148,26,143,150,316,21,7,-4,-4,7,-3,45,-1,-4,184,-3,5,29,203,11,-4,-7,0,-8,-4,4,0,5,15,-4,78,-3,31,-5,50,0,-4,-2,-2,-1,-14,213,33,45,7,38,103,200,33,195,72,389,52,-3,108,97,212,183,471,-6,1,12,67,28,15,-6,6,7,9,67,56,-3,17,24,8,8,164,35,57,44,63,139,-3,162,90,47,9,221,113,179,79,93,275,634,195,-1,-5,-3,6,39,-3,37,52,169,3,6,49,-1,-1,9,18,126,185,125,83,-2,5,187,31,-8,13,-4,-5,1,-6,18,93,137,103,-1,2,-3,1,6,17,28,1,-2,94,-2,241,-5,74,11,49,-10,56,20,-4,0,2,62,-5,2,29,68,26,-4,0,7,24,11,9,-4,14,3,41,5,44,-6,90,36,197,125,146,149,8,49,-4,105,68,195,-2,1,100,-7,5,-5,7,31,0,46,-5,2,-4,13,31,-7,144,139,163,103,3,1,-2,-2,-11,156,21,9,-2,19,29,-2,25,-2,18,-3,27,-2,-6,33,-2,-3,20,51,-3,9,79,8,19,34,39,19,196,155,114,-5,38,61,105,-11,20,26,-7,199,70,-2,-2,-1,26,-4,18,84,60,-7,11,4,13,331,92,12,-4,10,-4,-1,-6,42,-5,-3,1,0,2,12,-4,3,-6,-2,-8,0,3,-3,42,-2,4,-1,-5,-2,-2,1,-10,-1,169,-8,20,-5,-4,-5,4,129,110,3,-6,-1,-3,296,-6,-2,-6,5,-8,-6,-5,-9,26,21,-7,3,-6,-6,-1,-9,-5,16,0,-5,32,59,42,-7,217,30,65,4,27,35,51,33,33,40,20,18,64,129,48,44,15,64,28,37,-2,49,17,43,8,44,-2,111,88,81,177,232,149,160,8,-2,-1,-7,0,-6,-9,-5,-4,-4,-1,-10,1,-5,4,0,60,5,16,-6,11,-4,29,3,-5,19,-2,0,-11,-7,7,2,3,188,-5,8,-10,-11,23,-1]},"columns":[{"id":"flight","name":"Flight Number","type":"numeric","style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","cell":["4525","3806","4413","1228","3325","4333","4204","4140","3658","3325","4321","3401","147","1299","4255","1705","3375","4532","3375","3369","4257","4638","1493","3325","3856","3375","29","677","4171","4372","721","743","1600","4129","4411","4204","4698","4519","4298","3375","4204","4521","3375","512","738","3833","499","1702","145","738","1357","662","304","3375","1762","1415","1601","1275","721","4090","4181","2179","3393","512","3325","4702","1010","4636","4348","743","1853","745","1612","883","337","685","3325","983","401","1947","4087","1508","3375","3452","185","1599","4364","5309","5287","341","523","3492","3353","2053","343","3478","5298","4422","3496","3550","3611","4204","1175","3418","4522","797","3486","185","95","375","235","1516","65","3285","1185","3325","5242","235","681","16","23","885","161","422","407","223","1","19","323","483","423","2067","523","4471","23","183","1581","323","185","3363","3591","3525","2219","2931","1643","2280","119","169","1054","2921","4580","89","67","1692","1715","4510","6074","654","325","172","4191","3486","1105","605","3815","4935","802","3230","1416","3621","970","1","1529","301","2488","1185","497","427","5333","857","3357","303","1581","654","4333","6073","3547","4691","4419","1511","4274","23","698","413","3812","213","423","413","4885","2924","29","1284","415","915","4571","23","300","997","213","360","352","4099","1998","213","3386","2185","3425","2931","4312","2590","4278","398","4155","4407","4537","3771","839","3466","2134","464","1205","3604","430","2915","3827","2903","2927","2949","2933","2599","417","2593","1519","2243","4171","3689","424","1634","2903","1464","2134","486","2927","97","362","3843","3370","2214","884","2942","2915","29","5677","1071","884","362","2169","3370","312","643","3644","4195","403","1205","1117","3762","963","461","1889","1773","677","4646","4381","4661","4204","2119","4537","4204","3375","4413","389","593","4099","1558","2122","4625","3272","4241","2163","2165","3815","2167","3405","3792","2128","305","4543","2139","537","1695","985","3375","3835","3375","4326","1838","4383","727","3768","715","712","4670","4403","3375","4561","4636","366","3375","4264","3375","4525","1415","1740","1589","615","2267","4087","2124","3325","3375","4333","1643","701","3697","1544","3375","587","687","4561","3695","353","2119","3375","132","951","4309","361","715","4322","316","3525","413","4357","2116","1597","405","2034","3514","1721","815","785","1621","4065","3209","3354","675","1654","4662","503","1621","4333","4122","569","458","91","452","4547","387","4241","2347","357","1942","847","95","4661","4357","4705","2331","3783","1292","645","1680","1895","1200","4086","4381","987","878","1589","27","3810","4689","523","4370","4019","353","3817","2167","2161","139","5670","4490","887","119","33","19","3325","677","1552","2098","179","645","4204","4204","363","781","4352","303","905","301","583","1739","4564","5673","545","4091","4540","3881","2019","4583","489","4120","4413","4202","4484","4674","4059","4601","4626","4517","4700","4333","4153","503","4241","4409","3335","1643","157","4625","15","4535","3867","3334","3765","621","1680","1153","2231","917","2131","301","711","33","848","457","2165","1097","4193","128","972","4224","1043","3580","2183","2185","5038","4517","4555","4649","645","5168","345","329","377","1164","4204","4085","1769","1635","479","4193","4202","4342","1747","4657","4298","1101","1871","1485","977","1186","703","61","505","1073","71","1925","1534","212","1112","487","926","717","4120","677","21","857","691","1272","743","4553","4413","4518","3823","2171","4129","4413","6","1600","4203","533","706","4471","4657","4147","785","1431","1152","2075","3805","1621","177","1819","4975","4998","2395","2044","977","4309","3825","4413","1433","1709","2139","561","3410","21","321","319","1739","1731","4517","4059","3285","2185","5038","378","4247","4117","717","394","331","2223","4429","4646","4669","4104","4681","5486","1075","335","1905","785","1523","21","781","883","1447","2223","4596","2279","4299","518","3325","763","4667","773","785","1608","4579","2171","4411","3853","4204","3744","5215","4502","1024","17","1121","1815","4205","739","4255","4305","4534","4269","4255","1499","2042","771","4705","1925","1769","677","580","4195","4294","768","611","77","375","1170","930","1471","61","4679","505","1242","1769","1925","1982","1085","1973","38","4649","3416","1686","226","1170","4552","3944","4287","4532","1601","2134","3523","3694","2625","1491","1177","625","4224","363","1711","353","371","3879","2083","715","2165","3407","4511","3608","1293","615","262","4280","1485","3660","739","1060","580","377","3365","5254","1919","4181","1611","1120","711","5818","3367","4280","5550","38","1069","383","1847","1983","636","3817","1751","573","1765","4381","3621","1919","165","1548","1939","493","580","512","4543","4407","3391","1498","3532","4152","4352","5599","4596","4978","3357","253","257","1677","353","569","3574","331","905","1751","4111","1899","4171","3793","3301","3044","273","120","3319","3694","1973","5615","349","3540","3615","4202","1611","5769","4225","3476","305","1879","1338","4275","4280","1129","2181","297","675","408","681","2267","3407","4097","971","15","413","3658","253","791","15","580","179","23","187","1677","317","1284","4572","623","415","915","4097","15","4701","5841","3310","3698","2231","4411","4382","3932","4352","847","915","415","5254","3540","4120","3357","3393","5824","5038","108","1643","3493","431","2815","3836","759","3391","3532","4502","2223","341","3669","363","4576","3199","6002","763","343","3678","3694","3622","3459","5091","1618","221","3540","1901","1666","3525","1105","177","3310","21","4361","1625","411","4065","753","759","883","5841","3466","781","1117","1078","4202","301","1779","1601","1171","402","3585","1325","1107","4949","1677","4998","5806","405","3367","1403","3572","824","3325","4682","763","1507","1499","847","1942","3854","301","1216","403","1171","1982","4576","2183","3","1855","387","743","3622","105","4209","2043","781","2247","4140","604","883","1769","3134","3644","4171","4572","451","4336","1942","1403","3231","4115","779","2223","3532","706","3926","1284","3440","345","4013","2138","4091","1067","1625","1666","883","543","4519","3493","236","3540","1141","1437","4583","1621","664","2395","348","2247","4336","1295","318","4382","3622","4078","5841","6002","343","1507","3926","4245","3385","618","5109","4245","4471","4679","363","3216","207","1191","1173","1107","2269","1185","1503","1902","841","1581","3926","2019","3349","1629","4243","1258","1242","1621","85","1151","3416","503","181","1284","167","1022","5812","3807","4204","1841","1707","6002","3325","773","509","4191","4552","2085","5940","3676","3478","4952","1031","883","759","618","3325","4312","1883","1289","1178","4720","3928","347","4111","1257","443","1751","4388","212","4905","4918","325","403","1787","1635","4471","1641","3525","2099","1902","249","1708","1733","5713","4535","3052","689","1585","4247","783","1123","3301","449","316","283","843","1119","3301","4211","5085","4720","3359","503","4166","1338","119","471","2134","2279","745","4328","291","3070","53","927","1592","745","997","1139","347","2136","1873","4395","4576","4705","3556","3044","3555","3433","3395","3572","6177","507","5378","1170","1151","3493","491","337","5044","4687","3588","3231","4171","4381","1231","5675","4181","4596","4684","3532","3357","3202","256","1350","1410","3075","1078","320","2187","27","4572","1695","415","3320","4537","3555","3","1529","1107","1499","3525","2173","3493","2319","441","301","1246","1401","3488","1185","527","3325","2391","1193","1591","307","3616","745","4580","3846","3525","544","3531","375","347","15","331","5306","5068","4510","4412","300","327","464"],"html":true,"align":"right","headerStyle":{"font-weight":"normal"}},{"id":"arr_delay","name":"Arrival Delay (in min)","type":"numeric","style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","cell":["NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA"],"html":true,"align":"right","headerStyle":{"font-weight":"normal"}},{"id":"dep_delay","name":"Departure Delay (in min)","type":"numeric","style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","cell":["-5","29","-5","29","59","22","46","43","120","8","85","-3","-4","16","-7","-2","125","0","-4","10","6","-2","-2","7","0","-1","-14","2","-6","-3","-3","-4","14","17","153","68","26","40","9","-1","-5","-3","187","-7","5","-9","5","-2","-1","23","-3","86","-9","-1","10","-11","-1","0","0","15","2","-8","-8","-1","84","220","0","-8","72","-6","-6","-3","-6","-6","-4","12","-6","230","43","47","52","175","174","4","4","-8","-5","119","-5","-8","2","7","-2","1","-1","1","-5","-1","-5","32","-11","24","-3","34","-6","-5","7","127","-2","35","-11","59","3","22","2","20","101","-9","19","0","-6","-3","-10","-4","-3","-8","15","-5","-6","42","82","96","12","-5","-6","-2","-4","-1","-1","-2","-6","-9","54","210","-3","-5","-2","20","-3","-5","3","12","-4","26","-3","-2","0","-4","44","-2","23","-2","166","-7","-4","-7","-5","-2","4","-7","37","-6","-5","20","-5","-5","-3","0","43","-3","-5","6","9","9","-3","108","-6","-10","-3","-5","13","8","-2","5","25","3","9","-6","46","3","-1","-3","0","13","-6","25","-1","5","50","8","169","77","4","-1","155","-1","12","64","74","122","222","-9","46","122","152","72","0","-7","-9","2","9","65","7","35","16","231","204","125","219","143","28","42","7","5","16","231","-5","-8","128","-7","-4","-1","19","27","235","60","17","-3","38","84","0","12","12","95","41","125","-5","-3","4","0","-8","194","-1","76","2","0","-9","0","-2","28","83","6","75","0","55","1","-9","30","91","-5","8","123","20","1","-4","-9","-10","-3","-5","-4","7","-4","227","98","-5","-7","-10","0","22","-3","-7","-12","-5","39","-1","-9","14","6","0","-4","154","-7","-3","-1","66","-7","-1","-4","-1","12","236","-2","7","127","166","-4","-5","-7","-2","-4","-7","-4","7","23","49","-9","140","83","91","95","29","172","-7","7","0","308","-7","-1","97","14","131","-4","-3","-5","22","33","-4","0","43","-3","-9","20","118","170","2","27","73","12","15","-7","59","-6","24","0","-1","2","0","64","91","1","64","-6","-3","23","-4","30","75","145","65","119","168","103","8","5","59","-7","-11","177","39","46","12","-6","-8","27","-7","103","47","-8","-7","41","-8","-7","142","-8","-8","-6","46","9","-3","-1","60","16","189","72","62","0","96","-1","1","32","2","-1","-8","10","117","-2","3","4","1","109","52","66","-1","51","-3","-2","12","56","51","105","-7","109","131","-6","138","127","-4","0","25","-7","8","-5","-10","-3","39","65","66","-10","0","80","-1","-5","-3","1","51","14","12","6","-3","-4","24","113","54","156","86","61","50","65","-9","85","87","117","0","66","40","11","87","217","-5","28","-4","199","140","-2","189","0","-5","-6","-5","-3","-9","-2","-4","0","20","-8","5","-1","36","15","151","-3","-5","-1","-7","20","1","-5","5","-2","-4","-9","110","3","0","262","320","64","232","74","-12","13","-3","-7","10","22","25","94","86","67","28","6","33","-3","63","8","-1","1","-4","-9","24","37","48","27","81","-5","116","-1","-6","41","85","40","-11","10","47","63","10","276","0","96","-4","2","45","-6","9","206","22","203","193","102","176","-1","68","25","45","-1","3","-4","-6","-6","0","-4","65","3","0","-7","56","-3","-4","40","-6","-7","12","115","16","-4","33","-6","-4","-3","-5","0","201","14","-4","49","42","-9","-10","1","21","0","53","-2","-4","79","2","17","108","11","-3","-4","-9","1","-6","12","-1","1","-3","-2","0","56","20","39","-5","77","45","140","-2","-7","401","41","72","112","-3","-3","-6","27","38","-1","8","2","16","14","8","211","180","31","-6","-5","-6","-6","-1","2","120","32","142","79","178","138","51","12","-2","-7","34","-4","82","-6","32","27","43","-4","82","64","-4","145","3","40","132","-6","32","-4","-10","40","6","36","-6","-2","4","-1","26","6","3","393","97","46","-2","-8","15","-7","36","-6","37","12","58","0","98","-3","1","130","-2","0","-3","13","-3","58","26","115","128","-4","35","-3","1","-3","60","-6","114","261","161","24","124","148","26","143","150","316","21","7","-4","-4","7","-3","45","-1","-4","184","-3","5","29","203","11","-4","-7","0","-8","-4","4","0","5","15","-4","78","-3","31","-5","50","0","-4","-2","-2","-1","-14","213","33","45","7","38","103","200","33","195","72","389","52","-3","108","97","212","183","471","-6","1","12","67","28","15","-6","6","7","9","67","56","-3","17","24","8","8","164","35","57","44","63","139","-3","162","90","47","9","221","113","179","79","93","275","634","195","-1","-5","-3","6","39","-3","37","52","169","3","6","49","-1","-1","9","18","126","185","125","83","-2","5","187","31","-8","13","-4","-5","1","-6","18","93","137","103","-1","2","-3","1","6","17","28","1","-2","94","-2","241","-5","74","11","49","-10","56","20","-4","0","2","62","-5","2","29","68","26","-4","0","7","24","11","9","-4","14","3","41","5","44","-6","90","36","197","125","146","149","8","49","-4","105","68","195","-2","1","100","-7","5","-5","7","31","0","46","-5","2","-4","13","31","-7","144","139","163","103","3","1","-2","-2","-11","156","21","9","-2","19","29","-2","25","-2","18","-3","27","-2","-6","33","-2","-3","20","51","-3","9","79","8","19","34","39","19","196","155","114","-5","38","61","105","-11","20","26","-7","199","70","-2","-2","-1","26","-4","18","84","60","-7","11","4","13","331","92","12","-4","10","-4","-1","-6","42","-5","-3","1","0","2","12","-4","3","-6","-2","-8","0","3","-3","42","-2","4","-1","-5","-2","-2","1","-10","-1","169","-8","20","-5","-4","-5","4","129","110","3","-6","-1","-3","296","-6","-2","-6","5","-8","-6","-5","-9","26","21","-7","3","-6","-6","-1","-9","-5","16","0","-5","32","59","42","-7","217","30","65","4","27","35","51","33","33","40","20","18","64","129","48","44","15","64","28","37","-2","49","17","43","8","44","-2","111","88","81","177","232","149","160","8","-2","-1","-7","0","-6","-9","-5","-4","-4","-1","-10","1","-5","4","0","60","5","16","-6","11","-4","29","3","-5","19","-2","0","-11","-7","7","2","3","188","-5","8","-10","-11","23","-1"],"html":true,"align":"right","headerStyle":{"font-weight":"normal"}}],"defaultPageSize":10,"showPageSizeOptions":false,"pageSizeOptions":[10,25,50,100],"paginationType":"jump","showPagination":true,"showPageInfo":true,"minRows":1,"showSortable":true,"height":"auto","theme":{"color":"#333333","backgroundColor":"#FFFFFF","stripedColor":"rgba(128,128,128,0.05)","style":{"fontFamily":"system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"},"headerStyle":{"borderTopStyle":"solid","borderTopWidth":"2px","borderTopColor":"#D3D3D3","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"}},"elementId":"ipjdbaujul","dataKey":"542f8a5035318554ddaf58357fa41a2a"},"children":[]},"class":"reactR_markup"},"evals":["tag.attribs.columns.0.style","tag.attribs.columns.1.style","tag.attribs.columns.2.style"],"jsHooks":[]}</script>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;1: Table of all flights where arr_delay is missing but dep_delay is not</figcaption>
+</figure>
+</div>
+</div>
+<p>The following code displays all flights where neither <code>arr_time</code> nor <code>sched_arr_time</code> are missing, but <code>arr_delay</code> is missing reflected in <a href="#fig-q1a-ex3">Figure&nbsp;2</a>. There are 717 such flights.</p>
+<div class="cell" data-hash="Chapter13_cache/html/fig-q1a-ex3_0a715f8d8020988dd7720f84c1a71278">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(arr_time) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(sched_arr_time) <span class="sc">&amp;</span> <span class="fu">is.na</span>(arr_delay)) <span class="sc">|&gt;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(flight, arr_time, sched_arr_time, arr_delay) <span class="sc">|&gt;</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(<span class="at">flight =</span> <span class="st">"Flight Number"</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">arr_delay =</span> <span class="st">"Arrival Delay (in min)"</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">arr_time =</span> <span class="st">"Arrival Time (hrs)"</span>,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">sched_arr_time =</span> <span class="st">"Scheduled Arrival Time (hrs)"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_interactive</span>(<span class="at">pagination_type =</span> <span class="st">"jump"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-q1a-ex3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+
+<div id="lpjuwigavq" class=".gt_table" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lpjuwigavq table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#lpjuwigavq thead, #lpjuwigavq tbody, #lpjuwigavq tfoot, #lpjuwigavq tr, #lpjuwigavq td, #lpjuwigavq th {
+  border-style: none;
+}
+
+#lpjuwigavq p {
+  margin: 0;
+  padding: 0;
+}
+
+#lpjuwigavq .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#lpjuwigavq .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#lpjuwigavq .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#lpjuwigavq .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#lpjuwigavq .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#lpjuwigavq .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lpjuwigavq .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#lpjuwigavq .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#lpjuwigavq .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#lpjuwigavq .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#lpjuwigavq .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#lpjuwigavq .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#lpjuwigavq .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#lpjuwigavq .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#lpjuwigavq .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#lpjuwigavq .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#lpjuwigavq .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#lpjuwigavq .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#lpjuwigavq .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lpjuwigavq .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#lpjuwigavq .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#lpjuwigavq .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#lpjuwigavq .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lpjuwigavq .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#lpjuwigavq .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#lpjuwigavq .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lpjuwigavq .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lpjuwigavq .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#lpjuwigavq .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lpjuwigavq .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#lpjuwigavq .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lpjuwigavq .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#lpjuwigavq .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lpjuwigavq .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#lpjuwigavq .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lpjuwigavq .gt_left {
+  text-align: left;
+}
+
+#lpjuwigavq .gt_center {
+  text-align: center;
+}
+
+#lpjuwigavq .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#lpjuwigavq .gt_font_normal {
+  font-weight: normal;
+}
+
+#lpjuwigavq .gt_font_bold {
+  font-weight: bold;
+}
+
+#lpjuwigavq .gt_font_italic {
+  font-style: italic;
+}
+
+#lpjuwigavq .gt_super {
+  font-size: 65%;
+}
+
+#lpjuwigavq .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#lpjuwigavq .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#lpjuwigavq .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#lpjuwigavq .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#lpjuwigavq .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#lpjuwigavq .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#lpjuwigavq .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<div id="lpjuwigavq" class="reactable html-widget " style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="lpjuwigavq">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"flight":[4525,3806,4413,1228,3325,4333,4140,3658,3325,4321,3401,4255,1705,3375,4532,3375,3369,4257,4638,1493,3325,3375,29,4372,721,743,1600,4129,4204,4698,4298,3375,4204,3375,512,738,3833,499,1702,145,738,1357,662,304,3375,1762,1415,1601,1275,721,4090,4181,512,3325,1010,4636,4348,743,1853,745,1612,883,337,685,401,1947,4087,1508,3375,185,1599,4364,5287,341,523,3353,343,5298,4422,3496,3611,1175,4522,797,3486,185,95,375,235,1516,65,3285,1185,3325,885,422,1,19,483,2067,4471,183,1581,185,3591,3525,2219,1643,2280,119,169,1054,4580,67,1715,4510,6074,654,172,4191,3486,1105,3815,3230,3621,970,1,1529,301,2488,1185,497,427,5333,857,303,1581,654,3547,4691,4419,4274,23,698,413,3812,213,423,413,29,1284,415,915,4571,23,300,997,213,360,352,4099,213,2590,398,4407,4537,839,464,1205,3604,430,2915,3827,2599,417,2593,1519,2243,4171,1634,1464,486,2927,97,884,2915,29,5677,884,2169,312,4195,403,1205,1117,963,461,1773,677,4381,4204,4537,3375,4413,389,1558,4625,3272,2163,2167,305,4543,2139,537,1695,985,3375,3375,4326,1838,727,715,712,4403,3375,3375,4264,3375,4525,1415,1740,615,2267,4087,3325,3375,4333,1643,701,3697,3375,4561,3375,951,715,4322,413,1597,405,2034,3514,815,785,3209,4662,4333,4122,569,458,91,452,2347,357,1942,847,95,4661,4357,1895,1200,4086,4381,987,878,1589,27,3810,523,353,3817,139,5670,4490,119,33,19,3325,677,1552,2098,179,645,4204,363,781,303,905,301,583,1739,2019,503,4409,1643,157,4625,15,4535,3334,3765,621,1153,2231,2131,33,848,457,2165,1097,4193,972,4224,1043,2183,345,329,377,1164,4204,1635,4193,4202,4342,4657,4298,1101,1871,1485,977,1186,61,505,1073,71,1925,1534,212,926,717,4120,677,21,857,1272,4553,4518,2171,4413,1600,4203,533,706,4471,4147,785,1431,1152,2075,3805,1621,177,1819,4975,2395,2044,977,4309,4413,1433,1709,2139,561,21,321,319,1731,717,4681,335,1905,785,1523,21,781,883,2223,4596,2279,4299,518,3325,763,4667,773,785,1608,4411,4502,1024,1121,1815,739,4255,4534,4269,4255,1499,2042,771,1925,1769,677,580,4195,4294,611,77,375,1170,930,1471,61,4679,505,1242,1769,1925,1982,1085,1973,1686,4552,4532,1601,3694,1491,625,363,1711,353,371,3879,2083,715,4511,1293,262,739,1060,377,1919,4181,1611,1120,711,5818,3367,38,1069,383,1983,3817,1751,573,1765,4381,1919,165,1939,493,4407,1498,1677,569,3574,331,905,1751,4111,1899,4171,3301,273,120,3319,3694,305,1879,1129,297,675,408,681,971,15,413,253,791,187,1284,4572,623,4097,15,4120,5824,1643,431,5091,1618,4065,753,759,883,5841,781,1117,301,1779,1601,1171,402,1325,1107,1677,4998,5806,405,3367,1403,824,3325,4682,763,1507,1499,847,1942,3854,301,1216,403,1171,1982,4576,3,1855,387,743,105,2043,781,2247,604,883,3134,4171,4572,451,4336,1942,1403,3231,1284,4519,236,1141,4583,1621,664,2395,348,2247,4336,1295,4382,1507,5109,4245,4471,4679,363,3216,207,1191,1173,1107,2269,1185,1503,1902,841,1581,2019,3349,1629,4243,1258,1621,85,1151,503,181,1284,167,1022,3807,4204,1707,6002,3325,773,509,4191,4552,5940,883,759,618,3325,4312,1883,1289,1178,3928,4111,1257,1751,4388,212,325,403,1787,1635,4471,1641,2099,1902,249,1708,1733,4535,1585,4247,783,1123,3301,316,283,843,1119,3301,4211,4720,3359,503,4166,1338,119,2279,745,4328,291,53,927,1592,745,997,1139,1873,4395,4576,4705,27,415,4537,3,1529,1107,1499,3525,3493,441,301,1246,1401,3488,1185,527,3325,2391,1193,1591,307,745,4580,3846,3531,375,347,15,331,5068,4510,4412,300,327],"arr_time":[1934,2002,2158,2251,29,2358,1313,1445,2333,2235,2359,1521,1821,2327,19,2111,2223,114,1315,1521,2025,2105,24,1844,1357,1606,2010,1912,58,218,1620,2150,2330,54,2339,2206,2333,1429,1937,2155,2208,1630,2,1203,2127,2340,1624,1633,1815,1341,1556,2049,2257,2140,1725,1410,57,1813,1855,1907,1801,2058,1908,1936,1830,2042,1818,127,107,2238,1600,1323,2106,1947,452,1240,1206,2116,1038,1102,1138,1121,1019,1635,2337,534,2324,2146,30,2154,2245,2344,2353,2313,1146,1630,1606,1518,2030,2341,950,1642,1420,308,2249,1044,2047,1236,2210,144,5,1937,1836,19,2304,1645,1453,1540,1657,2204,2207,2323,1250,1502,27,1436,1427,1552,1953,2320,11,1717,140,1630,1235,1133,1409,2134,1212,1315,1218,1519,1621,2046,2138,1207,1852,2210,2157,2338,2328,2324,304,1119,1607,1811,1908,1946,2305,2322,1457,1834,259,1413,1342,1352,759,2247,131,152,1223,2250,1617,1003,1528,2216,2204,953,1838,1234,28,1333,2121,438,2119,2352,7,1109,2107,1130,1559,245,1655,253,1405,1947,948,2149,330,1948,2351,1120,2243,2100,2148,1331,1318,2302,1125,1342,1053,2237,126,2212,2114,2237,2115,2221,1856,1525,758,1247,54,1939,2135,2132,1117,2133,2249,1343,1418,144,1255,2320,1952,2110,31,1239,1836,1938,2056,2151,2122,2341,1307,1631,1410,1453,1508,1904,1951,1207,2132,1903,1519,52,1251,1540,1945,114,118,245,2100,2228,2111,2216,2047,20,1043,1948,59,940,2014,1529,2129,1702,2001,1956,49,206,2244,1050,1310,1932,1157,1543,2035,132,1908,2111,2242,222,12,35,1654,1228,1223,1337,1216,1442,2318,2048,1510,1335,2150,1214,2244,1028,2146,2007,1855,2109,2333,2244,1254,1315,1343,1136,1404,1857,1401,2036,2125,2330,1028,37,1952,2034,156,2029,1934,2227,927,2246,1313,1520,1636,1541,1648,1716,1913,2027,1950,2100,2010,2047,2155,2249,1517,1512,211,1022,1343,1009,1606,1059,1907,2355,118,1938,1329,2219,1405,221,146,44,210,56,2145,2012,38,2056,1948,1410,1631,1655,2021,2252,41,138,152,1737,1135,1430,1446,2348,1349,2041,1527,2356,10,32,1216,1614,1949,1803,1851,1147,2033,2332,2211,2149,1926,2148,2206,1919,1911,1911,1914,2102,1354,619,1357,1116,1326,1349,2219,2247,2223,2030,2204,2139,2140,2137,13,1151,1547,1743,1831,1800,1852,1818,1615,1910,2023,2147,2206,2158,10,2324,1526,1835,2012,1849,1148,2326,2300,247,109,209,231,1051,1309,1201,1521,1816,2140,647,1126,2124,1008,1819,103,1646,1318,2118,2238,2125,249,416,1333,1253,2023,2121,1434,1915,1230,2358,2025,2039,1347,2047,1149,1030,1047,1044,1139,1946,1927,2043,1921,2125,843,1343,1540,2020,518,1704,2006,17,1052,1733,223,1940,2121,1311,2021,2321,1840,2208,1940,2249,1518,2149,2116,2212,804,1904,2148,2224,1749,2032,2008,2059,1931,1835,2350,2101,2014,2056,2044,2021,1859,2108,633,1317,1326,1513,53,1355,1933,2045,1930,2027,2131,2322,2327,2337,16,1604,1627,1712,2020,2047,1937,1338,1558,1615,1546,40,1956,1829,2056,18,1950,2225,1847,1757,2044,2058,2046,1155,1927,2229,1755,2047,2349,1227,1926,40,1406,1757,2000,2005,303,2045,2101,1526,2346,1035,1720,2231,27,1314,1649,2054,2012,2105,2101,651,1910,2051,1240,2238,2334,2348,951,940,2133,2226,2027,2256,2321,111,4,126,120,329,2007,2224,2207,2221,2315,31,1636,2248,2008,2121,2138,2218,2234,1929,1952,2052,2340,1228,1941,2021,1241,1644,1422,1609,1803,2126,1035,1707,1516,1926,949,957,1209,950,2149,154,1305,1352,1942,2003,2015,121,2140,2157,1259,1938,2044,2044,1704,1820,2257,1210,1911,2019,2121,1627,1816,1738,723,1600,2049,2054,1949,2116,2056,123,52,1136,1536,1409,2000,1338,1019,1825,2255,1145,1633,1717,2237,2339,58,2351,2250,2352,1538,1428,2000,1921,2228,1139,2048,332,1923,1629,953,1130,1344,1801,2159],"sched_arr_time":[1805,1647,2020,2103,2151,2207,1045,1146,2151,1938,2306,1240,1628,2046,2129,2046,2137,2315,1120,1347,1925,2046,2245,1543,1245,1520,1812,1405,2219,2234,1336,2046,2220,2046,2050,2038,2231,1321,1641,2040,2038,1350,2150,937,2046,2130,1030,1146,1420,1245,1431,1658,2050,1925,1526,1044,2233,1520,1540,1550,1605,1735,1645,1639,1410,1438,1328,1944,2046,2010,1430,1022,1954,1700,2359,1003,914,1953,807,821,949,905,805,922,1950,40,2018,1906,2250,1847,1915,1921,2055,2132,920,1211,1220,1325,1625,2005,824,1039,1215,40,2040,750,1344,1132,1906,2200,2040,1643,1654,2035,2131,1124,1316,1230,1315,1920,1950,1746,912,1215,2255,1225,1325,1305,1737,2030,2050,1509,2354,1354,1116,933,1211,1925,940,1023,1053,1123,1410,1407,2025,1025,1714,1946,2025,2235,2014,2047,2357,918,1405,1605,1752,1714,2102,1851,1245,1714,2259,1003,1034,1034,437,2023,2355,2150,1040,2127,1308,2203,1042,1927,2021,850,1555,1025,2211,1030,1800,2352,1926,2159,2235,831,1700,809,1322,1854,1430,2355,1137,1837,837,1925,2357,1645,2220,1007,2046,2020,1935,1140,1111,2145,807,1022,850,2113,2247,1815,1907,1902,2046,2046,1656,925,438,1040,2123,1640,2046,2046,1012,2046,1805,1029,1142,1631,1110,2013,1925,2046,2207,1122,1331,1350,2046,1712,2046,2134,1040,1205,1140,1220,1340,1820,1915,950,2055,1505,1211,2207,920,1413,1819,2329,2327,1737,1654,1803,1838,1824,1855,1828,910,1841,2022,800,1815,905,1240,1450,1713,1453,2207,2315,2007,915,1010,1719,1100,1340,1844,3,1447,1907,2012,2340,2220,2227,1536,805,804,745,831,1225,1900,2037,1010,1125,1923,1025,1815,846,2056,1435,1438,1655,1850,2042,1050,915,1057,914,1235,1546,1240,1559,1916,1821,815,2100,1643,1749,2244,1845,1546,1853,753,1840,1157,1242,1310,1310,1510,1500,1428,1543,1700,1729,1805,1735,1858,2041,1210,1209,2356,1015,1128,811,1345,735,1213,2025,2310,1804,1008,2011,1245,2313,2050,2107,2144,2229,1415,1843,2140,1645,1627,1103,1445,1510,1740,2025,2135,2300,2243,1025,1015,1210,1140,2021,1135,1423,1045,1959,2050,2107,1015,1527,1800,1625,1705,1010,1735,2052,1837,1900,1702,2010,2050,1556,1820,1647,1715,1834,935,350,1201,920,1159,1200,1939,1934,1956,1805,1820,1714,2000,1857,1830,1004,1236,1310,1300,1418,1413,1428,1454,1543,1745,1820,1805,1907,1911,2033,1321,1449,1859,1621,1710,1844,1930,2130,1910,1950,2235,900,940,1030,1255,1645,1805,350,1005,1801,810,1650,2304,1444,930,1823,2010,1904,2348,17,1230,1159,1800,1821,1315,1658,808,1555,1805,1740,1013,1646,857,727,720,833,809,1800,1650,1741,1553,1925,725,1156,1401,1710,2140,1350,1906,2033,845,1528,1900,1358,1801,1040,1840,2205,1345,1605,1732,2015,1314,1801,1701,1837,2216,1638,1747,1741,1212,1635,1740,1750,1739,1534,1923,1735,1752,1655,1755,1752,1720,1809,2359,1043,1227,1335,2010,954,1541,1801,1741,1845,1950,1938,1844,1806,1913,1251,1307,1445,1755,1906,1746,1058,1320,1256,1500,2149,1553,1533,1628,1617,1750,2005,1554,1637,1737,1709,1806,954,1635,2012,1024,1620,2155,923,1754,2154,1057,1532,1632,1717,2321,1814,1950,1126,2109,829,1421,2130,1845,1100,1316,1742,1809,1750,1907,344,1749,1750,1152,2046,2050,2238,810,725,1754,1855,1840,2004,2015,2035,2039,2155,2046,2224,1741,1741,1801,2000,1925,2105,1444,1813,1750,1740,1627,1801,2100,1702,1747,1807,1955,931,1727,1800,1114,1141,1205,1445,1410,1905,829,1540,1440,1749,725,740,951,833,2106,2318,1050,1115,1720,1359,1909,1852,1912,1930,1115,1525,1640,2004,857,1458,2200,1035,1729,1913,2030,1309,1612,1554,350,1254,1842,1750,1556,1806,1919,2000,2015,1018,1056,1244,1748,1230,800,1535,1920,730,1505,1610,1818,2055,2000,2130,2137,2210,1025,934,1733,1650,1750,1020,1906,53,1813,1509,753,959,1222,1510,2020],"arr_delay":["NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA"]},"columns":[{"id":"flight","name":"Flight Number","type":"numeric","style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","cell":["4525","3806","4413","1228","3325","4333","4140","3658","3325","4321","3401","4255","1705","3375","4532","3375","3369","4257","4638","1493","3325","3375","29","4372","721","743","1600","4129","4204","4698","4298","3375","4204","3375","512","738","3833","499","1702","145","738","1357","662","304","3375","1762","1415","1601","1275","721","4090","4181","512","3325","1010","4636","4348","743","1853","745","1612","883","337","685","401","1947","4087","1508","3375","185","1599","4364","5287","341","523","3353","343","5298","4422","3496","3611","1175","4522","797","3486","185","95","375","235","1516","65","3285","1185","3325","885","422","1","19","483","2067","4471","183","1581","185","3591","3525","2219","1643","2280","119","169","1054","4580","67","1715","4510","6074","654","172","4191","3486","1105","3815","3230","3621","970","1","1529","301","2488","1185","497","427","5333","857","303","1581","654","3547","4691","4419","4274","23","698","413","3812","213","423","413","29","1284","415","915","4571","23","300","997","213","360","352","4099","213","2590","398","4407","4537","839","464","1205","3604","430","2915","3827","2599","417","2593","1519","2243","4171","1634","1464","486","2927","97","884","2915","29","5677","884","2169","312","4195","403","1205","1117","963","461","1773","677","4381","4204","4537","3375","4413","389","1558","4625","3272","2163","2167","305","4543","2139","537","1695","985","3375","3375","4326","1838","727","715","712","4403","3375","3375","4264","3375","4525","1415","1740","615","2267","4087","3325","3375","4333","1643","701","3697","3375","4561","3375","951","715","4322","413","1597","405","2034","3514","815","785","3209","4662","4333","4122","569","458","91","452","2347","357","1942","847","95","4661","4357","1895","1200","4086","4381","987","878","1589","27","3810","523","353","3817","139","5670","4490","119","33","19","3325","677","1552","2098","179","645","4204","363","781","303","905","301","583","1739","2019","503","4409","1643","157","4625","15","4535","3334","3765","621","1153","2231","2131","33","848","457","2165","1097","4193","972","4224","1043","2183","345","329","377","1164","4204","1635","4193","4202","4342","4657","4298","1101","1871","1485","977","1186","61","505","1073","71","1925","1534","212","926","717","4120","677","21","857","1272","4553","4518","2171","4413","1600","4203","533","706","4471","4147","785","1431","1152","2075","3805","1621","177","1819","4975","2395","2044","977","4309","4413","1433","1709","2139","561","21","321","319","1731","717","4681","335","1905","785","1523","21","781","883","2223","4596","2279","4299","518","3325","763","4667","773","785","1608","4411","4502","1024","1121","1815","739","4255","4534","4269","4255","1499","2042","771","1925","1769","677","580","4195","4294","611","77","375","1170","930","1471","61","4679","505","1242","1769","1925","1982","1085","1973","1686","4552","4532","1601","3694","1491","625","363","1711","353","371","3879","2083","715","4511","1293","262","739","1060","377","1919","4181","1611","1120","711","5818","3367","38","1069","383","1983","3817","1751","573","1765","4381","1919","165","1939","493","4407","1498","1677","569","3574","331","905","1751","4111","1899","4171","3301","273","120","3319","3694","305","1879","1129","297","675","408","681","971","15","413","253","791","187","1284","4572","623","4097","15","4120","5824","1643","431","5091","1618","4065","753","759","883","5841","781","1117","301","1779","1601","1171","402","1325","1107","1677","4998","5806","405","3367","1403","824","3325","4682","763","1507","1499","847","1942","3854","301","1216","403","1171","1982","4576","3","1855","387","743","105","2043","781","2247","604","883","3134","4171","4572","451","4336","1942","1403","3231","1284","4519","236","1141","4583","1621","664","2395","348","2247","4336","1295","4382","1507","5109","4245","4471","4679","363","3216","207","1191","1173","1107","2269","1185","1503","1902","841","1581","2019","3349","1629","4243","1258","1621","85","1151","503","181","1284","167","1022","3807","4204","1707","6002","3325","773","509","4191","4552","5940","883","759","618","3325","4312","1883","1289","1178","3928","4111","1257","1751","4388","212","325","403","1787","1635","4471","1641","2099","1902","249","1708","1733","4535","1585","4247","783","1123","3301","316","283","843","1119","3301","4211","4720","3359","503","4166","1338","119","2279","745","4328","291","53","927","1592","745","997","1139","1873","4395","4576","4705","27","415","4537","3","1529","1107","1499","3525","3493","441","301","1246","1401","3488","1185","527","3325","2391","1193","1591","307","745","4580","3846","3531","375","347","15","331","5068","4510","4412","300","327"],"html":true,"align":"right","headerStyle":{"font-weight":"normal"}},{"id":"arr_time","name":"Arrival Time (hrs)","type":"numeric","style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","cell":["1934","2002","2158","2251","29","2358","1313","1445","2333","2235","2359","1521","1821","2327","19","2111","2223","114","1315","1521","2025","2105","24","1844","1357","1606","2010","1912","58","218","1620","2150","2330","54","2339","2206","2333","1429","1937","2155","2208","1630","2","1203","2127","2340","1624","1633","1815","1341","1556","2049","2257","2140","1725","1410","57","1813","1855","1907","1801","2058","1908","1936","1830","2042","1818","127","107","2238","1600","1323","2106","1947","452","1240","1206","2116","1038","1102","1138","1121","1019","1635","2337","534","2324","2146","30","2154","2245","2344","2353","2313","1146","1630","1606","1518","2030","2341","950","1642","1420","308","2249","1044","2047","1236","2210","144","5","1937","1836","19","2304","1645","1453","1540","1657","2204","2207","2323","1250","1502","27","1436","1427","1552","1953","2320","11","1717","140","1630","1235","1133","1409","2134","1212","1315","1218","1519","1621","2046","2138","1207","1852","2210","2157","2338","2328","2324","304","1119","1607","1811","1908","1946","2305","2322","1457","1834","259","1413","1342","1352","759","2247","131","152","1223","2250","1617","1003","1528","2216","2204","953","1838","1234","28","1333","2121","438","2119","2352","7","1109","2107","1130","1559","245","1655","253","1405","1947","948","2149","330","1948","2351","1120","2243","2100","2148","1331","1318","2302","1125","1342","1053","2237","126","2212","2114","2237","2115","2221","1856","1525","758","1247","54","1939","2135","2132","1117","2133","2249","1343","1418","144","1255","2320","1952","2110","31","1239","1836","1938","2056","2151","2122","2341","1307","1631","1410","1453","1508","1904","1951","1207","2132","1903","1519","52","1251","1540","1945","114","118","245","2100","2228","2111","2216","2047","20","1043","1948","59","940","2014","1529","2129","1702","2001","1956","49","206","2244","1050","1310","1932","1157","1543","2035","132","1908","2111","2242","222","12","35","1654","1228","1223","1337","1216","1442","2318","2048","1510","1335","2150","1214","2244","1028","2146","2007","1855","2109","2333","2244","1254","1315","1343","1136","1404","1857","1401","2036","2125","2330","1028","37","1952","2034","156","2029","1934","2227","927","2246","1313","1520","1636","1541","1648","1716","1913","2027","1950","2100","2010","2047","2155","2249","1517","1512","211","1022","1343","1009","1606","1059","1907","2355","118","1938","1329","2219","1405","221","146","44","210","56","2145","2012","38","2056","1948","1410","1631","1655","2021","2252","41","138","152","1737","1135","1430","1446","2348","1349","2041","1527","2356","10","32","1216","1614","1949","1803","1851","1147","2033","2332","2211","2149","1926","2148","2206","1919","1911","1911","1914","2102","1354","619","1357","1116","1326","1349","2219","2247","2223","2030","2204","2139","2140","2137","13","1151","1547","1743","1831","1800","1852","1818","1615","1910","2023","2147","2206","2158","10","2324","1526","1835","2012","1849","1148","2326","2300","247","109","209","231","1051","1309","1201","1521","1816","2140","647","1126","2124","1008","1819","103","1646","1318","2118","2238","2125","249","416","1333","1253","2023","2121","1434","1915","1230","2358","2025","2039","1347","2047","1149","1030","1047","1044","1139","1946","1927","2043","1921","2125","843","1343","1540","2020","518","1704","2006","17","1052","1733","223","1940","2121","1311","2021","2321","1840","2208","1940","2249","1518","2149","2116","2212","804","1904","2148","2224","1749","2032","2008","2059","1931","1835","2350","2101","2014","2056","2044","2021","1859","2108","633","1317","1326","1513","53","1355","1933","2045","1930","2027","2131","2322","2327","2337","16","1604","1627","1712","2020","2047","1937","1338","1558","1615","1546","40","1956","1829","2056","18","1950","2225","1847","1757","2044","2058","2046","1155","1927","2229","1755","2047","2349","1227","1926","40","1406","1757","2000","2005","303","2045","2101","1526","2346","1035","1720","2231","27","1314","1649","2054","2012","2105","2101","651","1910","2051","1240","2238","2334","2348","951","940","2133","2226","2027","2256","2321","111","4","126","120","329","2007","2224","2207","2221","2315","31","1636","2248","2008","2121","2138","2218","2234","1929","1952","2052","2340","1228","1941","2021","1241","1644","1422","1609","1803","2126","1035","1707","1516","1926","949","957","1209","950","2149","154","1305","1352","1942","2003","2015","121","2140","2157","1259","1938","2044","2044","1704","1820","2257","1210","1911","2019","2121","1627","1816","1738","723","1600","2049","2054","1949","2116","2056","123","52","1136","1536","1409","2000","1338","1019","1825","2255","1145","1633","1717","2237","2339","58","2351","2250","2352","1538","1428","2000","1921","2228","1139","2048","332","1923","1629","953","1130","1344","1801","2159"],"html":true,"align":"right","headerStyle":{"font-weight":"normal"}},{"id":"sched_arr_time","name":"Scheduled Arrival Time (hrs)","type":"numeric","style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","cell":["1805","1647","2020","2103","2151","2207","1045","1146","2151","1938","2306","1240","1628","2046","2129","2046","2137","2315","1120","1347","1925","2046","2245","1543","1245","1520","1812","1405","2219","2234","1336","2046","2220","2046","2050","2038","2231","1321","1641","2040","2038","1350","2150","937","2046","2130","1030","1146","1420","1245","1431","1658","2050","1925","1526","1044","2233","1520","1540","1550","1605","1735","1645","1639","1410","1438","1328","1944","2046","2010","1430","1022","1954","1700","2359","1003","914","1953","807","821","949","905","805","922","1950","40","2018","1906","2250","1847","1915","1921","2055","2132","920","1211","1220","1325","1625","2005","824","1039","1215","40","2040","750","1344","1132","1906","2200","2040","1643","1654","2035","2131","1124","1316","1230","1315","1920","1950","1746","912","1215","2255","1225","1325","1305","1737","2030","2050","1509","2354","1354","1116","933","1211","1925","940","1023","1053","1123","1410","1407","2025","1025","1714","1946","2025","2235","2014","2047","2357","918","1405","1605","1752","1714","2102","1851","1245","1714","2259","1003","1034","1034","437","2023","2355","2150","1040","2127","1308","2203","1042","1927","2021","850","1555","1025","2211","1030","1800","2352","1926","2159","2235","831","1700","809","1322","1854","1430","2355","1137","1837","837","1925","2357","1645","2220","1007","2046","2020","1935","1140","1111","2145","807","1022","850","2113","2247","1815","1907","1902","2046","2046","1656","925","438","1040","2123","1640","2046","2046","1012","2046","1805","1029","1142","1631","1110","2013","1925","2046","2207","1122","1331","1350","2046","1712","2046","2134","1040","1205","1140","1220","1340","1820","1915","950","2055","1505","1211","2207","920","1413","1819","2329","2327","1737","1654","1803","1838","1824","1855","1828","910","1841","2022","800","1815","905","1240","1450","1713","1453","2207","2315","2007","915","1010","1719","1100","1340","1844","3","1447","1907","2012","2340","2220","2227","1536","805","804","745","831","1225","1900","2037","1010","1125","1923","1025","1815","846","2056","1435","1438","1655","1850","2042","1050","915","1057","914","1235","1546","1240","1559","1916","1821","815","2100","1643","1749","2244","1845","1546","1853","753","1840","1157","1242","1310","1310","1510","1500","1428","1543","1700","1729","1805","1735","1858","2041","1210","1209","2356","1015","1128","811","1345","735","1213","2025","2310","1804","1008","2011","1245","2313","2050","2107","2144","2229","1415","1843","2140","1645","1627","1103","1445","1510","1740","2025","2135","2300","2243","1025","1015","1210","1140","2021","1135","1423","1045","1959","2050","2107","1015","1527","1800","1625","1705","1010","1735","2052","1837","1900","1702","2010","2050","1556","1820","1647","1715","1834","935","350","1201","920","1159","1200","1939","1934","1956","1805","1820","1714","2000","1857","1830","1004","1236","1310","1300","1418","1413","1428","1454","1543","1745","1820","1805","1907","1911","2033","1321","1449","1859","1621","1710","1844","1930","2130","1910","1950","2235","900","940","1030","1255","1645","1805","350","1005","1801","810","1650","2304","1444","930","1823","2010","1904","2348","17","1230","1159","1800","1821","1315","1658","808","1555","1805","1740","1013","1646","857","727","720","833","809","1800","1650","1741","1553","1925","725","1156","1401","1710","2140","1350","1906","2033","845","1528","1900","1358","1801","1040","1840","2205","1345","1605","1732","2015","1314","1801","1701","1837","2216","1638","1747","1741","1212","1635","1740","1750","1739","1534","1923","1735","1752","1655","1755","1752","1720","1809","2359","1043","1227","1335","2010","954","1541","1801","1741","1845","1950","1938","1844","1806","1913","1251","1307","1445","1755","1906","1746","1058","1320","1256","1500","2149","1553","1533","1628","1617","1750","2005","1554","1637","1737","1709","1806","954","1635","2012","1024","1620","2155","923","1754","2154","1057","1532","1632","1717","2321","1814","1950","1126","2109","829","1421","2130","1845","1100","1316","1742","1809","1750","1907","344","1749","1750","1152","2046","2050","2238","810","725","1754","1855","1840","2004","2015","2035","2039","2155","2046","2224","1741","1741","1801","2000","1925","2105","1444","1813","1750","1740","1627","1801","2100","1702","1747","1807","1955","931","1727","1800","1114","1141","1205","1445","1410","1905","829","1540","1440","1749","725","740","951","833","2106","2318","1050","1115","1720","1359","1909","1852","1912","1930","1115","1525","1640","2004","857","1458","2200","1035","1729","1913","2030","1309","1612","1554","350","1254","1842","1750","1556","1806","1919","2000","2015","1018","1056","1244","1748","1230","800","1535","1920","730","1505","1610","1818","2055","2000","2130","2137","2210","1025","934","1733","1650","1750","1020","1906","53","1813","1509","753","959","1222","1510","2020"],"html":true,"align":"right","headerStyle":{"font-weight":"normal"}},{"id":"arr_delay","name":"Arrival Delay (in min)","type":"numeric","style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","cell":["NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA"],"html":true,"align":"right","headerStyle":{"font-weight":"normal"}}],"defaultPageSize":10,"showPageSizeOptions":false,"pageSizeOptions":[10,25,50,100],"paginationType":"jump","showPagination":true,"showPageInfo":true,"minRows":1,"showSortable":true,"height":"auto","theme":{"color":"#333333","backgroundColor":"#FFFFFF","stripedColor":"rgba(128,128,128,0.05)","style":{"fontFamily":"system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"},"headerStyle":{"borderTopStyle":"solid","borderTopWidth":"2px","borderTopColor":"#D3D3D3","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"}},"elementId":"lpjuwigavq","dataKey":"0d239b2dac7908db58ea35e2a619c592"},"children":[]},"class":"reactR_markup"},"evals":["tag.attribs.columns.0.style","tag.attribs.columns.1.style","tag.attribs.columns.2.style","tag.attribs.columns.3.style"],"jsHooks":[]}</script>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;2: Table of all flights where arr_delay is missing but dep_delay is not</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="question-2-1" class="level2">
+<h2 class="anchored" data-anchor-id="question-2-1">Question 2</h2>
+<p><strong>How many flights have a missing <code>dep_time</code>? What other variables are missing in these rows? What might these rows represent?</strong></p>
+<p>The following code shows us that 8,255 flights have a missing <code>dep_time</code> . Further, <a href="#fig-q2-ex3">Figure&nbsp;3</a> shows us that these flights have missing <code>dep_delay</code> , <code>arr_time</code> , <code>arr_delay</code> and <code>air_time</code>. Further, around 30% of these have missing <code>tailnum</code>.</p>
+<p>Thus, these rows most likely represent cancelled flights.</p>
+<div class="cell" data-hash="Chapter13_cache/html/fig-q2-ex3_76572ce6354804e3ca6c59bd3c6c1a6a">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(dep_time)) <span class="sc">|&gt;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">|&gt;</span> <span class="fu">as.numeric</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8255</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(dep_time)) <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  naniar<span class="sc">::</span><span class="fu">vis_miss</span>() <span class="sc">+</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x.top =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-q2-ex3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter13_files/figure-html/fig-q2-ex3-1.png" class="img-fluid figure-img" width="960"></p>
+<figcaption class="figure-caption">Figure&nbsp;3: Visualization of missing values in flights with missing dep_time</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="question-3" class="level2">
+<h2 class="anchored" data-anchor-id="question-3">Question 3</h2>
+<p><strong>Assuming that a missing <code>dep_time</code> implies that a flight is cancelled, look at the number of cancelled flights per day. Is there a pattern? Is there a connection between the proportion of cancelled flights and the average delay of non-cancelled flights?</strong></p>
+<p>As shown in <a href="#fig-q3a-ex3">Figure&nbsp;4</a> below, when seen over the entire course of year, no specific pattern emerges. However, certain months show more number of spikes - there is one day with large number of cancellations (over 400) in February. When seen month-wise, as in <a href="#fig-q3b-ex3">Figure&nbsp;5</a> , it becomes apparent that most flight cancellations occur in December - March; or in June-July.</p>
+<div class="cell" data-hash="Chapter13_cache/html/fig-q3a-ex3_92337944bfe0d810c429d0727cadf08a">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(dep_time)) <span class="sc">|&gt;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date =</span> <span class="fu">make_date</span>(<span class="at">year =</span> year,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">month =</span> month,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">day =</span> day)) <span class="sc">|&gt;</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(date) <span class="sc">|&gt;</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">|&gt;</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  ggthemes<span class="sc">::</span><span class="fu">theme_fivethirtyeight</span>() <span class="sc">+</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Cancelled flight numbers show spikes on certain days"</span>,</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"There is consistent cancellation in December - may be due to snowstorms!"</span>) <span class="sc">+</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>), </span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">colour =</span> <span class="st">"white"</span>)</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-q3a-ex3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter13_files/figure-html/fig-q3a-ex3-1.png" class="img-fluid figure-img" width="960"></p>
+<figcaption class="figure-caption">Figure&nbsp;4: <strong>?(caption)</strong></figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-hash="Chapter13_cache/html/fig-q3b-ex3_90d76640fad527af4fe99dc9924ba4e6">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>mths_lab <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Jan"</span>, <span class="st">"Feb"</span>, <span class="st">"Mar"</span>, <span class="st">"Apr"</span>,</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">"May"</span>, <span class="st">"Jun"</span>, <span class="st">"Jul"</span>, <span class="st">"Aug"</span>,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Sep"</span>, <span class="st">"Oct"</span>, <span class="st">"Nov"</span>, <span class="st">"Dec"</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  flights <span class="sc">|&gt;</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">is.na</span>(dep_time)) <span class="sc">|&gt;</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(month) <span class="sc">|&gt;</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>() <span class="sc">|&gt;</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> month, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    ggthemes<span class="sc">::</span><span class="fu">theme_fivethirtyeight</span>() <span class="sc">+</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"No. of cancelled flights"</span>,</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">title =</span> <span class="st">"Flight cancellations occur most </span><span class="sc">\n</span><span class="st">in a few months"</span>,</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">subtitle =</span> <span class="st">"December-Feruary, June-July see maximum cancelled flights. </span><span class="sc">\n</span><span class="st">October-November have the least cancellations"</span>) <span class="sc">+</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>,</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>                       <span class="at">labels =</span> mths_lab) <span class="sc">+</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>)) <span class="sc">+</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>), </span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">colour =</span> <span class="st">"white"</span>)</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>  flights <span class="sc">|&gt;</span></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">is.na</span>(dep_time)) <span class="sc">|&gt;</span></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(day) <span class="sc">|&gt;</span></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>() <span class="sc">|&gt;</span></span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> day, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">col =</span> <span class="st">"darkgrey"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>    ggthemes<span class="sc">::</span><span class="fu">theme_fivethirtyeight</span>() <span class="sc">+</span></span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"No. of cancelled flights"</span>,</span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>         <span class="at">title =</span> <span class="st">"Flight cancellations spike on 8th-9th days </span><span class="sc">\n</span><span class="st">of the months"</span>,</span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>         <span class="at">subtitle =</span> <span class="st">"This is unlikely to be a pattern since </span><span class="sc">\n</span><span class="st">this is a sum, influenced by a few high values"</span>) <span class="sc">+</span> </span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">31</span>, <span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>)) <span class="sc">+</span></span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>), </span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">colour =</span> <span class="st">"white"</span>)</span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a><span class="at">ncol =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-q3b-ex3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter13_files/figure-html/fig-q3b-ex3-1.png" class="img-fluid figure-img" width="960"></p>
+<figcaption class="figure-caption">Figure&nbsp;5: <strong>?(caption)</strong></figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The following <a href="#fig-3c-ex3">Figure&nbsp;6</a> depicts the connection between the proportion of cancelled flights and the average delay of non-cancelled flights. It shows that there is high average delay on the days where there are more cancelled flights, perhaps because bad weather causes both.</p>
+<p>Note: Here, I used <code>geom_smooth()</code> instead of <code>geom_line()</code> to make the pattern more easily perceptible.</p>
+<div class="cell" data-hash="Chapter13_cache/html/fig-3c-ex3_e869b95d4c97bacc7b82fbb680f7cd0d">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>coeff <span class="ot">=</span> <span class="fl">0.15</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date =</span> <span class="fu">make_date</span>(<span class="at">year =</span> year,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">month =</span> month,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">day =</span> day)) <span class="sc">|&gt;</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month, date) <span class="sc">|&gt;</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">cancelled =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(dep_time)),</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">prop_cancelled =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(dep_time)) <span class="sc">/</span> <span class="fu">n</span>(),</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> date)) <span class="sc">+</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">y =</span> prop_cancelled <span class="sc">*</span> <span class="dv">100</span>), </span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">"loess"</span>,</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>              <span class="at">span =</span> coeff,</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>              <span class="at">col =</span> <span class="st">"red"</span>,</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">y =</span> avg_delay), , </span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">"loess"</span>,</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>              <span class="at">span =</span> coeff,</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>              <span class="at">col =</span> <span class="st">"blue"</span>,</span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span>  </span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Percentage Cancelled Flights (%)"</span>,</span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">sec.axis =</span> <span class="fu">sec_axis</span>(<span class="at">trans =</span> <span class="sc">~</span> .<span class="sc">*</span><span class="fl">0.5</span>,</span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>                        <span class="at">name =</span> <span class="st">"Avg. Delay (min.)"</span>)) <span class="sc">+</span></span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y.left =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"red"</span>),</span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y.left =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"red"</span>),</span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y.right =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"blue"</span>),</span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y.right =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"blue"</span>)) <span class="sc">+</span></span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Flight Cancellations and average delays are correlated"</span>,</span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Higher average delay occurs on same days as more flight cancellations"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-3c-ex3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter13_files/figure-html/fig-3c-ex3-1.png" class="img-fluid figure-img" width="960"></p>
+<figcaption class="figure-caption">Figure&nbsp;6: Correlation between proportion of cancelled flights and the average delay of non-cancelled flights</figcaption>
+</figure>
+</div>
 </div>
 </div>
 
