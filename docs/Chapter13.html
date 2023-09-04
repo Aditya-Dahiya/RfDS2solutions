@@ -172,7 +172,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Chapter 13</li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Chapter13.html">Transform</a></li><li class="breadcrumb-item"><a href="./Chapter13.html">Chapter 13</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -281,8 +281,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Transform</span></span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Transform</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Chapter13.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Chapter 13</span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
@@ -348,6 +361,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#question-1-1" id="toc-question-1-1" class="nav-link" data-scroll-target="#question-1-1">Question 1</a></li>
   <li><a href="#question-2-1" id="toc-question-2-1" class="nav-link" data-scroll-target="#question-2-1">Question 2</a></li>
   <li><a href="#question-3" id="toc-question-3" class="nav-link" data-scroll-target="#question-3">Question 3</a></li>
+  </ul></li>
+  <li><a href="#exercises-2" id="toc-exercises-2" class="nav-link" data-scroll-target="#exercises-2"><strong>13.4.4 Exercises</strong></a>
+  <ul class="collapse">
+  <li><a href="#question-1-2" id="toc-question-1-2" class="nav-link" data-scroll-target="#question-1-2">Question 1</a></li>
+  <li><a href="#question-2-2" id="toc-question-2-2" class="nav-link" data-scroll-target="#question-2-2">Question 2</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/edit/main/Chapter13.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -1596,6 +1614,84 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+</section>
+</section>
+<section id="exercises-2" class="level1">
+<h1><strong>13.4.4 Exercises</strong></h1>
+<section id="question-1-2" class="level2">
+<h2 class="anchored" data-anchor-id="question-1-2">Question 1</h2>
+<p><strong>What will <code>sum(is.na(x))</code> tell you? How about <code>mean(is.na(x))</code>?</strong></p>
+<p>The expression <code>sum(is.na(x))</code> tells us the number of missing values in the vector <code>x</code>. The expression <code>mean(is.na(x))</code> tells us the proportion of missing values in the vector <code>x</code> .</p>
+<p>This is because <code>is.na(x)</code> is a function or operation used to determine which elements of a vector or data structure <code>x</code> are missing or NA (Not Available) values. NA values typically represent missing or undefined data points. Here’s what the two expressions you provided mean:</p>
+<ol type="1">
+<li><p><code>sum(is.na(x))</code>:</p>
+<ul>
+<li><p>This expression will count the number of NA (missing) values in the vector or data structure <code>x</code>. It calculates the total count of NA values in the entire dataset.</p></li>
+<li><p>The result will be an integer representing the count of NA values.</p></li>
+</ul></li>
+<li><p><code>mean(is.na(x))</code>:</p>
+<ul>
+<li><p>This expression will calculate the proportion of NA (missing) values in the vector or data structure <code>x</code>. It calculates the average of a binary vector where each element is either 1 (if NA) or 0 (if not NA).</p></li>
+<li><p>The result will be a numeric value between 0 and 1, representing the fraction of missing values in the dataset. It can be interpreted as the percentage of missing values when multiplied by 100.</p></li>
+</ul></li>
+</ol>
+<p>Here’s a simple example in R to illustrate these concepts:</p>
+<div class="cell" data-hash="Chapter13_cache/html/unnamed-chunk-13_82bb5081dfcc765dc23f84c1ff04a9e9">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample vector with missing values </span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="cn">NA</span>, <span class="dv">3</span>, <span class="cn">NA</span>, <span class="dv">5</span>, <span class="dv">6</span>)  </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Count of missing values </span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>count_missing <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(x)) </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Count of missing values:"</span>, count_missing, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Count of missing values: 2 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Proportion of missing values </span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>prop_missing <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">is.na</span>(x)) </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Proportion of missing values:"</span>, prop_missing, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Proportion of missing values: 0.3333333 </code></pre>
+</div>
+</div>
+</section>
+<section id="question-2-2" class="level2">
+<h2 class="anchored" data-anchor-id="question-2-2">Question 2</h2>
+<p><strong>What does <a href="https://rdrr.io/r/base/prod.html"><code>prod()</code></a> return when applied to a logical vector? What logical summary function is it equivalent to? What does <a href="https://rdrr.io/r/base/Extremes.html"><code>min()</code></a> return when applied to a logical vector? What logical summary function is it equivalent to? Read the documentation and perform a few experiments.</strong></p>
+<div class="cell" data-hash="Chapter13_cache/html/unnamed-chunk-14_fa091bff955c876d5ba0f32ce210d805">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A logical vector with random TRUE and FALSE</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>random <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>),</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="dv">10</span>,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>random</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1]  TRUE  TRUE  TRUE FALSE FALSE  TRUE  TRUE  TRUE FALSE  TRUE</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co"># A logical vector with all TRUE</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>all_true <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">TRUE</span>, <span class="dv">10</span>)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>all_true</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="co"># A logical vector with all FALSE</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>all_false <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">FALSE</span>, <span class="dv">10</span>)</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>all_false</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE</span></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a><span class="fu">prod</span>(random)</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0</span></span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a><span class="fu">prod</span>(all_true)</span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1</span></span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a><span class="fu">prod</span>(all_false)</span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0</span></span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(random)</span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0</span></span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(all_true)</span>
+<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1</span></span>
+<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(all_false)</span>
+<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In R, when we apply the <code>prod()</code> function to a logical vector, it treats <code>TRUE</code> as 1 and <code>FALSE</code> as 0, and then computes the product of the elements in the vector. Essentially, it multiplies all the elements together. This can be useful when we want to check if all elements in a logical vector are <code>TRUE</code>, as the product will be 1 if all are <code>TRUE</code> and 0 if any of them is <code>FALSE</code>.</p>
+<p>This is equivalent to using the <code>all()</code> function, which checks if all elements in a logical vector are <code>TRUE</code>. The <code>all()</code> function returns <code>TRUE</code> if all elements are <code>TRUE</code> and <code>FALSE</code> otherwise.</p>
+<p>Now, when we apply the <code>min()</code> function to a logical vector, it also treats <code>TRUE</code> as 1 and <code>FALSE</code> as 0, and then computes the minimum value. Since 0 represents <code>FALSE</code> and 1 represents <code>TRUE</code>, the minimum value in a logical vector is <code>FALSE</code> (0). Therefore, when we use <code>min()</code> on a logical vector with even one value <code>FALSE</code>, it will return <code>FALSE</code>.</p>
+<p>In summary, <code>prod()</code> and <code>min()</code> applied to logical vectors have specific behavior related to the interpretation of <code>TRUE</code> and <code>FALSE</code>, and they are equivalent to the <code>all()</code>.</p>
+<p>Note: <code>max()</code> will act as equivalen to the <code>any()</code> function.</p>
 
 
 </section>

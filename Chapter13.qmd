@@ -329,6 +329,71 @@ flights |>
 
 **What will `sum(is.na(x))` tell you? How about `mean(is.na(x))`?**
 
+The expression `sum(is.na(x))` tells us the number of missing values in the vector `x`. The expression `mean(is.na(x))` tells us the proportion of missing values in the vector `x` .
+
+This is because `is.na(x)` is a function or operation used to determine which elements of a vector or data structure `x` are missing or NA (Not Available) values. NA values typically represent missing or undefined data points. Here's what the two expressions you provided mean:
+
+1.  `sum(is.na(x))`:
+
+    -   This expression will count the number of NA (missing) values in the vector or data structure `x`. It calculates the total count of NA values in the entire dataset.
+
+    -   The result will be an integer representing the count of NA values.
+
+2.  `mean(is.na(x))`:
+
+    -   This expression will calculate the proportion of NA (missing) values in the vector or data structure `x`. It calculates the average of a binary vector where each element is either 1 (if NA) or 0 (if not NA).
+
+    -   The result will be a numeric value between 0 and 1, representing the fraction of missing values in the dataset. It can be interpreted as the percentage of missing values when multiplied by 100.
+
+Here's a simple example in R to illustrate these concepts:
+
+```{r}
+# Sample vector with missing values 
+x <- c(1, NA, 3, NA, 5, 6)  
+
+# Count of missing values 
+count_missing <- sum(is.na(x)) 
+cat("Count of missing values:", count_missing, "\n")  
+
+# Proportion of missing values 
+prop_missing <- mean(is.na(x)) 
+cat("Proportion of missing values:", prop_missing, "\n")
+```
+
 ## Question 2
 
 **What does [`prod()`](https://rdrr.io/r/base/prod.html) return when applied to a logical vector? What logical summary function is it equivalent to? What does [`min()`](https://rdrr.io/r/base/Extremes.html) return when applied to a logical vector? What logical summary function is it equivalent to? Read the documentation and perform a few experiments.**
+
+```{r}
+#| collapse: true
+
+# A logical vector with random TRUE and FALSE
+random <- sample(c(TRUE, FALSE),
+            size = 10,
+            replace = TRUE)
+random
+# A logical vector with all TRUE
+all_true <- rep(TRUE, 10)
+all_true
+# A logical vector with all FALSE
+all_false <- rep(FALSE, 10)
+all_false
+
+prod(random)
+prod(all_true)
+prod(all_false)
+
+min(random)
+min(all_true)
+min(all_false)
+```
+
+In R, when we apply the `prod()` function to a logical vector, it treats `TRUE` as 1 and `FALSE` as 0, and then computes the product of the elements in the vector. Essentially, it multiplies all the elements together. This can be useful when we want to check if all elements in a logical vector are `TRUE`, as the product will be 1 if all are `TRUE` and 0 if any of them is `FALSE`.
+
+This is equivalent to using the `all()` function, which checks if all elements in a logical vector are `TRUE`. The `all()` function returns `TRUE` if all elements are `TRUE` and `FALSE` otherwise.
+
+Now, when we apply the `min()` function to a logical vector, it also treats `TRUE` as 1 and `FALSE` as 0, and then computes the minimum value. Since 0 represents `FALSE` and 1 represents `TRUE`, the minimum value in a logical vector is `FALSE` (0). Therefore, when we use `min()` on a logical vector with even one value `FALSE`, it will return `FALSE`.
+
+In summary, `prod()` and `min()` applied to logical vectors have specific behavior related to the interpretation of `TRUE` and `FALSE`, and they are equivalent to the `all()`.
+
+Note: `max()` will act as equivalen to the `any()` function.
