@@ -367,6 +367,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#question-1-2" id="toc-question-1-2" class="nav-link" data-scroll-target="#question-1-2">Question 1</a></li>
   <li><a href="#question-2-2" id="toc-question-2-2" class="nav-link" data-scroll-target="#question-2-2">Question 2</a></li>
   </ul></li>
+  <li><a href="#exercises-3" id="toc-exercises-3" class="nav-link" data-scroll-target="#exercises-3"><strong>13.5.4 Exercises</strong></a>
+  <ul class="collapse">
+  <li><a href="#question-1-3" id="toc-question-1-3" class="nav-link" data-scroll-target="#question-1-3">Question 1</a></li>
+  <li><a href="#question-2-3" id="toc-question-2-3" class="nav-link" data-scroll-target="#question-2-3">Question 2</a></li>
+  <li><a href="#question-3-1" id="toc-question-3-1" class="nav-link" data-scroll-target="#question-3-1">Question 3</a></li>
+  <li><a href="#question-4" id="toc-question-4" class="nav-link" data-scroll-target="#question-4">Question 4</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/edit/main/Chapter13.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -1691,7 +1698,1063 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This is equivalent to using the <code>all()</code> function, which checks if all elements in a logical vector are <code>TRUE</code>. The <code>all()</code> function returns <code>TRUE</code> if all elements are <code>TRUE</code> and <code>FALSE</code> otherwise.</p>
 <p>Now, when we apply the <code>min()</code> function to a logical vector, it also treats <code>TRUE</code> as 1 and <code>FALSE</code> as 0, and then computes the minimum value. Since 0 represents <code>FALSE</code> and 1 represents <code>TRUE</code>, the minimum value in a logical vector is <code>FALSE</code> (0). Therefore, when we use <code>min()</code> on a logical vector with even one value <code>FALSE</code>, it will return <code>FALSE</code>.</p>
 <p>In summary, <code>prod()</code> and <code>min()</code> applied to logical vectors have specific behavior related to the interpretation of <code>TRUE</code> and <code>FALSE</code>, and they are equivalent to the <code>all()</code>.</p>
-<p>Note: <code>max()</code> will act as equivalen to the <code>any()</code> function.</p>
+<p>Note: <code>max()</code> will act as equivalent to the <code>any()</code> function.</p>
+</section>
+</section>
+<section id="exercises-3" class="level1">
+<h1><strong>13.5.4 Exercises</strong></h1>
+<section id="question-1-3" class="level2">
+<h2 class="anchored" data-anchor-id="question-1-3">Question 1</h2>
+<p><strong>A number is even if it's divisible by two, which in R you can find out with <code>x %% 2 == 0</code>. Use this fact and <a href="https://dplyr.tidyverse.org/reference/if_else.html"><code>if_else()</code></a> to determine whether each number between 0 and 20 is even or odd.</strong></p>
+<p>The easiest way to do this would be <code>if_else(x %% 2 == 0, true = "even", false = "odd")</code>, as shown below: –</p>
+<div class="cell" data-hash="Chapter13_cache/html/unnamed-chunk-15_406131c60cb0909c02c41983c70906c1">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">20</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">if_else</span>(x <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">0</span>,</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">true =</span> <span class="st">"even"</span>,</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">false =</span> <span class="st">"odd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "even" "odd"  "even" "odd"  "even" "odd"  "even" "odd"  "even" "odd" 
+[11] "even" "odd"  "even" "odd"  "even" "odd"  "even" "odd"  "even" "odd" 
+[21] "even"</code></pre>
+</div>
+</div>
+</section>
+<section id="question-2-3" class="level2">
+<h2 class="anchored" data-anchor-id="question-2-3">Question 2</h2>
+<p><strong>Given a vector of days like <code>x &lt;- c("Monday", "Saturday", "Wednesday")</code>, use an <a href="https://rdrr.io/r/base/ifelse.html"><code>ifelse()</code></a> statement to label them as weekends or weekdays.</strong></p>
+<p>The code shown below does the job: –</p>
+<div class="cell" data-hash="Chapter13_cache/html/unnamed-chunk-16_baecb6ed6568e7422719442e81bdd76d">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>days <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Monday"</span>, <span class="st">"Tuesday"</span>, <span class="st">"Wednesday"</span>, <span class="st">"Thursday"</span>,</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Friday"</span>, <span class="st">"Saturday"</span>, <span class="st">"Sunday"</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>weeknd <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Saturday"</span>, <span class="st">"Sunday"</span>)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">sample</span>(days, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(x,</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">if_else</span>(x <span class="sc">%in%</span> weeknd,</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Weekends"</span>,</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Weekdays"</span>, </span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>              <span class="st">"NA"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div id="jwplsrqpxx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jwplsrqpxx table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#jwplsrqpxx thead, #jwplsrqpxx tbody, #jwplsrqpxx tfoot, #jwplsrqpxx tr, #jwplsrqpxx td, #jwplsrqpxx th {
+  border-style: none;
+}
+
+#jwplsrqpxx p {
+  margin: 0;
+  padding: 0;
+}
+
+#jwplsrqpxx .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#jwplsrqpxx .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#jwplsrqpxx .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#jwplsrqpxx .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#jwplsrqpxx .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jwplsrqpxx .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jwplsrqpxx .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jwplsrqpxx .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#jwplsrqpxx .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#jwplsrqpxx .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#jwplsrqpxx .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#jwplsrqpxx .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#jwplsrqpxx .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#jwplsrqpxx .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#jwplsrqpxx .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#jwplsrqpxx .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#jwplsrqpxx .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#jwplsrqpxx .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#jwplsrqpxx .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jwplsrqpxx .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#jwplsrqpxx .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#jwplsrqpxx .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#jwplsrqpxx .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jwplsrqpxx .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#jwplsrqpxx .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#jwplsrqpxx .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jwplsrqpxx .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jwplsrqpxx .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#jwplsrqpxx .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jwplsrqpxx .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#jwplsrqpxx .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jwplsrqpxx .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jwplsrqpxx .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jwplsrqpxx .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jwplsrqpxx .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jwplsrqpxx .gt_left {
+  text-align: left;
+}
+
+#jwplsrqpxx .gt_center {
+  text-align: center;
+}
+
+#jwplsrqpxx .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#jwplsrqpxx .gt_font_normal {
+  font-weight: normal;
+}
+
+#jwplsrqpxx .gt_font_bold {
+  font-weight: bold;
+}
+
+#jwplsrqpxx .gt_font_italic {
+  font-style: italic;
+}
+
+#jwplsrqpxx .gt_super {
+  font-size: 65%;
+}
+
+#jwplsrqpxx .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#jwplsrqpxx .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#jwplsrqpxx .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#jwplsrqpxx .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#jwplsrqpxx .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#jwplsrqpxx .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#jwplsrqpxx .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="x">x</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="V2">V2</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="x" class="gt_row gt_left">Friday</td>
+<td headers="V2" class="gt_row gt_left">Weekdays</td></tr>
+    <tr><td headers="x" class="gt_row gt_left">Friday</td>
+<td headers="V2" class="gt_row gt_left">Weekdays</td></tr>
+    <tr><td headers="x" class="gt_row gt_left">Thursday</td>
+<td headers="V2" class="gt_row gt_left">Weekdays</td></tr>
+    <tr><td headers="x" class="gt_row gt_left">Friday</td>
+<td headers="V2" class="gt_row gt_left">Weekdays</td></tr>
+    <tr><td headers="x" class="gt_row gt_left">Saturday</td>
+<td headers="V2" class="gt_row gt_left">Weekends</td></tr>
+    <tr><td headers="x" class="gt_row gt_left">Thursday</td>
+<td headers="V2" class="gt_row gt_left">Weekdays</td></tr>
+    <tr><td headers="x" class="gt_row gt_left">Sunday</td>
+<td headers="V2" class="gt_row gt_left">Weekends</td></tr>
+    <tr><td headers="x" class="gt_row gt_left">Thursday</td>
+<td headers="V2" class="gt_row gt_left">Weekdays</td></tr>
+    <tr><td headers="x" class="gt_row gt_left">Wednesday</td>
+<td headers="V2" class="gt_row gt_left">Weekdays</td></tr>
+    <tr><td headers="x" class="gt_row gt_left">Sunday</td>
+<td headers="V2" class="gt_row gt_left">Weekends</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="question-3-1" class="level2">
+<h2 class="anchored" data-anchor-id="question-3-1">Question 3</h2>
+<p><strong>Use <a href="https://rdrr.io/r/base/ifelse.html"><code>ifelse()</code></a> to compute the absolute value of a numeric vector called <code>x</code>.</strong></p>
+<p>We can use the code <code>if_else(x &lt; 0, true = -x, false = x, missing = 0)</code> to do so, as shown below: –</p>
+<div class="cell" data-hash="Chapter13_cache/html/unnamed-chunk-17_f150b5031cf8d6d1ab3c7014ee206940">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">sample</span>(<span class="at">x =</span> <span class="sc">-</span><span class="dv">10</span><span class="sc">:</span><span class="dv">10</span>,</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">replace =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="dv">100</span>)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> x,</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">abs_x =</span> <span class="fu">if_else</span>(x <span class="sc">&lt;</span> <span class="dv">0</span>,</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">true =</span> <span class="sc">-</span>x,</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>                  <span class="at">false =</span> x,</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>                  <span class="at">missing =</span> <span class="dv">0</span>)</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_interactive</span>(<span class="at">use_pagination =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>                  <span class="at">pagination_type =</span> <span class="st">"simple"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div id="golfxedcjo" class=".gt_table" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#golfxedcjo table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#golfxedcjo thead, #golfxedcjo tbody, #golfxedcjo tfoot, #golfxedcjo tr, #golfxedcjo td, #golfxedcjo th {
+  border-style: none;
+}
+
+#golfxedcjo p {
+  margin: 0;
+  padding: 0;
+}
+
+#golfxedcjo .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#golfxedcjo .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#golfxedcjo .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#golfxedcjo .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#golfxedcjo .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#golfxedcjo .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#golfxedcjo .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#golfxedcjo .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#golfxedcjo .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#golfxedcjo .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#golfxedcjo .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#golfxedcjo .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#golfxedcjo .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#golfxedcjo .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#golfxedcjo .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#golfxedcjo .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#golfxedcjo .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#golfxedcjo .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#golfxedcjo .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#golfxedcjo .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#golfxedcjo .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#golfxedcjo .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#golfxedcjo .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#golfxedcjo .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#golfxedcjo .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#golfxedcjo .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#golfxedcjo .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#golfxedcjo .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#golfxedcjo .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#golfxedcjo .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#golfxedcjo .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#golfxedcjo .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#golfxedcjo .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#golfxedcjo .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#golfxedcjo .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#golfxedcjo .gt_left {
+  text-align: left;
+}
+
+#golfxedcjo .gt_center {
+  text-align: center;
+}
+
+#golfxedcjo .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#golfxedcjo .gt_font_normal {
+  font-weight: normal;
+}
+
+#golfxedcjo .gt_font_bold {
+  font-weight: bold;
+}
+
+#golfxedcjo .gt_font_italic {
+  font-style: italic;
+}
+
+#golfxedcjo .gt_super {
+  font-size: 65%;
+}
+
+#golfxedcjo .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#golfxedcjo .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#golfxedcjo .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#golfxedcjo .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#golfxedcjo .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#golfxedcjo .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#golfxedcjo .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<div id="golfxedcjo" class="reactable html-widget " style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="golfxedcjo">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"x":[-8,-4,-8,6,7,-1,-4,6,-4,9,-4,-10,-7,-8,-9,6,-3,9,-4,-7,-8,-7,4,-5,10,-9,3,2,2,-10,-1,4,-7,5,-1,4,-9,-6,7,0,-1,-7,-8,-5,1,-9,-7,-2,0,2,-10,-10,-2,-7,-1,-1,-10,7,3,3,-3,-6,-2,-4,8,10,8,-4,2,10,4,-3,-10,-3,8,5,-8,-9,9,4,-7,9,2,2,6,7,-10,-4,8,4,-5,7,10,3,7,-1,-7,1,-5,9],"abs_x":[8,4,8,6,7,1,4,6,4,9,4,10,7,8,9,6,3,9,4,7,8,7,4,5,10,9,3,2,2,10,1,4,7,5,1,4,9,6,7,0,1,7,8,5,1,9,7,2,0,2,10,10,2,7,1,1,10,7,3,3,3,6,2,4,8,10,8,4,2,10,4,3,10,3,8,5,8,9,9,4,7,9,2,2,6,7,10,4,8,4,5,7,10,3,7,1,7,1,5,9]},"columns":[{"id":"x","name":"x","type":"numeric","style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","cell":["-8","-4","-8","6","7","-1","-4","6","-4","9","-4","-10","-7","-8","-9","6","-3","9","-4","-7","-8","-7","4","-5","10","-9","3","2","2","-10","-1","4","-7","5","-1","4","-9","-6","7","0","-1","-7","-8","-5","1","-9","-7","-2","0","2","-10","-10","-2","-7","-1","-1","-10","7","3","3","-3","-6","-2","-4","8","10","8","-4","2","10","4","-3","-10","-3","8","5","-8","-9","9","4","-7","9","2","2","6","7","-10","-4","8","4","-5","7","10","3","7","-1","-7","1","-5","9"],"html":true,"align":"right","headerStyle":{"font-weight":"normal"}},{"id":"abs_x","name":"abs_x","type":"numeric","style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","cell":["8","4","8","6","7","1","4","6","4","9","4","10","7","8","9","6","3","9","4","7","8","7","4","5","10","9","3","2","2","10","1","4","7","5","1","4","9","6","7","0","1","7","8","5","1","9","7","2","0","2","10","10","2","7","1","1","10","7","3","3","3","6","2","4","8","10","8","4","2","10","4","3","10","3","8","5","8","9","9","4","7","9","2","2","6","7","10","4","8","4","5","7","10","3","7","1","7","1","5","9"],"html":true,"align":"right","headerStyle":{"font-weight":"normal"}}],"defaultPageSize":10,"showPageSizeOptions":false,"pageSizeOptions":[10,25,50,100],"paginationType":"simple","showPagination":true,"showPageInfo":true,"minRows":1,"showSortable":true,"height":"auto","theme":{"color":"#333333","backgroundColor":"#FFFFFF","stripedColor":"rgba(128,128,128,0.05)","style":{"fontFamily":"system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"},"headerStyle":{"borderTopStyle":"solid","borderTopWidth":"2px","borderTopColor":"#D3D3D3","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"}},"elementId":"golfxedcjo","dataKey":"add2e59643cf2998565d77f3efae9fe9"},"children":[]},"class":"reactR_markup"},"evals":["tag.attribs.columns.0.style","tag.attribs.columns.1.style"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</section>
+<section id="question-4" class="level2">
+<h2 class="anchored" data-anchor-id="question-4">Question 4</h2>
+<p><strong>Write a <a href="https://dplyr.tidyverse.org/reference/case_when.html"><code>case_when()</code></a> statement that uses the <code>month</code> and <code>day</code> columns from <code>flights</code> to label a selection of important US holidays (e.g., New Years Day, 4th of July, Thanksgiving, and Christmas). First create a logical column that is either <code>TRUE</code> or <code>FALSE</code>, and then create a character column that either gives the name of the holiday or is <code>NA</code>.</strong></p>
+<p>Here is the code: –</p>
+<div class="cell" data-hash="Chapter13_cache/html/unnamed-chunk-18_bd7e5cf2ac6349f17e54d75e39d20ca5">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">holiday =</span> <span class="fu">case_when</span>(</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    month <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> day <span class="sc">==</span> <span class="dv">1</span>   <span class="sc">~</span> <span class="st">"New Year’s Day"</span>,</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    month <span class="sc">==</span> <span class="dv">6</span> <span class="sc">&amp;</span> day <span class="sc">==</span> <span class="dv">19</span>  <span class="sc">~</span> <span class="st">"Juneteenth National Independence Day"</span>,</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    month <span class="sc">==</span> <span class="dv">7</span> <span class="sc">&amp;</span> day <span class="sc">==</span> <span class="dv">4</span>   <span class="sc">~</span> <span class="st">"Independence Day"</span>,</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    month <span class="sc">==</span> <span class="dv">11</span> <span class="sc">&amp;</span> day <span class="sc">==</span> <span class="dv">11</span> <span class="sc">~</span> <span class="st">"Veterans’ Day"</span>,</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    month <span class="sc">==</span> <span class="dv">12</span> <span class="sc">&amp;</span> day <span class="sc">==</span> <span class="dv">25</span> <span class="sc">~</span> <span class="st">"Christmas Day"</span>,</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">.default =</span> <span class="cn">NA</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">.keep =</span> <span class="st">"used"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">is_holiday =</span> <span class="fu">if_else</span>(<span class="sc">!</span><span class="fu">is.na</span>(holiday),</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>                              <span class="at">true =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>                              <span class="at">false =</span> <span class="cn">FALSE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 4
+   month   day holiday        is_holiday
+   &lt;int&gt; &lt;int&gt; &lt;chr&gt;          &lt;lgl&gt;     
+ 1     1     1 New Year’s Day TRUE      
+ 2     1     1 New Year’s Day TRUE      
+ 3     1     1 New Year’s Day TRUE      
+ 4     1     1 New Year’s Day TRUE      
+ 5     1     1 New Year’s Day TRUE      
+ 6     1     1 New Year’s Day TRUE      
+ 7     1     1 New Year’s Day TRUE      
+ 8     1     1 New Year’s Day TRUE      
+ 9     1     1 New Year’s Day TRUE      
+10     1     1 New Year’s Day TRUE      
+# ℹ 336,766 more rows</code></pre>
+</div>
+</div>
+<p>Another way to code this creating the logical column first is as follows: –</p>
+<div class="cell" data-hash="Chapter13_cache/html/unnamed-chunk-19_f6f0ac4d152808606cde89c0a889dca1">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">is_holiday =</span> <span class="fu">case_when</span>(</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>      (month <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> day <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">~</span> <span class="cn">TRUE</span>,        <span class="co"># New Year's Day</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>      (month <span class="sc">==</span> <span class="dv">7</span> <span class="sc">&amp;</span> day <span class="sc">==</span> <span class="dv">4</span>) <span class="sc">~</span> <span class="cn">TRUE</span>,        <span class="co"># 4th of July</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>      (month <span class="sc">==</span> <span class="dv">12</span> <span class="sc">&amp;</span> day <span class="sc">==</span> <span class="dv">25</span>) <span class="sc">~</span> <span class="cn">TRUE</span>,      <span class="co"># Christmas</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">FALSE</span>                           <span class="co"># Not a holiday</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">holiday_name =</span> <span class="fu">case_when</span>(</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>      is_holiday <span class="sc">~</span> <span class="fu">case_when</span>(</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>        (month <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> day <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">~</span> <span class="st">"New Year's Day"</span>,</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>        (month <span class="sc">==</span> <span class="dv">7</span> <span class="sc">&amp;</span> day <span class="sc">==</span> <span class="dv">4</span>) <span class="sc">~</span> <span class="st">"4th of July"</span>,</span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>        (month <span class="sc">==</span> <span class="dv">12</span> <span class="sc">&amp;</span> day <span class="sc">==</span> <span class="dv">25</span>) <span class="sc">~</span> <span class="st">"Christmas"</span>,</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>        <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_character_</span></span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_character_</span></span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">.keep =</span> <span class="st">"used"</span></span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 4
+   month   day is_holiday holiday_name  
+   &lt;int&gt; &lt;int&gt; &lt;lgl&gt;      &lt;chr&gt;         
+ 1     1     1 TRUE       New Year's Day
+ 2     1     1 TRUE       New Year's Day
+ 3     1     1 TRUE       New Year's Day
+ 4     1     1 TRUE       New Year's Day
+ 5     1     1 TRUE       New Year's Day
+ 6     1     1 TRUE       New Year's Day
+ 7     1     1 TRUE       New Year's Day
+ 8     1     1 TRUE       New Year's Day
+ 9     1     1 TRUE       New Year's Day
+10     1     1 TRUE       New Year's Day
+# ℹ 336,766 more rows</code></pre>
+</div>
+</div>
 
 
 </section>

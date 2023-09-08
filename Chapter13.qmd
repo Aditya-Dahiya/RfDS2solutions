@@ -396,4 +396,111 @@ Now, when we apply the `min()` function to a logical vector, it also treats `TRU
 
 In summary, `prod()` and `min()` applied to logical vectors have specific behavior related to the interpretation of `TRUE` and `FALSE`, and they are equivalent to the `all()`.
 
-Note: `max()` will act as equivalen to the `any()` function.
+Note: `max()` will act as equivalent to the `any()` function.
+
+# **13.5.4 Exercises**
+
+## Question 1
+
+**A number is even if it\'s divisible by two, which in R you can find out with `x %% 2 == 0`. Use this fact and [`if_else()`](https://dplyr.tidyverse.org/reference/if_else.html) to determine whether each number between 0 and 20 is even or odd.**
+
+The easiest way to do this would be `if_else(x %% 2 == 0, true = "even", false = "odd")`, as shown below: --
+
+```{r}
+x = 0:20
+if_else(x %% 2 == 0,
+        true = "even",
+        false = "odd")
+```
+
+## Question 2
+
+**Given a vector of days like `x <- c("Monday", "Saturday", "Wednesday")`, use an [`ifelse()`](https://rdrr.io/r/base/ifelse.html) statement to label them as weekends or weekdays.**
+
+The code shown below does the job: --
+
+```{r}
+days = c("Monday", "Tuesday", "Wednesday", "Thursday",
+      "Friday", "Saturday", "Sunday")
+weeknd = c("Saturday", "Sunday")
+
+x = sample(days, size = 10, replace = TRUE)
+
+cbind(x,
+      if_else(x %in% weeknd,
+              "Weekends",
+              "Weekdays", 
+              "NA")) |>
+  as_tibble() |> gt()
+```
+
+## Question 3
+
+**Use [`ifelse()`](https://rdrr.io/r/base/ifelse.html) to compute the absolute value of a numeric vector called `x`.**
+
+We can use the code `if_else(x < 0, true = -x, false = x, missing = 0)` to do so, as shown below: --
+
+```{r}
+x = sample(x = -10:10,
+           replace = TRUE,
+           size = 100)
+
+tibble(
+  x = x,
+  abs_x = if_else(x < 0,
+                  true = -x,
+                  false = x,
+                  missing = 0)
+) |>
+  gt() |>
+  opt_interactive(use_pagination = TRUE,
+                  pagination_type = "simple")
+
+```
+
+## Question 4
+
+**Write a [`case_when()`](https://dplyr.tidyverse.org/reference/case_when.html) statement that uses the `month` and `day` columns from `flights` to label a selection of important US holidays (e.g., New Years Day, 4th of July, Thanksgiving, and Christmas). First create a logical column that is either `TRUE` or `FALSE`, and then create a character column that either gives the name of the holiday or is `NA`.**
+
+Here is the code: --
+
+```{r}
+flights |>
+  mutate(holiday = case_when(
+    month == 1 & day == 1   ~ "New Year’s Day",
+    month == 6 & day == 19  ~ "Juneteenth National Independence Day",
+    month == 7 & day == 4   ~ "Independence Day",
+    month == 11 & day == 11 ~ "Veterans’ Day",
+    month == 12 & day == 25 ~ "Christmas Day",
+    .default = NA
+  ),
+  .keep = "used") |>
+  mutate(is_holiday = if_else(!is.na(holiday),
+                              true = TRUE,
+                              false = FALSE))
+```
+
+Another way to code this creating the logical column first is as follows: --
+
+```{r}
+flights |>
+  mutate(
+    is_holiday = case_when(
+      (month == 1 & day == 1) ~ TRUE,        # New Year's Day
+      (month == 7 & day == 4) ~ TRUE,        # 4th of July
+      (month == 12 & day == 25) ~ TRUE,      # Christmas
+      TRUE ~ FALSE                           # Not a holiday
+    ),
+    holiday_name = case_when(
+      is_holiday ~ case_when(
+        (month == 1 & day == 1) ~ "New Year's Day",
+        (month == 7 & day == 4) ~ "4th of July",
+        (month == 12 & day == 25) ~ "Christmas",
+        TRUE ~ NA_character_
+      ),
+      TRUE ~ NA_character_
+    ),
+    .keep = "used"
+  )
+
+```

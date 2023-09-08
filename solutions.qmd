@@ -15,8 +15,9 @@ listing:
     - "Chapter10.qmd"
     - "Chapter11.qmd"
     - "Chapter12.qmd"
-    - "Chapter21.qmd"
     - "Chapter13.qmd"
+    - "Chapter14.qmd"
+    - "Chapter21.qmd"
     - "Chapter29.qmd"
     - "Chapter30.qmd"
   fields: [title, subtitle, date]
