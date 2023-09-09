@@ -4,14 +4,14 @@
     "href": "index.html",
     "title": "Solutions: R for Data Science (2e)",
     "section": "",
-    "text": "Author: Aditya Dahiya\nThis website displays the solutions for the exercises in the book R for Data Science, 2nd Edition.\n\n\n\nR for Data Science (2nd Edition)"
+    "text": "Author: Aditya Dahiya\nThis website displays the solutions for the exercises in the book R for Data Science, 2nd Edition.\n."
   },
   {
     "objectID": "index.html#solutions-for-the-book-r-for-data-science-2nd-edition",
     "href": "index.html#solutions-for-the-book-r-for-data-science-2nd-edition",
     "title": "Solutions: R for Data Science (2e)",
     "section": "",
-    "text": "Author: Aditya Dahiya\nThis website displays the solutions for the exercises in the book R for Data Science, 2nd Edition.\n\n\n\nR for Data Science (2nd Edition)"
+    "text": "Author: Aditya Dahiya\nThis website displays the solutions for the exercises in the book R for Data Science, 2nd Edition.\n."
   },
   {
     "objectID": "Chapter29.html",
@@ -46,7 +46,7 @@
     "href": "solutions.html",
     "title": "Solutions",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\nTitle\n\n\nSubtitle\n\n\nDate\n\n\n\n\n\n\nChapter 10\n\n\nLayers\n\n\nAug 22, 2023\n\n\n\n\nChapter 11\n\n\nExploratory data analysis\n\n\nAug 28, 2023\n\n\n\n\nChapter 12\n\n\nCommunication\n\n\nAug 28, 2023\n\n\n\n\nChapter 13\n\n\nLogical Vectors\n\n\nSep 3, 2023\n\n\n\n\nChapter 2\n\n\nData Visualization\n\n\nJul 29, 2023\n\n\n\n\nChapter 21\n\n\nSpreadsheets\n\n\nAug 15, 2023\n\n\n\n\nChapter 29\n\n\nQuarto\n\n\nJul 25, 2023\n\n\n\n\nChapter 3\n\n\nWorkflow: Basics\n\n\nJul 29, 2023\n\n\n\n\nChapter 30\n\n\nQuarto Formats\n\n\nJul 25, 2023\n\n\n\n\nChapter 4\n\n\nData Transformation\n\n\nJul 29, 2023\n\n\n\n\nChapter 5\n\n\nWorkflow: code style\n\n\nAug 2, 2023\n\n\n\n\nChapter 6\n\n\nData tidying\n\n\nAug 5, 2023\n\n\n\n\nChapter 7\n\n\nWorkflow: scripts and projects\n\n\nAug 8, 2023\n\n\n\n\nChapter 8\n\n\nData Import\n\n\nAug 10, 2023\n\n\n\n\nChapter 9\n\n\nWorkflow: getting help\n\n\nAug 13, 2023\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\nTitle\n\n\nSubtitle\n\n\nDate\n\n\n\n\n\n\nChapter 10\n\n\nLayers\n\n\nAug 22, 2023\n\n\n\n\nChapter 11\n\n\nExploratory data analysis\n\n\nAug 28, 2023\n\n\n\n\nChapter 12\n\n\nCommunication\n\n\nAug 28, 2023\n\n\n\n\nChapter 13\n\n\nLogical Vectors\n\n\nSep 3, 2023\n\n\n\n\nChapter 14\n\n\nNumbers\n\n\nSep 8, 2023\n\n\n\n\nChapter 2\n\n\nData Visualization\n\n\nJul 29, 2023\n\n\n\n\nChapter 21\n\n\nSpreadsheets\n\n\nAug 15, 2023\n\n\n\n\nChapter 29\n\n\nQuarto\n\n\nJul 25, 2023\n\n\n\n\nChapter 3\n\n\nWorkflow: Basics\n\n\nJul 29, 2023\n\n\n\n\nChapter 30\n\n\nQuarto Formats\n\n\nJul 25, 2023\n\n\n\n\nChapter 4\n\n\nData Transformation\n\n\nJul 29, 2023\n\n\n\n\nChapter 5\n\n\nWorkflow: code style\n\n\nAug 2, 2023\n\n\n\n\nChapter 6\n\n\nData tidying\n\n\nAug 5, 2023\n\n\n\n\nChapter 7\n\n\nWorkflow: scripts and projects\n\n\nAug 8, 2023\n\n\n\n\nChapter 8\n\n\nData Import\n\n\nAug 10, 2023\n\n\n\n\nChapter 9\n\n\nWorkflow: getting help\n\n\nAug 13, 2023\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -299,5 +299,26 @@
     "title": "Chapter 13",
     "section": "Question 4",
     "text": "Question 4\nWrite a case_when() statement that uses the month and day columns from flights to label a selection of important US holidays (e.g., New Years Day, 4th of July, Thanksgiving, and Christmas). First create a logical column that is either TRUE or FALSE, and then create a character column that either gives the name of the holiday or is NA.\nHere is the code: –\n\nflights |&gt;\n  mutate(holiday = case_when(\n    month == 1 & day == 1   ~ \"New Year’s Day\",\n    month == 6 & day == 19  ~ \"Juneteenth National Independence Day\",\n    month == 7 & day == 4   ~ \"Independence Day\",\n    month == 11 & day == 11 ~ \"Veterans’ Day\",\n    month == 12 & day == 25 ~ \"Christmas Day\",\n    .default = NA\n  ),\n  .keep = \"used\") |&gt;\n  mutate(is_holiday = if_else(!is.na(holiday),\n                              true = TRUE,\n                              false = FALSE))\n\n# A tibble: 336,776 × 4\n   month   day holiday        is_holiday\n   &lt;int&gt; &lt;int&gt; &lt;chr&gt;          &lt;lgl&gt;     \n 1     1     1 New Year’s Day TRUE      \n 2     1     1 New Year’s Day TRUE      \n 3     1     1 New Year’s Day TRUE      \n 4     1     1 New Year’s Day TRUE      \n 5     1     1 New Year’s Day TRUE      \n 6     1     1 New Year’s Day TRUE      \n 7     1     1 New Year’s Day TRUE      \n 8     1     1 New Year’s Day TRUE      \n 9     1     1 New Year’s Day TRUE      \n10     1     1 New Year’s Day TRUE      \n# ℹ 336,766 more rows\n\n\nAnother way to code this creating the logical column first is as follows: –\n\nflights |&gt;\n  mutate(\n    is_holiday = case_when(\n      (month == 1 & day == 1) ~ TRUE,        # New Year's Day\n      (month == 7 & day == 4) ~ TRUE,        # 4th of July\n      (month == 12 & day == 25) ~ TRUE,      # Christmas\n      TRUE ~ FALSE                           # Not a holiday\n    ),\n    holiday_name = case_when(\n      is_holiday ~ case_when(\n        (month == 1 & day == 1) ~ \"New Year's Day\",\n        (month == 7 & day == 4) ~ \"4th of July\",\n        (month == 12 & day == 25) ~ \"Christmas\",\n        TRUE ~ NA_character_\n      ),\n      TRUE ~ NA_character_\n    ),\n    .keep = \"used\"\n  )\n\n# A tibble: 336,776 × 4\n   month   day is_holiday holiday_name  \n   &lt;int&gt; &lt;int&gt; &lt;lgl&gt;      &lt;chr&gt;         \n 1     1     1 TRUE       New Year's Day\n 2     1     1 TRUE       New Year's Day\n 3     1     1 TRUE       New Year's Day\n 4     1     1 TRUE       New Year's Day\n 5     1     1 TRUE       New Year's Day\n 6     1     1 TRUE       New Year's Day\n 7     1     1 TRUE       New Year's Day\n 8     1     1 TRUE       New Year's Day\n 9     1     1 TRUE       New Year's Day\n10     1     1 TRUE       New Year's Day\n# ℹ 336,766 more rows"
+  },
+  {
+    "objectID": "Chapter14.html",
+    "href": "Chapter14.html",
+    "title": "Chapter 14",
+    "section": "",
+    "text": "library(tidyverse)\nlibrary(gt)\nlibrary(nycflights13)\ndata(\"flights\")"
+  },
+  {
+    "objectID": "Chapter14.html#question-1",
+    "href": "Chapter14.html#question-1",
+    "title": "Chapter 14",
+    "section": "Question 1",
+    "text": "Question 1\nHow can you use count() to count the number rows with a missing value for a given variable?\nWe can use count() with weights as is.na(var_name) to the number of rows with missing values, as shown below\n\nflights |&gt;\n  group_by(month) |&gt;\n  summarise(total = n(),\n            missing = sum(is.na(dep_time))) |&gt;\n  gt()\nflights |&gt;\n  group_by(month) |&gt;\n  count(wt = is.na(dep_time)) |&gt;\n  ungroup() |&gt;\n  gt()\n\n\n\n\n\n\n\n  \n    \n    \n      month\n      total\n      missing\n    \n  \n  \n    1\n27004\n521\n    2\n24951\n1261\n    3\n28834\n861\n    4\n28330\n668\n    5\n28796\n563\n    6\n28243\n1009\n    7\n29425\n940\n    8\n29327\n486\n    9\n27574\n452\n    10\n28889\n236\n    11\n27268\n233\n    12\n28135\n1025\n  \n  \n  \n\n\n\n\n\n\n\n\n  \n    \n    \n      month\n      n\n    \n  \n  \n    1\n521\n    2\n1261\n    3\n861\n    4\n668\n    5\n563\n    6\n1009\n    7\n940\n    8\n486\n    9\n452\n    10\n236\n    11\n233\n    12\n1025"
+  },
+  {
+    "objectID": "Chapter14.html#question-2",
+    "href": "Chapter14.html#question-2",
+    "title": "Chapter 14",
+    "section": "Question 2",
+    "text": "Question 2\nExpand the following calls to count() to instead use group_by(), summarize(), and arrange():\n\nflights |&gt; count(dest, sort = TRUE)\n\nflights |&gt;\n  group_by(dest) |&gt;\n  summarise(n = n()) |&gt;\n  arrange(desc(n))\n\n# A tibble: 105 × 2\n   dest      n\n   &lt;chr&gt; &lt;int&gt;\n 1 ORD   17283\n 2 ATL   17215\n 3 LAX   16174\n 4 BOS   15508\n 5 MCO   14082\n 6 CLT   14064\n 7 SFO   13331\n 8 FLL   12055\n 9 MIA   11728\n10 DCA    9705\n# ℹ 95 more rows\n\n\nflights |&gt; count(tailnum, wt = distance)\n\nflights |&gt;\n  group_by(tailnum) |&gt;\n  summarise(n = sum(distance))\n\n# A tibble: 4,044 × 2\n   tailnum      n\n   &lt;chr&gt;    &lt;dbl&gt;\n 1 D942DN    3418\n 2 N0EGMQ  250866\n 3 N10156  115966\n 4 N102UW   25722\n 5 N103US   24619\n 6 N104UW   25157\n 7 N10575  150194\n 8 N105UW   23618\n 9 N107US   21677\n10 N108UW   32070\n# ℹ 4,034 more rows"
   }
 ]

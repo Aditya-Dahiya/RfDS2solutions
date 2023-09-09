@@ -22,3 +22,198 @@ editor_options:
 bibliography: references.bib
 ---
 
+```{r}
+library(tidyverse)
+library(gt)
+library(nycflights13)
+data("flights")
+```
+
+# **14.3.1 Exercises**
+
+## Question 1
+
+**How can you use [`count()`](https://dplyr.tidyverse.org/reference/count.html) to count the number rows with a missing value for a given variable?**
+
+We can use `count()` with weights as `is.na(var_name)` to the number of rows with missing values, as shown below
+
+```{r}
+#| layout-ncol: 2
+
+flights |>
+  group_by(month) |>
+  summarise(total = n(),
+            missing = sum(is.na(dep_time))) |>
+  gt()
+
+
+flights |>
+  group_by(month) |>
+  count(wt = is.na(dep_time)) |>
+  ungroup() |>
+  gt()
+```
+
+## Question 2
+
+Expand the following calls to [`count()`](https://dplyr.tidyverse.org/reference/count.html) to instead use [`group_by()`](https://dplyr.tidyverse.org/reference/group_by.html), [`summarize()`](https://dplyr.tidyverse.org/reference/summarise.html), and [`arrange()`](https://dplyr.tidyverse.org/reference/arrange.html):
+
+1.  **`flights |> count(dest, sort = TRUE)`**
+
+    ```{r}
+    flights |>
+      group_by(dest) |>
+      summarise(n = n()) |>
+      arrange(desc(n))
+    ```
+
+2.  **`flights |> count(tailnum, wt = distance)`**
+
+    ```{r}
+    flights |>
+      group_by(tailnum) |>
+      summarise(n = sum(distance))
+    ```
+
+# **14.4.8 Exercises**
+
+## Question 1
+
+**Explain in words what each line of the code used to generate [Figure 14.1](https://r4ds.hadley.nz/numbers#fig-prop-cancelled) does.**
+
+The explanation is given as annotation in the code below (i.e, lines starting with `#`): --
+
+```{r}
+# Load in the data-set flights from package nycflights13
+flights |> 
+  # Create a variable hour, which is the quotient of the division of
+  # sched_dep_time by 100. Further, group the dataset by this newly 
+  # created variable "hour" to get data into 24 groups - one for each
+  # hour.
+  group_by(hour = sched_dep_time %/% 100) |> 
+  
+  # For each gropu, i.e. all flights scheduled to depart in that
+  # hour, compute the NAs, i.e. cancelled flights, then compute their
+  # mean, i.e. proportion of cancelled flights; and also create a 
+  # variable n, which is the total number of flights
+  summarize(prop_cancelled = mean(is.na(dep_time)), n = n()) |> 
+  
+  # Remove the flights departing between 12 midnight and 1 am, since
+  # these are very very few, and all are cancelled leading to a highly
+  # skewed and uninformative graph
+  filter(hour > 1) |> 
+  
+  # Start a ggplot call, plotting the hour on the x-axis, and 
+  # proportion of cancelled flights on the y-axis
+  ggplot(aes(x = hour, y = prop_cancelled)) +
+  
+  # Create a line graph,which joins the proportion of cancelled 
+  # flights for each hour. Also, put in in dark grey colour
+  geom_line(color = "grey50") + 
+  
+  # Add points for each hour, whose size varies with the total number
+  # of flights in that hour
+  geom_point(aes(size = n))
+```
+
+## Question 2
+
+**What trigonometric functions does R provide? Guess some names and look up the documentation. Do they use degrees or radians?**
+
+`R` provides several trigonometric functions, most of which operate in radians. Here's a table listing some of the commonly used trigonometric functions in R, along with short descriptions and information about whether they use degrees or radians:
+
+| **Function**               | **Description**                                                                                                                | **Angle Measure** |
+|--------------|--------------------------------------------|--------------|
+| `sin(x)`                   | Sine function: Computes the sine of the angle `x`.                                                                             | Radians           |
+| `cos(x)`                   | Cosine function: Computes the cosine of the angle `x`.                                                                         | Radians           |
+| `tan(x)`                   | Tangent function: Computes the tangent of the angle `x`.                                                                       | Radians           |
+| `asin(x)` or `acos(x)`     | Inverse sine or inverse cosine: Computes the angle whose sine or cosine is `x`.                                                | Radians           |
+| `atan(x)` or `atan2(y, x)` | Inverse tangent or arctangent: Computes the angle whose tangent is `x` or the angle between the point `(x, y)` and the origin. | Radians           |
+| `sinh(x)`                  | Hyperbolic sine function: Computes the hyperbolic sine of `x`.                                                                 | Radians           |
+| `cosh(x)`                  | Hyperbolic cosine function: Computes the hyperbolic cosine of `x`.                                                             | Radians           |
+| `tanh(x)`                  | Hyperbolic tangent function: Computes the hyperbolic tangent of `x`.                                                           | Radians           |
+
+In R, trigonometric functions like `sin`, `cos`, and `tan` expect angles to be in radians by default. However, we can convert between degrees and radians using the `deg2rad` and `rad2deg` functions. For example, to compute the sine of an angle in degrees, you can use `sin(deg2rad(angle))`.
+
+```{r}
+#| label: fig-q2-ex4
+#| fig-cap: Graphs from some common trigonometric functions
+#| fig-width: 10
+df = tibble(x = seq(from = -5, to = +5, by = 0.1))
+g = ggplot(df, aes(x = x)) + 
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  labs(x = NULL, y = NULL) +
+  scale_x_continuous(breaks = -5:5)
+gridExtra::grid.arrange(
+  g + geom_line(aes(y = sin(x))) + labs(title = "sin(x)"),
+  g + geom_line(aes(y = cos(x))) + labs(title = "cos(x)"),
+  g + geom_line(aes(y = tan(x))) + labs(title = "tan(x)"),
+  g + geom_line(aes(y = asin(x))) + labs(title = "asin(x)"),
+  g + geom_line(aes(y = acos(x))) + labs(title = "acos(x)"),
+  g + geom_line(aes(y = atan(x))) + labs(title = "atan(x)"),
+  g + geom_line(aes(y = sinh(x))) + labs(title = "sinh(x)"),
+  g + geom_line(aes(y = cosh(x))) + labs(title = "cosh(x)"),
+  
+  nrow = 2
+)
+```
+
+## Question 3
+
+**Currently `dep_time` and `sched_dep_time` are convenient to look at, but hard to compute with because they\'re not really continuous numbers. You can see the basic problem by running the code below: there\'s a gap between each hour.**
+
+```         
+flights |>    
+  filter(month == 1, day == 1) |>    
+  ggplot(aes(x = sched_dep_time, y = dep_delay)) +   
+  geom_point()
+```
+
+**Convert them to a more truthful representation of time (either fractional hours or minutes since midnight).**
+
+We can correct the `sched_dep_time()` using the two arithmetical functions `%/%` and `%%` to generate the decimal representation of time in hours as shown in the code for the graph on the right hand side in
+
+```{r}
+#| label: fig-q3-ex4
+#| fig-cap: "Improved represenation of scheduled departure time to remove breaks in the data owing to represention of time as hhmm"
+
+gridExtra::grid.arrange(
+  flights |>    
+    filter(month == 1, day == 1) |>    
+    ggplot(aes(x = sched_dep_time, y = dep_delay)) +   
+    geom_point() +
+    labs(subtitle = "Incorrect scheduled departure time"),
+
+  flights |>
+    mutate(
+      hour_dep = sched_dep_time %/% 100,
+      min_dep  = sched_dep_time %%  100,
+      time_dep = hour_dep + (min_dep/60)
+    ) |>
+    filter(month == 1, day == 1) |>    
+    ggplot(aes(x = time_dep, y = dep_delay)) +   
+    geom_point() +
+    labs(subtitle = "Improved and accurate scheduled departure time",
+         x = "Scheduled Departure Time (in hrs)") +
+    scale_x_continuous(breaks = seq(0,24,4)),
+  
+  ncol = 2)
+```
+
+## Question 4
+
+**Round `dep_time` and `arr_time` to the nearest five minutes.**
+
+```{r}
+attach(flights)
+flights |>
+  slice_head(n = 50) |>
+  mutate(
+    dep_time_5 = round(dep_time/5) * 5,
+    arr_time_5 = round(arr_time/5) * 5,
+    .keep = "used"
+  ) |>
+  gt() |>
+  opt_interactive()
+```
