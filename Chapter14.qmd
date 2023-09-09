@@ -123,7 +123,7 @@ flights |>
 `R` provides several trigonometric functions, most of which operate in radians. Here's a table listing some of the commonly used trigonometric functions in R, along with short descriptions and information about whether they use degrees or radians:
 
 | **Function**               | **Description**                                                                                                                | **Angle Measure** |
-|--------------|--------------------------------------------|--------------|
+|----------------|-----------------------------------------|----------------|
 | `sin(x)`                   | Sine function: Computes the sine of the angle `x`.                                                                             | Radians           |
 | `cos(x)`                   | Cosine function: Computes the cosine of the angle `x`.                                                                         | Radians           |
 | `tan(x)`                   | Tangent function: Computes the tangent of the angle `x`.                                                                       | Radians           |
@@ -139,6 +139,9 @@ In R, trigonometric functions like `sin`, `cos`, and `tan` expect angles to be i
 #| label: fig-q2-ex4
 #| fig-cap: Graphs from some common trigonometric functions
 #| fig-width: 10
+#| code-fold: true
+
+
 df = tibble(x = seq(from = -5, to = +5, by = 0.1))
 g = ggplot(df, aes(x = x)) + 
   theme_minimal() +
@@ -161,7 +164,7 @@ gridExtra::grid.arrange(
 
 ## Question 3
 
-**Currently `dep_time` and `sched_dep_time` are convenient to look at, but hard to compute with because they\'re not really continuous numbers. You can see the basic problem by running the code below: there\'s a gap between each hour.**
+**Currently `dep_time` and `sched_dep_time` are convenient to look at, but hard to compute with because they're not really continuous numbers. You can see the basic problem by running the code below: there's a gap between each hour.**
 
 ```         
 flights |>    
@@ -177,12 +180,13 @@ We can correct the `sched_dep_time()` using the two arithmetical functions `%/%`
 ```{r}
 #| label: fig-q3-ex4
 #| fig-cap: "Improved represenation of scheduled departure time to remove breaks in the data owing to represention of time as hhmm"
+#| code-fold: true
 
 gridExtra::grid.arrange(
   flights |>    
     filter(month == 1, day == 1) |>    
     ggplot(aes(x = sched_dep_time, y = dep_delay)) +   
-    geom_point() +
+    geom_point(size = 0.5) +
     labs(subtitle = "Incorrect scheduled departure time"),
 
   flights |>
@@ -193,7 +197,7 @@ gridExtra::grid.arrange(
     ) |>
     filter(month == 1, day == 1) |>    
     ggplot(aes(x = time_dep, y = dep_delay)) +   
-    geom_point() +
+    geom_point(size = 0.5) +
     labs(subtitle = "Improved and accurate scheduled departure time",
          x = "Scheduled Departure Time (in hrs)") +
     scale_x_continuous(breaks = seq(0,24,4)),
@@ -216,4 +220,395 @@ flights |>
   ) |>
   gt() |>
   opt_interactive()
+```
+
+## Various Ranking functions in `R`
+
+| **Function**     | **Description**                                                                                                                                                                 | **Handling Ties**                                                                      |
+|------------------|---------------------------------|----------------------|
+| `min_rank()`     | Assigns the minimum rank to each element. The way ranks are usually computed in sports.                                                                                         | Tied values get the same rank; next rank is skipped.                                   |
+| `row_number()`   | Assigns every input a unique rank. Ties are given ranks based on the order of appearance, i.e. row number.                                                                      | Tied values get different ranks, depending on the order of appearance in the data set. |
+| `dense_rank()`   | Assigns the minimum rank to each element. And, assigns the same rank to tied values without gaps.                                                                               | Tied values get the same rank; no gaps in ranks.                                       |
+| `percent_rank()` | Computes the rank as a percentage of the total number of elements. It counts the total number of values less than x~i~, and divides it by the number of observations minus 1.   | Tied values get the same rank; no gaps in ranks.                                       |
+| `cume_dist()`    | Computes the cumulative distribution function (CDF) of the data. It counts the total number of values less than or equal to x~i~, and divides it by the number of observations. | Tied values get the same rank; no gaps in ranks.                                       |
+
+```{r}
+#| code-fold: true 
+#| fig-cap: "Various Ranking Functions" 
+#| label: fig-ex0-1  
+
+df <- data.frame(Name = c("Alice", "Bob", "Carol", "David", "Eve"),                  Score = c(85, 92, 85, 78, 92))   
+
+# Apply ranking functions and store the results in new columns   
+df |>      
+  mutate(Min_Rank = min_rank(Score),                    
+         Row_Number = row_number(Score),                    
+         Dense_Rank = dense_rank(Score),                    
+         Percent_Rank = percent_rank(Score),                    
+         Cumulative_Dist = cume_dist(Score)) |>      
+  gt()
+```
+
+# **14.5.4 Exercises**
+
+## Question 1
+
+**Find the 10 most delayed flights using a ranking function. How do you want to handle ties? Carefully read the documentation for [`min_rank()`](https://dplyr.tidyverse.org/reference/row_number.html).**
+
+We can find the 10 most delayed flights by using `min_rank()` since it gives ties equal rank, while creating gaps, thus keeping the total number of the flights to 10.
+
+```{r}
+flights |>
+  select(sched_dep_time, dep_time, dep_delay, tailnum, dest, carrier) |>
+  mutate(rank_delay = min_rank(desc(dep_delay))) |>
+  arrange(rank_delay) |>
+  slice_head(n = 10) |>
+  gt()
+```
+
+## Question 2
+
+**Which plane (`tailnum`) has the worst on-time record?**
+
+Using the code below, we can find the that the flight with tail number `N844MH` has the highest average departure delay of 32 minutes. However, this flight flew only once, so we might want to re-look for this delay statistic by removing the flights that flew less than 5 times.
+
+Thus, amongst the flights that flew 5 times or more, the highest mean departure delay of the flight with tail number `N665MQ`.
+
+```{r}
+# The flight tailnum with the highest average delay
+flights |>
+  group_by(tailnum) |>
+  summarize(mean_delay = mean(dep_delay, na.rm = TRUE),
+            n = n()) |>
+  arrange(desc(mean_delay)) |>
+  slice_head(n = 5)
+
+# The flight tailnum with the highest average delay amongst 
+# the flights that flew atleast 5 times or more
+flights |>
+  group_by(tailnum) |>
+  summarize(mean_delay = mean(dep_delay, na.rm = TRUE),
+            nos_of_flights = n()) |>
+  filter(nos_of_flights >= 5) |>
+  arrange(desc(mean_delay)) |>
+  slice_head(n = 5)
+```
+
+## Question 3
+
+**What time of day should you fly if you want to avoid delays as much as possible?**
+
+As shown in the @fig-q3-ex5 , we should fly with the early morning flights, particularly 5 am to 7 am, to avoid delays as much as possible.
+
+```{r}
+#| label: fig-q3-ex5
+#| fig-cap: "Graph of average departure delay vs. scheduled departure time"
+
+
+flights |>
+  mutate(sched_dep_hour = sched_dep_time %/% 100) |>
+  group_by(sched_dep_hour) |>
+  summarize(
+    mean_dep_delay = mean(dep_delay, na.rm = TRUE),
+    nos_of_flights = n()
+  ) |>
+  drop_na() |>
+  ggplot(aes(x = sched_dep_hour,
+             y = mean_dep_delay)) +
+  geom_line() +
+  geom_point(aes(size = nos_of_flights), 
+             alpha = 0.5) +
+  theme_light() +
+  labs(x = "Depature Hour", y = "Average departure delay (min)",
+       title = "Early morning flights have the least delay",
+       size = "Number of flights") +
+  scale_x_continuous(breaks = seq(5, 24, 2)) +
+  theme(legend.position = "bottom")
+```
+
+## Question 4
+
+**What does** `flights |> group_by(dest) |> filter(row_number() < 4)` **do? What does** `flights |> group_by(dest) |> filter(row_number(dep_delay) < 4)` **do?**
+
+The code `flights |> group_by(dest) |> filter(row_number() < 4)` displays only three flights for each destination, selected on the basis of the order in which they appear in the `flights` data-set.
+
+```{r}
+flights |> 
+  # reducing the number of columns for easy display
+  select(carrier, dest, sched_dep_time, month, day) |>
+  group_by(dest) |> 
+  # arrange(dest, sched_dep_time) |>
+  filter(row_number() < 4)
+```
+
+On the other hand, the code `flights |> group_by(dest) |> filter(row_number(dep_delay) < 4)` will display the three flights with the least departure delays for each destination. Further, in case of ties, it will select the flight which appears earlier in the data-set, i.e. on a earlier date.
+
+```{r}
+flights |> 
+  # reducing the number of columns for easy display
+  select(carrier, dest, sched_dep_time, month, day, dep_delay) |>
+  group_by(dest) |> 
+  filter(row_number(dep_delay) < 4)
+```
+
+## Question 5
+
+**For each destination, compute the total minutes of delay. For each flight, compute the proportion of the total delay for its destination.**
+
+The following code does the calculation desired: --
+
+```{r}
+flights |>
+  group_by(dest) |>
+  mutate(
+    total_delay = sum(dep_delay, na.rm = TRUE),
+    prop_delay = dep_delay / total_delay,
+    .keep = "used"
+  )
+```
+
+## Question 6
+
+**Delays are typically temporally correlated: even once the problem that caused the initial delay has been resolved, later flights are delayed to allow earlier flights to leave. Using [`lag()`](https://dplyr.tidyverse.org/reference/lead-lag.html), explore how the average flight delay for an hour is related to the average delay for the previous hour.**
+
+Here's the code for the analysis with annotation at appropriate places: --
+
+```{r}
+#| label: fig-q6-ex5
+#| fig-cap: "Plots of average departure delays in each hour vs. average departure delay in the previous hour"
+#| fig-height: 8
+
+flights |>    
+  # Generate hour of departure
+  mutate(hour = dep_time %/% 100) |>    
+  
+  # Creating groups by each hour of depature for different days
+  group_by(year, month, day, hour) |>  
+  
+  # Remove 213 flights with NA as hour (i.e., cancelled flights)
+  # to improve the subsequent plotting
+  filter(!is.na(hour)) |>
+  
+  # Average delay and the number of flights in each hour
+  summarize(     
+    dep_delay = mean(dep_delay, na.rm = TRUE),     
+    n = n(),     
+    .groups = "drop"   
+  ) |>    
+  
+  # Removing hours in which there were less than 5 flights departing
+  filter(n > 5) |>
+  
+  # Grouping to prevent using 11 pm hour delays as previous delays of the
+  # next day's 5 am flights
+  group_by(year, month, day) |>
+  
+  # A new variabe to show previous hour's average average departure delay
+  mutate(
+    prev_hour_delay = lag(dep_delay),
+    morning_flights = hour == 5
+  ) |>
+  
+  # Plotting to see correlation
+  ggplot(aes(x = dep_delay,
+             y = prev_hour_delay,
+             col = morning_flights)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(se = FALSE) +
+  geom_abline(slope = 1, intercept = 0, col = "grey") +
+  theme_light() +
+  coord_fixed() +
+  scale_x_continuous(breaks = seq(0,300,60)) +
+  scale_y_continuous(breaks = seq(0,300,60)) +
+  scale_color_discrete(labels = c("Other flights",
+                                  "Early Morning flights (5 am to 6 am)")) +
+  labs(x = "Average Departure Delay in an hour (min)",
+       y = "Average Departure Delay in the previous hour (min)",
+       col = NULL,
+       title = "Departure Delay correlates with delay in previous hour",
+       subtitle = "The average departure delay in any hour is worse than previous hours's average delay. \nFurther, the early morning flights' delay doesn't depend on previous nights' delay.") +
+  theme(legend.position = "bottom")
+```
+
+## Question 7
+
+**Look at each destination. Can you find flights that are suspiciously fast (i.e. flights that represent a potential data entry error)? Compute the air time of a flight relative to the shortest flight to that destination. Which flights were most delayed in the air?**
+
+The @tbl-q7-ex5 computes the average air time to each destination, and then computes the ratio of each flight's airtime to the average air time. There are four flights with this ratio less than 0.6. Out of these, the flight `N666DN` to `ATL` destination with air time of just 65 minutes *(compared to average 113 minutes)* appears to be suspiciously fast, and a potential data entry error.
+
+```{r}
+#| label: tbl-q7-ex5
+#| tbl-cap: "Suspiciously fast flights compared to the average air time for that destination"
+
+flights |>
+  select(month, day, dest, tailnum, dep_time, arr_time, air_time) |>
+  group_by(dest) |>
+  mutate(
+    mean_air_time = mean(air_time, na.rm = TRUE),
+    fast_ratio = air_time/mean_air_time
+  ) |>
+  relocate(air_time, mean_air_time, fast_ratio) |>
+  ungroup() |>
+  arrange(fast_ratio) |>
+  filter(fast_ratio < 0.6) |>
+  gt() |>
+  fmt_number(columns = c(mean_air_time, fast_ratio),
+    decimals = 2)
+```
+
+The following code also computes the air time (`air_time`)of every flight relative to the shortest flight (`min_air_time`) for each destination in form a ratio (`rel_ratio`), and @fig-q7a-ex5 displays top 100 flights that were most delayed in the air. We observe that, of the 100 most delayed flights in-air: --
+
+-   83 of these are flights to Boston (`BOS`); with shortest air time of 21 minutes (a potential data entry) causing this over-representation of Boston flights in the current computation.
+
+-   Once Boston is removed, most of top 100 delayed in-air flights belong to destinations `PHL` , `DCA` and `ATL`. These again either represent a erroneous data entry (flight `N666DN` to `ATL` destination with air time of just 65 minutes) or very short glifht destinations (`PHL` and `DCA`).
+
+```{r}
+#| label: fig-q7a-ex5
+#| fig-cap: "Flights that were most delayed in the air-time"
+
+flights |>
+  select(month, day, dest, tailnum, dep_time, arr_time, air_time) |>
+  group_by(dest) |>
+  mutate(
+    min_air_time = min(air_time, na.rm = TRUE),
+    rel_ratio = air_time/min_air_time
+  ) |>
+  relocate(air_time, min_air_time, rel_ratio) |>
+  ungroup() |>
+  arrange(desc(rel_ratio)) |>
+  slice_head(n = 100) |>
+  gt() |>
+  fmt_number(columns = c(min_air_time, rel_ratio),
+    decimals = 2) |>
+  opt_interactive()
+
+```
+
+## Question 8
+
+**Find all destinations that are flown by at least two carriers. Use those destinations to come up with a relative ranking of the carriers based on their performance for the same destination.**
+
+First, as shown in @fig-q8a-ex5 , we find out the destinations which have at-least two or more carriers. There are 76 such destinations.
+
+```{r}
+#| label: fig-q8a-ex5
+#| fig-cap: "Destinations with two or more carriers"
+#| code-fold: true
+
+# Computing the destinations with atleast two carriers
+df1 = flights |>
+  group_by(dest) |>
+  summarize(no_of_carriers = n_distinct(carrier)) |>
+  filter(no_of_carriers > 1)
+
+# Extracting the names of these carriers as a vector to use in filtering
+# the data in subsequent steps, as a vector called "dest2"
+dest2 = df1 |>
+  select(dest) |>
+  as_vector() |>
+  unname()
+
+# Displaying the table
+df1 |>
+  arrange(desc(no_of_carriers)) |>
+  gt() |>
+  opt_interactive(page_size_default = 5)
+```
+
+Then, in @fig-q8b-ex5 , we compute the three important parameters that we use to compare the performance of carriers: --
+
+1.  Average Departure Delay
+
+2.  Proportion of flights cancelled
+
+3.  Average Delay in Air Time
+
+```{r}
+#| label: fig-q8b-ex5
+#| fig-cap: "Table displaying the comparison parameters for each carrier at each destination"
+#| code-fold: true
+
+# Ranking parameters can be based on: ---
+# 1. Average Departure Delay
+# 2. Proportion of flights cancelled
+# 3. Average Delay in Air Time
+# Note: I have not included arrival delay, as that will automatically
+#       include the delay in the departure, and penalize the airline 
+#       twice for a departure delay.
+
+df2 = flights |>
+  filter(dest %in% dest2) |>
+  group_by(dest, carrier) |>
+  summarise(
+    mean_dep_delay = mean(dep_delay, na.rm = TRUE),
+    prop_cancelled = mean(is.na(dep_time)),
+    mean_air_time  = mean(air_time, na.rm = TRUE),
+    nos_of_flights = n()
+  ) |>
+  drop_na()
+  
+df2 |>
+  ungroup() |>
+  gt() |>
+  fmt_number(decimals = 2,
+             columns = -nos_of_flights) |>
+  opt_interactive()
+```
+
+Thereafter, in @tbl-q8c-ex5 , we compute scores based on these three parameters for each carrier and rank them accordingly.
+
+```{r}
+#| label: tbl-q8c-ex5
+#| tbl-cap: "Computed rankings with the method of scoring displayed for two destinations"
+#| code-fold: true
+
+# Ranking can be generated on basis of the least score calculated after
+# giving equal weightage to the following in formula for each carrier as
+# calculated by: (x - min(x)) / (max(x) - min(x))
+# 1. Average Departure Delay
+# 2. Proportion of flights cancelled
+# 3. Average Delay in Air Time
+df3 = df2 |>
+  mutate(
+    score_delay = (mean_dep_delay - min(mean_dep_delay))/(max(mean_dep_delay) - min(mean_dep_delay)),
+    score_cancel = (prop_cancelled - min(prop_cancelled)) / (max(prop_cancelled) - min(prop_cancelled)),
+    score_at = (mean_air_time - min(mean_air_time)) / (max(mean_air_time) - min(mean_air_time)),
+    total_score = score_delay + score_cancel + score_at,
+    rank_carrier = min_rank(total_score)
+  ) |>
+  drop_na()
+
+# Displaying an example ranking for ATL and AUS
+df3 |>
+  filter(dest %in% c("ATL", "AUS")) |>
+  gt() |>
+  fmt_number(columns = -c(rank_carrier, nos_of_flights)) |>
+  tab_spanner(label = "Scoring and Rank",
+              columns = score_delay:rank_carrier) |>
+  tab_spanner(label = "Statistics",
+              columns = mean_dep_delay:nos_of_flights) |>
+  opt_stylize(style = 1)
+```
+
+The final ranking of the carriers for each destination is displayed below in @tbl-fnl-q8-ex5 with names of destinations as column names, and within each column, the best carrier at the top, worst carrier at the bottom.
+
+```{r}
+#| label: tbl-fnl-q8-ex5
+#| tbl-cap-location: top
+#| tbl-cap: "Ranks of carriers for each destination: Best carrier at top, worst carrier at bottom"
+#| code-fold: true
+
+df3 |>
+  arrange(dest, rank_carrier) |>
+  select(dest, carrier, rank_carrier) |>
+  ungroup() |>
+  pivot_wider(names_from = rank_carrier,
+              values_from = carrier) |>
+  t() |>
+  as_tibble() |>
+  janitor::row_to_names(row_number = 1) |>
+  gt() |>
+  sub_missing(missing_text = "") |>
+  gtExtras::gt_theme_538()
+  
 ```
