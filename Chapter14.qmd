@@ -122,16 +122,25 @@ flights |>
 
 `R` provides several trigonometric functions, most of which operate in radians. Here's a table listing some of the commonly used trigonometric functions in R, along with short descriptions and information about whether they use degrees or radians:
 
++----------------------------+--------------------------------------------------------------------------------------------------------------------------------+-------------------+
 | **Function**               | **Description**                                                                                                                | **Angle Measure** |
-|----------------|-----------------------------------------|----------------|
++============================+================================================================================================================================+===================+
 | `sin(x)`                   | Sine function: Computes the sine of the angle `x`.                                                                             | Radians           |
++----------------------------+--------------------------------------------------------------------------------------------------------------------------------+-------------------+
 | `cos(x)`                   | Cosine function: Computes the cosine of the angle `x`.                                                                         | Radians           |
++----------------------------+--------------------------------------------------------------------------------------------------------------------------------+-------------------+
 | `tan(x)`                   | Tangent function: Computes the tangent of the angle `x`.                                                                       | Radians           |
++----------------------------+--------------------------------------------------------------------------------------------------------------------------------+-------------------+
 | `asin(x)` or `acos(x)`     | Inverse sine or inverse cosine: Computes the angle whose sine or cosine is `x`.                                                | Radians           |
++----------------------------+--------------------------------------------------------------------------------------------------------------------------------+-------------------+
 | `atan(x)` or `atan2(y, x)` | Inverse tangent or arctangent: Computes the angle whose tangent is `x` or the angle between the point `(x, y)` and the origin. | Radians           |
++----------------------------+--------------------------------------------------------------------------------------------------------------------------------+-------------------+
 | `sinh(x)`                  | Hyperbolic sine function: Computes the hyperbolic sine of `x`.                                                                 | Radians           |
++----------------------------+--------------------------------------------------------------------------------------------------------------------------------+-------------------+
 | `cosh(x)`                  | Hyperbolic cosine function: Computes the hyperbolic cosine of `x`.                                                             | Radians           |
++----------------------------+--------------------------------------------------------------------------------------------------------------------------------+-------------------+
 | `tanh(x)`                  | Hyperbolic tangent function: Computes the hyperbolic tangent of `x`.                                                           | Radians           |
++----------------------------+--------------------------------------------------------------------------------------------------------------------------------+-------------------+
 
 In R, trigonometric functions like `sin`, `cos`, and `tan` expect angles to be in radians by default. However, we can convert between degrees and radians using the `deg2rad` and `rad2deg` functions. For example, to compute the sine of an angle in degrees, you can use `sin(deg2rad(angle))`.
 
@@ -224,13 +233,19 @@ flights |>
 
 ## Various Ranking functions in `R`
 
++------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+
 | **Function**     | **Description**                                                                                                                                                                 | **Handling Ties**                                                                      |
-|------------------|---------------------------------|----------------------|
++==================+=================================================================================================================================================================================+========================================================================================+
 | `min_rank()`     | Assigns the minimum rank to each element. The way ranks are usually computed in sports.                                                                                         | Tied values get the same rank; next rank is skipped.                                   |
++------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+
 | `row_number()`   | Assigns every input a unique rank. Ties are given ranks based on the order of appearance, i.e. row number.                                                                      | Tied values get different ranks, depending on the order of appearance in the data set. |
++------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+
 | `dense_rank()`   | Assigns the minimum rank to each element. And, assigns the same rank to tied values without gaps.                                                                               | Tied values get the same rank; no gaps in ranks.                                       |
++------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+
 | `percent_rank()` | Computes the rank as a percentage of the total number of elements. It counts the total number of values less than x~i~, and divides it by the number of observations minus 1.   | Tied values get the same rank; no gaps in ranks.                                       |
++------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+
 | `cume_dist()`    | Computes the cumulative distribution function (CDF) of the data. It counts the total number of values less than or equal to x~i~, and divides it by the number of observations. | Tied values get the same rank; no gaps in ranks.                                       |
++------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+
 
 ```{r}
 #| code-fold: true 
@@ -517,11 +532,11 @@ df1 |>
 
 Then, in @fig-q8b-ex5 , we compute the three important parameters that we use to compare the performance of carriers: --
 
-1.  Average Departure Delay
+1.  Average departure delay.
 
-2.  Proportion of flights cancelled
+2.  Proportion of flights cancelled.
 
-3.  Average Delay in Air Time
+3.  Average delay in Air Time.
 
 ```{r}
 #| label: fig-q8b-ex5
@@ -612,3 +627,226 @@ df3 |>
   gtExtras::gt_theme_538()
   
 ```
+
+# **14.6.7 Exercises**
+
+## Question 1
+
+**Brainstorm at least 5 different ways to assess the typical delay characteristics of a group of flights. When is [`mean()`](https://rdrr.io/r/base/mean.html) useful? When is [`median()`](https://rdrr.io/r/stats/median.html) useful? When might you want to use something else? Should you use arrival delay or departure delay? Why might you want to use data from `planes`?**
+
+The different ways to assess the delay characteristics of a group of flights in form of a tabular comparison of various measures of central tendency are shown below: --
+
++-----------------------------+---------------------------------------------------------------------------------------------------------+----------------------------+---------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                             | **Definition**                                                                                          | **Appropriate Data Types** | **Robustness to Outliers**      | **Suitability**                                                                                                                                                                          |
++=============================+=========================================================================================================+============================+=================================+==========================================================================================================================================================================================+
+| **Mean**                    | The sum of all values divided by the number of values.                                                  | Interval, Ratio            | Sensitive to outliers           | Commonly used for normally distributed data.                                                                                                                                             |
+|                             |                                                                                                         |                            |                                 |                                                                                                                                                                                          |
+| `mean()`                    |                                                                                                         |                            |                                 |                                                                                                                                                                                          |
++-----------------------------+---------------------------------------------------------------------------------------------------------+----------------------------+---------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Median**                  | The middle value in a dataset when values are ordered, i.e., 50^th^ percentile.                         | Ordinal, Interval, Ratio   | Robust to outliers              | Suitable for skewed data and data with outliers.                                                                                                                                         |
+|                             |                                                                                                         |                            |                                 |                                                                                                                                                                                          |
+| `median()`                  |                                                                                                         |                            |                                 |                                                                                                                                                                                          |
++-----------------------------+---------------------------------------------------------------------------------------------------------+----------------------------+---------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Trimmed Mean**            | Mean calculated after removing a certain percentage of extreme values.                                  | Interval, Ratio            | Reduces the impact of outliers  | Useful for data containing outliers, i.e. flights with abnormally high delay                                                                                                             |
+|                             |                                                                                                         |                            |                                 |                                                                                                                                                                                          |
+| `mean(x, trim = 0.05)`      |                                                                                                         |                            |                                 |                                                                                                                                                                                          |
++-----------------------------+---------------------------------------------------------------------------------------------------------+----------------------------+---------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Weighted Mean**           | The sum of the products of values and their associated weights divided by the sum of the weights.       | Interval, Ratio            | Depends on the weighting scheme | Appropriate when different data points have different levels of importance. Example, if we give more importance to delay in short-haul flights, i.e., ratio of `dep_delay` to `air_time` |
+|                             |                                                                                                         |                            |                                 |                                                                                                                                                                                          |
+| `weighted.mean(x, weights)` |                                                                                                         |                            |                                 |                                                                                                                                                                                          |
++-----------------------------+---------------------------------------------------------------------------------------------------------+----------------------------+---------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Inter-Quartile Range**    | The difference between 25^th^ and 75^th^ percentile values in a dataset.                                | Interval, Ratio            | Not sensitive to outliers       | Provides a simple measure of central dispersion in the data.                                                                                                                             |
+|                             |                                                                                                         |                            |                                 |                                                                                                                                                                                          |
+| `IQR()`                     |                                                                                                         |                            |                                 |                                                                                                                                                                                          |
++-----------------------------+---------------------------------------------------------------------------------------------------------+----------------------------+---------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Percentile**              | The value below which a given percentage of data falls, e.g. 95^th^ percentile                          | Interval, Ratio            | Not influenced by outliers      | Useful for identifying specific positions within a dataset. We could find 95th percentile instead to maximum `dep_delay` to avoid data entry errors affecting our computation.           |
+|                             |                                                                                                         |                            |                                 |                                                                                                                                                                                          |
+| `quantile()`                |                                                                                                         |                            |                                 |                                                                                                                                                                                          |
++-----------------------------+---------------------------------------------------------------------------------------------------------+----------------------------+---------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Winsorized Mean**         | Mean calculated after replacing extreme values with less extreme ones, say 5^th^ and 95^th^ percentile. | Interval, Ratio            | Reduces the impact of outliers  | Useful when we want to retain some information from outliers.                                                                                                                            |
+|                             |                                                                                                         |                            |                                 |                                                                                                                                                                                          |
+| `DescTools::Winsorize()`    |                                                                                                         |                            |                                 |                                                                                                                                                                                          |
++-----------------------------+---------------------------------------------------------------------------------------------------------+----------------------------+---------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+Our choice of a measure depends on the characteristics of flights delay data and our specific analytical objectives.
+
+1.  `mean()` is useful when: --
+
+    -   When we want to find the typical or central value of a dataset, sensitive to all data points.
+
+    -   When our data does not contain extreme outliers. That is, it is commonly used for normally distributed data or data that follows a symmetric bell-shaped curve.
+
+2.  `median()` is useful when: --
+
+    -   When we want to find the middle value of a dataset. We want this when our data contains extreme values and outliers, perhaps due to data entry error.
+
+    -   Median is robust to outliers and is a better choice when the data contains extreme values or is skewed.
+
+    -   Caution: `median()` may not provide as much information about the distribution of data as the `mean()` does. It doesn't consider the magnitude of differences between values.
+
+3.  When to use something else:
+
+    -   **Mode:** The mode is useful when we want to identify the most frequently occurring value(s) in a dataset. It's suitable for nominal data (categories or labels) and not for departure delay data.
+
+    -   **Geometric Mean:** If we're dealing with positive data that follows a multiplicative relationship (e.g., growth rates, financial returns), the geometric mean may be more appropriate than the arithmetic mean.
+
+    -   **Trimmed Mean:** When dealing with data that contains outliers, we can calculate a trimmed mean by removing a certain percentage of extreme values from both ends of the dataset. This can help reduce the impact of outliers on the mean.
+
+    -   **Weighted Mean:** If different data points have different levels of importance or weight, we can calculate a weighted mean to give more weight to specific values.
+
+We should use **departure delay** instead of arrival delay, as most of the delay occurs only in departure. Once in air, the delay is minimal, and even if so, it is unavoidable due to safety reasons. The following table compares departure and arrival delays, and in my view, since our purpose of analysis is to compare airline carriers, we might use **departure delay**.
+
++----------+---------------------------------------------------------------------------+--------------------------------------------------------------------------+
+|          | **Departure Delay**                                                       | **Arrival Delay**                                                        |
++==========+===========================================================================+==========================================================================+
+| **Pros** | Useful for assessing punctuality in departing flights.                    | Provides a comprehensive view of overall travel delays.                  |
+|          |                                                                           |                                                                          |
+|          | Important for passengers concerned about on-time departure.               | Reflects the entire flight experience, including in-flight issues.       |
++----------+---------------------------------------------------------------------------+--------------------------------------------------------------------------+
+| **Cons** | Doesn't account for delays occurring during the flight.                   | Doesn't provide specific insight into departure punctuality.             |
+|          |                                                                           |                                                                          |
+|          | Less relevant for passengers with long layovers or no connecting flights. | May not be as crucial for passengers with direct flights.                |
+|          |                                                                           |                                                                          |
+|          | May not fully represent the passenger's overall experience.               | May not reflect the airline's performance in terms of prompt departures. |
++----------+---------------------------------------------------------------------------+--------------------------------------------------------------------------+
+
+We might use data from `planes` (to get flight aircraft make and year) and `flights` together as shown in the analysis below: --
+
+```{r}
+#| label: fig-q1-ex7
+#| code-fold: true
+
+# Compute mean, median and trimmed mean for departure delay and delay
+# in the airtime (i.e., time lost in air calculated by arr_delay minus 
+# dep_delay).
+df1 = 
+flights |>
+  group_by(tailnum) |>
+  summarize(
+    mean_dep_delay = mean(dep_delay, na.rm = TRUE),
+    median_dep_delay = median(dep_delay, na.rm = TRUE),
+    trim_mean_dep_delay = mean(dep_delay, na.rm = TRUE, trim = 0.025),
+    mean_air_time_loss = mean(arr_delay - dep_delay, na.rm = TRUE),
+    median_air_time_loss = median(arr_delay - dep_delay, na.rm = TRUE)
+  )
+
+df1 = inner_join(df1, planes, by = "tailnum")
+
+
+df1 |>
+  group_by(engine) |>
+  summarize(
+    median_delay = mean(median_dep_delay, na.rm = TRUE),
+    nos = n()
+  ) |>
+  mutate(is_positive = if_else(median_delay > 0, +1, -1)) |>
+  ggplot(aes(x = median_delay, 
+             y = engine,
+             fill = factor(is_positive),
+             label = paste0("Flights = ", nos))) +
+  geom_bar(stat = "identity") +
+  geom_text(hjust = 0.5) +
+  theme_minimal() +
+  scale_x_continuous(breaks = seq(-3, 5, 1)) +
+  scale_fill_manual(values = c("#119644", "#ed523e")) +
+  labs(x = "Average of the Median Depature Delays of each airplane (in minutes)",
+       y = NULL,
+       title = "Turbo-jet aircrafts have highest departure delays on average") +
+  theme(axis.ticks.y = element_blank(),
+        axis.title.y = element_blank(),
+        legend.position = "blank",
+        panel.grid = element_blank())
+```
+
+```{r}
+#| label: fig-q1a-ex7
+#| code-fold: true
+
+top_m = df1 |>
+  group_by(manufacturer) |>
+  count() |>
+  filter(n > 100) |>
+  select(manufacturer) |>
+  as_vector() |>
+  unname()
+
+df1 |>
+  filter(manufacturer %in% top_m) |>
+  group_by(manufacturer) |>
+  summarize(
+    nos = n(),
+    median_delay = mean(median_dep_delay, na.rm = TRUE)
+  ) |>
+  mutate(is_positive = if_else(median_delay > 0, +1, -1)) |>
+  ggplot(aes(x = median_delay, 
+             y = reorder(manufacturer, -median_delay),
+             fill = factor(is_positive),
+             label = paste0("Flights = ", nos))) +
+  geom_bar(stat = "identity") +
+  geom_text(position = "fill", hjust = 1.2) +
+  theme_minimal() +
+  scale_x_continuous(breaks = seq(-4, 4, 1)) +
+  scale_fill_manual(values = c("#119644", "#ed523e")) +
+  labs(x = "Average of the Median Depature Delays of flights of the manufacturer's aircrafts (in minutes)",
+       y = NULL,
+       title = "Average Departure Delays vary by the aircrafts' manufacturers: Boeing's airplanes get delayed the most") +
+  theme(axis.ticks.y = element_blank(),
+        axis.title.y = element_blank(),
+        legend.position = "blank",
+        panel.grid = element_blank(),
+        plot.title.position = "plot")
+```
+
+## Question 2
+
+**Which destinations show the greatest variation in air speed?**
+
+```{r}
+flights |>
+  mutate(speed = 60 * distance/air_time) |>
+  group_by(dest) |>
+  summarise(
+    nos = n(),
+    mean_speed = mean(speed, na.rm = TRUE),
+    var_speed  = var(speed, na.rm = TRUE),
+    sd_speed   = sd(speed, na.rm = TRUE)
+  ) |>
+  arrange(desc(nos)) |>
+  gt() |>
+  fmt_number(columns = -nos,
+             decimals = 2) |>
+  opt_interactive()
+
+
+dest_vec = flights |>
+  group_by(dest) |>
+  count() |>
+  filter(n > 10000) |>
+  select(dest) |>
+  as_vector() |>
+  unname()
+  
+flights |>
+  filter(dest %in% dest_vec) |>
+  mutate(speed = 60 * distance/air_time) |>
+  group_by(dest) |>
+  mutate(m_s = mean(speed, na.rm = TRUE)) |>
+  ggplot(aes(y = reorder(dest, m_s), 
+             x = speed)
+         ) +
+  geom_boxplot(outlier.alpha = 0.2) +
+  theme_minimal() +
+  labs(x = "Air speed (miles per hour)",
+       y = NULL, 
+       title = "Farther destinations have higher average air speed of aircrafts",
+       subtitle = "Los Angeles bound aircrafts' average speed is much higher than Boston-bound aircrafts") +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        plot.title.position = "plot") +
+  scale_x_continuous(breaks = seq(100, 600, 100)) +
+  coord_cartesian(xlim = c(100, 600))
+```
+
+## Question 3
+
+**Create a plot to further explore the adventures of EGE. Can you find any evidence that the airport moved locations? Can you find another variable that might explain the difference?**
