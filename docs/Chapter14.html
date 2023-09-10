@@ -303,6 +303,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Chapter 14</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Chapter15.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Chapter 15</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -1531,8 +1537,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <table class="table">
 <colgroup>
 <col style="width: 16%">
-<col style="width: 72%">
-<col style="width: 11%">
+<col style="width: 73%">
+<col style="width: 10%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -7248,9 +7254,9 @@ carrier at bottom</p> </caption>
 <p>We should use <strong>departure delay</strong> instead of arrival delay, as most of the delay occurs only in departure. Once in air, the delay is minimal, and even if so, it is unavoidable due to safety reasons. The following table compares departure and arrival delays, and in my view, since our purpose of analysis is to compare airline carriers, we might use <strong>departure delay</strong>.</p>
 <table class="table">
 <colgroup>
-<col style="width: 7%">
+<col style="width: 6%">
 <col style="width: 46%">
-<col style="width: 45%">
+<col style="width: 46%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -7279,7 +7285,7 @@ carrier at bottom</p> </caption>
 </tbody>
 </table>
 <p>We might use data from <code>planes</code> (to get flight aircraft make and year) and <code>flights</code> together as shown in the analysis below: –</p>
-<div class="cell" data-hash="Chapter14_cache/html/fig-q1-ex7_96c202f42ec6dddb413d4bfee8c27954">
+<div class="cell" data-hash="Chapter14_cache/html/fig-q1-ex7_5b79262c3c1672646d270d63400e2b58">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute mean, median and trimmed mean for departure delay and delay</span></span>
@@ -7327,12 +7333,12 @@ carrier at bottom</p> </caption>
 <div id="fig-q1-ex7" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="Chapter14_files/figure-html/fig-q1-ex7-1.png" class="img-fluid figure-img" width="960"></p>
-<figcaption class="figure-caption">Figure&nbsp;9: <strong>?(caption)</strong></figcaption>
+<figcaption class="figure-caption">Figure&nbsp;9: Bar plot of the average of median departure delays for each aircraft type (make)</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell" data-hash="Chapter14_cache/html/fig-q1a-ex7_3066110215ef47a8d0068c6284e0de5a">
+<div class="cell" data-hash="Chapter14_cache/html/fig-q1a-ex7_65200e100746a239e538537a55484370">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>top_m <span class="ot">=</span> df1 <span class="sc">|&gt;</span></span>
@@ -7373,7 +7379,7 @@ carrier at bottom</p> </caption>
 <div id="fig-q1a-ex7" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="Chapter14_files/figure-html/fig-q1a-ex7-1.png" class="img-fluid figure-img" width="960"></p>
-<figcaption class="figure-caption">Figure&nbsp;10: <strong>?(caption)</strong></figcaption>
+<figcaption class="figure-caption">Figure&nbsp;10: Bar plot of the average of median departure delays for each aircraft manufacturer</figcaption>
 </figure>
 </div>
 </div>
