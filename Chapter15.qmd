@@ -1,0 +1,43 @@
+---
+title: "Chapter 15"
+author: "Aditya Dahiya"
+subtitle: "Strings"
+date: 2023-09-10
+execute: 
+  echo: true
+  warning: false
+  error: false
+  cache: true
+filters:
+  - social-share
+share:
+  permalink: "https://aditya-dahiya.github.io/RfDS2solutions/Chapter15.html"
+  description: "Solutions: R for Data Science (2e)"
+  twitter: true
+  facebook: true
+  linkedin: true
+  email: true
+editor_options: 
+  chunk_output_type: console
+bibliography: references.bib
+---
+
+# **15.2.4 Exercises**
+
+## Question 1
+
+**Create strings that contain the following values:**
+
+1.  `He said "That's amazing!"`
+
+2.  `\a\b\c\d`
+
+3.  `\\\\\\`
+
+## Question 2
+
+**Create the string in your R session and print it. What happens to the special "\\u00a0"? How does [`str_view()`](https://stringr.tidyverse.org/reference/str_view.html) display it? Can you do a little googling to figure out what this special character is?**
+
+```         
+x <- "This\u00a0is\u00a0tricky"
+```
