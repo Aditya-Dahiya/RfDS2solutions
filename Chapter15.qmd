@@ -284,22 +284,108 @@ df3 |>
 
 **Are there any major trends in the length of baby names over time? What about the popularity of first and last letters?**
 
+The @fig-q3a-ex5, @fig-q3b-ex5 and @fig-q3c-ex5 show the trends over time.
+
 ```{r}
+#| label: fig-q3a-ex5
+#| fig-cap: "Length of babynames over time"
+#| code-fold: true
+
 df4 = babynames |>
   mutate(
     name_length = str_length(name),
     name_start = str_sub(name, 1, 1),
     name_end = str_sub(name, -1, -1)
   )
-
+y_coord = c(5.4, 6.3)
 df4 |>
   group_by(year) |>
   count(name_length, wt = n) |>
   summarise(mean_length = weighted.mean(name_length, w = n)) |>
   ggplot(aes(x = year, y = mean_length)) +
-  geom_line() +
   theme_classic() +
   labs(y = "Average name length (for each year)",
-       x = "Year") +
-  scale_x_continuous(breaks = seq(1880, 2000, 20))
+       x = "Year", 
+       title = "Baby names have become longer over the past 12 decades",
+       subtitle = "Between 1890-1920, and 1960-1990 baby names became longer\nBut, since 1990 the names are becoming shorter again") +
+  scale_x_continuous(breaks = seq(1880, 2000, 20)) +
+  geom_rect(mapping = aes(xmin = 1890, xmax = 1920,
+                          ymin = y_coord[1], ymax = y_coord[2]),
+            alpha = 0.01, fill = "grey") +
+  geom_rect(mapping = aes(xmin = 1960, xmax = 1990,
+                          ymin = y_coord[1], ymax = y_coord[2]),
+            alpha = 0.01, fill = "grey") +
+  geom_line(lwd = 1) +
+  coord_cartesian(ylim = y_coord) +
+  theme(plot.title.position = "plot")
+```
+
+```{r}
+#| label: fig-q3b-ex5
+#| fig-cap: "Trends on the starting letter of babynames over time"
+#| code-fold: true
+
+
+ns_vec = df4 |>
+  count(name_start, wt = n, sort = TRUE) |>
+  slice_head(n = 5) |>
+  select(name_start) |>
+  as_vector() |>
+  unname()
+
+df4 |>
+  filter(name_start %in% ns_vec) |>
+  group_by(year) |>
+  count(name_start, wt = n) |>
+  mutate(prop = 100*n/sum(n)) |>
+  mutate(lbl = if_else(year == 2017, 
+                       name_start, 
+                       NA)) |>
+  ggplot(aes(x = year, y = prop, 
+             col = name_start, label = lbl)) +
+  geom_line(lwd = 1) +
+  ggrepel::geom_label_repel(nudge_x = 1) +
+  labs(x = "Year",
+       y = "Percentage of names starting with character",
+       title = "People's preferences for baby names' starting letter change over time",
+       subtitle = "Names starting with A are most popular now\nNames starting with J were popular in the 1940s\nIn 1950s, names starting with D became popular, while those starting with A lost popularity") +
+  theme_classic() +
+  theme(legend.position = "none",
+        plot.title.position = "plot") +
+  scale_x_continuous(breaks = seq(1880, 2020, 20))
+
+```
+
+```{r}
+#| label: fig-q3c-ex5
+#| fig-cap: "Trends on the ending letter of babynames over time"
+#| code-fold: true
+
+ns_vec = df4 |>
+  count(name_end, wt = n, sort = TRUE) |>
+  slice_head(n = 5) |>
+  select(name_end) |>
+  as_vector() |>
+  unname()
+
+df4 |>
+  filter(name_end %in% ns_vec) |>
+  group_by(year) |>
+  count(name_end, wt = n) |>
+  mutate(prop = 100*n/sum(n)) |>
+  mutate(lbl = if_else(year == 2017, 
+                       name_end, 
+                       NA)) |>
+  ggplot(aes(x = year, y = prop, 
+             col = name_end, label = lbl)) +
+  geom_line(lwd = 1) +
+  ggrepel::geom_label_repel(nudge_x = 1) +
+  labs(x = "Year",
+       y = "Percentage of names ending with character",
+       title = "People's preferences for baby names' ending letter change over time",
+       subtitle = "Names ending in N have risen in popularity over the decades.\nNames ending with E have become less popular over time") +
+  theme_classic() +
+  theme(legend.position = "none",
+        plot.title.position = "plot") +
+  scale_x_continuous(breaks = seq(1880, 2020, 20))
 ```
