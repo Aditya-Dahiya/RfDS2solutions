@@ -28,6 +28,9 @@ bibliography: references.bib
 
 library(tidyverse)
 library(babynames)
+library(gt)
+library(gtExtras)
+data("babynames")
 ```
 
 **Important uses of quoting in `R`: --**
@@ -179,3 +182,124 @@ c.  `str_c("\\section{", title, "}")`
     ``` r
     str_glue("\\\\section{{{title}}}")
     ```
+
+asd
+
+find the distribution of lengths of US babynames and then with [`filter()`](https://dplyr.tidyverse.org/reference/filter.html) to look at the longest names, which happen to have 15 letters
+
+```{r}
+data("babynames")
+babynames |>
+  mutate(name_lgth = str_length(name)) |>
+  count(name_lgth, wt = n)
+
+babynames |>
+  filter(str_length(name) == 15) |>
+  count(name, wt = n, sort = TRUE) |>
+  slice_head(n = 5) |>
+  select(name) |>
+  as_vector() |>
+  unname() |>
+  str_sub(start = -3, end = -1)
+```
+
+# **15.5.3 Exercises**
+
+## Question 1
+
+**When computing the distribution of the length of `babynames`, why did we use `wt = n`?**
+
+The `babynames` data-set (@tbl-q1a-ex5) displays the column `n` to reflect the frequency, i.e., number of observations of that name in that year. Thus, when we are computing the distribution of the length of baby names (@tbl-q1b-ex5), we need to weigh the observations by `n` otherwise each row will be treated as 1 (@tbl-q1b-ex5 column 3), instead of the actual number reflected in `n` leading to erroneous results.
+
+```{r}
+#| tbl-cap: "The babynames data-set"
+#| label: tbl-q1a-ex5
+#| code-fold: true
+
+babynames |>
+  slice_head(n = 5) |>
+  gt() |>
+  fmt_number(prop, decimals = 4)
+```
+
+```{r}
+#| tbl-cap: "The distribution of the length of babynames"
+#| label: tbl-q1b-ex5
+#| code-fold: true
+
+df1 = babynames |>
+  mutate(name_length = str_length(name)) |>
+  count(name_length, wt = n) |>
+  rename(correct_frequency = n)
+
+df2 = babynames |>
+  mutate(name_length = str_length(name)) |>
+  count(name_length) |>
+  rename(wrong_frequency_without_weights = n)
+
+inner_join(df1, df2, by = "name_length") |>
+  gt() |>
+  fmt_number(-name_length , decimals = 0) |>
+  cols_label_with(
+    fn = ~ janitor::make_clean_names(., case = "title")
+  ) |>
+  gt_theme_538()
+```
+
+## Question 2
+
+**Use [`str_length()`](https://stringr.tidyverse.org/reference/str_length.html) and [`str_sub()`](https://stringr.tidyverse.org/reference/str_sub.html) to extract the middle letter from each baby name. What will you do if the string has an even number of characters?**
+
+The code displayed below extracts the middle letter from each baby name, and the results for first 10 names are displayed in @tbl-q2-ex5 . If the string has an even number of characters, we can pick the middle two characters.
+
+```{r}
+#| label: tbl-q2-ex5
+#| tbl-cap: "Middle letters of names"
+
+df3 = babynames |>
+  mutate(
+    name_length = str_length(name),
+    middle_letter_start = if_else(name_length %% 2 == 0,
+                             name_length/2,
+                             (name_length/2) + 0.5),
+    middle_letter_end = if_else(name_length %% 2 == 0,
+                                (name_length/2) + 1,
+                                (name_length/2) + 0.5),
+    middle_letter = str_sub(name, 
+                            start = middle_letter_start, 
+                            end = middle_letter_end)
+  ) |>
+  select(-c(year, sex, n, prop)) |>
+  slice_head(n = 10)
+
+df3 |>
+  gt() |>
+  cols_label_with(fn = ~ janitor::make_clean_names(., case = "title")) |>
+  cols_align(align = "center",
+             columns = -name) |>
+  gt_theme_538()
+```
+
+## Question 3
+
+**Are there any major trends in the length of baby names over time? What about the popularity of first and last letters?**
+
+```{r}
+df4 = babynames |>
+  mutate(
+    name_length = str_length(name),
+    name_start = str_sub(name, 1, 1),
+    name_end = str_sub(name, -1, -1)
+  )
+
+df4 |>
+  group_by(year) |>
+  count(name_length, wt = n) |>
+  summarise(mean_length = weighted.mean(name_length, w = n)) |>
+  ggplot(aes(x = year, y = mean_length)) +
+  geom_line() +
+  theme_classic() +
+  labs(y = "Average name length (for each year)",
+       x = "Year") +
+  scale_x_continuous(breaks = seq(1880, 2000, 20))
+```
