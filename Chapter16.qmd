@@ -1,0 +1,104 @@
+---
+title: "Chapter 16"
+subtitle: "Regular expressions"
+author: "Aditya Dahiya"
+date: 2023-09-12
+execute: 
+  echo: true
+  warning: false
+  error: false
+  cache: true
+filters:
+  - social-share
+share:
+  permalink: "https://aditya-dahiya.github.io/RfDS2solutions/Chapter16.html"
+  description: "Solutions: R for Data Science (2e)"
+  twitter: true
+  facebook: true
+  linkedin: true
+  email: true
+editor_options: 
+  chunk_output_type: console
+bibliography: references.bib
+---
+
+# Regular Expressions
+
+```{r}
+#| label: setup
+
+library(tidyverse)
+library(babynames)
+library(gt)
+library(gtExtras)
+library(janitor)
+```
+
+# **16.3.5 Exercises**
+
+## Question 1
+
+**What baby name has the most vowels? What name has the highest proportion of vowels? (Hint: what is the denominator?)**
+
+The code below shows the analysis. The answers are: ---
+
+-   The baby names with most vowels, i.e., 8 of them are ***Mariadelrosario*** and ***Mariaguadalupe***.
+
+-   The baby names with highest proportion of vowels, i.e. 1 (they are entirely composed of vowels) are ***Ai, Aia, Aoi, Ea, Eua, Ia,*** ***Ii*** and ***Io***.
+
+```{r}
+b1 = babynames |>
+  mutate(
+    nos_vowels = str_count(name, pattern = "[AEIOUaeiou]"),
+    name_length = str_length(name),
+    prop_vowels = nos_vowels / name_length
+  )
+  
+b1 |> 
+  group_by(name) |>
+  summarise(nos_vowels = mean(nos_vowels)) |>
+  arrange(desc(nos_vowels)) |>
+  slice_head(n = 5)
+
+b1 |> 
+  group_by(name) |>
+  summarise(prop_vowels = mean(prop_vowels)) |>
+  filter(prop_vowels == 1) |>
+  select(name) |>
+  as_vector() |>
+  str_flatten(collapse = ", ", last = " and ")
+```
+
+## Question 2
+
+**Replace all forward slashes in `"a/b/c/d/e"` with backslashes. What happens if you attempt to undo the transformation by replacing all backslashes with forward slashes? (We\'ll discuss the problem very soon.)**
+
+```{r}
+test_string = "a/b/c/d/e"
+str_replace_all(test_string,
+                pattern = "/",
+                replacement = "\\\\") |>
+  str_view()
+```
+
+## Question 3
+
+**Implement a simple version of [`str_to_lower()`](https://stringr.tidyverse.org/reference/case.html) using [`str_replace_all()`](https://stringr.tidyverse.org/reference/str_replace.html).**
+
+The following code implements `str_to_lower()` using `str_replace_all()` function.
+
+```{r}
+test_string_1 = "Take The Match And Strike It Against Your Shoe."
+
+str_replace_all(test_string_1,
+                pattern = "[A-Z|a-z]",
+                replacement = tolower)
+```
+
+## Question 4
+
+**Create a regular expression that will match telephone numbers as commonly written in your country.**
+
+```{r}
+
+```
