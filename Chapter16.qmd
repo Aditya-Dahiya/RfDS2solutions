@@ -463,4 +463,117 @@ f.  **`(.)\1\1`**: This regular expression matches strings that contain three co
 
 g.  **`"(..)\\1"`**: This is a string that represents a regular expression which matches strings consisting of two identical characters repeated twice. The **`(..)`** captures any two characters, and **`\\1`** refers to the first captured two characters. So, it matches strings like `aa` or `11` within double quotes.
 
-## 
+# **16.6.4 Exercises**
+
+## Question 1
+
+**For each of the following challenges, try solving it by using both a single regular expression, and a combination of multiple [`str_detect()`](https://stringr.tidyverse.org/reference/str_detect.html) calls.**
+
+a.  **Find all `words` that start or end with `x`.**
+
+    The words are displayed below: ---
+
+    ```{r}
+    # Using a singular regular expression
+    str_view(words, "(^xX)|(x$)")
+
+    # Using a combination of multiple str_detect() calls
+    words[str_detect(words, "^xX") | str_detect(words, "x$")]
+
+    ```
+
+b.  **Find all `words` that start with a vowel and end with a consonant.**
+
+    The words are displayed below: ---
+
+    ```{r}
+    # Using a singular regular expression
+    pattern_b = "^(?i)[aeiou].*[^aeiou]$"
+    str_subset(words, pattern_b)
+
+    # Using a combination of multiple str_detect() calls
+    words[
+      str_detect(words, "^(?i)[aeiou]") &
+      str_detect(words, "[^aeiou]$")  
+    ]
+    ```
+
+c.  **Are there any `words` that contain at least one of each different vowel?**
+
+    No, there are no such words in `words`.
+
+    ```{r}
+    pattern_c = "^(?=.*a)(?=.*e)(?=.*i)(?=.*o)(?=.*u).+"
+    str_subset(words, pattern_c)
+    ```
+
+## Question 2
+
+**Construct patterns to find evidence for and against the rule \"i before e except after c\"?**
+
+The code given below provides annotated evidence for and against the rule \"i before e except after c\".
+
+```{r}
+# Creating the regexp's first to use in stringr functions
+pattern_1a = "\\b\\w*ie\\w*\\b"
+pattern_1b = "\\b\\w+ei\\w*\\b"
+
+pattern_2a = "\\b\\w*cei\\w*\\b"
+pattern_2b = "\\b\\w*cie\\w*\\b"
+
+# Words which contain "i" before "e"
+words[str_detect(words, pattern_1a)]
+
+# Words which contain "e" before an "i", thus giving evidence against
+# the rule, unless there is a preceeding "c"
+words[str_detect(words, pattern_1b)]
+
+# Words which contain "e" before an "i" after "c", thus following the rule.
+# That is, evidence in favour of the rule
+words[str_detect(words, pattern_2a)]
+
+# Words which contain an "i" before "e" after "c", thus violating the rule.
+# That is, evidence against the rule
+words[str_detect(words, pattern_2b)]
+```
+
+## Question 3
+
+[**`colors()`**](https://rdrr.io/r/grDevices/colors.html) **contains a number of modifiers like \"lightgray\" and \"darkblue\". How could you automatically identify these modifiers? (Think about how you might detect and then removed the colors that are modified).**
+
+-   The R code `col_vec = colours(distinct = TRUE)` creates a vector `col_vec` containing a set of distinct color names available in R's default color palette.
+
+-   The code `col_vec = col_vec[!str_detect(col_vec, "\\b\\w*\\d\\w*\\b")]` filters the vector `col_vec` to exclude color names that contain any digits within them.
+
+-   Finally, the code `col_vec[str_detect(col_vec, "\\b(?:light|dark)\\w*\\b")]` will return a subset of the `col_vec` vector containing color names that have modifiers like "light" or "dark" in them, effectively identifying color names with modifiers.
+
+```{r}
+col_vec = colours(distinct = TRUE)
+col_vec = col_vec[!str_detect(col_vec, "\\b\\w*\\d\\w*\\b")]
+
+col_vec[str_detect(col_vec, "\\b(?:light|dark)\\w*\\b")]
+```
+
+## Question 4
+
+**Create a regular expression that finds any base R dataset. You can get a list of these data-sets via a special use of the [`data()`](https://rdrr.io/r/utils/data.html) function: `data(package = "datasets")$results[, "Item"]`. Note that a number of old data-sets are individual vectors; these contain the name of the grouping \"data frame\" in parentheses, so you\'ll need to strip those off.**
+
+The following code does the job, and purpose of each line is explained in the annotations.
+
+```{r}
+# Extract all base R datasets into a character vector
+base_r_packs = data(package = "datasets")$results[, "Item"]
+
+# Remove all the names of grouping data.frames in parenthesis 
+base_r_packs = str_replace_all(base_r_packs, 
+                pattern = "\\([^()]+\\)", 
+                replacement = "")
+# Remove the whitespace, i.e., " " let after removing the parenthesis words
+base_r_packs = str_replace_all(base_r_packs, 
+                pattern = "\\s+$", 
+                replacement = "")
+
+# Create the regular expression
+huge_regex = str_c("\\b(", str_flatten(base_r_packs, "|"), ")\\b")
+
+```

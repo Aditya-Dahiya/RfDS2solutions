@@ -385,7 +385,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#question-4-1" id="toc-question-4-1" class="nav-link" data-scroll-target="#question-4-1">Question 4</a></li>
   <li><a href="#question-5" id="toc-question-5" class="nav-link" data-scroll-target="#question-5">Question 5</a></li>
   <li><a href="#question-6" id="toc-question-6" class="nav-link" data-scroll-target="#question-6">Question 6</a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  </ul></li>
+  <li><a href="#exercises-2" id="toc-exercises-2" class="nav-link" data-scroll-target="#exercises-2"><strong>16.6.4 Exercises</strong></a>
+  <ul class="collapse">
+  <li><a href="#question-1-2" id="toc-question-1-2" class="nav-link" data-scroll-target="#question-1-2">Question 1</a></li>
+  <li><a href="#question-2-2" id="toc-question-2-2" class="nav-link" data-scroll-target="#question-2-2">Question 2</a></li>
+  <li><a href="#question-3-2" id="toc-question-3-2" class="nav-link" data-scroll-target="#question-3-2">Question 3</a></li>
+  <li><a href="#question-4-2" id="toc-question-4-2" class="nav-link" data-scroll-target="#question-4-2">Question 4</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/edit/main/Chapter16.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -1951,8 +1957,193 @@ tbody tr:last-child {
 <li><p><strong><code>"(..)\\1"</code></strong>: This is a string that represents a regular expression which matches strings consisting of two identical characters repeated twice. The <strong><code>(..)</code></strong> captures any two characters, and <strong><code>\\1</code></strong> refers to the first captured two characters. So, it matches strings like <code>aa</code> or <code>11</code> within double quotes.</p></li>
 </ol>
 </section>
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section"></h2>
+</section>
+<section id="exercises-2" class="level1">
+<h1><strong>16.6.4 Exercises</strong></h1>
+<section id="question-1-2" class="level2">
+<h2 class="anchored" data-anchor-id="question-1-2">Question 1</h2>
+<p><strong>For each of the following challenges, try solving it by using both a single regular expression, and a combination of multiple <a href="https://stringr.tidyverse.org/reference/str_detect.html"><code>str_detect()</code></a> calls.</strong></p>
+<ol type="a">
+<li><p><strong>Find all <code>words</code> that start or end with <code>x</code>.</strong></p>
+<p>The words are displayed below: —</p>
+<div class="cell" data-hash="Chapter16_cache/html/unnamed-chunk-20_6ec684f0201048918b9f37d6f38dca0f">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using a singular regular expression</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(words, <span class="st">"(^xX)|(x$)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[108] │ bo&lt;x&gt;
+[747] │ se&lt;x&gt;
+[772] │ si&lt;x&gt;
+[841] │ ta&lt;x&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using a combination of multiple str_detect() calls</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>words[<span class="fu">str_detect</span>(words, <span class="st">"^xX"</span>) <span class="sc">|</span> <span class="fu">str_detect</span>(words, <span class="st">"x$"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "box" "sex" "six" "tax"</code></pre>
+</div>
+</div></li>
+<li><p><strong>Find all <code>words</code> that start with a vowel and end with a consonant.</strong></p>
+<p>The words are displayed below: —</p>
+<div class="cell" data-hash="Chapter16_cache/html/unnamed-chunk-21_0db5a752cf16065567ead275699335b5">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using a singular regular expression</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>pattern_b <span class="ot">=</span> <span class="st">"^(?i)[aeiou].*[^aeiou]$"</span></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str_subset</span>(words, pattern_b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] "about"       "accept"      "account"     "across"      "act"        
+  [6] "actual"      "add"         "address"     "admit"       "affect"     
+ [11] "afford"      "after"       "afternoon"   "again"       "against"    
+ [16] "agent"       "air"         "all"         "allow"       "almost"     
+ [21] "along"       "already"     "alright"     "although"    "always"     
+ [26] "amount"      "and"         "another"     "answer"      "any"        
+ [31] "apart"       "apparent"    "appear"      "apply"       "appoint"    
+ [36] "approach"    "arm"         "around"      "art"         "as"         
+ [41] "ask"         "at"          "attend"      "authority"   "away"       
+ [46] "awful"       "each"        "early"       "east"        "easy"       
+ [51] "eat"         "economy"     "effect"      "egg"         "eight"      
+ [56] "either"      "elect"       "electric"    "eleven"      "employ"     
+ [61] "end"         "english"     "enjoy"       "enough"      "enter"      
+ [66] "environment" "equal"       "especial"    "even"        "evening"    
+ [71] "ever"        "every"       "exact"       "except"      "exist"      
+ [76] "expect"      "explain"     "express"     "identify"    "if"         
+ [81] "important"   "in"          "indeed"      "individual"  "industry"   
+ [86] "inform"      "instead"     "interest"    "invest"      "it"         
+ [91] "item"        "obvious"     "occasion"    "odd"         "of"         
+ [96] "off"         "offer"       "often"       "okay"        "old"        
+[101] "on"          "only"        "open"        "opportunity" "or"         
+[106] "order"       "original"    "other"       "ought"       "out"        
+[111] "over"        "own"         "under"       "understand"  "union"      
+[116] "unit"        "university"  "unless"      "until"       "up"         
+[121] "upon"        "usual"      </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using a combination of multiple str_detect() calls</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>words[</span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_detect</span>(words, <span class="st">"^(?i)[aeiou]"</span>) <span class="sc">&amp;</span></span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_detect</span>(words, <span class="st">"[^aeiou]$"</span>)  </span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] "about"       "accept"      "account"     "across"      "act"        
+  [6] "actual"      "add"         "address"     "admit"       "affect"     
+ [11] "afford"      "after"       "afternoon"   "again"       "against"    
+ [16] "agent"       "air"         "all"         "allow"       "almost"     
+ [21] "along"       "already"     "alright"     "although"    "always"     
+ [26] "amount"      "and"         "another"     "answer"      "any"        
+ [31] "apart"       "apparent"    "appear"      "apply"       "appoint"    
+ [36] "approach"    "arm"         "around"      "art"         "as"         
+ [41] "ask"         "at"          "attend"      "authority"   "away"       
+ [46] "awful"       "each"        "early"       "east"        "easy"       
+ [51] "eat"         "economy"     "effect"      "egg"         "eight"      
+ [56] "either"      "elect"       "electric"    "eleven"      "employ"     
+ [61] "end"         "english"     "enjoy"       "enough"      "enter"      
+ [66] "environment" "equal"       "especial"    "even"        "evening"    
+ [71] "ever"        "every"       "exact"       "except"      "exist"      
+ [76] "expect"      "explain"     "express"     "identify"    "if"         
+ [81] "important"   "in"          "indeed"      "individual"  "industry"   
+ [86] "inform"      "instead"     "interest"    "invest"      "it"         
+ [91] "item"        "obvious"     "occasion"    "odd"         "of"         
+ [96] "off"         "offer"       "often"       "okay"        "old"        
+[101] "on"          "only"        "open"        "opportunity" "or"         
+[106] "order"       "original"    "other"       "ought"       "out"        
+[111] "over"        "own"         "under"       "understand"  "union"      
+[116] "unit"        "university"  "unless"      "until"       "up"         
+[121] "upon"        "usual"      </code></pre>
+</div>
+</div></li>
+<li><p><strong>Are there any <code>words</code> that contain at least one of each different vowel?</strong></p>
+<p>No, there are no such words in <code>words</code>.</p>
+<div class="cell" data-hash="Chapter16_cache/html/unnamed-chunk-22_32156c4b5b96a09f69b752ecbf5f501a">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>pattern_c <span class="ot">=</span> <span class="st">"^(?=.*a)(?=.*e)(?=.*i)(?=.*o)(?=.*u).+"</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str_subset</span>(words, pattern_c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>character(0)</code></pre>
+</div>
+</div></li>
+</ol>
+</section>
+<section id="question-2-2" class="level2">
+<h2 class="anchored" data-anchor-id="question-2-2">Question 2</h2>
+<p><strong>Construct patterns to find evidence for and against the rule "i before e except after c"?</strong></p>
+<p>The code given below provides annotated evidence for and against the rule "i before e except after c".</p>
+<div class="cell" data-hash="Chapter16_cache/html/unnamed-chunk-23_05b3d393c05733407e2706891d41ede8">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating the regexp's first to use in stringr functions</span></span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>pattern_1a <span class="ot">=</span> <span class="st">"</span><span class="sc">\\</span><span class="st">b</span><span class="sc">\\</span><span class="st">w*ie</span><span class="sc">\\</span><span class="st">w*</span><span class="sc">\\</span><span class="st">b"</span></span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>pattern_1b <span class="ot">=</span> <span class="st">"</span><span class="sc">\\</span><span class="st">b</span><span class="sc">\\</span><span class="st">w+ei</span><span class="sc">\\</span><span class="st">w*</span><span class="sc">\\</span><span class="st">b"</span></span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>pattern_2a <span class="ot">=</span> <span class="st">"</span><span class="sc">\\</span><span class="st">b</span><span class="sc">\\</span><span class="st">w*cei</span><span class="sc">\\</span><span class="st">w*</span><span class="sc">\\</span><span class="st">b"</span></span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a>pattern_2b <span class="ot">=</span> <span class="st">"</span><span class="sc">\\</span><span class="st">b</span><span class="sc">\\</span><span class="st">w*cie</span><span class="sc">\\</span><span class="st">w*</span><span class="sc">\\</span><span class="st">b"</span></span>
+<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Words which contain "i" before "e"</span></span>
+<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a>words[<span class="fu">str_detect</span>(words, pattern_1a)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "achieve"    "believe"    "brief"      "client"     "die"       
+ [6] "experience" "field"      "friend"     "lie"        "piece"     
+[11] "quiet"      "science"    "society"    "tie"        "view"      </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Words which contain "e" before an "i", thus giving evidence against</span></span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the rule, unless there is a preceeding "c"</span></span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>words[<span class="fu">str_detect</span>(words, pattern_1b)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "receive" "weigh"  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Words which contain "e" before an "i" after "c", thus following the rule.</span></span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="co"># That is, evidence in favour of the rule</span></span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>words[<span class="fu">str_detect</span>(words, pattern_2a)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "receive"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Words which contain an "i" before "e" after "c", thus violating the rule.</span></span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="co"># That is, evidence against the rule</span></span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>words[<span class="fu">str_detect</span>(words, pattern_2b)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "science" "society"</code></pre>
+</div>
+</div>
+</section>
+<section id="question-3-2" class="level2">
+<h2 class="anchored" data-anchor-id="question-3-2">Question 3</h2>
+<p><a href="https://rdrr.io/r/grDevices/colors.html"><strong><code>colors()</code></strong></a> <strong>contains a number of modifiers like "lightgray" and "darkblue". How could you automatically identify these modifiers? (Think about how you might detect and then removed the colors that are modified).</strong></p>
+<ul>
+<li><p>The R code <code>col_vec = colours(distinct = TRUE)</code> creates a vector <code>col_vec</code> containing a set of distinct color names available in R’s default color palette.</p></li>
+<li><p>The code <code>col_vec = col_vec[!str_detect(col_vec, "\\b\\w*\\d\\w*\\b")]</code> filters the vector <code>col_vec</code> to exclude color names that contain any digits within them.</p></li>
+<li><p>Finally, the code <code>col_vec[str_detect(col_vec, "\\b(?:light|dark)\\w*\\b")]</code> will return a subset of the <code>col_vec</code> vector containing color names that have modifiers like “light” or “dark” in them, effectively identifying color names with modifiers.</p></li>
+</ul>
+<div class="cell" data-hash="Chapter16_cache/html/unnamed-chunk-24_d494cb007a5efbe840366fe665c4ae85">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>col_vec <span class="ot">=</span> <span class="fu">colours</span>(<span class="at">distinct =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>col_vec <span class="ot">=</span> col_vec[<span class="sc">!</span><span class="fu">str_detect</span>(col_vec, <span class="st">"</span><span class="sc">\\</span><span class="st">b</span><span class="sc">\\</span><span class="st">w*</span><span class="sc">\\</span><span class="st">d</span><span class="sc">\\</span><span class="st">w*</span><span class="sc">\\</span><span class="st">b"</span>)]</span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>col_vec[<span class="fu">str_detect</span>(col_vec, <span class="st">"</span><span class="sc">\\</span><span class="st">b(?:light|dark)</span><span class="sc">\\</span><span class="st">w*</span><span class="sc">\\</span><span class="st">b"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "darkgoldenrod"        "darkgray"             "darkgreen"           
+ [4] "darkkhaki"            "darkmagenta"          "darkolivegreen"      
+ [7] "darkorange"           "darkorchid"           "darkred"             
+[10] "darksalmon"           "darkseagreen"         "darkslateblue"       
+[13] "darkslategray"        "darkturquoise"        "darkviolet"          
+[16] "lightblue"            "lightcoral"           "lightcyan"           
+[19] "lightgoldenrod"       "lightgoldenrodyellow" "lightgray"           
+[22] "lightgreen"           "lightpink"            "lightsalmon"         
+[25] "lightseagreen"        "lightskyblue"         "lightslateblue"      
+[28] "lightslategray"       "lightsteelblue"       "lightyellow"         </code></pre>
+</div>
+</div>
+</section>
+<section id="question-4-2" class="level2">
+<h2 class="anchored" data-anchor-id="question-4-2">Question 4</h2>
+<p><strong>Create a regular expression that finds any base R dataset. You can get a list of these data-sets via a special use of the <a href="https://rdrr.io/r/utils/data.html"><code>data()</code></a> function: <code>data(package = "datasets")$results[, "Item"]</code>. Note that a number of old data-sets are individual vectors; these contain the name of the grouping "data frame" in parentheses, so you'll need to strip those off.</strong></p>
+<p>The following code does the job, and purpose of each line is explained in the annotations.</p>
+<div class="cell" data-hash="Chapter16_cache/html/unnamed-chunk-25_6b5bcbd9829e1e3dd8c2aa189b9ef8be">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract all base R datasets into a character vector</span></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>base_r_packs <span class="ot">=</span> <span class="fu">data</span>(<span class="at">package =</span> <span class="st">"datasets"</span>)<span class="sc">$</span>results[, <span class="st">"Item"</span>]</span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove all the names of grouping data.frames in parenthesis </span></span>
+<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a>base_r_packs <span class="ot">=</span> <span class="fu">str_replace_all</span>(base_r_packs, </span>
+<span id="cb78-6"><a href="#cb78-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">pattern =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">([^()]+</span><span class="sc">\\</span><span class="st">)"</span>, </span>
+<span id="cb78-7"><a href="#cb78-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">replacement =</span> <span class="st">""</span>)</span>
+<span id="cb78-8"><a href="#cb78-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the whitespace, i.e., " " let after removing the parenthesis words</span></span>
+<span id="cb78-9"><a href="#cb78-9" aria-hidden="true" tabindex="-1"></a>base_r_packs <span class="ot">=</span> <span class="fu">str_replace_all</span>(base_r_packs, </span>
+<span id="cb78-10"><a href="#cb78-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">pattern =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">s+$"</span>, </span>
+<span id="cb78-11"><a href="#cb78-11" aria-hidden="true" tabindex="-1"></a>                <span class="at">replacement =</span> <span class="st">""</span>)</span>
+<span id="cb78-12"><a href="#cb78-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-13"><a href="#cb78-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the regular expression</span></span>
+<span id="cb78-14"><a href="#cb78-14" aria-hidden="true" tabindex="-1"></a>huge_regex <span class="ot">=</span> <span class="fu">str_c</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">b("</span>, <span class="fu">str_flatten</span>(base_r_packs, <span class="st">"|"</span>), <span class="st">")</span><span class="sc">\\</span><span class="st">b"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 </section>
