@@ -509,9 +509,9 @@ c.  **Are there any `words` that contain at least one of each different vowel?**
 
 ## Question 2
 
-**Construct patterns to find evidence for and against the rule \"i before e except after c\"?**
+**Construct patterns to find evidence for and against the rule "i before e except after c"?**
 
-The code given below provides annotated evidence for and against the rule \"i before e except after c\".
+The code given below provides annotated evidence for and against the rule "i before e except after c".
 
 ```{r}
 # Creating the regexp's first to use in stringr functions
@@ -539,7 +539,7 @@ words[str_detect(words, pattern_2b)]
 
 ## Question 3
 
-[**`colors()`**](https://rdrr.io/r/grDevices/colors.html) **contains a number of modifiers like \"lightgray\" and \"darkblue\". How could you automatically identify these modifiers? (Think about how you might detect and then removed the colors that are modified).**
+[**`colors()`**](https://rdrr.io/r/grDevices/colors.html) **contains a number of modifiers like "lightgray" and "darkblue". How could you automatically identify these modifiers? (Think about how you might detect and then removed the colors that are modified).**
 
 -   The R code `col_vec = colours(distinct = TRUE)` creates a vector `col_vec` containing a set of distinct color names available in R's default color palette.
 
@@ -556,7 +556,7 @@ col_vec[str_detect(col_vec, "\\b(?:light|dark)\\w*\\b")]
 
 ## Question 4
 
-**Create a regular expression that finds any base R dataset. You can get a list of these data-sets via a special use of the [`data()`](https://rdrr.io/r/utils/data.html) function: `data(package = "datasets")$results[, "Item"]`. Note that a number of old data-sets are individual vectors; these contain the name of the grouping \"data frame\" in parentheses, so you\'ll need to strip those off.**
+**Create a regular expression that finds any base R dataset. You can get a list of these data-sets via a special use of the [`data()`](https://rdrr.io/r/utils/data.html) function: `data(package = "datasets")$results[, "Item"]`. Note that a number of old data-sets are individual vectors; these contain the name of the grouping "data frame" in parentheses, so you'll need to strip those off.**
 
 The following code does the job, and purpose of each line is explained in the annotations.
 

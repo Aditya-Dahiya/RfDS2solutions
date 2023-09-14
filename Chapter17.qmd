@@ -1,0 +1,134 @@
+---
+title: "Chapter 17"
+author: "Aditya Dahiya"
+subtitle: "Factors"
+author: "Aditya Dahiya"
+date: 2023-09-14
+execute: 
+  echo: true
+  warning: false
+  error: false
+  cache: true
+filters:
+  - social-share
+share:
+  permalink: "https://aditya-dahiya.github.io/RfDS2solutions/Chapter17.html"
+  description: "Solutions: R for Data Science (2e)"
+  twitter: true
+  facebook: true
+  linkedin: true
+  email: true
+editor_options: 
+  chunk_output_type: console
+bibliography: references.bib
+---
+
+```{r}
+#| label: setup
+
+library(tidyverse)
+library(ggthemes)
+library(gt)
+data("gss_cat")
+```
+
+# **17.3.1 Exercise**
+
+## Question 1
+
+**Explore the distribution of `rincome` (reported income). What makes the default bar chart hard to understand? How could you improve the plot?**
+
+The default bar chart is hard to understand because: --
+
+1.  It is vertical, and the names of categories overlap on x-axis.
+
+2.  The "Not applicable" category is before the lowest income group. Thus, the pattern is disturbed.
+
+We could improve the plot, as shown in @fig-q1-ex3, by: ---
+
+1.  Making it into a horizontal bar chart to allow space and easy reading of categories of income levels.
+
+2.  Move the "Not Applicable" level after the highest income level, along-side "Refused", "Dont' know" and "No answer".
+
+3.  Further, we could remove non-data ink, as per principles of Mr. Tufte to make our pattern stand out. Also, we could create a separate colouring scheme for data outside the income levels.
+
+```{r}
+#| label: fig-q1-ex3
+#| fig-cap: "Improved bar chart"
+
+no_levels = levels(gss_cat$rincome)[c(1:3, 16)]
+
+gss_cat |>
+  mutate(col_level = rincome %in% no_levels) |>
+  ggplot(aes(y = fct_relevel(rincome, 
+                             "Not applicable",
+                             after = 3),
+             fill = col_level)) +
+  geom_bar() +
+  theme_minimal() +
+  labs(x = "Number of respondents", y = NULL,
+       title = "Income Levels of respondents in General Social Survey") +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        legend.position = "none") +
+  scale_fill_manual(values = c("#3d3b3b", "#999494"))
+```
+
+## Question 2
+
+**What is the most common `relig` in this survey? What\'s the most common `partyid`?**
+
+The most common `relig` is "Protestant". And, the most common `partyid` is "Independent".
+
+```{r}
+gss_cat |>
+  count(relig, sort = TRUE)
+
+gss_cat |>
+  count(partyid, sort = TRUE)
+```
+
+## Question 3
+
+**Which `relig` does `denom` (denomination) apply to? How can you find out with a table? How can you find out with a visualization?**
+
+We can see from the code below that more than one factor values in `denom` (denomination) occur only in "Protestant", "Christian" and "Other" religions. To explore further, we can cross-tabulate religion and denomination, as shown in @tbl-q3-ex3, and realize that the only religion to which denomination really applies to is "Protestant".
+
+We could also do a visualization as in @fig-q3a-ex3 .
+
+```{r}
+gss_cat |>
+  group_by(relig) |>
+  summarise(n = n_distinct(denom)) |>
+  arrange(desc(n)) |>
+  filter(n > 1)
+```
+
+```{r}
+#| label: tbl-q3-ex3
+#| tbl-cap: "Cross-Table of the deominations within the three religions"
+
+gss_cat |>
+  filter(relig %in% c("Protestant", "Christian", "Other")) |>
+  group_by(relig, denom) |>
+  tally() |>
+  spread(relig, n) |>
+  arrange(desc(Christian)) |>
+  gt() |>
+  gt_theme_538()
+```
+
+```{r}
+#| label: fig-q3a-ex3
+#| tbl-cap: "Visualization of the number of deominations within religions"
+
+gss_cat |>
+  group_by(relig) |>
+  summarise(n = n_distinct(denom)) |>
+  arrange(desc(n)) |>
+  ggplot(aes(y = reorder(relig, n), x = n)) +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  labs(x = "Number of denominations", y = NULL,
+       title = "Only Protestant religion has demoninations within it")
+```
