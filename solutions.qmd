@@ -19,6 +19,7 @@ listing:
     - "Chapter14.qmd"
     - "Chapter15.qmd"
     - "Chapter16.qmd"
+    - "Chapter17.qmd"
     - "Chapter21.qmd"
     - "Chapter29.qmd"
     - "Chapter30.qmd"

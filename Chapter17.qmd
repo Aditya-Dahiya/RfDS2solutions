@@ -2,7 +2,6 @@
 title: "Chapter 17"
 author: "Aditya Dahiya"
 subtitle: "Factors"
-author: "Aditya Dahiya"
 date: 2023-09-14
 execute: 
   echo: true
@@ -29,8 +28,13 @@ bibliography: references.bib
 library(tidyverse)
 library(ggthemes)
 library(gt)
+library(gtExtras)
 data("gss_cat")
 ```
+
+**Important Points**
+
+-   Most rename and recoding functions in the tidyverse, the new values go on the left and the old values go on the right.
 
 # **17.3.1 Exercise**
 
@@ -76,7 +80,7 @@ gss_cat |>
 
 ## Question 2
 
-**What is the most common `relig` in this survey? What\'s the most common `partyid`?**
+**What is the most common `relig` in this survey? What's the most common `partyid`?**
 
 The most common `relig` is "Protestant". And, the most common `partyid` is "Independent".
 
@@ -131,4 +135,126 @@ gss_cat |>
   theme_minimal() +
   labs(x = "Number of denominations", y = NULL,
        title = "Only Protestant religion has demoninations within it")
+```
+
+# **17.4.1 Exercises**
+
+## Question 1
+
+**There are some suspiciously high numbers in `tvhours`. Is the mean a good summary?**
+
+No, mean is not a good summary as the distribution of `tvhours` is right skewed. Instead, we should use median as a summary measure.
+
+```{r}
+gss_cat |>
+  drop_na() |>
+  mutate(tvhours = as_factor(tvhours)) |>
+  ggplot(aes(x = tvhours)) +
+  geom_bar(col = "black", fill = "white") +
+  theme_clean() +
+  labs(x = "Hours per day spent watching TV",
+       y = "Numbers", title = "Distribution of TV Hours is right skewed")
+```
+
+## Question 2
+
+**For each factor in `gss_cat` identify whether the order of the levels is arbitrary or principled.**
+
+The variables in the `gss_cat` data-set which are factors are: ---
+
+| Factor Variable | Levels                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Order is arbitrary or principled                                                                                 |
+|------------|-------------------------------------------------|------------|
+| `marital`       | No answer, Never married, Separated, Divorced, Widowed and, Married                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Arbitrary, since they are not in a specific order                                                                |
+| `race`          | Other, Black, White and, Not applicable                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | Arbitrary, since they are not in a specific order                                                                |
+| `rincome`       | No answer, Don't know, Refused, \$25000 or more, \$20000 - 24999, \$15000 - 19999, \$10000 - 14999, \$8000 to 9999, \$7000 to 7999, \$6000 to 6999, \$5000 to 5999, \$4000 to 4999, \$3000 to 3999, \$1000 to 2999, Lt \$1000 and, Not applicable                                                                                                                                                                                                                                                                                                | Principled, since the income levels are in a specified increasing or decreasing order, with few levels arbitrary |
+| `partyid`       | No answer, Don't know, Other party, Strong republican, Not str republican, Ind,near rep, Independent, Ind,near dem, Not str democrat and, Strong democrat                                                                                                                                                                                                                                                                                                                                                                                        | Partly Principled, as there are two extremes, and then levels in the middle.                                     |
+| `relig`         | No answer, Don't know, Inter-nondenominational, Native american, Christian, Orthodox-christian, Moslem/islam, Other eastern, Hinduism, Buddhism, Other, None, Jewish, Catholic, Protestant and, Not applicable                                                                                                                                                                                                                                                                                                                                   | Arbitrary, as the religions are not in a specific order.                                                         |
+| `denom`         | No answer, Don't know, No denomination, Other, Episcopal, Presbyterian-dk wh, Presbyterian, merged, Other presbyterian, United pres ch in us, Presbyterian c in us, Lutheran-dk which, Evangelical luth, Other lutheran, Wi evan luth synod, Lutheran-mo synod, Luth ch in america, Am lutheran, Methodist-dk which, Other methodist, United methodist, Afr meth ep zion, Afr meth episcopal, Baptist-dk which, Other baptists, Southern baptist, Nat bapt conv usa, Nat bapt conv of am, Am bapt ch in usa, Am baptist asso and, Not applicable | Arbitrary, as the denominations are not in a specific order.                                                     |
+
+## Question 3
+
+**Why did moving "Not applicable" to the front of the levels move it to the bottom of the plot?**
+
+Moving "Not applicable" to the front of the levels move it to the bottom of the plot, because `ggplot2` plots the levels in increasing order, starting bottom's upwards.
+
+# **17.5.1 Exercises**
+
+## Question 1
+
+**How have the proportions of people identifying as Democrat, Republican, and Independent changed over time?**
+
+As reflected in the @fig-q1-ex5, the proportions of people identifying as Democrat has slightly increased, Republican has slightly decreased, and Independent has increased, over the period of 15 years reflected in the data-set.
+
+```{r}
+#| label: fig-q1-ex5
+#| fig-cap: "Stacked bar chart of the partyid in the data-set"
+
+
+gss_cat |>
+  mutate(
+    partyid = fct_collapse(partyid,
+      "Republican"  = c("Strong republican",  "Not str republican"),
+      "Democrat"    = c("Strong democrat", "Not str democrat"),
+      "Independent" = c("Independent", "Ind,near dem", "Ind,near rep"),
+      "Others"      = c("No answer", "Don't know", "Other party")
+    )
+  ) |>
+  group_by(year, partyid) |>
+  count() |>
+  ggplot(aes(x = year, y = n, fill = partyid)) +
+  geom_col(position = "fill") +
+  scale_fill_manual(values = c("lightgrey", "red", "grey", "blue")) +
+  theme_classic() +
+  theme(legend.position = "bottom") +
+  labs(x = "Year", y = "Proportion of respondents", fill = "Party",
+       subtitle = "Proportion of republicans has decreased, while that of independents has increased over the years",
+       title = "In 15 years, share of parties' supporters has changed")
+```
+
+## Question 2
+
+**How could you collapse `rincome` into a small set of categories?**
+
+We could collapse the `rincome` into a small set of categories using the following functions: --
+
+-   `fct_lump_n()`
+
+-   `fct_lump_lowfreq()`
+
+-   `fct_lump_min()`
+
+-   `fct_lump_prop()`
+
+-   `fct_lump()`
+
+-   `fct_collapse()`
+
+```{r}
+gss_cat|>
+  mutate(
+    rincome = fct_lump_n(rincome, n = 6)
+  ) |>
+  group_by(rincome) |>
+  count() |>
+  arrange(desc(n)) |>
+  ungroup() |>
+  gt() |>
+  cols_label(rincome = "Annual Income",
+             n = "Numbers")
+```
+
+## Question 3
+
+**Notice there are 9 groups (excluding other) in the `fct_lump` example above. Why not 10? (Hint: type [`?fct_lump`](https://forcats.tidyverse.org/reference/fct_lump.html), and find the default for the argument `other_level` is "Other".)**
+
+Yes, there are 9 groups (excluding other) in this example, as shown below also in @fig-q3-ex5. This is because `n = 10` argument limits the total groups to 10, and the function needs one group for ***"Other"***, i.e. all other groups whose count is lesser than top 9 groups. Thus, the groups shown are 9, with 1 as ***"Other"*** (at the end).
+
+```{r}
+#| label: fig-q3-ex5
+#| fig-cap: "Table of number of respondents from each of top 10 religions, including Other"
+
+gss_cat |>
+  mutate(relig = fct_lump_n(relig, n = 10)) |>
+  count(relig) |>
+  gt()
 ```

@@ -2060,8 +2060,8 @@ tbody tr:last-child {
 </section>
 <section id="question-2-2" class="level2">
 <h2 class="anchored" data-anchor-id="question-2-2">Question 2</h2>
-<p><strong>Construct patterns to find evidence for and against the rule "i before e except after c"?</strong></p>
-<p>The code given below provides annotated evidence for and against the rule "i before e except after c".</p>
+<p><strong>Construct patterns to find evidence for and against the rule “i before e except after c”?</strong></p>
+<p>The code given below provides annotated evidence for and against the rule “i before e except after c”.</p>
 <div class="cell" data-hash="Chapter16_cache/html/unnamed-chunk-23_05b3d393c05733407e2706891d41ede8">
 <div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating the regexp's first to use in stringr functions</span></span>
 <span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>pattern_1a <span class="ot">=</span> <span class="st">"</span><span class="sc">\\</span><span class="st">b</span><span class="sc">\\</span><span class="st">w*ie</span><span class="sc">\\</span><span class="st">w*</span><span class="sc">\\</span><span class="st">b"</span></span>
@@ -2099,7 +2099,7 @@ tbody tr:last-child {
 </section>
 <section id="question-3-2" class="level2">
 <h2 class="anchored" data-anchor-id="question-3-2">Question 3</h2>
-<p><a href="https://rdrr.io/r/grDevices/colors.html"><strong><code>colors()</code></strong></a> <strong>contains a number of modifiers like "lightgray" and "darkblue". How could you automatically identify these modifiers? (Think about how you might detect and then removed the colors that are modified).</strong></p>
+<p><a href="https://rdrr.io/r/grDevices/colors.html"><strong><code>colors()</code></strong></a> <strong>contains a number of modifiers like “lightgray” and “darkblue”. How could you automatically identify these modifiers? (Think about how you might detect and then removed the colors that are modified).</strong></p>
 <ul>
 <li><p>The R code <code>col_vec = colours(distinct = TRUE)</code> creates a vector <code>col_vec</code> containing a set of distinct color names available in R’s default color palette.</p></li>
 <li><p>The code <code>col_vec = col_vec[!str_detect(col_vec, "\\b\\w*\\d\\w*\\b")]</code> filters the vector <code>col_vec</code> to exclude color names that contain any digits within them.</p></li>
@@ -2126,7 +2126,7 @@ tbody tr:last-child {
 </section>
 <section id="question-4-2" class="level2">
 <h2 class="anchored" data-anchor-id="question-4-2">Question 4</h2>
-<p><strong>Create a regular expression that finds any base R dataset. You can get a list of these data-sets via a special use of the <a href="https://rdrr.io/r/utils/data.html"><code>data()</code></a> function: <code>data(package = "datasets")$results[, "Item"]</code>. Note that a number of old data-sets are individual vectors; these contain the name of the grouping "data frame" in parentheses, so you'll need to strip those off.</strong></p>
+<p><strong>Create a regular expression that finds any base R dataset. You can get a list of these data-sets via a special use of the <a href="https://rdrr.io/r/utils/data.html"><code>data()</code></a> function: <code>data(package = "datasets")$results[, "Item"]</code>. Note that a number of old data-sets are individual vectors; these contain the name of the grouping “data frame” in parentheses, so you’ll need to strip those off.</strong></p>
 <p>The following code does the job, and purpose of each line is explained in the annotations.</p>
 <div class="cell" data-hash="Chapter16_cache/html/unnamed-chunk-25_6b5bcbd9829e1e3dd8c2aa189b9ef8be">
 <div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract all base R datasets into a character vector</span></span>
