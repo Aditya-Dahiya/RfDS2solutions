@@ -1,0 +1,160 @@
+---
+title: "Chapter 18"
+author: "Aditya Dahiya"
+subtitle: "Dates and times"
+date: 2023-09-15
+execute: 
+  echo: true
+  warning: false
+  error: false
+  cache: true
+filters:
+  - social-share
+share:
+  permalink: "https://aditya-dahiya.github.io/RfDS2solutions/Chapter18.html"
+  description: "Solutions: R for Data Science (2e)"
+  twitter: true
+  facebook: true
+  linkedin: true
+  email: true
+editor_options: 
+  chunk_output_type: console
+bibliography: references.bib
+---
+
+Date-Time
+
+```{r}
+#| label: setup
+
+library(tidyverse)
+library(nycflights13)
+library(lubridate)
+data("flights")
+```
+
+```{r}
+names(flights)
+today() |>
+  class()
+now() |>
+  class()
+```
+
+## **All date formats understood by `readr`**[@lubridate]
+
+| Type  | Code  | Meaning                        | Example         |
+|-------|-------|--------------------------------|-----------------|
+| Year  | `%Y`  | 4 digit year                   | 2021            |
+|       | `%y`  | 2 digit year                   | 21              |
+| Month | `%m`  | Number                         | 2               |
+|       | `%b`  | Abbreviated name               | Feb             |
+|       | `%B`  | Full name                      | February        |
+| Day   | `%d`  | Two digits                     | 02              |
+|       | `%e`  | One or two digits              | 2               |
+| Time  | `%H`  | 24-hour hour                   | 13              |
+|       | `%I`  | 12-hour hour                   | 1               |
+|       | `%p`  | AM/PM                          | pm              |
+|       | `%M`  | Minutes                        | 35              |
+|       | `%S`  | Seconds                        | 45              |
+|       | `%OS` | Seconds with decimal component | 45.35           |
+|       | `%Z`  | Time zone name                 | America/Chicago |
+|       | `%z`  | Offset from UTC                | +0800           |
+| Other | `%.`  | Skip one non-digit             | :               |
+|       | `%*`  | Skip any number of non-digits  |                 |
+
+```{r}
+#| eval: false
+#| echo: false
+
+###############################################################
+###########       Long Method       ###########################
+###############################################################
+
+flights |>
+  select(-c(hour, minute, time_hour)) |>
+  mutate(
+    dep_time = as.character(dep_time),
+    dep_time = if_else(str_length(dep_time) == 3,
+                       paste0("0", dep_time),
+                       dep_time),
+    dep_time = if_else(str_length(dep_time) == 2,
+                       paste0("00", dep_time),
+                       dep_time),
+    dep_time = if_else(str_length(dep_time) == 1,
+                       paste0("000", dep_time),
+                       dep_time),
+    dep_time = if_else(dep_time == "2400",
+                       "0000",
+                       dep_time),
+    .keep = "unused"
+  ) |>
+  mutate(time_hrmin = parse_time(dep_time, format = "%H%M")) |>
+  mutate(
+    day = as.character(day),
+    day = ifelse(str_length(day) == 1,
+                 paste0("0", day),
+                 day),
+    month = as.character(month),
+    month = ifelse(str_length(month) == 1,
+                 paste0("0", month),
+                 month),
+    date_iso = paste0(year, "-", month, "-", day),
+    date_iso = parse_date(date_iso, format = "%Y-%m-%d"),
+    .keep = "unused"
+    )
+
+###############################################################
+###########       Short Method      ###########################
+###############################################################
+
+flights |>
+  select(-time_hour) |>
+  mutate(datetime = make_datetime(year = year, 
+                              month = month, 
+                              day = day,
+                              hour = hour,
+                              min = minute),
+         .keep = "unused") 
+library(gganimate)
+install.packages("gganimate")
+flights |>
+  group_by(hour) |>
+  ggplot(aes(x = dep_delay,
+             y = arr_delay)) +
+  geom_point(alpha = 0.2) +
+  labs(title = 'Hour: {frame_time}', 
+       x = 'Departure Delay', 
+       y = 'Arrival Delay') +
+  theme_minimal() +
+  transition_time(hour) +
+  ease_aes('linear')
+```
+
+# **18.2.5 Exercises**
+
+## Question 1
+
+**What happens if you parse a string that contains invalid dates?**
+
+```         
+ymd(c("2010-10-10", "bananas"))
+```
+
+## Question 2
+
+**What does the `tzone` argument to [`today()`](https://lubridate.tidyverse.org/reference/now.html) do? Why is it important?**
+
+## Question 3
+
+**For each of the following date-times, show how you'd parse it using a readr column specification and a lubridate function.**
+
+```         
+d1 <- "January 1, 2010" 
+d2 <- "2015-Mar-07" 
+d3 <- "06-Jun-2017" 
+d4 <- c("August 19 (2015)", "July 1 (2015)") 
+d5 <- "12/30/14" # Dec 30, 2014 
+t1 <- "1705" 
+t2 <- "11:15:10.12 PM"
+```

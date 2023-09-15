@@ -394,6 +394,30 @@
             "title": "Ggthemes: Extra themes, scales and geoms for ’ggplot2’",
             "title-short": "Ggthemes",
             "type": "article-journal"
+        },
+        {
+            "URL": "https://www.jstatsoft.org/v40/i03/",
+            "author": [
+                {
+                    "family": "Grolemund",
+                    "given": "Garrett"
+                },
+                {
+                    "family": "Wickham",
+                    "given": "Hadley"
+                }
+            ],
+            "id": "lubridate",
+            "issued": {
+                "date-parts": [
+                    [
+                        2011
+                    ]
+                ]
+            },
+            "title": "Dates and times made easy with lubridate",
+            "type": "article-journal",
+            "volume": "40"
         }
     ],
     "project_biblios": []
