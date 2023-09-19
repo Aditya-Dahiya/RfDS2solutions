@@ -22,8 +22,6 @@ editor_options:
 bibliography: references.bib
 ---
 
-Date-Time
-
 ```{r}
 #| label: setup
 
@@ -31,17 +29,13 @@ library(tidyverse)
 library(nycflights13)
 library(lubridate)
 data("flights")
+library(gt)
+library(gtExtras)
 ```
 
-```{r}
-names(flights)
-today() |>
-  class()
-now() |>
-  class()
-```
+## **All date formats understood by `readr`**
 
-## **All date formats understood by `readr`**[@lubridate]
+*(As taken from the book R for Data Science (2e) and [@lubridate])*
 
 | Type  | Code  | Meaning                        | Example         |
 |-------|-------|--------------------------------|-----------------|
@@ -141,13 +135,33 @@ flights |>
 ymd(c("2010-10-10", "bananas"))
 ```
 
+Whenever a string is parsed, that contains invalid dates, a missing value, i.e., `NA` will be generated.
+
+```{r}
+ymd(c("2010-10-10", "bananas"))
+```
+
 ## Question 2
 
 **What does the `tzone` argument to [`today()`](https://lubridate.tidyverse.org/reference/now.html) do? Why is it important?**
 
+The `tzone` argument aloows us to write *"a character vector specifying which time zone you would like the current time in. `tzone` defaults to your computer's system timezone."*[@lubridate-2]
+
+Thus, we can find the date at the current moment in local time zone of the computer system with `today()` and at any other timezone, say UTC, with `today(tzone = "UTC")` . It is important when analyzing real-time data, or data from multiples locations across the globe, as the date may not be the same at all places at all times.
+
+A more important role of `tzone` is with `now()` as time is different at different zones.
+
+```{r}
+today()
+today(tzone = "UTC")
+
+now()
+now(tzone = "UTC")
+```
+
 ## Question 3
 
-**For each of the following date-times, show how you'd parse it using a readr column specification and a lubridate function.**
+**For each of the following date-times, show how you'd parse it using a readr column specification and a `lubridate` function.**
 
 ```         
 d1 <- "January 1, 2010" 
@@ -157,4 +171,421 @@ d4 <- c("August 19 (2015)", "July 1 (2015)")
 d5 <- "12/30/14" # Dec 30, 2014 
 t1 <- "1705" 
 t2 <- "11:15:10.12 PM"
+```
+
+The parsing of date and time from these values is shown below: ---
+
+```{r}
+d1 <- "January 1, 2010" 
+d2 <- "2015-Mar-07" 
+d3 <- "06-Jun-2017" 
+d4 <- c("August 19 (2015)", "July 1 (2015)") 
+d5 <- "12/30/14" # Dec 30, 2014 
+t1 <- "1705" 
+t2 <- "11:15:10.12 PM"
+
+df = tibble(d1, d2, d3, d4, d5, t1, t2) |>
+  slice(1)
+
+df |>
+  mutate(
+    d1 = mdy(d1),
+    d2 = ymd(d2),
+    d3 = dmy(d3),
+    d4 = mdy(d4),
+    d5 = mdy(d5),
+    t1 = hm(paste0(as.numeric(t1) %/% 100, ":", as.numeric(t1) %% 100)),
+    t2 = hms(t2)
+  )
+```
+
+# **18.3.4 Exercises**
+
+## Question 1
+
+**How does the distribution of flight times within a day change over the course of the year?**
+
+The distribution of flight times within a day change over the course of the year is displayed in @fig-q1-ex3 . To check whether this is due to only some extraordinarily delayed flights, or due to longer flight times in general, we can plot the median, instead of mean, as shown in @fig-q1a-ex3 . Both plots provide the same conclusion, as explained there-in.
+
+```{r}
+#| label: fig-q1-ex3
+#| fig-cap: "Scatterplot of mean air time for each day of the year, with a overlaid loess smooother"
+#| code-fold: true
+#| fig-width: 10
+
+flights |>
+  mutate(
+    dep_time = make_datetime(year, month, day, dep_time %/% 100, dep_time %% 100),
+    dep_day = round_date(dep_time, unit = "day")
+  ) |>
+  group_by(dep_day) |>
+  summarise(mean_air_time = mean(air_time, na.rm = TRUE)) |>
+  ggplot(aes(x = dep_day,
+             y = mean_air_time)) +
+  geom_point() +
+  geom_smooth(span = 0.5) +
+  theme_minimal() +
+  labs(y = "Average flight time for flights departing each day (in min)",
+       x = NULL,
+       title = "The average flight time increases towards the winter months",
+       subtitle = "The lowest average flight times occur in late summer and early fall; while highest occur in December",
+       caption = "Each dot represents the mean air time for flights departing in that day") +
+  theme(panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank())
+```
+
+```{r}
+#| label: fig-q1a-ex3
+#| fig-cap: "Scatterplot of MEDIAN air time for each day of the year, with a overlaid loess smooother"
+#| code-fold: true
+#| fig-width: 10
+
+flights |>
+  mutate(
+    dep_time = make_datetime(year, month, day, dep_time %/% 100, dep_time %% 100),
+    dep_day = round_date(dep_time, unit = "day")
+  ) |>
+  group_by(dep_day) |>
+  summarise(median_air_time = median(air_time, na.rm = TRUE)) |>
+  ggplot(aes(x = dep_day,
+             y = median_air_time)) +
+  geom_point() +
+  geom_smooth(span = 0.5) +
+  theme_minimal() +
+  labs(y = "Median flight time for flights departing each day (in min)",
+       x = NULL,
+       title = "The median flight time increases towards the winter months",
+       subtitle = "The lowest median flight times occur in late summer and early fall; while highest occur in December",
+       caption = "Each dot represents the median air time for flights departing in that day") +
+  theme(panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank())
+```
+
+## Question 2
+
+**Compare `dep_time`, `sched_dep_time` and `dep_delay`. Are they consistent? Explain your findings.**
+
+```{r}
+#| label: tbl-q2-ex3
+#| tbl-cap: "Table displaying top 5 observations comparing Departure Delay calculated vs. dep_delay"
+
+f1 = flights |>
+  select(-hour, -minute, -time_hour) |>
+  filter(!is.na(dep_time) & !is.na(arr_time) & !is.na(sched_dep_time)) |>
+  mutate(
+   dep_time = make_datetime(year, month, day, dep_time %/% 100, dep_time %% 100),
+   sched_dep_time = make_datetime(year, month, day, sched_dep_time %/% 100, sched_dep_time %% 100),
+   dep_delay_calc = dep_time - sched_dep_time,
+   comparison = dep_delay_calc/60 == dep_delay,
+   .keep = "used"
+  )
+
+f1 |>
+  slice_head(n = 5) |>
+  gt() |>
+  gt_theme_538()
+```
+
+Now, when we compute the percentage of observations where `dep_delay == dep_delay_calc` , we get only 99.63%. This means that for 0.36% of flights, the calculation doesn't match. We need to explore these further.
+
+```{r}
+mean(f1$comparison) * 100
+
+## Code Part 1
+f1 |>
+  filter(!comparison)
+
+## Code Part 2
+f1 |>
+  filter(!comparison) |>
+  filter(dep_delay_calc > 0)
+```
+
+Now, after seeing results of `## Code Part 1`, we realize that some flights are so delayed that their scheduled departure time goes over to the next day, and this, unfortunately we did not figure in our calculations. To further confirm, using `## Code Part II` , we confirm that the only mismatches are the ones where calculated departure delay is negative.
+
+Hence, we need to re-work our calculations, as follows: ---
+
+```{r}
+## Create new tibble from flights with datetime columns
+f2 = flights |>
+  select(-hour, -minute, -time_hour) |>
+  filter(!is.na(dep_time) & !is.na(arr_time) & !is.na(sched_dep_time)) |>
+  mutate(
+   dep_time = make_datetime(year, month, day, dep_time %/% 100, dep_time %% 100),
+   sched_dep_time = make_datetime(year, month, day, sched_dep_time %/% 100, sched_dep_time %% 100)
+   )
+
+## Check range of dep_delay: to understand how early can a flight depart from scheduled time
+## The earliest is -43 min, i.e., 43 min early
+range(f2$dep_delay)
+
+## Now, change the departure time into +1 day, if the dep_time is earlier than scheduled time 
+## by more than 45 min
+f2 = f2 |>
+  mutate(
+   dep_time = if_else(dep_time < sched_dep_time - minutes(45),
+                      true = dep_time + days(1),
+                      false = dep_time),
+   dep_delay_calc = dep_time - sched_dep_time,
+   dep_delay_calc = dep_delay_calc/60,
+   comparison = dep_delay_calc == dep_delay
+  )
+
+## Percentage of cases where our calculated departure delay is exactly same as dep_delay column
+mean(f2$comparison) * 100
+```
+
+Thus, we realize that our 100% of our calculations match, once we factor in the flights departing the next day from their scheduled date as reflected in @tbl-q2a-ex3.
+
+```{r}
+#| label: tbl-q2a-ex3
+#| tbl-cap: "Comparison table for 5 flights departing next day from scheduled date"
+
+## Show some flights delayed so much that they depart the next day, to see comparison
+f2 |>
+  filter(day(dep_time) != day(sched_dep_time)) |>
+  select(year, month, day, dep_time, sched_dep_time, 
+         carrier, tailnum, dep_delay, dep_delay_calc, 
+         comparison) |>
+  slice_head(n = 5) |>
+  gt() |>
+  gt_theme_538()
+```
+
+## Question 3
+
+**Compare `air_time` with the duration between the departure and arrival. Explain your findings. (Hint: consider the location of the airport.)**
+
+If we compare the `air_time` with duration between departure time and arrival time, we get hardly 0.06% matches, even after adjusting for `dep_times` that occur on the next day, or arrival times occurring on the next day. This means that something else is going on, perhaps the `origin` and `dest` airports are in different time zones.
+
+```{r}
+#| label: tbl-q3-ex3
+#| tbl-cap: "The air_time variable and caculated difference between departure and arrival times don't match if we dont account for time zones"
+#| code-fold: true
+
+f3 = flights |>
+  select(-hour, -minute, -time_hour) |>
+  filter(!is.na(dep_time) & !is.na(arr_time) & !is.na(air_time)) |>
+  mutate(
+   dep_time = make_datetime(year, month, day, dep_time %/% 100, dep_time %% 100),
+   sched_dep_time = make_datetime(year, month, day, sched_dep_time %/% 100, sched_dep_time %% 100),
+   dep_time = if_else(dep_time < sched_dep_time - minutes(45),
+                      true = dep_time + days(1),
+                      false = dep_time),
+   arr_time = make_datetime(year, month, day, arr_time %/% 100, arr_time %% 100),
+   sched_arr_time = make_datetime(year, month, day, sched_arr_time %/% 100, sched_arr_time %% 100),
+   air_time_calc = (arr_time - dep_time),
+   comparison = air_time_calc == air_time
+  )
+
+f3 |>
+  select(c(dep_time,
+           sched_dep_time,
+           arr_time,
+           sched_arr_time,
+           origin,
+           dest,
+           air_time,
+           air_time_calc,
+           comparison)) |>
+  slice(200:205) |>
+  gt() |>
+  gt_theme_nytimes() |>
+  tab_style(
+    style = list(cell_text(weight = "bold")),
+    locations = cells_body(columns = comparison)
+  )
+
+mean(f3$comparison) * 100
+```
+
+Let's try to add the time-zones of destination airports, and then calculate the flight times. As we see below, the results still don't match. Perhaps `air_time` excludes the time between `dep_time` and `arr_time` spent on the tarmac, runway etc. I hope to return to this analysis later sometime.
+
+```{r}
+#| label: tbl-q3a-ex3
+#| tbl-cap: "Comparative table of calculated flight times with air_time"
+#| code-fold: true
+#| eval: false
+#########################################################################################
+# Load data from airports which contains their time zones
+data("airports")
+
+# Left join the data set
+flights_airports = left_join(flights, airports, by = join_by(dest == faa)) |>
+  select(-hour, -minute, -time_hour, -carrier, -tailnum, -lat, -lon, -alt) |>
+  filter(!is.na(dep_time) & !is.na(arr_time) & !is.na(air_time))
+
+f4 = flights_airports |>
+  select(year, month, day, dep_time, sched_dep_time, dep_delay, 
+         arr_time, sched_arr_time, arr_delay,
+         flight, origin, dest,air_time, distance, name, tzone) |>
+  mutate(
+    dep_time = make_datetime(year, month, day, 
+                             dep_time %/% 100, dep_time %% 100, 
+                             tz = "America/New_York"),
+    arr_time = make_datetime(year, month, day, 
+                             arr_time %/% 100, arr_time %% 100, 
+                             tz = tzone),
+    air_time_calc = difftime(arr_time, dep_time, units = "mins")
+    )
+
+f4 |>
+  select(-c(year, month, day)) |>
+  slice(201:205)
+```
+
+## Question 4
+
+**How does the average delay time change over the course of a day? Should you use `dep_time` or `sched_dep_time`? Why?**
+
+The average delay time increases over the course of a given day. The plot in @fig-q4-ex3 shows us that peak delays occur in the late evening.
+
+In my view, we should use scheduled departure time
+
+```{r}
+#| label: fig-q4-ex3
+#| fig-cap: "Line Chart (with loess smoother) of average departure delays over the course of a day"
+
+flights |>
+  group_by(sched_dep_time) |>
+  summarise(
+    mean_dep_delay = mean(dep_delay, na.rm = TRUE),
+    median_dep_delay = median(dep_delay, na.rm = TRUE)
+  ) |>
+  mutate(
+    sched_dep_hour = sched_dep_time %/% 100,
+    sched_dep_min = sched_dep_time %% 100,
+    sched_dep_time = sched_dep_hour + (sched_dep_min/60)
+  ) |>
+  
+  ggplot(aes(x = sched_dep_time,
+             y = mean_dep_delay)) +
+  geom_point(size = 0.2) +
+  geom_line() +
+  geom_smooth(col = "red") +
+  coord_cartesian(xlim = c(4, 24),
+                  ylim = c(0,80)) +
+  scale_x_continuous(breaks = seq(5,24,1)) +
+  theme_minimal() +
+  labs(x = "Scheduled Depature Time during the day",
+       y = "Average Departure Delay (minutes)",
+       title = "Average departure delay for flights rises as the day progresses",
+       subtitle = "Flights in the evening, 6 pm to 10 pm, have the highest departure delays\nConversely, early morning flights have minimal delays") +
+   theme(panel.grid.minor.x = element_blank(),
+         plot.title.position = "plot")
+```
+
+## Question 5
+
+**On what day of the week should you leave if you want to minimise the chance of a delay?**
+
+As we can see in the @fig-q5-ex3, if we want to minimize the chance of delay, we should leave on **Saturday**. Since the questions uses "should you leave", we use `dep_time` in place of `sched_dep_time` .
+
+```{r}
+#| label: fig-q5-ex3
+#| fig-cap: "Plot of mean & median delays, and number of flights on each day of the week"
+#| fig-width: 10
+#| fig-asp: 0.2
+
+labels_grid = c(
+  mean_delay = "Mean delay (in mins)",
+  median_delay = "Median delay (in mins)",
+  numbers = "Number of flights")
+
+flights |>
+  mutate(
+   dep_time = make_datetime(year, month, day,
+                            dep_time %/% 100,
+                            dep_time %% 100),
+   weekday = wday(dep_time, label = TRUE, abbr = FALSE)
+  ) |>
+  group_by(weekday) |>
+  summarise(
+    mean_delay = mean(dep_delay, na.rm = TRUE),
+    median_delay = median(dep_delay, na.rm = TRUE),
+    numbers = n()
+  ) |>
+  drop_na() |>
+  pivot_longer(cols = -weekday,
+               names_to = "indicator",
+               values_to = "val") |>
+  ggplot(aes(y = weekday, x = val, fill = indicator)) +
+  geom_bar(stat = "identity") +
+  geom_vline(xintercept = 0) +
+  facet_grid(~ indicator, scales = "free_x",
+             labeller = labeller(indicator = labels_grid)) +
+  labs(x = NULL, y = NULL) + 
+  theme_minimal() +
+  theme(legend.position = "none") +
+  scale_fill_brewer(palette = "Dark2")
+```
+
+## Question 6
+
+**What makes the distribution of `diamonds$carat` and `flights$sched_dep_time` similar?**
+
+The distribution of `diamonds$carat` and `flights$sched_dep_time` are similar in having tendency to round off the values to nearest 0.5 Carat (in case of `carat`) or 5/30/60 minutes (in case of `sched_dep_time`). This means when humans record a continuous variable, there is a tendency to round it off to nearest unit, thus leading to a distribution which shows spikes at fixed intervals.
+
+```{r}
+data("diamonds")
+
+diamonds |>
+  ggplot(aes(x = carat)) +
+  geom_histogram(bins = 500) +
+  coord_cartesian(xlim = c(0, 3)) +
+  theme_minimal() +
+  labs(x = "Carat of Diamond", y = "Number of Diamonds",
+       title = "Carats of diamonds are mostly in multiples of 0.5",
+       subtitle = "This suggests observations recorders' bias in propensity to round off carat to nearest 0.5") +
+  scale_x_continuous(breaks = seq(0, 3, 0.5))
+
+f5 = flights |>
+  mutate(sched_dep_time = hour + minute/60)
+
+f5 |>
+  ggplot(aes(sched_dep_time)) +
+  geom_histogram(bins = 1000) +
+  coord_cartesian(xlim = c(5, 24)) +
+  theme_minimal() +
+  labs(x = "Scheduled departure time (in hr)", 
+       y = "Number of Flights",
+       title = "Scheduled Departure times are geenrally in multiples of 5, 30 or 60 minutes",
+       subtitle = "This suggests propensity to round off scheduled departure time to nearest hour, or atleast 5 minutes") +
+  scale_x_continuous(breaks = seq(5, 24, 1))
+```
+
+## Question 7
+
+**Confirm our hypothesis that the early departures of flights in minutes 20-30 and 50-60 are caused by scheduled flights that leave early. Hint: create a binary variable that tells you whether or not a flight was delayed.**
+
+In the code below, we compare the proportion of flights that were delayed: ---
+
+-   with scheduled departure times between 20-30 min and 50-60 min **(0.538)**
+
+-   with scheduled departure times other than these minutes **(0.573)**
+
+A two-sided t-test of the comparison of these two proportions has a p-value of \< 0.001, thus, there is a significant difference between the two proportions. Thus, we conclude that flights with scheduled departure times between 20-30 min and 50-60 min have a significantly lesser delay than other flights.
+
+```{r}
+f7 = flights |>
+  mutate(
+    sdt_20_30 = (minute >= 20 & minute <= 30),
+    sdt_50_60 = (minute >= 50 & minute <= 60),
+    sdt_round_times = (sdt_20_30 | sdt_50_60),
+    was_delayed = (dep_delay < 0),
+    .keep = "used"
+  )
+
+f7 |>
+  group_by(sdt_round_times) |>
+  summarise(prop_delayed = mean(was_delayed, na.rm = TRUE),
+            n = n())
+
+f8test = prop.test(
+  x = c(113092, 75098),
+  n = c(197298, 139478)
+)
+
+f8test
+f8test$p.value
 ```

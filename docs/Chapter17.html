@@ -541,7 +541,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 3 Other          2</code></pre>
 </div>
 </div>
-<div class="cell" data-hash="Chapter17_cache/html/tbl-q3-ex3_b884097a5a2faaafdb5bbb52006603e6">
+<div class="cell" data-hash="Chapter17_cache/html/tbl-q3-ex3_67c31b2790ff824f66276fa7611e518b">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>gss_cat <span class="sc">|&gt;</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(relig <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Protestant"</span>, <span class="st">"Christian"</span>, <span class="st">"Other"</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(relig, denom) <span class="sc">|&gt;</span></span>
@@ -549,28 +549,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(relig, n) <span class="sc">|&gt;</span></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Christian)) <span class="sc">|&gt;</span></span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt_theme_538</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sub_missing</span>(<span class="at">missing_text =</span> <span class="st">""</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt_theme_538</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="tbl-q3-ex3" class="anchored">
 
-<div id="bnxlzcijwt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="tngnaztoxt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#bnxlzcijwt table {
+#tngnaztoxt table {
   font-family: Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bnxlzcijwt thead, #bnxlzcijwt tbody, #bnxlzcijwt tfoot, #bnxlzcijwt tr, #bnxlzcijwt td, #bnxlzcijwt th {
+#tngnaztoxt thead, #tngnaztoxt tbody, #tngnaztoxt tfoot, #tngnaztoxt tr, #tngnaztoxt td, #tngnaztoxt th {
   border-style: none;
 }
 
-#bnxlzcijwt p {
+#tngnaztoxt p {
   margin: 0;
   padding: 0;
 }
 
-#bnxlzcijwt .gt_table {
+#tngnaztoxt .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -596,12 +597,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#bnxlzcijwt .gt_caption {
+#tngnaztoxt .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bnxlzcijwt .gt_title {
+#tngnaztoxt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -613,7 +614,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#bnxlzcijwt .gt_subtitle {
+#tngnaztoxt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -625,7 +626,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#bnxlzcijwt .gt_heading {
+#tngnaztoxt .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -637,13 +638,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#bnxlzcijwt .gt_bottom_border {
+#tngnaztoxt .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bnxlzcijwt .gt_col_headings {
+#tngnaztoxt .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -658,7 +659,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#bnxlzcijwt .gt_col_heading {
+#tngnaztoxt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -678,7 +679,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#bnxlzcijwt .gt_column_spanner_outer {
+#tngnaztoxt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -690,15 +691,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#bnxlzcijwt .gt_column_spanner_outer:first-child {
+#tngnaztoxt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bnxlzcijwt .gt_column_spanner_outer:last-child {
+#tngnaztoxt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bnxlzcijwt .gt_column_spanner {
+#tngnaztoxt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -710,11 +711,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#bnxlzcijwt .gt_spanner_row {
+#tngnaztoxt .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bnxlzcijwt .gt_group_heading {
+#tngnaztoxt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -740,7 +741,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#bnxlzcijwt .gt_empty_group_heading {
+#tngnaztoxt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -755,15 +756,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#bnxlzcijwt .gt_from_md > :first-child {
+#tngnaztoxt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bnxlzcijwt .gt_from_md > :last-child {
+#tngnaztoxt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bnxlzcijwt .gt_row {
+#tngnaztoxt .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -782,7 +783,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#bnxlzcijwt .gt_stub {
+#tngnaztoxt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -795,7 +796,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#bnxlzcijwt .gt_stub_row_group {
+#tngnaztoxt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -809,15 +810,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#bnxlzcijwt .gt_row_group_first td {
+#tngnaztoxt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bnxlzcijwt .gt_row_group_first th {
+#tngnaztoxt .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bnxlzcijwt .gt_summary_row {
+#tngnaztoxt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -827,16 +828,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#bnxlzcijwt .gt_first_summary_row {
+#tngnaztoxt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bnxlzcijwt .gt_first_summary_row.thick {
+#tngnaztoxt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bnxlzcijwt .gt_last_summary_row {
+#tngnaztoxt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -846,7 +847,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#bnxlzcijwt .gt_grand_summary_row {
+#tngnaztoxt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -856,7 +857,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#bnxlzcijwt .gt_first_grand_summary_row {
+#tngnaztoxt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -866,7 +867,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#bnxlzcijwt .gt_last_grand_summary_row_top {
+#tngnaztoxt .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -876,11 +877,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#bnxlzcijwt .gt_striped {
+#tngnaztoxt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bnxlzcijwt .gt_table_body {
+#tngnaztoxt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -889,7 +890,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#bnxlzcijwt .gt_footnotes {
+#tngnaztoxt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -903,7 +904,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#bnxlzcijwt .gt_footnote {
+#tngnaztoxt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -912,7 +913,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#bnxlzcijwt .gt_sourcenotes {
+#tngnaztoxt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -926,7 +927,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#bnxlzcijwt .gt_sourcenote {
+#tngnaztoxt .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -934,63 +935,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#bnxlzcijwt .gt_left {
+#tngnaztoxt .gt_left {
   text-align: left;
 }
 
-#bnxlzcijwt .gt_center {
+#tngnaztoxt .gt_center {
   text-align: center;
 }
 
-#bnxlzcijwt .gt_right {
+#tngnaztoxt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bnxlzcijwt .gt_font_normal {
+#tngnaztoxt .gt_font_normal {
   font-weight: normal;
 }
 
-#bnxlzcijwt .gt_font_bold {
+#tngnaztoxt .gt_font_bold {
   font-weight: bold;
 }
 
-#bnxlzcijwt .gt_font_italic {
+#tngnaztoxt .gt_font_italic {
   font-style: italic;
 }
 
-#bnxlzcijwt .gt_super {
+#tngnaztoxt .gt_super {
   font-size: 65%;
 }
 
-#bnxlzcijwt .gt_footnote_marks {
+#tngnaztoxt .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bnxlzcijwt .gt_asterisk {
+#tngnaztoxt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bnxlzcijwt .gt_indent_1 {
+#tngnaztoxt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bnxlzcijwt .gt_indent_2 {
+#tngnaztoxt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bnxlzcijwt .gt_indent_3 {
+#tngnaztoxt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bnxlzcijwt .gt_indent_4 {
+#tngnaztoxt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bnxlzcijwt .gt_indent_5 {
+#tngnaztoxt .gt_indent_5 {
   text-indent: 25px;
 }
 
@@ -1016,118 +1017,118 @@ tbody tr:last-child {
     <tr><td headers="denom" class="gt_row gt_center">Not applicable</td>
 <td headers="Christian" class="gt_row gt_right">224</td>
 <td headers="Other" class="gt_row gt_right">217</td>
-<td headers="Protestant" class="gt_row gt_right">NA</td></tr>
+<td headers="Protestant" class="gt_row gt_right"></td></tr>
     <tr><td headers="denom" class="gt_row gt_center">Don't know</td>
 <td headers="Christian" class="gt_row gt_right">11</td>
-<td headers="Other" class="gt_row gt_right">NA</td>
+<td headers="Other" class="gt_row gt_right"></td>
 <td headers="Protestant" class="gt_row gt_right">41</td></tr>
     <tr><td headers="denom" class="gt_row gt_center">No answer</td>
 <td headers="Christian" class="gt_row gt_right">2</td>
-<td headers="Other" class="gt_row gt_right">NA</td>
+<td headers="Other" class="gt_row gt_right"></td>
 <td headers="Protestant" class="gt_row gt_right">22</td></tr>
     <tr><td headers="denom" class="gt_row gt_center">Other</td>
-<td headers="Christian" class="gt_row gt_right">NA</td>
-<td headers="Other" class="gt_row gt_right">NA</td>
+<td headers="Christian" class="gt_row gt_right"></td>
+<td headers="Other" class="gt_row gt_right"></td>
 <td headers="Protestant" class="gt_row gt_right">2534</td></tr>
     <tr><td headers="denom" class="gt_row gt_center">Episcopal</td>
-<td headers="Christian" class="gt_row gt_right">NA</td>
-<td headers="Other" class="gt_row gt_right">NA</td>
+<td headers="Christian" class="gt_row gt_right"></td>
+<td headers="Other" class="gt_row gt_right"></td>
 <td headers="Protestant" class="gt_row gt_right">397</td></tr>
     <tr><td headers="denom" class="gt_row gt_center">Presbyterian-dk wh</td>
-<td headers="Christian" class="gt_row gt_right">NA</td>
-<td headers="Other" class="gt_row gt_right">NA</td>
+<td headers="Christian" class="gt_row gt_right"></td>
+<td headers="Other" class="gt_row gt_right"></td>
 <td headers="Protestant" class="gt_row gt_right">244</td></tr>
     <tr><td headers="denom" class="gt_row gt_center">Presbyterian, merged</td>
-<td headers="Christian" class="gt_row gt_right">NA</td>
-<td headers="Other" class="gt_row gt_right">NA</td>
+<td headers="Christian" class="gt_row gt_right"></td>
+<td headers="Other" class="gt_row gt_right"></td>
 <td headers="Protestant" class="gt_row gt_right">67</td></tr>
     <tr><td headers="denom" class="gt_row gt_center">Other presbyterian</td>
-<td headers="Christian" class="gt_row gt_right">NA</td>
-<td headers="Other" class="gt_row gt_right">NA</td>
+<td headers="Christian" class="gt_row gt_right"></td>
+<td headers="Other" class="gt_row gt_right"></td>
 <td headers="Protestant" class="gt_row gt_right">47</td></tr>
     <tr><td headers="denom" class="gt_row gt_center">United pres ch in us</td>
-<td headers="Christian" class="gt_row gt_right">NA</td>
-<td headers="Other" class="gt_row gt_right">NA</td>
+<td headers="Christian" class="gt_row gt_right"></td>
+<td headers="Other" class="gt_row gt_right"></td>
 <td headers="Protestant" class="gt_row gt_right">110</td></tr>
     <tr><td headers="denom" class="gt_row gt_center">Presbyterian c in us</td>
-<td headers="Christian" class="gt_row gt_right">NA</td>
-<td headers="Other" class="gt_row gt_right">NA</td>
+<td headers="Christian" class="gt_row gt_right"></td>
+<td headers="Other" class="gt_row gt_right"></td>
 <td headers="Protestant" class="gt_row gt_right">104</td></tr>
     <tr><td headers="denom" class="gt_row gt_center">Lutheran-dk which</td>
-<td headers="Christian" class="gt_row gt_right">NA</td>
-<td headers="Other" class="gt_row gt_right">NA</td>
+<td headers="Christian" class="gt_row gt_right"></td>
+<td headers="Other" class="gt_row gt_right"></td>
 <td headers="Protestant" class="gt_row gt_right">267</td></tr>
     <tr><td headers="denom" class="gt_row gt_center">Evangelical luth</td>
-<td headers="Christian" class="gt_row gt_right">NA</td>
-<td headers="Other" class="gt_row gt_right">NA</td>
+<td headers="Christian" class="gt_row gt_right"></td>
+<td headers="Other" class="gt_row gt_right"></td>
 <td headers="Protestant" class="gt_row gt_right">122</td></tr>
     <tr><td headers="denom" class="gt_row gt_center">Other lutheran</td>
-<td headers="Christian" class="gt_row gt_right">NA</td>
-<td headers="Other" class="gt_row gt_right">NA</td>
+<td headers="Christian" class="gt_row gt_right"></td>
+<td headers="Other" class="gt_row gt_right"></td>
 <td headers="Protestant" class="gt_row gt_right">30</td></tr>
     <tr><td headers="denom" class="gt_row gt_center">Wi evan luth synod</td>
-<td headers="Christian" class="gt_row gt_right">NA</td>
-<td headers="Other" class="gt_row gt_right">NA</td>
+<td headers="Christian" class="gt_row gt_right"></td>
+<td headers="Other" class="gt_row gt_right"></td>
 <td headers="Protestant" class="gt_row gt_right">71</td></tr>
     <tr><td headers="denom" class="gt_row gt_center">Lutheran-mo synod</td>
-<td headers="Christian" class="gt_row gt_right">NA</td>
-<td headers="Other" class="gt_row gt_right">NA</td>
+<td headers="Christian" class="gt_row gt_right"></td>
+<td headers="Other" class="gt_row gt_right"></td>
 <td headers="Protestant" class="gt_row gt_right">212</td></tr>
     <tr><td headers="denom" class="gt_row gt_center">Luth ch in america</td>
-<td headers="Christian" class="gt_row gt_right">NA</td>
-<td headers="Other" class="gt_row gt_right">NA</td>
+<td headers="Christian" class="gt_row gt_right"></td>
+<td headers="Other" class="gt_row gt_right"></td>
 <td headers="Protestant" class="gt_row gt_right">71</td></tr>
     <tr><td headers="denom" class="gt_row gt_center">Am lutheran</td>
-<td headers="Christian" class="gt_row gt_right">NA</td>
-<td headers="Other" class="gt_row gt_right">NA</td>
+<td headers="Christian" class="gt_row gt_right"></td>
+<td headers="Other" class="gt_row gt_right"></td>
 <td headers="Protestant" class="gt_row gt_right">146</td></tr>
     <tr><td headers="denom" class="gt_row gt_center">Methodist-dk which</td>
-<td headers="Christian" class="gt_row gt_right">NA</td>
-<td headers="Other" class="gt_row gt_right">NA</td>
+<td headers="Christian" class="gt_row gt_right"></td>
+<td headers="Other" class="gt_row gt_right"></td>
 <td headers="Protestant" class="gt_row gt_right">239</td></tr>
     <tr><td headers="denom" class="gt_row gt_center">Other methodist</td>
-<td headers="Christian" class="gt_row gt_right">NA</td>
-<td headers="Other" class="gt_row gt_right">NA</td>
+<td headers="Christian" class="gt_row gt_right"></td>
+<td headers="Other" class="gt_row gt_right"></td>
 <td headers="Protestant" class="gt_row gt_right">33</td></tr>
     <tr><td headers="denom" class="gt_row gt_center">United methodist</td>
-<td headers="Christian" class="gt_row gt_right">NA</td>
-<td headers="Other" class="gt_row gt_right">NA</td>
+<td headers="Christian" class="gt_row gt_right"></td>
+<td headers="Other" class="gt_row gt_right"></td>
 <td headers="Protestant" class="gt_row gt_right">1067</td></tr>
     <tr><td headers="denom" class="gt_row gt_center">Afr meth ep zion</td>
-<td headers="Christian" class="gt_row gt_right">NA</td>
-<td headers="Other" class="gt_row gt_right">NA</td>
+<td headers="Christian" class="gt_row gt_right"></td>
+<td headers="Other" class="gt_row gt_right"></td>
 <td headers="Protestant" class="gt_row gt_right">32</td></tr>
     <tr><td headers="denom" class="gt_row gt_center">Afr meth episcopal</td>
-<td headers="Christian" class="gt_row gt_right">NA</td>
-<td headers="Other" class="gt_row gt_right">NA</td>
+<td headers="Christian" class="gt_row gt_right"></td>
+<td headers="Other" class="gt_row gt_right"></td>
 <td headers="Protestant" class="gt_row gt_right">77</td></tr>
     <tr><td headers="denom" class="gt_row gt_center">Baptist-dk which</td>
-<td headers="Christian" class="gt_row gt_right">NA</td>
-<td headers="Other" class="gt_row gt_right">NA</td>
+<td headers="Christian" class="gt_row gt_right"></td>
+<td headers="Other" class="gt_row gt_right"></td>
 <td headers="Protestant" class="gt_row gt_right">1457</td></tr>
     <tr><td headers="denom" class="gt_row gt_center">Other baptists</td>
-<td headers="Christian" class="gt_row gt_right">NA</td>
-<td headers="Other" class="gt_row gt_right">NA</td>
+<td headers="Christian" class="gt_row gt_right"></td>
+<td headers="Other" class="gt_row gt_right"></td>
 <td headers="Protestant" class="gt_row gt_right">213</td></tr>
     <tr><td headers="denom" class="gt_row gt_center">Southern baptist</td>
-<td headers="Christian" class="gt_row gt_right">NA</td>
-<td headers="Other" class="gt_row gt_right">NA</td>
+<td headers="Christian" class="gt_row gt_right"></td>
+<td headers="Other" class="gt_row gt_right"></td>
 <td headers="Protestant" class="gt_row gt_right">1536</td></tr>
     <tr><td headers="denom" class="gt_row gt_center">Nat bapt conv usa</td>
-<td headers="Christian" class="gt_row gt_right">NA</td>
-<td headers="Other" class="gt_row gt_right">NA</td>
+<td headers="Christian" class="gt_row gt_right"></td>
+<td headers="Other" class="gt_row gt_right"></td>
 <td headers="Protestant" class="gt_row gt_right">40</td></tr>
     <tr><td headers="denom" class="gt_row gt_center">Nat bapt conv of am</td>
-<td headers="Christian" class="gt_row gt_right">NA</td>
-<td headers="Other" class="gt_row gt_right">NA</td>
+<td headers="Christian" class="gt_row gt_right"></td>
+<td headers="Other" class="gt_row gt_right"></td>
 <td headers="Protestant" class="gt_row gt_right">76</td></tr>
     <tr><td headers="denom" class="gt_row gt_center">Am bapt ch in usa</td>
-<td headers="Christian" class="gt_row gt_right">NA</td>
-<td headers="Other" class="gt_row gt_right">NA</td>
+<td headers="Christian" class="gt_row gt_right"></td>
+<td headers="Other" class="gt_row gt_right"></td>
 <td headers="Protestant" class="gt_row gt_right">130</td></tr>
     <tr><td headers="denom" class="gt_row gt_center">Am baptist asso</td>
-<td headers="Christian" class="gt_row gt_right">NA</td>
-<td headers="Other" class="gt_row gt_right">NA</td>
+<td headers="Christian" class="gt_row gt_right"></td>
+<td headers="Other" class="gt_row gt_right"></td>
 <td headers="Protestant" class="gt_row gt_right">237</td></tr>
   </tbody>
   
@@ -1184,9 +1185,9 @@ tbody tr:last-child {
 <p>The variables in the <code>gss_cat</code> data-set which are factors are: —</p>
 <table class="table">
 <colgroup>
-<col style="width: 16%">
-<col style="width: 67%">
-<col style="width: 16%">
+<col style="width: 2%">
+<col style="width: 80%">
+<col style="width: 17%">
 </colgroup>
 <thead>
 <tr class="header">
