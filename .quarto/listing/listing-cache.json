@@ -20,6 +20,9 @@
       "Chapter15.qmd",
       "Chapter16.qmd",
       "Chapter17.qmd"
+    ],
+    "talks.qmd": [
+      "manual_office_procedure_22_sep_23.qmd"
     ]
   }
 }

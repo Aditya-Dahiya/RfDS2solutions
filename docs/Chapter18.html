@@ -439,12 +439,13 @@ div.csl-indent {
 
 </header>
 
-<p>Date-Time</p>
-<div class="cell" data-hash="Chapter18_cache/html/setup_821c67942e76819a33a6251d3d240ad0">
+<div class="cell" data-hash="Chapter18_cache/html/setup_c7a13b2fd5e618734c2ebea856290498">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nycflights13)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"flights"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"flights"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtExtras)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="all-date-formats-understood-by-readr" class="level2">
 <h2 class="anchored" data-anchor-id="all-date-formats-understood-by-readr"><strong>All date formats understood by <code>readr</code></strong></h2>
@@ -651,8 +652,8 @@ t2 &lt;- "11:15:10.12 PM"</code></pre>
 <section id="question-1-1" class="level2">
 <h2 class="anchored" data-anchor-id="question-1-1">Question 1</h2>
 <p><strong>How does the distribution of flight times within a day change over the course of the year?</strong></p>
-<p>The distribution of flight times within a day change over the course of the year is displayed in <a href="#fig-q1-ex3">Figure&nbsp;1</a> . To check whether this is due to only some extraordinarily delayed flights, or due to longer flight times in general, we can plot the median, instead of mean, as shown in <a href="#fig-q1a-ex3">Figure&nbsp;2</a> .</p>
-<div class="cell" data-hash="Chapter18_cache/html/fig-q1-ex3_86eb0c7108b7222c7d3321b6aed6907c">
+<p>The distribution of flight times within a day change over the course of the year is displayed in <a href="#fig-q1-ex3">Figure&nbsp;1</a> . To check whether this is due to only some extraordinarily delayed flights, or due to longer flight times in general, we can plot the median, instead of mean, as shown in <a href="#fig-q1a-ex3">Figure&nbsp;2</a> . Both plots provide the same conclusion, as explained there-in.</p>
+<div class="cell" data-hash="Chapter18_cache/html/fig-q1-ex3_0156f8686d78b072b88c8d99ffb246f2">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
@@ -671,7 +672,7 @@ t2 &lt;- "11:15:10.12 PM"</code></pre>
 <span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="cn">NULL</span>,</span>
 <span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"The average flight time increases towards the winter months"</span>,</span>
 <span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"The lowest average flight times occur in late summer and early fall; while highest occur in December"</span>,</span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Each dot represents the mean air time for flights of that day"</span>) <span class="sc">+</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Each dot represents the mean air time for flights departing in that day"</span>) <span class="sc">+</span></span>
 <span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor.x =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -684,7 +685,7 @@ t2 &lt;- "11:15:10.12 PM"</code></pre>
 </div>
 </div>
 </div>
-<div class="cell" data-hash="Chapter18_cache/html/fig-q1a-ex3_b951d37c28b5c79d2ffbc4a0222f5afe">
+<div class="cell" data-hash="Chapter18_cache/html/fig-q1a-ex3_5a774be7ed38d34a1524183735c703a1">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
@@ -693,20 +694,19 @@ t2 &lt;- "11:15:10.12 PM"</code></pre>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">dep_day =</span> <span class="fu">round_date</span>(dep_time, <span class="at">unit =</span> <span class="st">"day"</span>)</span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(dep_day) <span class="sc">|&gt;</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> dep_day,</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> air_time,</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">group =</span> dep_day)) <span class="sc">+</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">median_air_time =</span> <span class="fu">median</span>(air_time, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> dep_day,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> median_air_time)) <span class="sc">+</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">span =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Average flight time for flights departing each day (in min)"</span>,</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Median flight time for flights departing each day (in min)"</span>,</span>
 <span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="cn">NULL</span>,</span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"The average flight time increases towards the winter months"</span>,</span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"The lowest average flight times occur in late summer and early fall; while highest occur in December"</span>,</span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Each dot represents the mean air time for flights of that day"</span>) <span class="sc">+</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"The median flight time increases towards the winter months"</span>,</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"The lowest median flight times occur in late summer and early fall; while highest occur in December"</span>,</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Each dot represents the median air time for flights departing in that day"</span>) <span class="sc">+</span></span>
 <span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor.x =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">200</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor.x =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-q1a-ex3" class="quarto-figure quarto-figure-center anchored">
@@ -717,127 +717,1937 @@ t2 &lt;- "11:15:10.12 PM"</code></pre>
 </div>
 </div>
 </div>
-<div class="cell" data-hash="Chapter18_cache/html/unnamed-chunk-8_3e979f2af1146227aa81bfe800ff515e">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">dep_time =</span> <span class="fu">make_datetime</span>(year, month, day, dep_time <span class="sc">%/%</span> <span class="dv">100</span>, dep_time <span class="sc">%%</span> <span class="dv">100</span>),</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">dep_day =</span> <span class="fu">round_date</span>(dep_time, <span class="at">unit =</span> <span class="st">"day"</span>)</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(dep_day) <span class="sc">|&gt;</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">median_air_time =</span> <span class="fu">median</span>(air_time, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> dep_day,</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> median_air_time)) <span class="sc">+</span></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">span =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Median flight time for flights departing each day (in min)"</span>,</span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="cn">NULL</span>,</span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"......."</span>,</span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"..............."</span>,</span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Each dot represents the mean air time for flights of that day"</span>) <span class="sc">+</span></span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor.x =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="Chapter18_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<div class="cell" data-hash="Chapter18_cache/html/unnamed-chunk-9_68312eda89c56beaa846f8b54dca7a9c">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">=</span> flights <span class="sc">|&gt;</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>hour, <span class="sc">-</span>minute, <span class="sc">-</span>time_hour) <span class="sc">|&gt;</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(dep_time) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(arr_time) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(air_time)) <span class="sc">|&gt;</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">dep_time =</span> <span class="fu">make_datetime</span>(year, month, day, dep_time <span class="sc">%/%</span> <span class="dv">100</span>, dep_time <span class="sc">%%</span> <span class="dv">100</span>),</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>   <span class="at">sched_dep_time =</span> <span class="fu">make_datetime</span>(year, month, day, sched_dep_time <span class="sc">%/%</span> <span class="dv">100</span>, sched_dep_time <span class="sc">%%</span> <span class="dv">100</span>),</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>   <span class="at">arr_time =</span> <span class="fu">make_datetime</span>(year, month, day, arr_time <span class="sc">%/%</span> <span class="dv">100</span>, arr_time <span class="sc">%%</span> <span class="dv">100</span>),</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>   <span class="at">sched_arr_time =</span> <span class="fu">make_datetime</span>(year, month, day, sched_arr_time <span class="sc">%/%</span> <span class="dv">100</span>, sched_arr_time <span class="sc">%%</span> <span class="dv">100</span>),</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>   <span class="do">## If arrival time is earlier than departure time, add one day to the arrival time</span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>   <span class="at">arr_time =</span> <span class="fu">if_else</span>(arr_time <span class="sc">&lt;</span> dep_time,</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>                      <span class="at">true =</span> arr_time <span class="sc">+</span> <span class="fu">days</span>(<span class="dv">1</span>),</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>                      <span class="at">false =</span> arr_time),</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>   <span class="at">flight_time =</span> arr_time <span class="sc">-</span> dep_time,</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>   <span class="at">.keep =</span> <span class="st">"unused"</span></span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="do">###########</span></span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(dest <span class="sc">==</span> <span class="st">"HNL"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 707 × 19
-    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
-   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
- 1  2013     1     1      857            900        -3     1516           1530
- 2  2013     1     1     1344           1344         0     2005           1944
- 3  2013     1     2      909            900         9     1525           1530
- 4  2013     1     2     1344           1344         0     1940           1944
- 5  2013     1     3      914            900        14     1504           1530
- 6  2013     1     3     1418           1341        37     2006           1935
- 7  2013     1     4      900            900         0     1516           1530
- 8  2013     1     4     1343           1341         2     1932           1935
- 9  2013     1     5      858            900        -2     1519           1530
-10  2013     1     5     1329           1335        -6     1850           1935
-# ℹ 697 more rows
-# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
-#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
-#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="do">###########</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>f1 <span class="sc">|&gt;</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(flight_time <span class="sc">&gt;</span> <span class="dv">6</span><span class="sc">*</span><span class="dv">60</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 106 × 14
-   dep_time            sched_dep_time      dep_delay arr_time           
-   &lt;dttm&gt;              &lt;dttm&gt;                  &lt;dbl&gt; &lt;dttm&gt;             
- 1 2013-01-01 08:57:00 2013-01-01 09:00:00        -3 2013-01-01 15:16:00
- 2 2013-01-01 13:44:00 2013-01-01 13:44:00         0 2013-01-01 20:05:00
- 3 2013-01-02 09:09:00 2013-01-02 09:00:00         9 2013-01-02 15:25:00
- 4 2013-01-04 09:00:00 2013-01-04 09:00:00         0 2013-01-04 15:16:00
- 5 2013-01-05 08:58:00 2013-01-05 09:00:00        -2 2013-01-05 15:19:00
- 6 2013-01-08 09:01:00 2013-01-08 09:00:00         1 2013-01-08 15:04:00
- 7 2013-01-08 13:44:00 2013-01-08 13:41:00         3 2013-01-08 19:51:00
- 8 2013-01-09 06:41:00 2013-01-09 09:00:00      1301 2013-01-09 12:42:00
- 9 2013-01-09 13:40:00 2013-01-09 13:41:00        -1 2013-01-09 20:19:00
-10 2013-01-13 08:56:00 2013-01-13 09:00:00        -4 2013-01-13 15:23:00
-# ℹ 96 more rows
-# ℹ 10 more variables: sched_arr_time &lt;dttm&gt;, arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;,
-#   flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;,
-#   distance &lt;dbl&gt;, flight_time &lt;drtn&gt;</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="sc">|&gt;</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">day_hour =</span> <span class="fu">hour</span>(dep_time)) <span class="sc">|&gt;</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(day_hour) <span class="sc">|&gt;</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_flight_time =</span> <span class="fu">mean</span>(flight_time, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> day_hour,</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> avg_flight_time)) <span class="sc">+</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="Chapter18_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
 </section>
 <section id="question-2-1" class="level2">
 <h2 class="anchored" data-anchor-id="question-2-1">Question 2</h2>
 <p><strong>Compare <code>dep_time</code>, <code>sched_dep_time</code> and <code>dep_delay</code>. Are they consistent? Explain your findings.</strong></p>
+<div class="cell" data-hash="Chapter18_cache/html/tbl-q2-ex3_f52aba386e6c4d9ec418104e03aee657">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">=</span> flights <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>hour, <span class="sc">-</span>minute, <span class="sc">-</span>time_hour) <span class="sc">|&gt;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(dep_time) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(arr_time) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(sched_dep_time)) <span class="sc">|&gt;</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">dep_time =</span> <span class="fu">make_datetime</span>(year, month, day, dep_time <span class="sc">%/%</span> <span class="dv">100</span>, dep_time <span class="sc">%%</span> <span class="dv">100</span>),</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>   <span class="at">sched_dep_time =</span> <span class="fu">make_datetime</span>(year, month, day, sched_dep_time <span class="sc">%/%</span> <span class="dv">100</span>, sched_dep_time <span class="sc">%%</span> <span class="dv">100</span>),</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>   <span class="at">dep_delay_calc =</span> dep_time <span class="sc">-</span> sched_dep_time,</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>   <span class="at">comparison =</span> dep_delay_calc<span class="sc">/</span><span class="dv">60</span> <span class="sc">==</span> dep_delay,</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>   <span class="at">.keep =</span> <span class="st">"used"</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>f1 <span class="sc">|&gt;</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">5</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt_theme_538</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="tbl-q2-ex3" class="anchored">
+
+<div id="kgtfbsfmrg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#kgtfbsfmrg table {
+  font-family: Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#kgtfbsfmrg thead, #kgtfbsfmrg tbody, #kgtfbsfmrg tfoot, #kgtfbsfmrg tr, #kgtfbsfmrg td, #kgtfbsfmrg th {
+  border-style: none;
+}
+
+#kgtfbsfmrg p {
+  margin: 0;
+  padding: 0;
+}
+
+#kgtfbsfmrg .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: 300;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: none;
+  border-top-width: 3px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#kgtfbsfmrg .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#kgtfbsfmrg .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#kgtfbsfmrg .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#kgtfbsfmrg .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#kgtfbsfmrg .gt_bottom_border {
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kgtfbsfmrg .gt_col_headings {
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#kgtfbsfmrg .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: normal;
+  text-transform: uppercase;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#kgtfbsfmrg .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: normal;
+  text-transform: uppercase;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#kgtfbsfmrg .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#kgtfbsfmrg .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#kgtfbsfmrg .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#kgtfbsfmrg .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#kgtfbsfmrg .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #000000;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#kgtfbsfmrg .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #000000;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #FFFFFF;
+  vertical-align: middle;
+}
+
+#kgtfbsfmrg .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#kgtfbsfmrg .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#kgtfbsfmrg .gt_row {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#kgtfbsfmrg .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-right-color: #FFFFFF;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kgtfbsfmrg .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#kgtfbsfmrg .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#kgtfbsfmrg .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#kgtfbsfmrg .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kgtfbsfmrg .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#kgtfbsfmrg .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#kgtfbsfmrg .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kgtfbsfmrg .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kgtfbsfmrg .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#kgtfbsfmrg .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kgtfbsfmrg .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#kgtfbsfmrg .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kgtfbsfmrg .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#kgtfbsfmrg .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kgtfbsfmrg .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#kgtfbsfmrg .gt_sourcenote {
+  font-size: 12px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kgtfbsfmrg .gt_left {
+  text-align: left;
+}
+
+#kgtfbsfmrg .gt_center {
+  text-align: center;
+}
+
+#kgtfbsfmrg .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#kgtfbsfmrg .gt_font_normal {
+  font-weight: normal;
+}
+
+#kgtfbsfmrg .gt_font_bold {
+  font-weight: bold;
+}
+
+#kgtfbsfmrg .gt_font_italic {
+  font-style: italic;
+}
+
+#kgtfbsfmrg .gt_super {
+  font-size: 65%;
+}
+
+#kgtfbsfmrg .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#kgtfbsfmrg .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#kgtfbsfmrg .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#kgtfbsfmrg .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#kgtfbsfmrg .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#kgtfbsfmrg .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#kgtfbsfmrg .gt_indent_5 {
+  text-indent: 25px;
+}
+
+tbody tr:last-child {
+  border-bottom: 2px solid #ffffff00;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Table&nbsp;1:  <p>Table displaying top 5 observations comparing Departure Delay
+calculated vs.&nbsp;dep_delay</p> </caption>
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="year">year</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="month">month</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="day">day</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="dep_time">dep_time</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="sched_dep_time">sched_dep_time</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="dep_delay">dep_delay</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="dep_delay_calc">dep_delay_calc</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="comparison">comparison</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="year" class="gt_row gt_right">2013</td>
+<td headers="month" class="gt_row gt_right">1</td>
+<td headers="day" class="gt_row gt_right">1</td>
+<td headers="dep_time" class="gt_row gt_right">2013-01-01 05:17:00</td>
+<td headers="sched_dep_time" class="gt_row gt_right">2013-01-01 05:15:00</td>
+<td headers="dep_delay" class="gt_row gt_right">2</td>
+<td headers="dep_delay_calc" class="gt_row gt_center">120</td>
+<td headers="comparison" class="gt_row gt_center">TRUE</td></tr>
+    <tr><td headers="year" class="gt_row gt_right">2013</td>
+<td headers="month" class="gt_row gt_right">1</td>
+<td headers="day" class="gt_row gt_right">1</td>
+<td headers="dep_time" class="gt_row gt_right">2013-01-01 05:33:00</td>
+<td headers="sched_dep_time" class="gt_row gt_right">2013-01-01 05:29:00</td>
+<td headers="dep_delay" class="gt_row gt_right">4</td>
+<td headers="dep_delay_calc" class="gt_row gt_center">240</td>
+<td headers="comparison" class="gt_row gt_center">TRUE</td></tr>
+    <tr><td headers="year" class="gt_row gt_right">2013</td>
+<td headers="month" class="gt_row gt_right">1</td>
+<td headers="day" class="gt_row gt_right">1</td>
+<td headers="dep_time" class="gt_row gt_right">2013-01-01 05:42:00</td>
+<td headers="sched_dep_time" class="gt_row gt_right">2013-01-01 05:40:00</td>
+<td headers="dep_delay" class="gt_row gt_right">2</td>
+<td headers="dep_delay_calc" class="gt_row gt_center">120</td>
+<td headers="comparison" class="gt_row gt_center">TRUE</td></tr>
+    <tr><td headers="year" class="gt_row gt_right">2013</td>
+<td headers="month" class="gt_row gt_right">1</td>
+<td headers="day" class="gt_row gt_right">1</td>
+<td headers="dep_time" class="gt_row gt_right">2013-01-01 05:44:00</td>
+<td headers="sched_dep_time" class="gt_row gt_right">2013-01-01 05:45:00</td>
+<td headers="dep_delay" class="gt_row gt_right">-1</td>
+<td headers="dep_delay_calc" class="gt_row gt_center">-60</td>
+<td headers="comparison" class="gt_row gt_center">TRUE</td></tr>
+    <tr><td headers="year" class="gt_row gt_right">2013</td>
+<td headers="month" class="gt_row gt_right">1</td>
+<td headers="day" class="gt_row gt_right">1</td>
+<td headers="dep_time" class="gt_row gt_right">2013-01-01 05:54:00</td>
+<td headers="sched_dep_time" class="gt_row gt_right">2013-01-01 06:00:00</td>
+<td headers="dep_delay" class="gt_row gt_right">-6</td>
+<td headers="dep_delay_calc" class="gt_row gt_center">-360</td>
+<td headers="comparison" class="gt_row gt_center">TRUE</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</div>
+<p>Now, when we compute the percentage of observations where <code>dep_delay == dep_delay_calc</code> , we get only 99.63%. This means that for 0.36% of flights, the calculation doesn’t match. We need to explore these further.</p>
+<div class="cell" data-hash="Chapter18_cache/html/unnamed-chunk-9_06107288bf250aab92ed153ecaa5ae43">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(f1<span class="sc">$</span>comparison) <span class="sc">*</span> <span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 99.63269</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Code Part 1</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>f1 <span class="sc">|&gt;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>comparison)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,205 × 8
+    year month   day dep_time            sched_dep_time      dep_delay
+   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dttm&gt;              &lt;dttm&gt;                  &lt;dbl&gt;
+ 1  2013     1     1 2013-01-01 08:48:00 2013-01-01 18:35:00       853
+ 2  2013     1     2 2013-01-02 00:42:00 2013-01-02 23:59:00        43
+ 3  2013     1     2 2013-01-02 01:26:00 2013-01-02 22:50:00       156
+ 4  2013     1     3 2013-01-03 00:32:00 2013-01-03 23:59:00        33
+ 5  2013     1     3 2013-01-03 00:50:00 2013-01-03 21:45:00       185
+ 6  2013     1     3 2013-01-03 02:35:00 2013-01-03 23:59:00       156
+ 7  2013     1     4 2013-01-04 00:25:00 2013-01-04 23:59:00        26
+ 8  2013     1     4 2013-01-04 01:06:00 2013-01-04 22:45:00       141
+ 9  2013     1     5 2013-01-05 00:14:00 2013-01-05 23:59:00        15
+10  2013     1     5 2013-01-05 00:37:00 2013-01-05 22:30:00       127
+# ℹ 1,195 more rows
+# ℹ 2 more variables: dep_delay_calc &lt;drtn&gt;, comparison &lt;lgl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Code Part 2</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>f1 <span class="sc">|&gt;</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>comparison) <span class="sc">|&gt;</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(dep_delay_calc <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 0 × 8
+# ℹ 8 variables: year &lt;int&gt;, month &lt;int&gt;, day &lt;int&gt;, dep_time &lt;dttm&gt;,
+#   sched_dep_time &lt;dttm&gt;, dep_delay &lt;dbl&gt;, dep_delay_calc &lt;drtn&gt;,
+#   comparison &lt;lgl&gt;</code></pre>
+</div>
+</div>
+<p>Now, after seeing results of <code>## Code Part 1</code>, we realize that some flights are so delayed that their scheduled departure time goes over to the next day, and this, unfortunately we did not figure in our calculations. To further confirm, using <code>## Code Part II</code> , we confirm that the only mismatches are the ones where calculated departure delay is negative.</p>
+<p>Hence, we need to re-work our calculations, as follows: —</p>
+<div class="cell" data-hash="Chapter18_cache/html/unnamed-chunk-10_f29cde18c2ac3f400d636169b6cc0021">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Create new tibble from flights with datetime columns</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>f2 <span class="ot">=</span> flights <span class="sc">|&gt;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>hour, <span class="sc">-</span>minute, <span class="sc">-</span>time_hour) <span class="sc">|&gt;</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(dep_time) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(arr_time) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(sched_dep_time)) <span class="sc">|&gt;</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>   <span class="at">dep_time =</span> <span class="fu">make_datetime</span>(year, month, day, dep_time <span class="sc">%/%</span> <span class="dv">100</span>, dep_time <span class="sc">%%</span> <span class="dv">100</span>),</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>   <span class="at">sched_dep_time =</span> <span class="fu">make_datetime</span>(year, month, day, sched_dep_time <span class="sc">%/%</span> <span class="dv">100</span>, sched_dep_time <span class="sc">%%</span> <span class="dv">100</span>)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>   )</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Check range of dep_delay: to understand how early can a flight depart from scheduled time</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="do">## The earliest is -43 min, i.e., 43 min early</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(f2<span class="sc">$</span>dep_delay)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  -43 1301</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Now, change the departure time into +1 day, if the dep_time is earlier than scheduled time </span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="do">## by more than 45 min</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>f2 <span class="ot">=</span> f2 <span class="sc">|&gt;</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">dep_time =</span> <span class="fu">if_else</span>(dep_time <span class="sc">&lt;</span> sched_dep_time <span class="sc">-</span> <span class="fu">minutes</span>(<span class="dv">45</span>),</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">true =</span> dep_time <span class="sc">+</span> <span class="fu">days</span>(<span class="dv">1</span>),</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>                      <span class="at">false =</span> dep_time),</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>   <span class="at">dep_delay_calc =</span> dep_time <span class="sc">-</span> sched_dep_time,</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>   <span class="at">dep_delay_calc =</span> dep_delay_calc<span class="sc">/</span><span class="dv">60</span>,</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>   <span class="at">comparison =</span> dep_delay_calc <span class="sc">==</span> dep_delay</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Percentage of cases where our calculated departure delay is exactly same as dep_delay column</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(f2<span class="sc">$</span>comparison) <span class="sc">*</span> <span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 100</code></pre>
+</div>
+</div>
+<p>Thus, we realize that our 100% of our calculations match, once we factor in the flights departing the next day from their scheduled date as reflected in <a href="#tbl-q2a-ex3">Table&nbsp;2</a>.</p>
+<div class="cell" data-hash="Chapter18_cache/html/tbl-q2a-ex3_064cd1e7cf590ad72eb1030dd460c0b8">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Show some flights delayed so much that they depart the next day, to see comparison</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>f2 <span class="sc">|&gt;</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">day</span>(dep_time) <span class="sc">!=</span> <span class="fu">day</span>(sched_dep_time)) <span class="sc">|&gt;</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year, month, day, dep_time, sched_dep_time, </span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>         carrier, tailnum, dep_delay, dep_delay_calc, </span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>         comparison) <span class="sc">|&gt;</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">5</span>) <span class="sc">|&gt;</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt_theme_538</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="tbl-q2a-ex3" class="anchored">
+
+<div id="aoikyuqmgu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#aoikyuqmgu table {
+  font-family: Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#aoikyuqmgu thead, #aoikyuqmgu tbody, #aoikyuqmgu tfoot, #aoikyuqmgu tr, #aoikyuqmgu td, #aoikyuqmgu th {
+  border-style: none;
+}
+
+#aoikyuqmgu p {
+  margin: 0;
+  padding: 0;
+}
+
+#aoikyuqmgu .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: 300;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: none;
+  border-top-width: 3px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#aoikyuqmgu .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#aoikyuqmgu .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#aoikyuqmgu .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#aoikyuqmgu .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#aoikyuqmgu .gt_bottom_border {
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#aoikyuqmgu .gt_col_headings {
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#aoikyuqmgu .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: normal;
+  text-transform: uppercase;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#aoikyuqmgu .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: normal;
+  text-transform: uppercase;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#aoikyuqmgu .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#aoikyuqmgu .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#aoikyuqmgu .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#aoikyuqmgu .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#aoikyuqmgu .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #000000;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#aoikyuqmgu .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #000000;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #FFFFFF;
+  vertical-align: middle;
+}
+
+#aoikyuqmgu .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#aoikyuqmgu .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#aoikyuqmgu .gt_row {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#aoikyuqmgu .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-right-color: #FFFFFF;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#aoikyuqmgu .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#aoikyuqmgu .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#aoikyuqmgu .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#aoikyuqmgu .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#aoikyuqmgu .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#aoikyuqmgu .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#aoikyuqmgu .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#aoikyuqmgu .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#aoikyuqmgu .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#aoikyuqmgu .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#aoikyuqmgu .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#aoikyuqmgu .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#aoikyuqmgu .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#aoikyuqmgu .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#aoikyuqmgu .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#aoikyuqmgu .gt_sourcenote {
+  font-size: 12px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#aoikyuqmgu .gt_left {
+  text-align: left;
+}
+
+#aoikyuqmgu .gt_center {
+  text-align: center;
+}
+
+#aoikyuqmgu .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#aoikyuqmgu .gt_font_normal {
+  font-weight: normal;
+}
+
+#aoikyuqmgu .gt_font_bold {
+  font-weight: bold;
+}
+
+#aoikyuqmgu .gt_font_italic {
+  font-style: italic;
+}
+
+#aoikyuqmgu .gt_super {
+  font-size: 65%;
+}
+
+#aoikyuqmgu .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#aoikyuqmgu .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#aoikyuqmgu .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#aoikyuqmgu .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#aoikyuqmgu .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#aoikyuqmgu .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#aoikyuqmgu .gt_indent_5 {
+  text-indent: 25px;
+}
+
+tbody tr:last-child {
+  border-bottom: 2px solid #ffffff00;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Table&nbsp;2:  <p>Comparison table for 5 flights departing next day from scheduled
+date</p> </caption>
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="year">year</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="month">month</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="day">day</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="dep_time">dep_time</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="sched_dep_time">sched_dep_time</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="carrier">carrier</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="tailnum">tailnum</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="dep_delay">dep_delay</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="dep_delay_calc">dep_delay_calc</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="comparison">comparison</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="year" class="gt_row gt_right">2013</td>
+<td headers="month" class="gt_row gt_right">1</td>
+<td headers="day" class="gt_row gt_right">1</td>
+<td headers="dep_time" class="gt_row gt_right">2013-01-02 08:48:00</td>
+<td headers="sched_dep_time" class="gt_row gt_right">2013-01-01 18:35:00</td>
+<td headers="carrier" class="gt_row gt_left">MQ</td>
+<td headers="tailnum" class="gt_row gt_left">N942MQ</td>
+<td headers="dep_delay" class="gt_row gt_right">853</td>
+<td headers="dep_delay_calc" class="gt_row gt_center">853</td>
+<td headers="comparison" class="gt_row gt_center">TRUE</td></tr>
+    <tr><td headers="year" class="gt_row gt_right">2013</td>
+<td headers="month" class="gt_row gt_right">1</td>
+<td headers="day" class="gt_row gt_right">2</td>
+<td headers="dep_time" class="gt_row gt_right">2013-01-03 00:42:00</td>
+<td headers="sched_dep_time" class="gt_row gt_right">2013-01-02 23:59:00</td>
+<td headers="carrier" class="gt_row gt_left">B6</td>
+<td headers="tailnum" class="gt_row gt_left">N580JB</td>
+<td headers="dep_delay" class="gt_row gt_right">43</td>
+<td headers="dep_delay_calc" class="gt_row gt_center">43</td>
+<td headers="comparison" class="gt_row gt_center">TRUE</td></tr>
+    <tr><td headers="year" class="gt_row gt_right">2013</td>
+<td headers="month" class="gt_row gt_right">1</td>
+<td headers="day" class="gt_row gt_right">2</td>
+<td headers="dep_time" class="gt_row gt_right">2013-01-03 01:26:00</td>
+<td headers="sched_dep_time" class="gt_row gt_right">2013-01-02 22:50:00</td>
+<td headers="carrier" class="gt_row gt_left">B6</td>
+<td headers="tailnum" class="gt_row gt_left">N636JB</td>
+<td headers="dep_delay" class="gt_row gt_right">156</td>
+<td headers="dep_delay_calc" class="gt_row gt_center">156</td>
+<td headers="comparison" class="gt_row gt_center">TRUE</td></tr>
+    <tr><td headers="year" class="gt_row gt_right">2013</td>
+<td headers="month" class="gt_row gt_right">1</td>
+<td headers="day" class="gt_row gt_right">3</td>
+<td headers="dep_time" class="gt_row gt_right">2013-01-04 00:32:00</td>
+<td headers="sched_dep_time" class="gt_row gt_right">2013-01-03 23:59:00</td>
+<td headers="carrier" class="gt_row gt_left">B6</td>
+<td headers="tailnum" class="gt_row gt_left">N763JB</td>
+<td headers="dep_delay" class="gt_row gt_right">33</td>
+<td headers="dep_delay_calc" class="gt_row gt_center">33</td>
+<td headers="comparison" class="gt_row gt_center">TRUE</td></tr>
+    <tr><td headers="year" class="gt_row gt_right">2013</td>
+<td headers="month" class="gt_row gt_right">1</td>
+<td headers="day" class="gt_row gt_right">3</td>
+<td headers="dep_time" class="gt_row gt_right">2013-01-04 00:50:00</td>
+<td headers="sched_dep_time" class="gt_row gt_right">2013-01-03 21:45:00</td>
+<td headers="carrier" class="gt_row gt_left">B6</td>
+<td headers="tailnum" class="gt_row gt_left">N329JB</td>
+<td headers="dep_delay" class="gt_row gt_right">185</td>
+<td headers="dep_delay_calc" class="gt_row gt_center">185</td>
+<td headers="comparison" class="gt_row gt_center">TRUE</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="question-3-1" class="level2">
 <h2 class="anchored" data-anchor-id="question-3-1">Question 3</h2>
 <p><strong>Compare <code>air_time</code> with the duration between the departure and arrival. Explain your findings. (Hint: consider the location of the airport.)</strong></p>
+<p>If we compare the <code>air_time</code> with duration between departure time and arrival time, we get hardly 0.06% matches, even after adjusting for <code>dep_times</code> that occur on the next day, or arrival times occurring on the next day. This means that something else is going on, perhaps the <code>origin</code> and <code>dest</code> airports are in different time zones.</p>
+<div class="cell" data-hash="Chapter18_cache/html/tbl-q3-ex3_941e3153cc25bde10058f45d89dd58e5">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>f3 <span class="ot">=</span> flights <span class="sc">|&gt;</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>hour, <span class="sc">-</span>minute, <span class="sc">-</span>time_hour) <span class="sc">|&gt;</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(dep_time) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(arr_time) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(air_time)) <span class="sc">|&gt;</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">dep_time =</span> <span class="fu">make_datetime</span>(year, month, day, dep_time <span class="sc">%/%</span> <span class="dv">100</span>, dep_time <span class="sc">%%</span> <span class="dv">100</span>),</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>   <span class="at">sched_dep_time =</span> <span class="fu">make_datetime</span>(year, month, day, sched_dep_time <span class="sc">%/%</span> <span class="dv">100</span>, sched_dep_time <span class="sc">%%</span> <span class="dv">100</span>),</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>   <span class="at">dep_time =</span> <span class="fu">if_else</span>(dep_time <span class="sc">&lt;</span> sched_dep_time <span class="sc">-</span> <span class="fu">minutes</span>(<span class="dv">45</span>),</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>                      <span class="at">true =</span> dep_time <span class="sc">+</span> <span class="fu">days</span>(<span class="dv">1</span>),</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>                      <span class="at">false =</span> dep_time),</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>   <span class="at">arr_time =</span> <span class="fu">make_datetime</span>(year, month, day, arr_time <span class="sc">%/%</span> <span class="dv">100</span>, arr_time <span class="sc">%%</span> <span class="dv">100</span>),</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>   <span class="at">sched_arr_time =</span> <span class="fu">make_datetime</span>(year, month, day, sched_arr_time <span class="sc">%/%</span> <span class="dv">100</span>, sched_arr_time <span class="sc">%%</span> <span class="dv">100</span>),</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>   <span class="at">air_time_calc =</span> (arr_time <span class="sc">-</span> dep_time),</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>   <span class="at">comparison =</span> air_time_calc <span class="sc">==</span> air_time</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>f3 <span class="sc">|&gt;</span></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(dep_time,</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>           sched_dep_time,</span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>           arr_time,</span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>           sched_arr_time,</span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>           origin,</span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>           dest,</span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>           air_time,</span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>           air_time_calc,</span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>           comparison)) <span class="sc">|&gt;</span></span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">200</span><span class="sc">:</span><span class="dv">205</span>) <span class="sc">|&gt;</span></span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt_theme_nytimes</span>() <span class="sc">|&gt;</span></span>
+<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">list</span>(<span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>)),</span>
+<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(<span class="at">columns =</span> comparison)</span>
+<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="tbl-q3-ex3" class="anchored">
+
+<div id="bnxthedyjk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#bnxthedyjk table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#bnxthedyjk thead, #bnxthedyjk tbody, #bnxthedyjk tfoot, #bnxthedyjk tr, #bnxthedyjk td, #bnxthedyjk th {
+  border-style: none;
+}
+
+#bnxthedyjk p {
+  margin: 0;
+  padding: 0;
+}
+
+#bnxthedyjk .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#bnxthedyjk .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#bnxthedyjk .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#bnxthedyjk .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#bnxthedyjk .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bnxthedyjk .gt_bottom_border {
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bnxthedyjk .gt_col_headings {
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 1px;
+  border-bottom-color: #334422;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bnxthedyjk .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 12px;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#bnxthedyjk .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 12px;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#bnxthedyjk .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#bnxthedyjk .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#bnxthedyjk .gt_column_spanner {
+  border-bottom-style: none;
+  border-bottom-width: 1px;
+  border-bottom-color: #334422;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#bnxthedyjk .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#bnxthedyjk .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#bnxthedyjk .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#bnxthedyjk .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#bnxthedyjk .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#bnxthedyjk .gt_row {
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#bnxthedyjk .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bnxthedyjk .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#bnxthedyjk .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#bnxthedyjk .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#bnxthedyjk .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bnxthedyjk .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#bnxthedyjk .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#bnxthedyjk .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bnxthedyjk .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bnxthedyjk .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#bnxthedyjk .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bnxthedyjk .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#bnxthedyjk .gt_table_body {
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #FFFFFF;
+}
+
+#bnxthedyjk .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bnxthedyjk .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bnxthedyjk .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bnxthedyjk .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bnxthedyjk .gt_left {
+  text-align: left;
+}
+
+#bnxthedyjk .gt_center {
+  text-align: center;
+}
+
+#bnxthedyjk .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#bnxthedyjk .gt_font_normal {
+  font-weight: normal;
+}
+
+#bnxthedyjk .gt_font_bold {
+  font-weight: bold;
+}
+
+#bnxthedyjk .gt_font_italic {
+  font-style: italic;
+}
+
+#bnxthedyjk .gt_super {
+  font-size: 65%;
+}
+
+#bnxthedyjk .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#bnxthedyjk .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#bnxthedyjk .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#bnxthedyjk .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#bnxthedyjk .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#bnxthedyjk .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#bnxthedyjk .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Table&nbsp;3:  <p>The air_time variable and caculated difference between departure and
+arrival times don’t match if we dont account for time zones</p> </caption>
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="dep_time">dep_time</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="sched_dep_time">sched_dep_time</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="arr_time">arr_time</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="sched_arr_time">sched_arr_time</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="origin">origin</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="dest">dest</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="air_time">air_time</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="air_time_calc">air_time_calc</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="comparison">comparison</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="dep_time" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013-01-01 09:31:00</td>
+<td headers="sched_dep_time" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013-01-01 09:30:00</td>
+<td headers="arr_time" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013-01-01 11:21:00</td>
+<td headers="sched_arr_time" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013-01-01 11:08:00</td>
+<td headers="origin" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">LGA</td>
+<td headers="dest" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">ORD</td>
+<td headers="air_time" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">154</td>
+<td headers="air_time_calc" class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">110</td>
+<td headers="comparison" class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: bold;">FALSE</td></tr>
+    <tr><td headers="dep_time" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013-01-01 09:32:00</td>
+<td headers="sched_dep_time" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013-01-01 09:30:00</td>
+<td headers="arr_time" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013-01-01 12:19:00</td>
+<td headers="sched_arr_time" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013-01-01 12:25:00</td>
+<td headers="origin" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">JFK</td>
+<td headers="dest" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">LAS</td>
+<td headers="air_time" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">324</td>
+<td headers="air_time_calc" class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">167</td>
+<td headers="comparison" class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: bold;">FALSE</td></tr>
+    <tr><td headers="dep_time" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013-01-01 09:33:00</td>
+<td headers="sched_dep_time" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013-01-01 09:37:00</td>
+<td headers="arr_time" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013-01-01 10:57:00</td>
+<td headers="sched_arr_time" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013-01-01 11:02:00</td>
+<td headers="origin" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">JFK</td>
+<td headers="dest" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">BUF</td>
+<td headers="air_time" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">66</td>
+<td headers="air_time_calc" class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">84</td>
+<td headers="comparison" class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: bold;">FALSE</td></tr>
+    <tr><td headers="dep_time" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013-01-01 09:33:00</td>
+<td headers="sched_dep_time" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013-01-01 09:04:00</td>
+<td headers="arr_time" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013-01-01 12:52:00</td>
+<td headers="sched_arr_time" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013-01-01 12:10:00</td>
+<td headers="origin" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">JFK</td>
+<td headers="dest" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">FLL</td>
+<td headers="air_time" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">170</td>
+<td headers="air_time_calc" class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">199</td>
+<td headers="comparison" class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: bold;">FALSE</td></tr>
+    <tr><td headers="dep_time" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013-01-01 09:33:00</td>
+<td headers="sched_dep_time" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013-01-01 09:35:00</td>
+<td headers="arr_time" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013-01-01 11:20:00</td>
+<td headers="sched_arr_time" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013-01-01 11:05:00</td>
+<td headers="origin" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">LGA</td>
+<td headers="dest" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">MDW</td>
+<td headers="air_time" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">145</td>
+<td headers="air_time_calc" class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">107</td>
+<td headers="comparison" class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: bold;">FALSE</td></tr>
+    <tr><td headers="dep_time" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013-01-01 09:36:00</td>
+<td headers="sched_dep_time" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013-01-01 09:40:00</td>
+<td headers="arr_time" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013-01-01 12:35:00</td>
+<td headers="sched_arr_time" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013-01-01 12:51:00</td>
+<td headers="origin" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">LGA</td>
+<td headers="dest" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">TPA</td>
+<td headers="air_time" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">159</td>
+<td headers="air_time_calc" class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">179</td>
+<td headers="comparison" class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: bold;">FALSE</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(f3<span class="sc">$</span>comparison) <span class="sc">*</span> <span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.05987548</code></pre>
+</div>
+</div>
+<p>Let’s try to add the time-zones of destination airports, and then calculate the flight times. As we see below, the results still don’t match. Perhaps <code>air_time</code> excludes the time between <code>dep_time</code> and <code>arr_time</code> spent on the tarmac, runway etc. I hope to return to this analysis later sometime.</p>
+<div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="do">#########################################################################################</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data from airports which contains their time zones</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"airports"</span>)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Left join the data set</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>flights_airports <span class="ot">=</span> <span class="fu">left_join</span>(flights, airports, <span class="at">by =</span> <span class="fu">join_by</span>(dest <span class="sc">==</span> faa)) <span class="sc">|&gt;</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>hour, <span class="sc">-</span>minute, <span class="sc">-</span>time_hour, <span class="sc">-</span>carrier, <span class="sc">-</span>tailnum, <span class="sc">-</span>lat, <span class="sc">-</span>lon, <span class="sc">-</span>alt) <span class="sc">|&gt;</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(dep_time) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(arr_time) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(air_time))</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>f4 <span class="ot">=</span> flights_airports <span class="sc">|&gt;</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year, month, day, dep_time, sched_dep_time, dep_delay, </span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>         arr_time, sched_arr_time, arr_delay,</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>         flight, origin, dest,air_time, distance, name, tzone) <span class="sc">|&gt;</span></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">dep_time =</span> <span class="fu">make_datetime</span>(year, month, day, </span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>                             dep_time <span class="sc">%/%</span> <span class="dv">100</span>, dep_time <span class="sc">%%</span> <span class="dv">100</span>, </span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>                             <span class="at">tz =</span> <span class="st">"America/New_York"</span>),</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">arr_time =</span> <span class="fu">make_datetime</span>(year, month, day, </span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>                             arr_time <span class="sc">%/%</span> <span class="dv">100</span>, arr_time <span class="sc">%%</span> <span class="dv">100</span>, </span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>                             <span class="at">tz =</span> tzone),</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">air_time_calc =</span> <span class="fu">difftime</span>(arr_time, dep_time, <span class="at">units =</span> <span class="st">"mins"</span>)</span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>f4 <span class="sc">|&gt;</span></span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(year, month, day)) <span class="sc">|&gt;</span></span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">201</span><span class="sc">:</span><span class="dv">205</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="tbl-q3a-ex3" class="cell tbl-parent quarto-layout-panel anchored" data-tbl-cap="Comparative table of calculated flight times with air_time" data-hash="Chapter18_cache/html/tbl-q3a-ex3_3ead672e99e0a799add5f5daad142857">
+<div class="panel-caption table-caption">
+<p><strong>?(caption)</strong></p>
+</div>
+</div>
+</div>
 </section>
 <section id="question-4" class="level2">
 <h2 class="anchored" data-anchor-id="question-4">Question 4</h2>
 <p><strong>How does the average delay time change over the course of a day? Should you use <code>dep_time</code> or <code>sched_dep_time</code>? Why?</strong></p>
+<p>The average delay time increases over the course of a given day. The plot in <a href="#fig-q4-ex3">Figure&nbsp;3</a> shows us that peak delays occur in the late evening.</p>
+<p>In my view, we should use scheduled departure time</p>
+<div class="cell" data-hash="Chapter18_cache/html/fig-q4-ex3_8b79c8c6c589868b1ff4b8f6129ce03a">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sched_dep_time) <span class="sc">|&gt;</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_dep_delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_dep_delay =</span> <span class="fu">median</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">sched_dep_hour =</span> sched_dep_time <span class="sc">%/%</span> <span class="dv">100</span>,</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">sched_dep_min =</span> sched_dep_time <span class="sc">%%</span> <span class="dv">100</span>,</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">sched_dep_time =</span> sched_dep_hour <span class="sc">+</span> (sched_dep_min<span class="sc">/</span><span class="dv">60</span>)</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sched_dep_time,</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> mean_dep_delay)) <span class="sc">+</span></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">col =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">24</span>),</span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">80</span>)) <span class="sc">+</span></span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">5</span>,<span class="dv">24</span>,<span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Scheduled Depature Time during the day"</span>,</span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Average Departure Delay (minutes)"</span>,</span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Average departure delay for flights rises as the day progresses"</span>,</span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Flights in the evening, 6 pm to 10 pm, have the highest departure delays</span><span class="sc">\n</span><span class="st">Conversely, early morning flights have minimal delays"</span>) <span class="sc">+</span></span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme</span>(<span class="at">panel.grid.minor.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a>         <span class="at">plot.title.position =</span> <span class="st">"plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-q4-ex3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter18_files/figure-html/fig-q4-ex3-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;3: Line Chart (with loess smoother) of average departure delays over the course of a day</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="question-5" class="level2">
 <h2 class="anchored" data-anchor-id="question-5">Question 5</h2>
 <p><strong>On what day of the week should you leave if you want to minimise the chance of a delay?</strong></p>
+<p>As we can see in the <a href="#fig-q5-ex3">Figure&nbsp;4</a>, if we want to minimize the chance of delay, we should leave on <strong>Saturday</strong>. Since the questions uses “should you leave”, we use <code>dep_time</code> in place of <code>sched_dep_time</code> .</p>
+<div class="cell" data-fig.asp="0.2" data-hash="Chapter18_cache/html/fig-q5-ex3_70e1644cf62cff67de0c2e85ef860be4">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>labels_grid <span class="ot">=</span> <span class="fu">c</span>(</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean_delay =</span> <span class="st">"Mean delay (in mins)"</span>,</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">median_delay =</span> <span class="st">"Median delay (in mins)"</span>,</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">numbers =</span> <span class="st">"Number of flights"</span>)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>   <span class="at">dep_time =</span> <span class="fu">make_datetime</span>(year, month, day,</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>                            dep_time <span class="sc">%/%</span> <span class="dv">100</span>,</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>                            dep_time <span class="sc">%%</span> <span class="dv">100</span>),</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>   <span class="at">weekday =</span> <span class="fu">wday</span>(dep_time, <span class="at">label =</span> <span class="cn">TRUE</span>, <span class="at">abbr =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(weekday) <span class="sc">|&gt;</span></span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_delay =</span> <span class="fu">median</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">numbers =</span> <span class="fu">n</span>()</span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">|&gt;</span></span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>weekday,</span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"indicator"</span>,</span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"val"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> weekday, <span class="at">x =</span> val, <span class="at">fill =</span> indicator)) <span class="sc">+</span></span>
+<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span> indicator, <span class="at">scales =</span> <span class="st">"free_x"</span>,</span>
+<span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a>             <span class="at">labeller =</span> <span class="fu">labeller</span>(<span class="at">indicator =</span> labels_grid)) <span class="sc">+</span></span>
+<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>) <span class="sc">+</span> </span>
+<span id="cb35-29"><a href="#cb35-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb35-30"><a href="#cb35-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb35-31"><a href="#cb35-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-q5-ex3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Chapter18_files/figure-html/fig-q5-ex3-1.png" class="img-fluid figure-img" width="960"></p>
+<figcaption class="figure-caption">Figure&nbsp;4: Plot of mean &amp; median delays, and number of flights on each day of the week</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="question-6" class="level2">
 <h2 class="anchored" data-anchor-id="question-6">Question 6</h2>
 <p><strong>What makes the distribution of <code>diamonds$carat</code> and <code>flights$sched_dep_time</code> similar?</strong></p>
+<p>The distribution of <code>diamonds$carat</code> and <code>flights$sched_dep_time</code> are similar in having tendency to round off the values to nearest 0.5 Carat (in case of <code>carat</code>) or 5/30/60 minutes (in case of <code>sched_dep_time</code>). This means when humans record a continuous variable, there is a tendency to round it off to nearest unit, thus leading to a distribution which shows spikes at fixed intervals.</p>
+<div class="cell" data-hash="Chapter18_cache/html/unnamed-chunk-16_9d729d8ae8fbad0f6d2540f7fa09d4a7">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"diamonds"</span>)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> carat)) <span class="sc">+</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">500</span>) <span class="sc">+</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3</span>)) <span class="sc">+</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Carat of Diamond"</span>, <span class="at">y =</span> <span class="st">"Number of Diamonds"</span>,</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Carats of diamonds are mostly in multiples of 0.5"</span>,</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"This suggests observations recorders' bias in propensity to round off carat to nearest 0.5"</span>) <span class="sc">+</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">3</span>, <span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Chapter18_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>f5 <span class="ot">=</span> flights <span class="sc">|&gt;</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sched_dep_time =</span> hour <span class="sc">+</span> minute<span class="sc">/</span><span class="dv">60</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>f5 <span class="sc">|&gt;</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(sched_dep_time)) <span class="sc">+</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">1000</span>) <span class="sc">+</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">24</span>)) <span class="sc">+</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Scheduled departure time (in hr)"</span>, </span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Number of Flights"</span>,</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Scheduled Departure times are geenrally in multiples of 5, 30 or 60 minutes"</span>,</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"This suggests propensity to round off scheduled departure time to nearest hour, or atleast 5 minutes"</span>) <span class="sc">+</span></span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">24</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Chapter18_files/figure-html/unnamed-chunk-16-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 </section>
 <section id="question-7" class="level2">
 <h2 class="anchored" data-anchor-id="question-7">Question 7</h2>
 <p><strong>Confirm our hypothesis that the early departures of flights in minutes 20-30 and 50-60 are caused by scheduled flights that leave early. Hint: create a binary variable that tells you whether or not a flight was delayed.</strong></p>
+<p>In the code below, we compare the proportion of flights that were delayed: —</p>
+<ul>
+<li><p>with scheduled departure times between 20-30 min and 50-60 min <strong>(0.538)</strong></p></li>
+<li><p>with scheduled departure times other than these minutes <strong>(0.573)</strong></p></li>
+</ul>
+<p>A two-sided t-test of the comparison of these two proportions has a p-value of &lt; 0.001, thus, there is a significant difference between the two proportions. Thus, we conclude that flights with scheduled departure times between 20-30 min and 50-60 min have a significantly lesser delay than other flights.</p>
+<div class="cell" data-hash="Chapter18_cache/html/unnamed-chunk-17_fdb43dff928b9575b68fa999789ee4c9">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>f7 <span class="ot">=</span> flights <span class="sc">|&gt;</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">sdt_20_30 =</span> (minute <span class="sc">&gt;=</span> <span class="dv">20</span> <span class="sc">&amp;</span> minute <span class="sc">&lt;=</span> <span class="dv">30</span>),</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">sdt_50_60 =</span> (minute <span class="sc">&gt;=</span> <span class="dv">50</span> <span class="sc">&amp;</span> minute <span class="sc">&lt;=</span> <span class="dv">60</span>),</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">sdt_round_times =</span> (sdt_20_30 <span class="sc">|</span> sdt_50_60),</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">was_delayed =</span> (dep_delay <span class="sc">&lt;</span> <span class="dv">0</span>),</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">.keep =</span> <span class="st">"used"</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>f7 <span class="sc">|&gt;</span></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sdt_round_times) <span class="sc">|&gt;</span></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">prop_delayed =</span> <span class="fu">mean</span>(was_delayed, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">n =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  sdt_round_times prop_delayed      n
+  &lt;lgl&gt;                  &lt;dbl&gt;  &lt;int&gt;
+1 FALSE                  0.573 197298
+2 TRUE                   0.538 139478</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>f8test <span class="ot">=</span> <span class="fu">prop.test</span>(</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">c</span>(<span class="dv">113092</span>, <span class="dv">75098</span>),</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">197298</span>, <span class="dv">139478</span>)</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>f8test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    2-sample test for equality of proportions with continuity correction
+
+data:  c(113092, 75098) out of c(197298, 139478)
+X-squared = 400.83, df = 1, p-value &lt; 2.2e-16
+alternative hypothesis: two.sided
+95 percent confidence interval:
+ 0.03136898 0.03819533
+sample estimates:
+   prop 1    prop 2 
+0.5732040 0.5384218 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>f8test<span class="sc">$</span>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.641236e-89</code></pre>
+</div>
+</div>
 
 
 

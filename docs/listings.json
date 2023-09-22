@@ -22,5 +22,9 @@
       "/Chapter8.html",
       "/Chapter9.html"
     ]
+  },
+  {
+    "listing": "/talks.html",
+    "items": []
   }
 ]
