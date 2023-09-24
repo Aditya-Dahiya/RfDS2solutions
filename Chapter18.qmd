@@ -425,13 +425,18 @@ f4 = flights_airports |>
                              tz = "America/New_York"),
     arr_time = make_datetime(year, month, day, 
                              arr_time %/% 100, arr_time %% 100, 
-                             tz = tzone),
-    air_time_calc = difftime(arr_time, dep_time, units = "mins")
+                             tz = tzone)
     )
 
 f4 |>
-  select(-c(year, month, day)) |>
-  slice(201:205)
+  slice(202) |>
+  mutate(
+    air_time = air_time,
+    tzone = tzone,
+    air_time_calc = interval(dep_time, arr_time)/minutes(1),
+    .keep = "used"
+  )
+
 ```
 
 ## Question 4
@@ -440,7 +445,7 @@ f4 |>
 
 The average delay time increases over the course of a given day. The plot in @fig-q4-ex3 shows us that peak delays occur in the late evening.
 
-In my view, we should use scheduled departure time
+In my view, we should use scheduled departure time because people arrive at the airport, and plan their travel as per scheduled departure time, and thus, information about scheduled departure time will be more useful to the consumers of the data visualization.
 
 ```{r}
 #| label: fig-q4-ex3
@@ -588,4 +593,56 @@ f8test = prop.test(
 
 f8test
 f8test$p.value
+```
+
+# **18.4.4 Exercises**
+
+## Question 1
+
+**Explain `days(!overnight)` and `days(overnight)` to someone who has just started learning R. What is the key fact you need to know?**
+
+In `R`, `TRUE` is represented numerically as 1, and `FALSE` is represented numerically as 0. Thus, `days(!overnight)` is equal to `days(0)`, i.e., a time period of zero days, for an overnight flight, and 1 day for a regular flight.
+
+On the other hand, `days(overnight)` is equal to `days(1)`, i.e., a time period of 1 day, for an overnight flight, and 0 day for a regular flight.
+
+The key fact that we need to know is whether the value of `overnight` is `TRUE` or `FALSE` , i.e., whether the flight is an overnight one or not. And, the fact that `R` treats `TRUE` as 1, and `FALSE` as 0.
+
+## **Question 2**
+
+**Create a vector of dates giving the first day of every month in 2015. Create a vector of dates giving the first day of every month in the *current* year.**
+
+```{r}
+seq(from = ymd("2015-01-01"),
+    to   = ymd("2015-12-31"),
+    by   = "1 month")
+
+seq(from = ymd(paste0(year(today()), "-01-01")),
+    to   = ymd(paste0(year(today()), "-12-31")),
+    by   = "1 month")
+```
+
+## **Question 3**
+
+**Write a function that given your birthday (as a date), returns how old you are in years.**
+
+The function `find_age()` is created below. An example is also shown: ---
+
+```{r}
+find_age = function(birthday){
+  age = floor((interval(parse_date(birthday), today()))/years(1))
+  
+  cat("You are", age, "years old.")
+}
+
+find_age("1991-09-24")
+```
+
+## **Question 4**
+
+**Why can't `(today() %--% (today() + years(1))) / months(1)` work?**
+
+This expression should not work because the interval although the interval **`(today() %--% (today() + years(1)))`** can be computed; but, the duration of `months(1)` is not defined, since, each month is different in length - ranging from 28 days to 31 days. Hence, there is no clear accurate answer to the expression.
+
+```{r}
+(today() %--% (today() + years(1))) / months(1)
 ```

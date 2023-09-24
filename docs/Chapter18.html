@@ -403,6 +403,13 @@ div.csl-indent {
   <li><a href="#question-6" id="toc-question-6" class="nav-link" data-scroll-target="#question-6">Question 6</a></li>
   <li><a href="#question-7" id="toc-question-7" class="nav-link" data-scroll-target="#question-7">Question 7</a></li>
   </ul></li>
+  <li><a href="#exercises-2" id="toc-exercises-2" class="nav-link" data-scroll-target="#exercises-2"><strong>18.4.4 Exercises</strong></a>
+  <ul class="collapse">
+  <li><a href="#question-1-2" id="toc-question-1-2" class="nav-link" data-scroll-target="#question-1-2">Question 1</a></li>
+  <li><a href="#question-2-2" id="toc-question-2-2" class="nav-link" data-scroll-target="#question-2-2"><strong>Question 2</strong></a></li>
+  <li><a href="#question-3-2" id="toc-question-3-2" class="nav-link" data-scroll-target="#question-3-2"><strong>Question 3</strong></a></li>
+  <li><a href="#question-4-1" id="toc-question-4-1" class="nav-link" data-scroll-target="#question-4-1"><strong>Question 4</strong></a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/edit/main/Chapter18.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -2646,6 +2653,66 @@ sample estimates:
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>f8test<span class="sc">$</span>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3.641236e-89</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="exercises-2" class="level1">
+<h1><strong>18.4.4 Exercises</strong></h1>
+<section id="question-1-2" class="level2">
+<h2 class="anchored" data-anchor-id="question-1-2">Question 1</h2>
+<p><strong>Explain <code>days(!overnight)</code> and <code>days(overnight)</code> to someone who has just started learning R. What is the key fact you need to know?</strong></p>
+<p>In <code>R</code>, <code>TRUE</code> is represented numerically as 1, and <code>FALSE</code> is represented numerically as 0. Thus, <code>days(!overnight)</code> is equal to <code>days(0)</code>, i.e., a time period of zero days, for an overnight flight, and 1 day for a regular flight.</p>
+<p>On the other hand, <code>days(overnight)</code> is equal to <code>days(1)</code>, i.e., a time period of 1 day, for an overnight flight, and 0 day for a regular flight.</p>
+<p>The key fact that we need to know is whether the value of <code>overnight</code> is <code>TRUE</code> or <code>FALSE</code> , i.e., whether the flight is an overnight one or not. And, the fact that <code>R</code> treats <code>TRUE</code> as 1, and <code>FALSE</code> as 0.</p>
+</section>
+<section id="question-2-2" class="level2">
+<h2 class="anchored" data-anchor-id="question-2-2"><strong>Question 2</strong></h2>
+<p><strong>Create a vector of dates giving the first day of every month in 2015. Create a vector of dates giving the first day of every month in the <em>current</em> year.</strong></p>
+<div class="cell" data-hash="Chapter18_cache/html/unnamed-chunk-18_f33a4362c75053b399640710a297af51">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="at">from =</span> <span class="fu">ymd</span>(<span class="st">"2015-01-01"</span>),</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">to   =</span> <span class="fu">ymd</span>(<span class="st">"2015-12-31"</span>),</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">by   =</span> <span class="st">"1 month"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "2015-01-01" "2015-02-01" "2015-03-01" "2015-04-01" "2015-05-01"
+ [6] "2015-06-01" "2015-07-01" "2015-08-01" "2015-09-01" "2015-10-01"
+[11] "2015-11-01" "2015-12-01"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="at">from =</span> <span class="fu">ymd</span>(<span class="fu">paste0</span>(<span class="fu">year</span>(<span class="fu">today</span>()), <span class="st">"-01-01"</span>)),</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">to   =</span> <span class="fu">ymd</span>(<span class="fu">paste0</span>(<span class="fu">year</span>(<span class="fu">today</span>()), <span class="st">"-12-31"</span>)),</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">by   =</span> <span class="st">"1 month"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "2023-01-01" "2023-02-01" "2023-03-01" "2023-04-01" "2023-05-01"
+ [6] "2023-06-01" "2023-07-01" "2023-08-01" "2023-09-01" "2023-10-01"
+[11] "2023-11-01" "2023-12-01"</code></pre>
+</div>
+</div>
+</section>
+<section id="question-3-2" class="level2">
+<h2 class="anchored" data-anchor-id="question-3-2"><strong>Question 3</strong></h2>
+<p><strong>Write a function that given your birthday (as a date), returns how old you are in years.</strong></p>
+<p>The function <code>find_age()</code> is created below. An example is also shown: —</p>
+<div class="cell" data-hash="Chapter18_cache/html/unnamed-chunk-19_2226f3fd895b36680826f9d520cc03c2">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>find_age <span class="ot">=</span> <span class="cf">function</span>(birthday){</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  age <span class="ot">=</span> <span class="fu">floor</span>((<span class="fu">interval</span>(<span class="fu">parse_date</span>(birthday), <span class="fu">today</span>()))<span class="sc">/</span><span class="fu">years</span>(<span class="dv">1</span>))</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"You are"</span>, age, <span class="st">"years old."</span>)</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a><span class="fu">find_age</span>(<span class="st">"1991-09-24"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>You are 31 years old.</code></pre>
+</div>
+</div>
+</section>
+<section id="question-4-1" class="level2">
+<h2 class="anchored" data-anchor-id="question-4-1"><strong>Question 4</strong></h2>
+<p><strong>Why can’t <code>(today() %--% (today() + years(1))) / months(1)</code> work?</strong></p>
+<p>This expression should not work because the interval although the interval <strong><code>(today() %--% (today() + years(1)))</code></strong> can be computed; but, the duration of <code>months(1)</code> is not defined, since, each month is different in length - ranging from 28 days to 31 days. Hence, there is no clear accurate answer to the expression.</p>
+<div class="cell" data-hash="Chapter18_cache/html/unnamed-chunk-20_02b7975caba1e20cf56bd707f658a056">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">today</span>() <span class="sc">%--%</span> (<span class="fu">today</span>() <span class="sc">+</span> <span class="fu">years</span>(<span class="dv">1</span>))) <span class="sc">/</span> <span class="fu">months</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12</code></pre>
 </div>
 </div>
 
