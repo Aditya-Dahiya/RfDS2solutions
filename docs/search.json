@@ -46,7 +46,7 @@
     "href": "solutions.html",
     "title": "Solutions",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\nTitle\n\n\nSubtitle\n\n\nDate\n\n\n\n\n\n\nChapter 10\n\n\nLayers\n\n\nAug 22, 2023\n\n\n\n\nChapter 11\n\n\nExploratory data analysis\n\n\nAug 28, 2023\n\n\n\n\nChapter 12\n\n\nCommunication\n\n\nAug 28, 2023\n\n\n\n\nChapter 13\n\n\nLogical Vectors\n\n\nSep 3, 2023\n\n\n\n\nChapter 14\n\n\nNumbers\n\n\nSep 8, 2023\n\n\n\n\nChapter 15\n\n\nStrings\n\n\nSep 10, 2023\n\n\n\n\nChapter 16\n\n\nRegular Expressions\n\n\nSep 12, 2023\n\n\n\n\nChapter 17\n\n\nFactors\n\n\nSep 14, 2023\n\n\n\n\nChapter 2\n\n\nData Visualization\n\n\nJul 29, 2023\n\n\n\n\nChapter 21\n\n\nSpreadsheets\n\n\nAug 15, 2023\n\n\n\n\nChapter 29\n\n\nQuarto\n\n\nJul 25, 2023\n\n\n\n\nChapter 3\n\n\nWorkflow: Basics\n\n\nJul 29, 2023\n\n\n\n\nChapter 30\n\n\nQuarto Formats\n\n\nJul 25, 2023\n\n\n\n\nChapter 4\n\n\nData Transformation\n\n\nJul 29, 2023\n\n\n\n\nChapter 5\n\n\nWorkflow: code style\n\n\nAug 2, 2023\n\n\n\n\nChapter 6\n\n\nData tidying\n\n\nAug 5, 2023\n\n\n\n\nChapter 7\n\n\nWorkflow: scripts and projects\n\n\nAug 8, 2023\n\n\n\n\nChapter 8\n\n\nData Import\n\n\nAug 10, 2023\n\n\n\n\nChapter 9\n\n\nWorkflow: getting help\n\n\nAug 13, 2023\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\nTitle\n\n\nSubtitle\n\n\nDate\n\n\n\n\n\n\nChapter 10\n\n\nLayers\n\n\nAug 22, 2023\n\n\n\n\nChapter 11\n\n\nExploratory data analysis\n\n\nAug 28, 2023\n\n\n\n\nChapter 12\n\n\nCommunication\n\n\nAug 28, 2023\n\n\n\n\nChapter 13\n\n\nLogical Vectors\n\n\nSep 3, 2023\n\n\n\n\nChapter 14\n\n\nNumbers\n\n\nSep 8, 2023\n\n\n\n\nChapter 15\n\n\nStrings\n\n\nSep 10, 2023\n\n\n\n\nChapter 16\n\n\nRegular Expressions\n\n\nSep 12, 2023\n\n\n\n\nChapter 17\n\n\nFactors\n\n\nSep 14, 2023\n\n\n\n\nChapter 18\n\n\nDates and times\n\n\nSep 15, 2023\n\n\n\n\nChapter 19\n\n\nMissing Values\n\n\nOct 2, 2023\n\n\n\n\nChapter 2\n\n\nData Visualization\n\n\nJul 29, 2023\n\n\n\n\nChapter 20\n\n\nJoins\n\n\nOct 2, 2023\n\n\n\n\nChapter 21\n\n\nSpreadsheets\n\n\nAug 15, 2023\n\n\n\n\nChapter 29\n\n\nQuarto\n\n\nJul 25, 2023\n\n\n\n\nChapter 3\n\n\nWorkflow: Basics\n\n\nJul 29, 2023\n\n\n\n\nChapter 30\n\n\nQuarto Formats\n\n\nJul 25, 2023\n\n\n\n\nChapter 4\n\n\nData Transformation\n\n\nJul 29, 2023\n\n\n\n\nChapter 5\n\n\nWorkflow: code style\n\n\nAug 2, 2023\n\n\n\n\nChapter 6\n\n\nData tidying\n\n\nAug 5, 2023\n\n\n\n\nChapter 7\n\n\nWorkflow: scripts and projects\n\n\nAug 8, 2023\n\n\n\n\nChapter 8\n\n\nData Import\n\n\nAug 10, 2023\n\n\n\n\nChapter 9\n\n\nWorkflow: getting help\n\n\nAug 13, 2023\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -725,14 +725,14 @@
     "href": "Chapter18.html#question-3-1",
     "title": "Chapter 18",
     "section": "Question 3",
-    "text": "Question 3\nCompare air_time with the duration between the departure and arrival. Explain your findings. (Hint: consider the location of the airport.)\nIf we compare the air_time with duration between departure time and arrival time, we get hardly 0.06% matches, even after adjusting for dep_times that occur on the next day, or arrival times occurring on the next day. This means that something else is going on, perhaps the origin and dest airports are in different time zones.\n\n\nCode\nf3 = flights |&gt;\n  select(-hour, -minute, -time_hour) |&gt;\n  filter(!is.na(dep_time) & !is.na(arr_time) & !is.na(air_time)) |&gt;\n  mutate(\n   dep_time = make_datetime(year, month, day, dep_time %/% 100, dep_time %% 100),\n   sched_dep_time = make_datetime(year, month, day, sched_dep_time %/% 100, sched_dep_time %% 100),\n   dep_time = if_else(dep_time &lt; sched_dep_time - minutes(45),\n                      true = dep_time + days(1),\n                      false = dep_time),\n   arr_time = make_datetime(year, month, day, arr_time %/% 100, arr_time %% 100),\n   sched_arr_time = make_datetime(year, month, day, sched_arr_time %/% 100, sched_arr_time %% 100),\n   air_time_calc = (arr_time - dep_time),\n   comparison = air_time_calc == air_time\n  )\n\nf3 |&gt;\n  select(c(dep_time,\n           sched_dep_time,\n           arr_time,\n           sched_arr_time,\n           origin,\n           dest,\n           air_time,\n           air_time_calc,\n           comparison)) |&gt;\n  slice(200:205) |&gt;\n  gt() |&gt;\n  gt_theme_nytimes() |&gt;\n  tab_style(\n    style = list(cell_text(weight = \"bold\")),\n    locations = cells_body(columns = comparison)\n  )\n\n\n\n\n\n\nTable 3:  The air_time variable and caculated difference between departure and\narrival times don’t match if we dont account for time zones \n  \n    \n    \n      dep_time\n      sched_dep_time\n      arr_time\n      sched_arr_time\n      origin\n      dest\n      air_time\n      air_time_calc\n      comparison\n    \n  \n  \n    2013-01-01 09:31:00\n2013-01-01 09:30:00\n2013-01-01 11:21:00\n2013-01-01 11:08:00\nLGA\nORD\n154\n110\nFALSE\n    2013-01-01 09:32:00\n2013-01-01 09:30:00\n2013-01-01 12:19:00\n2013-01-01 12:25:00\nJFK\nLAS\n324\n167\nFALSE\n    2013-01-01 09:33:00\n2013-01-01 09:37:00\n2013-01-01 10:57:00\n2013-01-01 11:02:00\nJFK\nBUF\n66\n84\nFALSE\n    2013-01-01 09:33:00\n2013-01-01 09:04:00\n2013-01-01 12:52:00\n2013-01-01 12:10:00\nJFK\nFLL\n170\n199\nFALSE\n    2013-01-01 09:33:00\n2013-01-01 09:35:00\n2013-01-01 11:20:00\n2013-01-01 11:05:00\nLGA\nMDW\n145\n107\nFALSE\n    2013-01-01 09:36:00\n2013-01-01 09:40:00\n2013-01-01 12:35:00\n2013-01-01 12:51:00\nLGA\nTPA\n159\n179\nFALSE\n  \n  \n  \n\n\n\n\n\nCode\nmean(f3$comparison) * 100\n\n\n[1] 0.05987548\n\n\nLet’s try to add the time-zones of destination airports, and then calculate the flight times. As we see below, the results still don’t match. Perhaps air_time excludes the time between dep_time and arr_time spent on the tarmac, runway etc. I hope to return to this analysis later sometime.\n\n\nCode\n#########################################################################################\n# Load data from airports which contains their time zones\ndata(\"airports\")\n\n# Left join the data set\nflights_airports = left_join(flights, airports, by = join_by(dest == faa)) |&gt;\n  select(-hour, -minute, -time_hour, -carrier, -tailnum, -lat, -lon, -alt) |&gt;\n  filter(!is.na(dep_time) & !is.na(arr_time) & !is.na(air_time))\n\nf4 = flights_airports |&gt;\n  select(year, month, day, dep_time, sched_dep_time, dep_delay, \n         arr_time, sched_arr_time, arr_delay,\n         flight, origin, dest,air_time, distance, name, tzone) |&gt;\n  mutate(\n    dep_time = make_datetime(year, month, day, \n                             dep_time %/% 100, dep_time %% 100, \n                             tz = \"America/New_York\"),\n    arr_time = make_datetime(year, month, day, \n                             arr_time %/% 100, arr_time %% 100, \n                             tz = tzone),\n    air_time_calc = difftime(arr_time, dep_time, units = \"mins\")\n    )\n\nf4 |&gt;\n  select(-c(year, month, day)) |&gt;\n  slice(201:205)\n\n\n\n?(caption)"
+    "text": "Question 3\nCompare air_time with the duration between the departure and arrival. Explain your findings. (Hint: consider the location of the airport.)\nIf we compare the air_time with duration between departure time and arrival time, we get hardly 0.06% matches, even after adjusting for dep_times that occur on the next day, or arrival times occurring on the next day. This means that something else is going on, perhaps the origin and dest airports are in different time zones.\n\n\nCode\nf3 = flights |&gt;\n  select(-hour, -minute, -time_hour) |&gt;\n  filter(!is.na(dep_time) & !is.na(arr_time) & !is.na(air_time)) |&gt;\n  mutate(\n   dep_time = make_datetime(year, month, day, dep_time %/% 100, dep_time %% 100),\n   sched_dep_time = make_datetime(year, month, day, sched_dep_time %/% 100, sched_dep_time %% 100),\n   dep_time = if_else(dep_time &lt; sched_dep_time - minutes(45),\n                      true = dep_time + days(1),\n                      false = dep_time),\n   arr_time = make_datetime(year, month, day, arr_time %/% 100, arr_time %% 100),\n   sched_arr_time = make_datetime(year, month, day, sched_arr_time %/% 100, sched_arr_time %% 100),\n   air_time_calc = (arr_time - dep_time),\n   comparison = air_time_calc == air_time\n  )\n\nf3 |&gt;\n  select(c(dep_time,\n           sched_dep_time,\n           arr_time,\n           sched_arr_time,\n           origin,\n           dest,\n           air_time,\n           air_time_calc,\n           comparison)) |&gt;\n  slice(200:205) |&gt;\n  gt() |&gt;\n  gt_theme_nytimes() |&gt;\n  tab_style(\n    style = list(cell_text(weight = \"bold\")),\n    locations = cells_body(columns = comparison)\n  )\n\n\n\n\n\n\nTable 3:  The air_time variable and caculated difference between departure and\narrival times don’t match if we dont account for time zones \n  \n    \n    \n      dep_time\n      sched_dep_time\n      arr_time\n      sched_arr_time\n      origin\n      dest\n      air_time\n      air_time_calc\n      comparison\n    \n  \n  \n    2013-01-01 09:31:00\n2013-01-01 09:30:00\n2013-01-01 11:21:00\n2013-01-01 11:08:00\nLGA\nORD\n154\n110\nFALSE\n    2013-01-01 09:32:00\n2013-01-01 09:30:00\n2013-01-01 12:19:00\n2013-01-01 12:25:00\nJFK\nLAS\n324\n167\nFALSE\n    2013-01-01 09:33:00\n2013-01-01 09:37:00\n2013-01-01 10:57:00\n2013-01-01 11:02:00\nJFK\nBUF\n66\n84\nFALSE\n    2013-01-01 09:33:00\n2013-01-01 09:04:00\n2013-01-01 12:52:00\n2013-01-01 12:10:00\nJFK\nFLL\n170\n199\nFALSE\n    2013-01-01 09:33:00\n2013-01-01 09:35:00\n2013-01-01 11:20:00\n2013-01-01 11:05:00\nLGA\nMDW\n145\n107\nFALSE\n    2013-01-01 09:36:00\n2013-01-01 09:40:00\n2013-01-01 12:35:00\n2013-01-01 12:51:00\nLGA\nTPA\n159\n179\nFALSE\n  \n  \n  \n\n\n\n\n\nCode\nmean(f3$comparison) * 100\n\n\n[1] 0.05987548\n\n\nLet’s try to add the time-zones of destination airports, and then calculate the flight times. As we see below, the results still don’t match. Perhaps air_time excludes the time between dep_time and arr_time spent on the tarmac, runway etc. I hope to return to this analysis later sometime.\n\n\nCode\n#########################################################################################\n# Load data from airports which contains their time zones\ndata(\"airports\")\n\n# Left join the data set\nflights_airports = left_join(flights, airports, by = join_by(dest == faa)) |&gt;\n  select(-hour, -minute, -time_hour, -carrier, -tailnum, -lat, -lon, -alt) |&gt;\n  filter(!is.na(dep_time) & !is.na(arr_time) & !is.na(air_time))\n\nf4 = flights_airports |&gt;\n  select(year, month, day, dep_time, sched_dep_time, dep_delay, \n         arr_time, sched_arr_time, arr_delay,\n         flight, origin, dest,air_time, distance, name, tzone) |&gt;\n  mutate(\n    dep_time = make_datetime(year, month, day, \n                             dep_time %/% 100, dep_time %% 100, \n                             tz = \"America/New_York\"),\n    arr_time = make_datetime(year, month, day, \n                             arr_time %/% 100, arr_time %% 100, \n                             tz = tzone)\n    )\n\nf4 |&gt;\n  slice(202) |&gt;\n  mutate(\n    air_time = air_time,\n    tzone = tzone,\n    air_time_calc = interval(dep_time, arr_time)/minutes(1),\n    .keep = \"used\"\n  )\n\n\n\n?(caption)"
   },
   {
     "objectID": "Chapter18.html#question-4",
     "href": "Chapter18.html#question-4",
     "title": "Chapter 18",
     "section": "Question 4",
-    "text": "Question 4\nHow does the average delay time change over the course of a day? Should you use dep_time or sched_dep_time? Why?\nThe average delay time increases over the course of a given day. The plot in Figure 3 shows us that peak delays occur in the late evening.\nIn my view, we should use scheduled departure time\n\nflights |&gt;\n  group_by(sched_dep_time) |&gt;\n  summarise(\n    mean_dep_delay = mean(dep_delay, na.rm = TRUE),\n    median_dep_delay = median(dep_delay, na.rm = TRUE)\n  ) |&gt;\n  mutate(\n    sched_dep_hour = sched_dep_time %/% 100,\n    sched_dep_min = sched_dep_time %% 100,\n    sched_dep_time = sched_dep_hour + (sched_dep_min/60)\n  ) |&gt;\n  \n  ggplot(aes(x = sched_dep_time,\n             y = mean_dep_delay)) +\n  geom_point(size = 0.2) +\n  geom_line() +\n  geom_smooth(col = \"red\") +\n  coord_cartesian(xlim = c(4, 24),\n                  ylim = c(0,80)) +\n  scale_x_continuous(breaks = seq(5,24,1)) +\n  theme_minimal() +\n  labs(x = \"Scheduled Depature Time during the day\",\n       y = \"Average Departure Delay (minutes)\",\n       title = \"Average departure delay for flights rises as the day progresses\",\n       subtitle = \"Flights in the evening, 6 pm to 10 pm, have the highest departure delays\\nConversely, early morning flights have minimal delays\") +\n   theme(panel.grid.minor.x = element_blank(),\n         plot.title.position = \"plot\")\n\n\n\n\nFigure 3: Line Chart (with loess smoother) of average departure delays over the course of a day"
+    "text": "Question 4\nHow does the average delay time change over the course of a day? Should you use dep_time or sched_dep_time? Why?\nThe average delay time increases over the course of a given day. The plot in Figure 3 shows us that peak delays occur in the late evening.\nIn my view, we should use scheduled departure time because people arrive at the airport, and plan their travel as per scheduled departure time, and thus, information about scheduled departure time will be more useful to the consumers of the data visualization.\n\nflights |&gt;\n  group_by(sched_dep_time) |&gt;\n  summarise(\n    mean_dep_delay = mean(dep_delay, na.rm = TRUE),\n    median_dep_delay = median(dep_delay, na.rm = TRUE)\n  ) |&gt;\n  mutate(\n    sched_dep_hour = sched_dep_time %/% 100,\n    sched_dep_min = sched_dep_time %% 100,\n    sched_dep_time = sched_dep_hour + (sched_dep_min/60)\n  ) |&gt;\n  \n  ggplot(aes(x = sched_dep_time,\n             y = mean_dep_delay)) +\n  geom_point(size = 0.2) +\n  geom_line() +\n  geom_smooth(col = \"red\") +\n  coord_cartesian(xlim = c(4, 24),\n                  ylim = c(0,80)) +\n  scale_x_continuous(breaks = seq(5,24,1)) +\n  theme_minimal() +\n  labs(x = \"Scheduled Depature Time during the day\",\n       y = \"Average Departure Delay (minutes)\",\n       title = \"Average departure delay for flights rises as the day progresses\",\n       subtitle = \"Flights in the evening, 6 pm to 10 pm, have the highest departure delays\\nConversely, early morning flights have minimal delays\") +\n   theme(panel.grid.minor.x = element_blank(),\n         plot.title.position = \"plot\")\n\n\n\n\nFigure 3: Line Chart (with loess smoother) of average departure delays over the course of a day"
   },
   {
     "objectID": "Chapter18.html#question-5",
@@ -789,5 +789,138 @@
     "title": "Chapter 18",
     "section": "Question 4",
     "text": "Question 4\nWhy can’t (today() %--% (today() + years(1))) / months(1) work?\nThis expression should not work because the interval although the interval (today() %--% (today() + years(1))) can be computed; but, the duration of months(1) is not defined, since, each month is different in length - ranging from 28 days to 31 days. Hence, there is no clear accurate answer to the expression.\n\n(today() %--% (today() + years(1))) / months(1)\n\n[1] 12"
+  },
+  {
+    "objectID": "Chapter19.html",
+    "href": "Chapter19.html",
+    "title": "Chapter 19",
+    "section": "",
+    "text": "library(tidyverse)\nlibrary(janitor)\nlibrary(gt)\nlibrary(gtExtras)"
+  },
+  {
+    "objectID": "Chapter19.html#exercises",
+    "href": "Chapter19.html#exercises",
+    "title": "Chapter 19",
+    "section": "19.3.4 Exercises",
+    "text": "19.3.4 Exercises"
+  },
+  {
+    "objectID": "Chapter19.html#question-1",
+    "href": "Chapter19.html#question-1",
+    "title": "Chapter 19",
+    "section": "Question 1",
+    "text": "Question 1\nCan you find any relationship between the carrier and the rows that appear to be missing from planes?\nYes, as we can see in the Table 1 , the airline carriers MQ and AA have most of their aircrafts’ tail numbers missing from the planes data-set, apart from few other carriers that have a small percentage of their data missing.\n\nlibrary(nycflights13)\ndata(\"flights\")\ndata(\"planes\")\n\n# Create a vector of carriers that have tailsnums missing in planes\ncar_vec = flights |&gt;\n  distinct(tailnum, carrier) |&gt;\n  anti_join(planes) |&gt;\n  distinct(carrier) |&gt;\n  as_vector() |&gt;\n  unname()\n\n# Find total tailnums for these carriers\ntotal_tails = flights |&gt;\n  filter(carrier %in% car_vec) |&gt;\n  group_by(carrier) |&gt;\n  summarize(\n    total_aircrafts = n_distinct(tailnum)\n    )\n\nflights |&gt;\n  distinct(tailnum, carrier) |&gt;\n  anti_join(planes) |&gt;\n  count(carrier, name = \"missing_tailnums\") |&gt;\n  full_join(total_tails) |&gt;\n  mutate(percentage_missing = missing_tailnums/total_aircrafts) |&gt;\n  arrange(desc(percentage_missing)) |&gt;\n  gt() |&gt;\n  gt_theme_538() |&gt;\n  cols_label_with(fn = ~ janitor::make_clean_names(., case = \"title\")) |&gt;\n  fmt_percent(columns = percentage_missing) |&gt;\n   tab_style(\n    style = list(cell_text(weight = \"bold\") ),\n    locations = cells_body(columns = percentage_missing)) \n\n\n\n\n\nTable 1:  Percentage of tail numbers of each carrier that is missing from\nplanes data set \n  \n    \n    \n      Carrier\n      Missing Tailnums\n      Total Aircrafts\n      Percentage Missing\n    \n  \n  \n    MQ\n234\n238\n98.32%\n    AA\n430\n601\n71.55%\n    F9\n3\n26\n11.54%\n    FL\n12\n129\n9.30%\n    UA\n23\n621\n3.70%\n    US\n9\n290\n3.10%\n    DL\n10\n629\n1.59%\n    B6\n3\n193\n1.55%\n    WN\n3\n583\n0.51%\n    9E\n1\n204\n0.49%"
+  },
+  {
+    "objectID": "Chapter20.html",
+    "href": "Chapter20.html",
+    "title": "Chapter 20",
+    "section": "",
+    "text": "We forgot to draw the relationship between weather and airports in Figure 20.1. What is the relationship and how should it appear in the diagram?\n\n\n\nweather only contains information for the three origin airports in NYC. If it contained weather records for all airports in the USA, what additional connection would it make to flights?\n\n\n\nThe year, month, day, hour, and origin variables almost form a compound key for weather, but there's one hour that has duplicate observations. Can you figure out what's special about that hour?\n\n\n\nWe know that some days of the year are special and fewer people than usual fly on them (e.g., Christmas eve and Christmas day). How might you represent that data as a data frame? What would be the primary key? How would it connect to the existing data frames?\n\n\n\nDraw a diagram illustrating the connections between the Batting, People, and Salaries data frames in the Lahman package. Draw another diagram that shows the relationship between People, Managers, AwardsManagers. How would you characterize the relationship between the Batting, Pitching, and Fielding data frames?"
+  },
+  {
+    "objectID": "Chapter20.html#question-1",
+    "href": "Chapter20.html#question-1",
+    "title": "Chapter 20",
+    "section": "",
+    "text": "We forgot to draw the relationship between weather and airports in Figure 20.1. What is the relationship and how should it appear in the diagram?"
+  },
+  {
+    "objectID": "Chapter20.html#question-2",
+    "href": "Chapter20.html#question-2",
+    "title": "Chapter 20",
+    "section": "",
+    "text": "weather only contains information for the three origin airports in NYC. If it contained weather records for all airports in the USA, what additional connection would it make to flights?"
+  },
+  {
+    "objectID": "Chapter20.html#question-3",
+    "href": "Chapter20.html#question-3",
+    "title": "Chapter 20",
+    "section": "",
+    "text": "The year, month, day, hour, and origin variables almost form a compound key for weather, but there's one hour that has duplicate observations. Can you figure out what's special about that hour?"
+  },
+  {
+    "objectID": "Chapter20.html#question-4",
+    "href": "Chapter20.html#question-4",
+    "title": "Chapter 20",
+    "section": "",
+    "text": "We know that some days of the year are special and fewer people than usual fly on them (e.g., Christmas eve and Christmas day). How might you represent that data as a data frame? What would be the primary key? How would it connect to the existing data frames?"
+  },
+  {
+    "objectID": "Chapter20.html#question-5",
+    "href": "Chapter20.html#question-5",
+    "title": "Chapter 20",
+    "section": "",
+    "text": "Draw a diagram illustrating the connections between the Batting, People, and Salaries data frames in the Lahman package. Draw another diagram that shows the relationship between People, Managers, AwardsManagers. How would you characterize the relationship between the Batting, Pitching, and Fielding data frames?"
+  },
+  {
+    "objectID": "Chapter20.html#question-1-1",
+    "href": "Chapter20.html#question-1-1",
+    "title": "Chapter 20",
+    "section": "Question 1",
+    "text": "Question 1\nFind the 48 hours (over the course of the whole year) that have the worst delays. Cross-reference it with the weather data. Can you see any patterns?"
+  },
+  {
+    "objectID": "Chapter20.html#question-2-1",
+    "href": "Chapter20.html#question-2-1",
+    "title": "Chapter 20",
+    "section": "Question 2",
+    "text": "Question 2\nImagine you've found the top 10 most popular destinations using this code:\ntop_dest &lt;- flights2 |&gt;   count(dest, sort = TRUE) |&gt;   head(10)\nHow can you find all flights to those destinations?"
+  },
+  {
+    "objectID": "Chapter20.html#question-3-1",
+    "href": "Chapter20.html#question-3-1",
+    "title": "Chapter 20",
+    "section": "Question 3",
+    "text": "Question 3\nDoes every departing flight have corresponding weather data for that hour?"
+  },
+  {
+    "objectID": "Chapter20.html#question-4-1",
+    "href": "Chapter20.html#question-4-1",
+    "title": "Chapter 20",
+    "section": "Question 4",
+    "text": "Question 4\nWhat do the tail numbers that don't have a matching record in planes have in common? (Hint: one variable explains ~90% of the problems.)"
+  },
+  {
+    "objectID": "Chapter20.html#question-5-1",
+    "href": "Chapter20.html#question-5-1",
+    "title": "Chapter 20",
+    "section": "Question 5",
+    "text": "Question 5\nAdd a column to planes that lists every carrier that has flown that plane. You might expect that there's an implicit relationship between plane and airline, because each plane is flown by a single airline. Confirm or reject this hypothesis using the tools you've learned in previous chapters."
+  },
+  {
+    "objectID": "Chapter20.html#question-6",
+    "href": "Chapter20.html#question-6",
+    "title": "Chapter 20",
+    "section": "Question 6",
+    "text": "Question 6\nAdd the latitude and the longitude of the origin and destination airport to flights. Is it easier to rename the columns before or after the join?"
+  },
+  {
+    "objectID": "Chapter20.html#question-7",
+    "href": "Chapter20.html#question-7",
+    "title": "Chapter 20",
+    "section": "Question 7",
+    "text": "Question 7\nCompute the average delay by destination, then join on the airports data frame so you can show the spatial distribution of delays. Here's an easy way to draw a map of the United States:\nairports |&gt;   semi_join(flights, join_by(faa == dest)) |&gt;   ggplot(aes(x = lon, y = lat)) +     borders(\"state\") +     geom_point() +     coord_quickmap()\nYou might want to use the size or color of the points to display the average delay for each airport."
+  },
+  {
+    "objectID": "Chapter20.html#question-8",
+    "href": "Chapter20.html#question-8",
+    "title": "Chapter 20",
+    "section": "Question 8",
+    "text": "Question 8\nWhat happened on June 13 2013? Draw a map of the delays, and then use Google to cross-reference with the weather."
+  },
+  {
+    "objectID": "Chapter20.html#question-1-2",
+    "href": "Chapter20.html#question-1-2",
+    "title": "Chapter 20",
+    "section": "Question 1",
+    "text": "Question 1\nCan you explain what's happening with the keys in this equi join? Why are they different?\nx |&gt; full_join(y, by = \"key\")\n#&gt; # A tibble: 4 × 3\n#&gt;     key val_x val_y\n#&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;\n#&gt; 1     1 x1    y1   \n#&gt; 2     2 x2    y2   \n#&gt; 3     3 x3    &lt;NA&gt; \n#&gt; 4     4 &lt;NA&gt;  y3\n\nx |&gt; full_join(y, by = \"key\", keep = TRUE)\n#&gt; # A tibble: 4 × 4\n#&gt;   key.x val_x key.y val_y\n#&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;\n#&gt; 1     1 x1        1 y1   \n#&gt; 2     2 x2        2 y2   \n#&gt; 3     3 x3       NA &lt;NA&gt; \n#&gt; 4    NA &lt;NA&gt;      4 y3"
+  },
+  {
+    "objectID": "Chapter20.html#question-2-2",
+    "href": "Chapter20.html#question-2-2",
+    "title": "Chapter 20",
+    "section": "Question 2",
+    "text": "Question 2\nWhen finding if any party period overlapped with another party period we used q &lt; q in the join_by()? Why? What happens if you remove this inequality?"
   }
 ]

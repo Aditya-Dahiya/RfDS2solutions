@@ -442,6 +442,53 @@
             "title": "Dates and times made easy with lubridate",
             "type": "article-journal",
             "volume": "40"
+        },
+        {
+            "DOI": "10.18637/jss.v105.i07",
+            "author": [
+                {
+                    "family": "Tierney",
+                    "given": "Nicholas"
+                },
+                {
+                    "family": "Cook",
+                    "given": "Dianne"
+                }
+            ],
+            "id": "naniar",
+            "issued": {
+                "date-parts": [
+                    [
+                        2023
+                    ]
+                ]
+            },
+            "title": "Expanding tidy data principles to facilitate missing data exploration, visualization and assessment of imputations",
+            "type": "article-journal",
+            "volume": "105"
+        },
+        {
+            "DOI": "10.21105/joss.00355",
+            "URL": "http://dx.doi.org/10.21105/joss.00355",
+            "author": [
+                {
+                    "family": "Tierney",
+                    "given": "Nicholas"
+                }
+            ],
+            "id": "visdat",
+            "issued": {
+                "date-parts": [
+                    [
+                        2017
+                    ]
+                ]
+            },
+            "page": "355",
+            "title": "Visdat: Visualising whole data frames",
+            "title-short": "Visdat",
+            "type": "article-journal",
+            "volume": "2"
         }
     ],
     "project_biblios": []
