@@ -22,27 +22,333 @@ editor_options:
 bibliography: references.bib
 ---
 
+```{r}
+# Loading required datasets and libraries
+library(tidyverse)
+library(gt)
+library(gtExtras)
+library(nycflights13)
+library(janitor)
+data("flights")
+data("weather")
+data("airports")
+```
+
 # **20.2.4 Exercises**
 
 ## Question 1
 
 **We forgot to draw the relationship between `weather` and `airports` in [Figure 20.1](https://r4ds.hadley.nz/joins#fig-flights-relationships). What is the relationship and how should it appear in the diagram?**
 
+The relation between `weather` and `airports` is depicted below in the image adapted and copied from [R for Data Science 2(e)](https://r4ds.hadley.nz/joins#fig-flights-relationships), [Fig 20.1](https://r4ds.hadley.nz/diagrams/relational.png).
+
+-   The primary key will be `airports$faa` .
+
+-   It corresponds to a compound secondary key, `weather$origin` and `weather$time_hour`.
+
+![The relationship between datasets: weather and airports.](docs/relational.png){width="339"}
+
 ## Question 2
 
 **`weather` only contains information for the three origin airports in NYC. If it contained weather records for all airports in the USA, what additional connection would it make to `flights`?**
 
+If `weather` contained the weather records for all airports in the USA, it would have made an additional connection to the variable `dest` in the `flights` dataset.
+
 ## Question 3
 
-**The `year`, `month`, `day`, `hour`, and `origin` variables almost form a compound key for `weather`, but there\'s one hour that has duplicate observations. Can you figure out what\'s special about that hour?**
+**The `year`, `month`, `day`, `hour`, and `origin` variables almost form a compound key for `weather`, but there's one hour that has duplicate observations. Can you figure out what's special about that hour?**
+
+As we can see in the @tbl-q3-ex2 , on November 3, 2013 at 1 am, we have a duplicate weather record. This means that the combination of `year`, `month`, `day`, `hour`, and `origin` variables does not form a compound key for `weather` , since some observations are not unique.
+
+This happens because the daylight savings time clock changed on November 3, 2013 in New York City as follows: --
+
+-   Start of DST in 2013: Sunday, March 10, 2013 -- 1 hour forward - 1 hour is skipped.
+
+-   End of DST in 2013: Sunday, November 3, 2013 -- 1 hour backward at 1 am.
+
+```{r}
+#| label: tbl-q3-ex2
+#| tbl-cap: "Day and hour that has two weather reports"
+
+weather |>
+  group_by(year, month, day, hour, origin) |>
+  count() |>
+  filter(n > 1) |>
+  ungroup() |>
+  gt() |>
+  gt_theme_538()
+```
 
 ## Question 4
 
 **We know that some days of the year are special and fewer people than usual fly on them (e.g., Christmas eve and Christmas day). How might you represent that data as a data frame? What would be the primary key? How would it connect to the existing data frames?**
 
+We can create a data frame or a tibble, as shown in the code below, named `holidays` to represent holidays and the pre-holiday days.
+
+The primary key would be a compound key of `year` , `month` and `day`. It would connect to the existing data frames using a secondary compound key of of `year` , `month` and `day`.
+
+*\[Note: to make things easier, without using a compound key, I have used the `make_date()` function to create a single key `flight_date()` \]*
+
+```{r}
+#| code-fold: true
+
+
+# Create a tibble for the major holidays in the USA in 2013
+holidays <- tibble(
+  year = 2013,
+  month = c(1, 2, 5, 7, 9, 10, 11, 12),
+  day = c(1, 14, 27, 4, 2, 31, 28, 25),
+  holiday_name = c(
+    "New Year's Day",
+    "Valentine's Day",
+    "Memorial Day",
+    "Independence Day",
+    "Labor Day",
+    "Halloween",
+    "Thanksgiving",
+    "Christmas Day"
+  ),
+  holiday_type = "Holiday"
+)
+
+# Computing the pre-holiday date and adding it to holidays
+holidays <- bind_rows(
+  # Exisitng tibble of holidays
+  holidays,
+  # A new tibble of holiday eves
+  holidays |>
+  mutate(
+    day = day-1,
+    holiday_name = str_c(holiday_name, " Eve"),
+    holiday_type = "Pre-Holiday"
+  ) |>
+  slice(2:8)
+) |>
+  mutate(flight_date = make_date(year, month, day))
+
+# Display
+holidays |> 
+  gt() |> 
+  # cols_label_with(fn = ~ make_clean_names(., case = "title")) |>
+  gt_theme_nytimes()
+```
+
+Now, we can use this new tibble, join it with our existing data sets and try to figure out whether there is any difference in number of flights on holidays, and pre-holidays, vs. the rest of the days. The results are in @fig-q4-ex2-a .
+
+```{r}
+#| code-fold: true
+#| label: fig-q4-ex2-a
+#| fig-cap: "Average number of flights on holidays vs pre-holidays vs rest of the days"
+
+# A tibble on the number of flights each day, along with whether each day 
+# is holiday or not; and if yes, which holiday
+nos_flights <- flights |>
+  mutate(flight_date = make_date(year, month, day)) |>
+  left_join(holidays) |>
+  group_by(flight_date, holiday_type, holiday_name) |>
+  count()
+
+nos_flights |>
+  group_by(holiday_type) |>
+  summarize(avg_flights = mean(n)) |>
+  mutate(holiday_type = if_else(is.na(holiday_type),
+                                "Other Days",
+                                holiday_type)) |>
+  ggplot(aes(x = avg_flights,
+             y = reorder(holiday_type, avg_flights))) +
+  geom_bar(stat = "identity", fill = "grey") +
+  theme_minimal() +
+  theme(panel.grid = element_blank()) +
+  labs(y = NULL, x = "Average Number of flights (per day)",
+       title = "Holidays / pre-holiday have lower number of flights, on average") +
+  theme(plot.title.position = "plot")
+```
+
+The number of flights on various holidays and pre-holiday days is shown in @fig-q4-ex2-b .
+
+```{r}
+#| label: fig-q4-ex2-b
+#| fig-cap: "Average number of flights on some important days vs others"
+#| code-fold: true
+nos_flights |>
+  group_by(holiday_name) |>
+  summarize(avg_flights = mean(n)) |>
+  mutate(holiday_name = if_else(is.na(holiday_name),
+                                "Other Days",
+                                holiday_name)) |>
+  mutate(col_var = holiday_name == "Other Days") |>
+  ggplot(aes(x = avg_flights,
+             y = reorder(holiday_name, avg_flights),
+             fill = col_var,
+             label = round(avg_flights, 0))) +
+  geom_bar(stat = "identity") +
+  geom_text(nudge_x = 20, size = 3) +
+  theme_minimal() +
+  theme(panel.grid = element_blank(),
+        plot.title.position = "plot",
+        legend.position = "none") +
+  labs(y = NULL, x = "Number of flights (per day)") +
+  scale_fill_brewer(palette = "Paired") +
+  coord_cartesian(xlim = c(500, 1050))
+```
+
 ## Question 5
 
 **Draw a diagram illustrating the connections between the `Batting`, `People`, and `Salaries` data frames in the Lahman package. Draw another diagram that shows the relationship between `People`, `Managers`, `AwardsManagers`. How would you characterize the relationship between the `Batting`, `Pitching`, and `Fielding` data frames?**
+
+The data-frames are shown below, alongwith the check that `playerID` is a key: --
+
+In `Batting` , the variables `playerID` , `yearID` and `stint` form a compound key.
+
+```{r}
+library(Lahman)
+Batting |> as_tibble() |>
+  group_by(playerID, yearID, stint) |>
+  count() |>
+  filter(n > 1)
+head(Batting) |> tibble() |> 
+  gt() |> gt_theme_538() |>
+   tab_style(
+    style = list(cell_fill(color = "yellow"),
+                 cell_text(weight = "bold")),
+    locations = cells_body(columns = c(playerID, yearID, stint))
+  ) |>
+  tab_header(title = md("**`Batting`**"))
+```
+
+In `People`, the variable `playerID` is unique for each observation, and hence a primary key.
+
+```{r}
+People |> 
+  as_tibble() |>
+  group_by(playerID) |>
+  count() |>
+  filter(n > 1)
+
+head(People) |> tibble() |> 
+  gt() |> gt_theme_538() |>
+   tab_style(
+    style = list(cell_fill(color = "yellow"),
+                 cell_text(weight = "bold")),
+    locations = cells_body(columns = c(playerID))
+  ) |>
+  tab_header(title = md("**`People`**"))
+
+```
+
+In `Salaries` the variables `playerID` , `yearID` and `stint` form a compound key.
+
+```{r}
+Salaries |> 
+  as_tibble() |>
+  group_by(playerID, yearID, teamID) |>
+  count() |>
+  filter(n > 1)
+
+head(Salaries) |> tibble() |> 
+  gt() |> gt_theme_538() |>
+   tab_style(
+    style = list(cell_fill(color = "yellow"),
+                 cell_text(weight = "bold")),
+    locations = cells_body(columns = c(playerID, yearID, teamID))
+  )|>
+  tab_header(title = md("**`Salaries`**"))
+```
+
+The diagram illustrating the connections is shown below: --
+
+![](docs/relation-q5-ex2-a.png){width="492"}
+
+Now, we show another diagram that shows the relationship between `People`, `Managers`, `AwardsManagers`.
+
+For `Managers`, the key is a compound key of `playerID`, `yearID` and `inseason`
+
+```{r}
+head(Managers)
+Managers |>
+  as_tibble() |>
+  group_by(playerID, yearID, inseason) |>
+  count() |>
+  filter(n > 1)
+
+head(Managers) |> as_tibble() |>
+  gt() |> 
+  gt_theme_538() |>
+  tab_style(
+    style = list(cell_fill(color = "yellow"),
+                 cell_text(weight = "bold")),
+    locations = cells_body(columns = c(playerID, yearID, inseason))
+  ) |>
+  tab_header(title = md("**`Managers`**"))
+```
+
+For `AwardsManagers` , the primary key is a compound key of `playerID` , `awardID` and `yearID` .
+
+```{r}
+head(AwardsManagers)
+
+AwardsManagers |>
+  as_tibble() |>
+  group_by(playerID, awardID, yearID) |>
+  count() |>
+  filter(n > 1)
+
+head(AwardsManagers) |> as_tibble() |>
+  gt() |> 
+  gt_theme_538() |>
+  tab_style(
+    style = list(cell_fill(color = "yellow"),
+                 cell_text(weight = "bold")),
+    locations = cells_body(columns = c(playerID, yearID, awardID))
+  ) |>
+  tab_header(title = md("**`AwardsManagers`**"))
+```
+
+Hence, the relationship between `People`, `Managers`, `AwardsManagers` is as follows: --
+
+![](docs/relation-q5-ex2-b.png){width="506"}
+
+Now, let's try to characterize the relationship between `Batting` , `Pitching` and `Fielding`.
+
+```{r}
+Pitching |> as_tibble() |>
+  group_by(playerID, yearID, stint) |>
+  count() |>
+  filter(n > 1)
+
+head(Pitching) |> as_tibble() |>
+  gt() |> 
+  gt_theme_538() |>
+  tab_style(
+    style = list(cell_fill(color = "yellow"),
+                 cell_text(weight = "bold")),
+    locations = cells_body(columns = c(playerID, yearID, stint))
+  ) |>
+  tab_header(title = md("**`Pitching`**"))
+```
+
+In the `Fielding` dataset, the primary key is a compound key comprised of `playerID` , `yearID` , `stint` and `POS`.
+
+```{r}
+Fielding |> as_tibble() |>
+  group_by(playerID, yearID, stint, POS) |>
+  count() |>
+  filter(n > 1)
+
+head(Fielding) |> as_tibble() |>
+  gt() |> 
+  gt_theme_538() |>
+  tab_style(
+    style = list(cell_fill(color = "yellow"),
+                 cell_text(weight = "bold")),
+    locations = cells_body(columns = c(playerID, yearID, stint, POS))
+  ) |>
+  tab_header(title = md("**`Fielding`**"))
+```
+
+Thus, the relationship between the `Batting`, `Pitching`, and `Fielding` data frames is as follows: --
+
+![](docs/relation-q5-ex2-c.png){width="491"}
 
 # **20.3.4 Exercises**
 
@@ -50,27 +356,252 @@ bibliography: references.bib
 
 **Find the 48 hours (over the course of the whole year) that have the worst delays. Cross-reference it with the `weather` data. Can you see any patterns?**
 
+First, we find out the 48 hours (over the course of the whole year) that have the worst delays. As we can see in @fig-q1-ex3-dist , these are quite similar across the 3 origin airports, for which we have the weather data.
+
+```{r}
+#| code-fold: true
+#| label: fig-q1-ex3-dist
+#| fig-cap: "Distribution of the 48 worst delay hours over the course of the year in three airports of New York City"
+# Create a dataframe of 48 hours with highestaverage delays 
+# (for each of the 3 origin airports)
+delayhours = flights |>
+  group_by(origin, time_hour) |>
+  summarize(avg_delay = mean(dep_delay, na.rm = TRUE)) |>
+  arrange(desc(avg_delay), .by_group = TRUE) |>
+  slice_head(n = 48) |>
+  arrange(time_hour)
+
+delayhours |>
+  ggplot(aes(y = time_hour, x = avg_delay)) +
+  geom_point(size = 2, alpha = 0.5) +
+  facet_wrap(~origin, dir = "h") +
+  theme_minimal() +
+  labs(x = "Average delay during the hour (in mins.)", y = NULL,
+       title = "The worst 48 hours for departure delays are similar across 3 airports")
+```
+
+The @fig-q1-ex3-multi depicts that across the three airports, the 48 hours with worst delays consistently have much higher rainfall *(precipitation in inches)* and poorer visibility *(lower visibility in miles and higher dew-point in degrees F).*
+
+```{r}
+#| code-fold: true
+#| label: fig-q1-ex3-multi
+#| fig-cap: "Comparison of weather patterns for hours with worst delays vs the rest"
+#| fig-width: 10
+
+var_labels = c("Temperature (F)", "Dewpoint (F)", 
+               "Relative Humidity %", "Precipitation (inches)", 
+               "Visibility (miles)")
+names(var_labels) = c("temp", "dewp", "humid", "precip", "visib")
+
+g1 = weather |>
+  filter(origin == "EWR") |>
+  left_join(delayhours) |>
+  mutate(
+    del_hrs = if_else(is.na(avg_delay),
+                      "Other hours",
+                      "Hours with max delays"),
+    precip = precip * 25.4
+  ) |>
+  pivot_longer(
+    cols = c(temp, dewp, humid, precip, visib),
+    names_to = "variable",
+    values_to = "values"
+  ) |>
+  group_by(origin, del_hrs, variable) |>
+  summarise(means = mean(values, na.rm = TRUE)) |>
+  ggplot(aes(x = del_hrs, y = means, fill = del_hrs)) +
+  geom_bar(stat = "identity") +
+  facet_wrap( ~ variable, scales = "free", ncol = 5,
+              labeller = labeller(variable = var_labels)) +
+  scale_fill_brewer(palette = "Dark2") + 
+  theme_minimal() +
+  theme(panel.grid.major.x = element_blank(),
+        axis.title = element_blank(),
+        axis.text.x = element_blank(),
+        legend.position = "bottom") +
+  labs(subtitle = "Weather Patterns for Newark Airport (EWR)",
+       fill = "")
+  
+g2 = weather |>
+  filter(origin == "JFK") |>
+  left_join(delayhours) |>
+  mutate(
+    del_hrs = if_else(is.na(avg_delay),
+                      "Other hours",
+                      "Hours with max delays"),
+    precip = precip * 25.4
+  ) |>
+  pivot_longer(
+    cols = c(temp, dewp, humid, precip, visib),
+    names_to = "variable",
+    values_to = "values"
+  ) |>
+  group_by(origin, del_hrs, variable) |>
+  summarise(means = mean(values, na.rm = TRUE)) |>
+  ggplot(aes(x = del_hrs, y = means, fill = del_hrs)) +
+  geom_bar(stat = "identity") +
+  facet_wrap( ~ variable, scales = "free", ncol = 5,
+              labeller = labeller(variable = var_labels)) +
+  scale_fill_brewer(palette = "Dark2") + 
+  theme_minimal() +
+  theme(panel.grid.major.x = element_blank(),
+        axis.title = element_blank(),
+        axis.text.x = element_blank(),
+        legend.position = "bottom")  +
+  labs(subtitle = "Weather Patterns for John F Kennedy Airport (JFK)",
+       fill = "")
+
+g3 = weather |>
+  filter(origin == "LGA") |>
+  left_join(delayhours) |>
+  mutate(
+    del_hrs = if_else(is.na(avg_delay),
+                      "Other hours",
+                      "Hours with max delays"),
+    precip = precip * 25.4
+  ) |>
+  pivot_longer(
+    cols = c(temp, dewp, humid, precip, visib),
+    names_to = "variable",
+    values_to = "values"
+  ) |>
+  group_by(origin, del_hrs, variable) |>
+  summarise(means = mean(values, na.rm = TRUE)) |>
+  ggplot(aes(x = del_hrs, y = means, fill = del_hrs)) +
+  geom_bar(stat = "identity") +
+  facet_wrap( ~ variable, scales = "free", ncol = 5,
+              labeller = labeller(variable = var_labels)) +
+  scale_fill_brewer(palette = "Dark2") + 
+  theme_minimal() +
+  theme(panel.grid.major.x = element_blank(),
+        axis.title = element_blank(),
+        axis.text.x = element_blank(),
+        legend.position = "bottom")  +
+  labs(subtitle = "Weather Patterns for La Guardia Airport (LGA)",
+       fill = "") 
+
+library(patchwork)
+
+g1 / g2 / g3 + plot_layout(guides = "collect") & theme(legend.position = "bottom")
+```
+
 ## Question 2
 
-**Imagine you\'ve found the top 10 most popular destinations using this code:**
+**Imagine you've found the top 10 most popular destinations using this code:**
 
 ```         
-top_dest <- flights2 |>   count(dest, sort = TRUE) |>   head(10)
+top_dest <- flights2 |>   
+  count(dest, sort = TRUE) |>   
+  head(10)
 ```
 
 **How can you find all flights to those destinations?**
+
+We can first create a vector of the names of the top 10 destinations, using `select(dest)` and `as_vector()` . Thereafter, we can `filter(dest %in% top_dest_vec)` as shown below: --
+
+```{r}
+flights2 <- flights |> 
+  mutate(id = row_number(), .before = 1)
+top_dest <- flights2 |>   
+  count(dest, sort = TRUE) |>   
+  head(10)
+top_dest_vec <- top_dest |> select(dest) |> as_vector()
+flights |>
+  filter(dest %in% top_dest_vec) 
+```
 
 ## Question 3
 
 **Does every departing flight have corresponding weather data for that hour?**
 
+No, as we can see from the code below, every departing flight DOES NOT have corresponding weather data for that hour. 1556 flights do not have associated weather data; and these correspond to 38 different hours during the year.
+
+```{r}
+# Number of flights that do not have associated weather data
+flights |>
+  anti_join(weather) |>
+  nrow()
+
+# Number of distinct time_hours that do not have such data
+flights |>
+  anti_join(weather) |>
+  distinct(time_hour)
+
+# A check to confirm our results
+flights |>
+  select(year, month, day, origin, dest, time_hour) |>
+  left_join(weather) |>
+  summarise(
+    missing_temp_or_windspeed = mean(is.na(temp) & is.na(wind_speed)),
+    missing_dewp = mean(is.na(dewp))
+  )
+(as.numeric(flights |> anti_join(weather) |> nrow())) / nrow(flights)
+```
+
 ## Question 4
 
-**What do the tail numbers that don\'t have a matching record in `planes` have in common? (Hint: one variable explains \~90% of the problems.)**
+**What do the tail numbers that don't have a matching record in `planes` have in common? (Hint: one variable explains \~90% of the problems.)**
+
+The tail numbers that don't have a matching record in `planes` mostly belong the a select few airline carriers, i.e., `AA` and `MQ` . The variable `carrier` explains most of the problems in missing data, as shown in @fig-q4-ex3.
+
+```{r}
+#| label: fig-q4-ex3
+#| fig-cap: "Bar Chart of number of flights per carrier"
+#| code-fold: true
+
+# Create a unique flight ID for each flight
+flights2 <- flights |>
+  mutate(id = row_number(), .before = 1)
+  
+ids_no_record = flights2 |>
+  anti_join(planes, by = join_by(tailnum)) |>
+  select(id) |>
+  as_vector() |> unname()
+
+flights2 = flights2 |>
+  mutate(
+    missing_record = id %in% ids_no_record
+  )
+
+label_vec = c("Flights with missing tailnum in planes", "Other flights")
+names(label_vec) = c(FALSE, TRUE)
+
+flights2 |>
+  group_by(missing_record) |>
+  count(carrier) |>
+  mutate(col_var = carrier %in% c("MQ", "AA")) |>
+  ggplot(aes(x = n, y = carrier, fill = col_var)) +
+  geom_bar(stat = "identity") +
+  facet_wrap(~ missing_record, 
+             scales = "free_x", 
+             labeller = labeller(missing_record = label_vec)) +
+  theme_bw() +
+  theme(legend.position = "none") +
+  labs(x = "Number of flights",  y = "Carrier",
+       title = "Flights with missing tailnum in planes belong to a select few carriers") + 
+  scale_fill_brewer(palette = "Set2")
+```
 
 ## Question 5
 
-**Add a column to `planes` that lists every `carrier` that has flown that plane. You might expect that there\'s an implicit relationship between plane and airline, because each plane is flown by a single airline. Confirm or reject this hypothesis using the tools you\'ve learned in previous chapters.**
+**Add a column to `planes` that lists every `carrier` that has flown that plane. You might expect that there's an implicit relationship between plane and airline, because each plane is flown by a single airline. Confirm or reject this hypothesis using the tools you've learned in previous chapters.**
+
+Using the code below, we confirm that there are 17 such different airplanes (identified by `tailnum`) that have been flown by two carriers.
+
+```{r}
+#| eval: false
+#| output: false
+
+# Checking the number of distinct carriers for each tailnum (i.e. each airplane)
+flights |>
+  group_by(tailnum) |>
+  summarise(
+    carrier_num = n_distinct(carrier),
+    carrier_name = str_flatten(distinct(carrier), collapse = " ")
+    ) |>
+  drop_na() |>
+  filter(carrier_num > 1)
+```
 
 ## Question 6
 
@@ -78,7 +609,7 @@ top_dest <- flights2 |>   count(dest, sort = TRUE) |>   head(10)
 
 ## Question 7
 
-**Compute the average delay by destination, then join on the `airports` data frame so you can show the spatial distribution of delays. Here\'s an easy way to draw a map of the United States:**
+**Compute the average delay by destination, then join on the `airports` data frame so you can show the spatial distribution of delays. Here's an easy way to draw a map of the United States:**
 
 ```         
 airports |>   semi_join(flights, join_by(faa == dest)) |>   ggplot(aes(x = lon, y = lat)) +     borders("state") +     geom_point() +     coord_quickmap()
@@ -94,7 +625,7 @@ airports |>   semi_join(flights, join_by(faa == dest)) |>   ggplot(aes(x = lon, 
 
 ## Question 1
 
-**Can you explain what\'s happening with the keys in this equi join? Why are they different?**
+**Can you explain what's happening with the keys in this equi join? Why are they different?**
 
 ```         
 x |> full_join(y, by = "key")
