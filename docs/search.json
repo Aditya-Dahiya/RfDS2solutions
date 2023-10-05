@@ -46,7 +46,7 @@
     "href": "solutions.html",
     "title": "Solutions",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\nTitle\n\n\nSubtitle\n\n\nDate\n\n\n\n\n\n\nChapter 10\n\n\nLayers\n\n\nAug 22, 2023\n\n\n\n\nChapter 11\n\n\nExploratory data analysis\n\n\nAug 28, 2023\n\n\n\n\nChapter 12\n\n\nCommunication\n\n\nAug 28, 2023\n\n\n\n\nChapter 13\n\n\nLogical Vectors\n\n\nSep 3, 2023\n\n\n\n\nChapter 14\n\n\nNumbers\n\n\nSep 8, 2023\n\n\n\n\nChapter 15\n\n\nStrings\n\n\nSep 10, 2023\n\n\n\n\nChapter 16\n\n\nRegular Expressions\n\n\nSep 12, 2023\n\n\n\n\nChapter 17\n\n\nFactors\n\n\nSep 14, 2023\n\n\n\n\nChapter 18\n\n\nDates and times\n\n\nSep 15, 2023\n\n\n\n\nChapter 19\n\n\nMissing Values\n\n\nOct 2, 2023\n\n\n\n\nChapter 2\n\n\nData Visualization\n\n\nJul 29, 2023\n\n\n\n\nChapter 20\n\n\nJoins\n\n\nOct 2, 2023\n\n\n\n\nChapter 21\n\n\nSpreadsheets\n\n\nAug 15, 2023\n\n\n\n\nChapter 22\n\n\nDatabases\n\n\nOct 5, 2023\n\n\n\n\nChapter 29\n\n\nQuarto\n\n\nJul 25, 2023\n\n\n\n\nChapter 3\n\n\nWorkflow: Basics\n\n\nJul 29, 2023\n\n\n\n\nChapter 30\n\n\nQuarto Formats\n\n\nJul 25, 2023\n\n\n\n\nChapter 4\n\n\nData Transformation\n\n\nJul 29, 2023\n\n\n\n\nChapter 5\n\n\nWorkflow: code style\n\n\nAug 2, 2023\n\n\n\n\nChapter 6\n\n\nData tidying\n\n\nAug 5, 2023\n\n\n\n\nChapter 7\n\n\nWorkflow: scripts and projects\n\n\nAug 8, 2023\n\n\n\n\nChapter 8\n\n\nData Import\n\n\nAug 10, 2023\n\n\n\n\nChapter 9\n\n\nWorkflow: getting help\n\n\nAug 13, 2023\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\nTitle\n\n\nSubtitle\n\n\nDate\n\n\n\n\n\n\nChapter 10\n\n\nLayers\n\n\nAug 22, 2023\n\n\n\n\nChapter 11\n\n\nExploratory data analysis\n\n\nAug 28, 2023\n\n\n\n\nChapter 12\n\n\nCommunication\n\n\nAug 28, 2023\n\n\n\n\nChapter 13\n\n\nLogical Vectors\n\n\nSep 3, 2023\n\n\n\n\nChapter 14\n\n\nNumbers\n\n\nSep 8, 2023\n\n\n\n\nChapter 15\n\n\nStrings\n\n\nSep 10, 2023\n\n\n\n\nChapter 16\n\n\nRegular Expressions\n\n\nSep 12, 2023\n\n\n\n\nChapter 17\n\n\nFactors\n\n\nSep 14, 2023\n\n\n\n\nChapter 18\n\n\nDates and times\n\n\nSep 15, 2023\n\n\n\n\nChapter 19\n\n\nMissing Values\n\n\nOct 2, 2023\n\n\n\n\nChapter 2\n\n\nData Visualization\n\n\nJul 29, 2023\n\n\n\n\nChapter 20\n\n\nJoins\n\n\nOct 2, 2023\n\n\n\n\nChapter 21\n\n\nSpreadsheets\n\n\nAug 15, 2023\n\n\n\n\nChapter 22\n\n\nDatabases\n\n\nOct 5, 2023\n\n\n\n\nChapter 23\n\n\nArrow\n\n\nOct 5, 2023\n\n\n\n\nChapter 24\n\n\nHierarchical data\n\n\nOct 5, 2023\n\n\n\n\nChapter 29\n\n\nQuarto\n\n\nJul 25, 2023\n\n\n\n\nChapter 3\n\n\nWorkflow: Basics\n\n\nJul 29, 2023\n\n\n\n\nChapter 30\n\n\nQuarto Formats\n\n\nJul 25, 2023\n\n\n\n\nChapter 4\n\n\nData Transformation\n\n\nJul 29, 2023\n\n\n\n\nChapter 5\n\n\nWorkflow: code style\n\n\nAug 2, 2023\n\n\n\n\nChapter 6\n\n\nData tidying\n\n\nAug 5, 2023\n\n\n\n\nChapter 7\n\n\nWorkflow: scripts and projects\n\n\nAug 8, 2023\n\n\n\n\nChapter 8\n\n\nData Import\n\n\nAug 10, 2023\n\n\n\n\nChapter 9\n\n\nWorkflow: getting help\n\n\nAug 13, 2023\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -943,5 +943,40 @@
     "title": "Chapter 22",
     "section": "Question 2",
     "text": "Question 2\nExplain what each of the following SQL queries do and try recreate them using dbplyr.\nSELECT *  \nFROM flights \nWHERE dep_delay &lt; arr_delay  \nThe code above is equivalent to dplyr’s flights |&gt; filter(dep_delay &lt; arr_delay) .\nSELECT *, distance / (airtime / 60) AS speed \nFROM flights\nThe code above is equivalent to dplyr’s flights |&gt; mutate(speed = distance / (airtime / 60)) ."
+  },
+  {
+    "objectID": "Chapter23.html",
+    "href": "Chapter23.html",
+    "title": "Chapter 23",
+    "section": "",
+    "text": "# Loading Required Packages\nlibrary(tidyverse)\nlibrary(arrow)\nlibrary(dbplyr, warn.conflicts = FALSE)\nlibrary(duckdb)"
+  },
+  {
+    "objectID": "Chapter23.html#section-23.3",
+    "href": "Chapter23.html#section-23.3",
+    "title": "Chapter 23",
+    "section": "Section 23.3",
+    "text": "Section 23.3\n\nWorkign with the Seattle library 9 GB data!\n\ndir.create(\"data\", showWarnings = FALSE)\n\ncurl::multi_download(\n  url = \"https://r4ds.s3.us-west-2.amazonaws.com/seattle-library-checkouts.csv\",\n  destfiles = \"data/seattle-library-checkouts.csv\",\n  resume = TRUE\n)\n\n# Opening the dataset file\n\nseattle_csv &lt;- open_dataset(\n  sources = \"data/seattle-library-checkouts.csv\", \n  format = \"csv\"\n)\n# Viewing a portion of the data-set file\nseattle_csv |&gt;\n  glimpse()"
+  },
+  {
+    "objectID": "Chapter23.html#the-parquet-format",
+    "href": "Chapter23.html#the-parquet-format",
+    "title": "Chapter 23",
+    "section": "23.4 The Parquet Format",
+    "text": "23.4 The Parquet Format\n\n# Convert the 9GB csv file into smaller parquet files, \n# each for 1 checkout year.\n\npq_path &lt;- \"data/seattle-library-checkouts\"\n\nseattle_csv |&gt;\n  group_by(CheckoutYear) |&gt;\n  write_dataset(path = pq_path, format = \"parquet\")\n\n# Viweing the results\ntibble(\n  files = list.files(pq_path, recursive = TRUE),\n  size_MB = file.size(file.path(pq_path, files)) / 1024^2\n)"
+  },
+  {
+    "objectID": "Chapter23.html#using-dplyr-with-arrow",
+    "href": "Chapter23.html#using-dplyr-with-arrow",
+    "title": "Chapter 23",
+    "section": "23.5 Using dplyr with arrow",
+    "text": "23.5 Using dplyr with arrow\n\n# Read in the parquet files\nseattle_pq &lt;- open_dataset(pq_path)\n\n# Count the total number of books checked out in \n# each month for the last five years\nquery &lt;- seattle_pq |&gt; \n  filter(CheckoutYear &gt;= 2018, MaterialType == \"BOOK\") |&gt;\n  group_by(CheckoutYear, CheckoutMonth) |&gt;\n  summarize(TotalCheckouts = sum(Checkouts)) |&gt;\n  arrange(CheckoutYear, CheckoutMonth)\n\nquery\n\n# Get the results by calling collect()\nquery |&gt; collect()\n\n# Comparing performance\nseattle_csv |&gt; \n  filter(CheckoutYear == 2021, MaterialType == \"BOOK\") |&gt;\n  group_by(CheckoutMonth) |&gt;\n  summarize(TotalCheckouts = sum(Checkouts)) |&gt;\n  arrange(desc(CheckoutMonth)) |&gt;\n  collect() |&gt; \n  system.time()\n\nseattle_pq |&gt; \n  filter(CheckoutYear == 2021, MaterialType == \"BOOK\") |&gt;\n  group_by(CheckoutMonth) |&gt;\n  summarize(TotalCheckouts = sum(Checkouts)) |&gt;\n  arrange(desc(CheckoutMonth)) |&gt;\n  collect() |&gt; \n  system.time()\n\nImportant: Whenever we want to output the results of our dplyr code, we will use collect() ."
+  },
+  {
+    "objectID": "Chapter23.html#opening-a-dataset",
+    "href": "Chapter23.html#opening-a-dataset",
+    "title": "Chapter 23",
+    "section": "23.3 Opening a dataset",
+    "text": "23.3 Opening a dataset\n\nWorkign with the Seattle library 9 GB data!\n\ndir.create(\"data\", showWarnings = FALSE)\n\ncurl::multi_download(\n  url = \"https://r4ds.s3.us-west-2.amazonaws.com/seattle-library-checkouts.csv\",\n  destfiles = \"data/seattle-library-checkouts.csv\",\n  resume = TRUE\n)\n\n# Opening the dataset file\n\nseattle_csv &lt;- open_dataset(\n  sources = \"data/seattle-library-checkouts.csv\", \n  format = \"csv\"\n)\n# Viewing a portion of the data-set file\nseattle_csv |&gt;\n  glimpse()"
   }
 ]

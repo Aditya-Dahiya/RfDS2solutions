@@ -23,7 +23,9 @@
       "Chapter18.qmd",
       "Chapter19.qmd",
       "Chapter20.qmd",
-      "Chapter22.qmd"
+      "Chapter22.qmd",
+      "Chapter23.qmd",
+      "Chapter24.qmd"
     ],
     "talks.qmd": [
       "manual_office_procedure_22_sep_23.qmd"

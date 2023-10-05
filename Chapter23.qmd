@@ -1,0 +1,117 @@
+---
+title: "Chapter 23"
+author: "Aditya Dahiya"
+subtitle: "Arrow"
+date: 2023-10-05
+execute: 
+  echo: true
+  warning: false
+  error: false
+  cache: true
+  eval: false
+filters:
+  - social-share
+share:
+  permalink: "https://aditya-dahiya.github.io/RfDS2solutions/Chapter23.html"
+  description: "Solutions: R for Data Science (2e)"
+  twitter: true
+  facebook: true
+  linkedin: true
+  email: true
+editor_options: 
+  chunk_output_type: console
+bibliography: references.bib
+---
+
+```{r}
+#| label: setup
+
+# Loading Required Packages
+library(tidyverse)
+library(arrow)
+library(dbplyr, warn.conflicts = FALSE)
+library(duckdb)
+```
+
+## **23.3 Opening a dataset**
+
+#### Workign with the Seattle library 9 GB data!
+
+```{r}
+dir.create("data", showWarnings = FALSE)
+
+curl::multi_download(
+  url = "https://r4ds.s3.us-west-2.amazonaws.com/seattle-library-checkouts.csv",
+  destfiles = "data/seattle-library-checkouts.csv",
+  resume = TRUE
+)
+
+# Opening the dataset file
+
+seattle_csv <- open_dataset(
+  sources = "data/seattle-library-checkouts.csv", 
+  format = "csv"
+)
+# Viewing a portion of the data-set file
+seattle_csv |>
+  glimpse()
+```
+
+## 23.4 The Parquet Format
+
+```{r}
+# Convert the 9GB csv file into smaller parquet files, 
+# each for 1 checkout year.
+
+pq_path <- "data/seattle-library-checkouts"
+
+seattle_csv |>
+  group_by(CheckoutYear) |>
+  write_dataset(path = pq_path, format = "parquet")
+
+# Viweing the results
+tibble(
+  files = list.files(pq_path, recursive = TRUE),
+  size_MB = file.size(file.path(pq_path, files)) / 1024^2
+)
+```
+
+## **23.5 Using dplyr with arrow**
+
+```{r}
+# Read in the parquet files
+seattle_pq <- open_dataset(pq_path)
+
+# Count the total number of books checked out in 
+# each month for the last five years
+query <- seattle_pq |> 
+  filter(CheckoutYear >= 2018, MaterialType == "BOOK") |>
+  group_by(CheckoutYear, CheckoutMonth) |>
+  summarize(TotalCheckouts = sum(Checkouts)) |>
+  arrange(CheckoutYear, CheckoutMonth)
+
+query
+
+# Get the results by calling collect()
+query |> collect()
+
+# Comparing performance
+seattle_csv |> 
+  filter(CheckoutYear == 2021, MaterialType == "BOOK") |>
+  group_by(CheckoutMonth) |>
+  summarize(TotalCheckouts = sum(Checkouts)) |>
+  arrange(desc(CheckoutMonth)) |>
+  collect() |> 
+  system.time()
+
+seattle_pq |> 
+  filter(CheckoutYear == 2021, MaterialType == "BOOK") |>
+  group_by(CheckoutMonth) |>
+  summarize(TotalCheckouts = sum(Checkouts)) |>
+  arrange(desc(CheckoutMonth)) |>
+  collect() |> 
+  system.time()
+
+```
+
+**Important:** Whenever we want to output the results of our `dplyr` code, we will use `collect()` .
