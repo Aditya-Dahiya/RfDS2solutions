@@ -56,6 +56,7 @@ website:
       - section: "Import"
         contents:
           - Chapter21.qmd
+          - Chapter22.qmd
       - section: "Program"
         contents:
       - section: "Communicate"

@@ -1,0 +1,79 @@
+---
+title: "Chapter 22"
+author: "Aditya Dahiya"
+subtitle: "Databases"
+date: 2023-10-05
+execute: 
+  echo: true
+  warning: false
+  error: false
+  cache: true
+filters:
+  - social-share
+share:
+  permalink: "https://aditya-dahiya.github.io/RfDS2solutions/Chapter22.html"
+  description: "Solutions: R for Data Science (2e)"
+  twitter: true
+  facebook: true
+  linkedin: true
+  email: true
+editor_options: 
+  chunk_output_type: console
+bibliography: references.bib
+---
+
+```{r}
+#| label: setup
+
+library(DBI)
+library(dbplyr)
+library(tidyverse)
+```
+
+```{r}
+# Reading in the data as a database
+
+connection <- DBI::dbConnect(duckdb::duckdb())
+dbWriteTable(connection, name = "db_diamonds", value = ggplot2::diamonds)
+
+db_df <- tbl(connection, "db_diamonds")
+```
+
+# **22.5.10 Exercises**
+
+## Question 1
+
+**What is [`distinct()`](https://dplyr.tidyverse.org/reference/distinct.html) translated to? How about [`head()`](https://rdrr.io/r/utils/head.html)?**
+
+As we can see below, the `dplyr` function `distinct()` translates into `SELECT DISTINCT <variable name>` .
+
+Similarly, the function `head()` translates to `SELECT * FROM <table name> LIMIT 6`.
+
+```{r}
+db_df |>
+  distinct(cut) |>
+  show_query()
+
+db_df |>
+  head() |>
+  show_query()
+```
+
+## Question 2
+
+**Explain what each of the following SQL queries do and try recreate them using dbplyr.**
+
+``` SQL
+SELECT *  
+FROM flights 
+WHERE dep_delay < arr_delay  
+```
+
+The code above is equivalent to `dplyr`'s `flights |> filter(dep_delay < arr_delay)` .
+
+``` SQL
+SELECT *, distance / (airtime / 60) AS speed 
+FROM flights
+```
+
+The code above is equivalent to `dplyr`'s `flights |> mutate(speed = distance / (airtime / 60))` .

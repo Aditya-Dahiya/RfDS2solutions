@@ -15,11 +15,9 @@ website:
     type: textbox
 ---
 
-## Solutions for the book R for Data Science, 2nd edition
-
 Author: Aditya Dahiya
 
-This website displays the solutions for the exercises in the book [R for Data Science, 2nd Edition](https://r4ds.hadley.nz/ "R for Data Science (2e)").
+This website displays the solutions for the exercises in the open-source book [R for Data Science, 2nd Edition](https://r4ds.hadley.nz/ "R for Data Science (2e)").
 
 [![R for Data Science (2nd Edition)](https://r4ds.hadley.nz/cover.jpg){fig-alt="R for Data Science (2nd Edition)" fig-align="left" width="275"}](https://r4ds.hadley.nz/).
 

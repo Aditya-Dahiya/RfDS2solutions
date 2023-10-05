@@ -17,7 +17,6 @@ share:
   facebook: true
   linkedin: true
   email: true
-  whatsapp: true
 editor_options: 
   chunk_output_type: console
 bibliography: references.bib

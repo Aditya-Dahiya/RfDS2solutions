@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Solutions: R for Data Science (2e)",
     "section": "",
-    "text": "Author: Aditya Dahiya\nThis website displays the solutions for the exercises in the book R for Data Science, 2nd Edition.\n."
+    "text": "Author: Aditya Dahiya\nThis website displays the solutions for the exercises in the open-source book R for Data Science, 2nd Edition.\n."
   },
   {
     "objectID": "index.html#solutions-for-the-book-r-for-data-science-2nd-edition",
@@ -46,7 +46,7 @@
     "href": "solutions.html",
     "title": "Solutions",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\nTitle\n\n\nSubtitle\n\n\nDate\n\n\n\n\n\n\nChapter 10\n\n\nLayers\n\n\nAug 22, 2023\n\n\n\n\nChapter 11\n\n\nExploratory data analysis\n\n\nAug 28, 2023\n\n\n\n\nChapter 12\n\n\nCommunication\n\n\nAug 28, 2023\n\n\n\n\nChapter 13\n\n\nLogical Vectors\n\n\nSep 3, 2023\n\n\n\n\nChapter 14\n\n\nNumbers\n\n\nSep 8, 2023\n\n\n\n\nChapter 15\n\n\nStrings\n\n\nSep 10, 2023\n\n\n\n\nChapter 16\n\n\nRegular Expressions\n\n\nSep 12, 2023\n\n\n\n\nChapter 17\n\n\nFactors\n\n\nSep 14, 2023\n\n\n\n\nChapter 18\n\n\nDates and times\n\n\nSep 15, 2023\n\n\n\n\nChapter 19\n\n\nMissing Values\n\n\nOct 2, 2023\n\n\n\n\nChapter 2\n\n\nData Visualization\n\n\nJul 29, 2023\n\n\n\n\nChapter 20\n\n\nJoins\n\n\nOct 2, 2023\n\n\n\n\nChapter 21\n\n\nSpreadsheets\n\n\nAug 15, 2023\n\n\n\n\nChapter 29\n\n\nQuarto\n\n\nJul 25, 2023\n\n\n\n\nChapter 3\n\n\nWorkflow: Basics\n\n\nJul 29, 2023\n\n\n\n\nChapter 30\n\n\nQuarto Formats\n\n\nJul 25, 2023\n\n\n\n\nChapter 4\n\n\nData Transformation\n\n\nJul 29, 2023\n\n\n\n\nChapter 5\n\n\nWorkflow: code style\n\n\nAug 2, 2023\n\n\n\n\nChapter 6\n\n\nData tidying\n\n\nAug 5, 2023\n\n\n\n\nChapter 7\n\n\nWorkflow: scripts and projects\n\n\nAug 8, 2023\n\n\n\n\nChapter 8\n\n\nData Import\n\n\nAug 10, 2023\n\n\n\n\nChapter 9\n\n\nWorkflow: getting help\n\n\nAug 13, 2023\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\nTitle\n\n\nSubtitle\n\n\nDate\n\n\n\n\n\n\nChapter 10\n\n\nLayers\n\n\nAug 22, 2023\n\n\n\n\nChapter 11\n\n\nExploratory data analysis\n\n\nAug 28, 2023\n\n\n\n\nChapter 12\n\n\nCommunication\n\n\nAug 28, 2023\n\n\n\n\nChapter 13\n\n\nLogical Vectors\n\n\nSep 3, 2023\n\n\n\n\nChapter 14\n\n\nNumbers\n\n\nSep 8, 2023\n\n\n\n\nChapter 15\n\n\nStrings\n\n\nSep 10, 2023\n\n\n\n\nChapter 16\n\n\nRegular Expressions\n\n\nSep 12, 2023\n\n\n\n\nChapter 17\n\n\nFactors\n\n\nSep 14, 2023\n\n\n\n\nChapter 18\n\n\nDates and times\n\n\nSep 15, 2023\n\n\n\n\nChapter 19\n\n\nMissing Values\n\n\nOct 2, 2023\n\n\n\n\nChapter 2\n\n\nData Visualization\n\n\nJul 29, 2023\n\n\n\n\nChapter 20\n\n\nJoins\n\n\nOct 2, 2023\n\n\n\n\nChapter 21\n\n\nSpreadsheets\n\n\nAug 15, 2023\n\n\n\n\nChapter 22\n\n\nDatabases\n\n\nOct 5, 2023\n\n\n\n\nChapter 29\n\n\nQuarto\n\n\nJul 25, 2023\n\n\n\n\nChapter 3\n\n\nWorkflow: Basics\n\n\nJul 29, 2023\n\n\n\n\nChapter 30\n\n\nQuarto Formats\n\n\nJul 25, 2023\n\n\n\n\nChapter 4\n\n\nData Transformation\n\n\nJul 29, 2023\n\n\n\n\nChapter 5\n\n\nWorkflow: code style\n\n\nAug 2, 2023\n\n\n\n\nChapter 6\n\n\nData tidying\n\n\nAug 5, 2023\n\n\n\n\nChapter 7\n\n\nWorkflow: scripts and projects\n\n\nAug 8, 2023\n\n\n\n\nChapter 8\n\n\nData Import\n\n\nAug 10, 2023\n\n\n\n\nChapter 9\n\n\nWorkflow: getting help\n\n\nAug 13, 2023\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -922,5 +922,26 @@
     "title": "Chapter 20",
     "section": "Question 2",
     "text": "Question 2\nWhen finding if any party period overlapped with another party period we used q &lt; q in the join_by()? Why? What happens if you remove this inequality?\nThe default syntax for function inner_join is inner_join(x, y, by = NULL, ...) . The default for by = argument is NULL, where the default *_join()⁠ will perform a natural join, using all variables in common across x and y.\nThus, when we skip q &lt; q , the inner_join finds that the variables q , start and end are common. The start and end variables are taken care of by the helper function overlaps() . But q remains. Since q is common in parties and parties all observations get matched. To prevent observations from matching on q we can keep a condition q &lt; q , and thus each observation and match is repeated only once, leading to correct results.\n\nparties &lt;- tibble(\n  q = 1:4,\n  party = ymd(c(\"2022-01-10\", \"2022-04-04\", \"2022-07-11\", \"2022-10-03\")),\n  start = ymd(c(\"2022-01-01\", \"2022-04-04\", \"2022-07-11\", \"2022-10-03\")),\n  end = ymd(c(\"2022-04-03\", \"2022-07-11\", \"2022-10-02\", \"2022-12-31\"))\n)\n\n# Using the correct code in textbook\nparties |&gt; \n  inner_join(parties, join_by(overlaps(start, end, start, end), q &lt; q)) |&gt;\n  select(start.x, end.x, start.y, end.y)\n\n# A tibble: 1 × 4\n  start.x    end.x      start.y    end.y     \n  &lt;date&gt;     &lt;date&gt;     &lt;date&gt;     &lt;date&gt;    \n1 2022-04-04 2022-07-11 2022-07-11 2022-10-02\n\n# Removing the \"q &lt; q\" in the join_by()\nparties |&gt; \n  inner_join(parties, join_by(overlaps(start, end, start, end))) |&gt;\n  select(start.x, end.x, start.y, end.y)\n\n# A tibble: 6 × 4\n  start.x    end.x      start.y    end.y     \n  &lt;date&gt;     &lt;date&gt;     &lt;date&gt;     &lt;date&gt;    \n1 2022-01-01 2022-04-03 2022-01-01 2022-04-03\n2 2022-04-04 2022-07-11 2022-04-04 2022-07-11\n3 2022-04-04 2022-07-11 2022-07-11 2022-10-02\n4 2022-07-11 2022-10-02 2022-04-04 2022-07-11\n5 2022-07-11 2022-10-02 2022-07-11 2022-10-02\n6 2022-10-03 2022-12-31 2022-10-03 2022-12-31"
+  },
+  {
+    "objectID": "Chapter22.html",
+    "href": "Chapter22.html",
+    "title": "Chapter 22",
+    "section": "",
+    "text": "library(DBI)\nlibrary(dbplyr)\nlibrary(tidyverse)\n# Reading in the data as a database\n\nconnection &lt;- DBI::dbConnect(duckdb::duckdb())\ndbWriteTable(connection, name = \"db_diamonds\", value = ggplot2::diamonds)\n\ndb_df &lt;- tbl(connection, \"db_diamonds\")"
+  },
+  {
+    "objectID": "Chapter22.html#question-1",
+    "href": "Chapter22.html#question-1",
+    "title": "Chapter 22",
+    "section": "Question 1",
+    "text": "Question 1\nWhat is distinct() translated to? How about head()?\nAs we can see below, the dplyr function distinct() translates into SELECT DISTINCT &lt;variable name&gt; .\nSimilarly, the function head() translates to SELECT * FROM &lt;table name&gt; LIMIT 6.\n\ndb_df |&gt;\n  distinct(cut) |&gt;\n  show_query()\n\n&lt;SQL&gt;\nSELECT DISTINCT cut\nFROM db_diamonds\n\ndb_df |&gt;\n  head() |&gt;\n  show_query()\n\n&lt;SQL&gt;\nSELECT *\nFROM db_diamonds\nLIMIT 6"
+  },
+  {
+    "objectID": "Chapter22.html#question-2",
+    "href": "Chapter22.html#question-2",
+    "title": "Chapter 22",
+    "section": "Question 2",
+    "text": "Question 2\nExplain what each of the following SQL queries do and try recreate them using dbplyr.\nSELECT *  \nFROM flights \nWHERE dep_delay &lt; arr_delay  \nThe code above is equivalent to dplyr’s flights |&gt; filter(dep_delay &lt; arr_delay) .\nSELECT *, distance / (airtime / 60) AS speed \nFROM flights\nThe code above is equivalent to dplyr’s flights |&gt; mutate(speed = distance / (airtime / 60)) ."
   }
 ]
