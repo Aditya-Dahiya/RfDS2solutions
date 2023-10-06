@@ -8,7 +8,6 @@ execute:
   warning: false
   error: false
   cache: true
-  eval: false
 filters:
   - social-share
 share:
@@ -22,3 +21,356 @@ editor_options:
   chunk_output_type: console
 bibliography: references.bib
 ---
+
+```{r}
+#| label: setup
+
+library(tidyverse)
+library(jsonlite)
+library(repurrrsive)
+library(gt)
+library(gtExtras)
+```
+
+# **24.3.5 Exercises**
+
+## Question 1
+
+**What happens when you use [`unnest_wider()`](https://tidyr.tidyverse.org/reference/unnest_wider.html) with unnamed list-columns like `df2`? What argument is now necessary? What happens to missing values?**
+
+When we use `unnest_wider()` with unnamed list columns, it results in an error because `unnest_wider()` cannot un-nest columns with missing names of the children of the list-column. The error message tells us that the argument `names_sep = "_"` is now necessary, where `"_"` is any separator that we may wish to use. The result names the new columns as `y_1` , `y_2` etc. The missing values are represented with an `NA` .
+
+```{r}
+
+# Create df2 with an unnamed list-column
+df2 <- tribble(
+  ~x, ~y,
+  1, list(11, 12, 13),
+  2, list(21),
+  3, list(31, 32),
+)
+
+# Running unnest_wider()
+# df2 |>
+#   unnest_wider(y)
+# Error in `unnest_wider()`:
+# ℹ In column: `y`.
+# ℹ In row: 1.
+# Caused by error:
+# ! Can't unnest elements with missing names.
+# ℹ Supply `names_sep` to generate automatic names.
+# Run `rlang::last_trace()` to see where the error occurred.
+
+df2 |>
+  unnest_wider(y, names_sep = "_")
+```
+
+## Question 2
+
+**What happens when you use [`unnest_longer()`](https://tidyr.tidyverse.org/reference/unnest_longer.html) with named list-columns like `df1`? What additional information do you get in the output? How can you suppress that extra detail?**
+
+When we use [`unnest_longer()`](https://tidyr.tidyverse.org/reference/unnest_longer.html) with named list-columns like `df1` , we get a new row for each value of the list, and in addition, we get a new column named `"<name of list column>_id"` which tells us the name of the list child from which the value has been picked up.
+
+We can suppress this extra detail by adding the argument `indices_include = FALSE` .
+
+```{r}
+# Create a named list-column like df1
+df1 <- tribble(
+  ~x, ~y,
+  1, list(a = 11, b = 12),
+  2, list(a = 21, b = 22),
+  3, list(a = 31, b = 32),
+)
+
+# Unnest Longer function on a named list-column
+df1 |>
+  unnest_longer(y)
+
+# Additional argument to suppress the extra detail of _id column
+df1 |>
+  unnest_longer(y, indices_include = FALSE)
+```
+
+## Question 3
+
+**From time-to-time you encounter data frames with multiple list-columns with aligned values. For example, in the following data frame, the values of `y` and `z` are aligned (i.e. `y` and `z` will always have the same length within a row, and the first value of `y` corresponds to the first value of `z`). What happens if you apply two [`unnest_longer()`](https://tidyr.tidyverse.org/reference/unnest_longer.html) calls to this data frame? How can you preserve the relationship between `x` and `y`? (Hint: carefully read the docs).**
+
+```         
+df4 <- tribble(
+  ~x, ~y, ~z,
+  "a", list("y-a-1", "y-a-2"), list("z-a-1", "z-a-2"),
+  "b", list("y-b-1", "y-b-2", "y-b-3"), list("z-b-1", "z-b-2", "z-b-3")
+)
+```
+
+If we apply two consequtive `unnest_longer()` calls to this data-frame it results in a permutation-combination like situation, where each newly created row of `y` is treated a un-linked to each element of lists in `z` and thus the resulting data-frame produces a combination of all possible values of `y` and `z` .
+
+```{r}
+
+df4 <- tribble(
+  ~x, ~y, ~z,
+  "a", list("y-a-1", "y-a-2"), list("z-a-1", "z-a-2"),
+  "b", list("y-b-1", "y-b-2", "y-b-3"), list("z-b-1", "z-b-2", "z-b-3")
+)
+
+# Result if we apply two unnest_longer() calls to this data frame
+df4 |>
+  unnest_longer(y) |>
+  unnest_longer(z)
+```
+
+We can preserve the relationship between `x` and `y` (and `z` ) by including multiple columns in a single call of `unnest_longer()` . The help documentation with `unnest_longer()` provides that
+
+> `col` : List-column(s) to unnest. *When selecting multiple columns, values from the same row will be recycled to their common size.*
+
+```{r}
+
+df4 |>
+  unnest_longer(c(y, z))
+```
+
+# **24.4.4 Exercises**
+
+## Question 1
+
+**Roughly estimate when `gh_repos` was created. Why can you only roughly estimate the date?**
+
+Using the code shown below, and viewing the results of the maximum (i.e. the latest time stamps) we find that the latest data observation in the data-set is of
+
+```         
+2016-10-25 03:09:53
+```
+
+Thus, the data-set `gh_repos` was created on or after 25 October, 2016 3:09 AM UTC. We can only find the estimate, and not the exact time of its creation since the data-set does not explicitly contain the information of date and time of its creation. We can only infer it from the contents of the data.
+
+```{r}
+
+# Convert the gh_repos into a tibble for easy viewing
+ghrepos = tibble(json = gh_repos)
+ghrepos |>
+  
+  # Rectangling the data
+  unnest_longer(json) |>
+  unnest_wider(json) |>
+  
+  # Selecting the time variables to find the latest date in the data
+  select(created_at, updated_at, pushed_at) |>
+  
+  # Covert to date-time objects
+  mutate(across(.cols = 1:3, .fns = ymd_hms)) |>
+  
+  # Find the maximum (i.e. the latest) time in the three columns
+  summarize(
+    max_created_at = max(created_at),
+    max_updated_at = max(updated_at),
+    max_pushed_at = max(pushed_at)
+  ) |>
+  
+  # Nice display
+  gt() |>
+  cols_label_with(fn = ~ janitor::make_clean_names(., case = "title")) |>
+  gt_theme_538()
+```
+
+## Question 2
+
+**The `owner` column of `gh_repo` contains a lot of duplicated information because each owner can have many repos. Can you construct an `owners` data frame that contains one row for each owner? (Hint: does [`distinct()`](https://dplyr.tidyverse.org/reference/distinct.html) work with `list-cols`?)**
+
+The code below shows the two ways of creating an an `owners` data frame that contains one row for each owner. The **Method 1** uses the `unnest_wider()` first, and then uses `distinct()` on the resulting data frame. The **Method 2** first uses `distinct()` and then `unnest_wider()` . The results are the same.
+
+Yes, we observe that surprisingly, the function `distinct()` does work with `list-cols` .
+
+```{r}
+########### Method 1: The long way, after unnesting
+ghrepos |>
+  
+  # Rectangling the data
+  unnest_longer(json) |>
+  unnest_wider(json) |>
+  
+  # Selecting the owner variable
+  select(owner) |>
+  
+  # Unnesting the named list i.e., owner column, 
+  # using names_sep to ensure id is not duplicated original id column
+  # when joining the data frames later
+  unnest_wider(owner, names_sep = "_") |>
+  
+  # Checking the nature of data, what are the contents of each column like
+  # visdat::vis_dat()
+  
+  # Keeping only distinct columns, dropping duplicated rows
+  distinct()
+
+
+######### Method 2: The short way - using distinct() on the owner list-column
+owners <- ghrepos |>
+   # Rectangling the data
+  unnest_longer(json) |>
+  unnest_wider(json) |>
+  distinct(owner) |>
+  unnest_wider(owner, names_sep = "_")
+owners
+```
+
+## Question 3
+
+**Follow the steps used for `titles` to create similar tables for the aliases, allegiances, books, and TV series for the Game of Thrones characters.**
+
+```{r}
+# A tibble for aliases
+aliases = tibble(json = got_chars) |>
+  unnest_wider(json) |>
+  select(id, aliases) |>
+  unnest_longer(aliases) |>
+  filter(aliases != "")
+aliases
+
+# A tibble for allegiances
+allegiances = tibble(json = got_chars) |>
+  unnest_wider(json) |>
+  select(id, allegiances) |>
+  unnest_longer(allegiances) |>
+  filter(allegiances != "")
+allegiances
+
+# A tibble for aliases
+books = tibble(json = got_chars) |>
+  unnest_wider(json) |>
+  select(id, books) |>
+  unnest_longer(books) |>
+  filter(books != "")
+books
+
+# A tibble for aliases
+tvSeries = tibble(json = got_chars) |>
+  unnest_wider(json) |>
+  select(id, tvSeries) |>
+  unnest_longer(tvSeries) |>
+  filter(tvSeries != "")
+tvSeries
+```
+
+We could also try to create a function for this: --
+
+```{r}
+#| eval: false
+
+# Create a function to do the same job for each variable in the nested data
+got_unnest <- function(variable, nested_tibble){
+  
+  tibble(json = nested_tibble) |>
+  unnest_wider(json) |>
+  select(id, variable) |>
+  unnest_longer(variable) |>
+  filter(variable != "")
+}
+```
+
+## Question 4
+
+**Explain the following code line-by-line. Why is it interesting? Why does it work for `got_chars` but might not work in general?**
+
+The following annotations to the code explain it line by line. This is interesting because it provides us a way to directly create a tidy data, in long form, for plotting by `ggplot2` etc. from the list.
+
+```{r}
+
+# Convert lsit into tibble for easy viewing and rectangling operations
+tibble(json = got_chars) |> 
+  
+  # Unnest the named column json into 18 different columns
+  unnest_wider(json) |> 
+  
+  # Select to view only the id column, and nested columns which are list-columns
+  select(id, where(is.list)) |> 
+  
+  # Convert into long format by making different row for each column
+  pivot_longer(
+    where(is.list), 
+    names_to = "name", 
+    values_to = "value"
+  ) |>  
+  
+  # Now unnest the value column to display one row for each list item
+  unnest_longer(value)
+```
+
+This worked for `got_chars` because luckily, each list that we pivoted in `pivot_longer()` had exactly the same level of nesting. That is, none of the contents of the created column `value` has more than one level of nesting. This may not work in general because different data sets and lists may have different levels of nesting for each column. For example, one column may have 3 levels of nesting, while other may have 10 levels of nesting.
+
+## Question 5
+
+**In `gmaps_cities`, what does `address_components` contain? Why does the length vary between rows? Un-nest it appropriately to figure it out. (Hint: `types` always appears to contain two elements. Does [`unnest_wider()`](https://tidyr.tidyverse.org/reference/unnest_wider.html) make it easier to work with than [`unnest_longer()`](https://tidyr.tidyverse.org/reference/unnest_longer.html)?) .**
+
+The `address_components` contain the complete words and parts (city, county, state and country) that come for the complete address of the city. The contents are the following: --
+
+-   `long_name` : The actual complete name of the component (city, or county or state or country)
+
+-   `short_name` : The abbreviation for the name (for states and country)
+
+-   `types`: The `address_components` further sub-component `types` contains two elements, one is the type of address, (i..e one of the Locality, Administrative Area Level 2, Administrative Area Level 1, Country) and second is same for all, i.e. type of address `political` .
+
+The length varies between rows because some address have only **two levels**, for example:\--
+
+-   Washington, United States
+
+But, others have **three levels** in the address such as: --
+
+-   New York City, New York State, United States
+
+And, lastly, others have **four levels** in the address such as: --
+
+-   Houston, Harris County, Texas, United States
+
+Yes, [`unnest_wider()`](https://tidyr.tidyverse.org/reference/unnest_wider.html) make it easier to work with than `unnest_longer()` because we can create columns of the components for easy display. Tidy data in long form is good for `ggplot2` visualization, but not easy to read. The output is shown below in @fig-q5-ex3.
+
+```{r}
+#| label: fig-q5-ex3
+#| fig-cap: "The components of addresses in gmaps_cities"
+#| code-fold: true
+
+gmaps_cities |>
+  unnest_wider(json) |>
+  
+  # Remove status as it adds no info
+  select(-status) |>
+  
+  # Unnamed lists, so unnest longer - make rows
+  unnest_longer(results) |>
+  
+  # Named lists to unnest wider into columns
+  unnest_wider(results) |>
+  
+  # Select an id variable and address_components
+  select(formatted_address, address_components) |>
+  
+  # Since we know the address components have City, County, State and Country
+  # Names, lets try to create a column for each by unnest_wider
+  unnest_wider(address_components, names_sep = "_") |>
+  
+  # To create tidy data of address levels
+  pivot_longer(cols = -formatted_address,
+               names_to = "level",
+               values_to = "address_components") |>
+  mutate(level = parse_number(level)) |>
+  
+  # Further, making new columns from remaining list-columns
+  unnest_wider(address_components) |>
+  unnest_wider(types, names_sep = "_") |>
+  
+  # Remove types_2 ("political) as it does not add any information
+  select(-types_2) |>
+  
+  # Tidying up final display
+  rename(level_type = types_1) |>
+  relocate(level_type, .before = long_name) |>
+  drop_na() |>
+  mutate(level_type = snakecase::to_any_case(level_type, "title")) |>
+  
+  # gt() to display the output nicely
+  gt(rowname_col = NULL,
+     groupname_col = "formatted_address") |>
+  tab_options(row_group.as_column = TRUE) |>
+  cols_label_with(fn = ~ janitor::make_clean_names(., case = "title")) |>
+  gt_theme_538()
+    
+```
