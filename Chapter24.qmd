@@ -374,3 +374,40 @@ gmaps_cities |>
   gt_theme_538()
     
 ```
+
+# **24.5.4 Exercises**
+
+## Question 1
+
+**Rectangle the `df_col` and `df_row` below. They represent the two ways of encoding a data frame in JSON.**
+
+```{r}
+json_col <- parse_json('
+  {
+    "x": ["a", "x", "z"],
+    "y": [10, null, 3]
+  }
+')
+
+
+json_row <- parse_json('
+  [
+    {"x": "a", "y": 10},
+    {"x": "x", "y": null},
+    {"x": "z", "y": 3}
+  ]
+')
+
+df_col <- tibble(json = list(json_col)) 
+
+df_row <- tibble(json = json_row)
+
+# Rectangling df_col
+df_col |>
+  unnest_wider(json) |>
+  unnest_longer(c(x, y))
+
+# Reactangling df_row
+df_row |>
+  unnest_wider(json)
+```
