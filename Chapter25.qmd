@@ -22,3 +22,47 @@ editor_options:
 bibliography: references.bib
 ---
 
+Experiment scraping the Wikipedia page of fighter aircrafts
+
+```{r}
+# Load libraries
+library(tidyverse)
+library(rvest)
+
+url <- "https://en.wikipedia.org/wiki/List_of_fighter_aircraft"
+
+url_html <- read_html(url)
+
+df <- url_html |>
+  html_element("table") |>
+  html_table() |>
+  rename(
+    numbers = `No.`,
+    year = Date
+  ) |>
+  janitor::clean_names() |>
+  mutate(
+    numbers = parse_number(numbers),
+    class = str_replace_all(class, 
+                            pattern = "\"", 
+                            replacement = "")
+  )
+
+# A pie chart of all aircrafts ever made
+
+df |>
+  mutate(
+    country = fct(country)
+  ) |>
+  group_by(country) |>
+  count(wt = numbers)
+
+
+  group_by(country, status) |>
+  summarize(
+    total_aircrafts = sum(numbers),
+    total_types = n_distinct(type)
+  ) |>
+  ungroup()
+  group_by(country)
+```
