@@ -1,0 +1,27 @@
+---
+title: "Chapter 26"
+author: "Aditya Dahiya"
+subtitle: "Functions"
+date: 2023-10-09
+execute: 
+  echo: true
+  warning: false
+  error: false
+  cache: true
+filters:
+  - social-share
+share:
+  permalink: "https://aditya-dahiya.github.io/RfDS2solutions/Chapter26.html"
+  description: "Solutions: R for Data Science (2e)"
+  twitter: true
+  facebook: true
+  linkedin: true
+  email: true
+editor_options: 
+  chunk_output_type: console
+bibliography: references.bib
+---
+
+
+---
+
