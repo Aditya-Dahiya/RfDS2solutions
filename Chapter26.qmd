@@ -22,6 +22,197 @@ editor_options:
 bibliography: references.bib
 ---
 
+```{r}
+#| label: setup
 
----
+library(tidyverse)
+library(nycflights13)
 
+```
+
+Important stuff from Chapter 26, [R for Data Science (2e)](https://r4ds.hadley.nz/functions)
+
+-   To find the definition of a function that you\'ve written, place the cursor on the name of the function and press `F2`.
+
+-   To quickly jump to a function, press `Ctrl + .` to open the fuzzy file and function finder and type the first few letters of your function name. You can also navigate to files, Quarto sections, and more, making it a very handy navigation tool.
+
+# **26.2.5 Exercises**
+
+## Question 1
+
+**Practice turning the following code snippets into functions. Think about what each function does. What would you call it? How many arguments does it need?**
+
+```         
+mean(is.na(x))
+mean(is.na(y))
+mean(is.na(z))
+```
+
+The following function computes the proportion of missing values in a vector. It needs one argument.
+
+```{r}
+prop_missing <- function(x){
+  mean(is.na(x))
+}
+```
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+```         
+x / sum(x, na.rm = TRUE)
+y / sum(y, na.rm = TRUE)
+z / sum(z, na.rm = TRUE)
+```
+
+The following function computes the proportion of each element of a vector to the sum of the vector. It needs one argument.
+
+```{r}
+prop_element <- function(x){
+  x / sum(x, na.rm = TRUE)
+}
+```
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+```         
+round(x / sum(x, na.rm = TRUE) * 100, 1)
+round(y / sum(y, na.rm = TRUE) * 100, 1)
+round(z / sum(z, na.rm = TRUE) * 100, 1)
+```
+
+This function below computes the percentage of each value (as compared to the sum of the vector of values) within one decimal place.
+
+```{r}
+perc_element <- function(x){
+  round(x / sum(x, na.rm = TRUE) * 100, 1)
+}
+```
+
+## Question 2
+
+**In the second variant of `rescale01()`, infinite values are left unchanged. Can you rewrite `rescale01()` so that `-Inf` is mapped to 0, and `Inf` is mapped to 1?**
+
+```{r}
+rescale01 <- function(x) {
+  
+  # Replace -Inf with the minimum number (other than -Inf)
+  min_value <- min(x[is.finite(x)])
+  x[x == -Inf] <- min_value
+
+  # Replace +Inf with the maximum number (other than +Inf)
+  max_value <- max(x[is.finite(x)])
+  x[x == Inf] <- max_value
+
+  rng <- range(x, na.rm = TRUE)
+  (x - rng[1]) / (rng[2] - rng[1])
+}
+```
+
+## Question 3
+
+**Given a vector of birth-dates, write a function to compute the age in years.**
+
+```{r}
+# Function to compute age in years from birth dates
+
+compute_age <- function(birth_dates) {
+  
+  # Convert the birth dates to Date objects
+  birth_dates <- as.Date(birth_dates)
+  
+  # Calculate the current date
+  current_date <- Sys.Date()
+  
+  # Calculate age in years using lubridate
+  ages <- interval(birth_dates, current_date) %/% years(1)
+  
+  # Return the ages as a numeric vector
+  return(ages)
+}
+```
+
+## Question 4
+
+**Write your own functions to compute the variance and skewness of a numeric vector. You can look up the definitions on Wikipedia or elsewhere.**
+
+To compute the variance and skewness of a numeric vector, we can define custom functions for each: --
+
+1.  **Variance Calculation** using the formula:
+
+``` r
+# Function to compute the variance
+compute_variance <- function(x) {
+  n <- length(x)
+  x_bar <- mean(x)
+  sum_squared_diff <- sum((x - x_bar)^2)
+  variance <- sum_squared_diff / (n - 1)
+  return(variance)
+}
+```
+
+2.  **Skewness Calculation** using the formula:
+
+``` r
+# Function to compute the skewness
+compute_skewness <- function(x) {
+  n <- length(x)
+  x_bar <- mean(x)
+  std_dev <- sqrt(compute_variance(x))  # Using previously defined variance function
+  skewness <- sum((x - x_bar)^3) / ((n - 1) * std_dev^3)
+  return(skewness)
+}
+```
+
+These custom functions `compute_variance` and `compute_skewness` will calculate the variance and skewness of a numeric vector based on the provided formulas, without relying on external packages.
+
+## Question 5
+
+**Write `both_na()`, a summary function that takes two vectors of the same length and returns the number of positions that have an `NA` in both vectors.**
+
+```{r}
+
+# Method 1
+both_na <- function(x,y){
+  
+  x_na <- which(is.na(x))
+  y_na <- which(is.na(y))
+  
+  # values of x which are also present in y
+  common <- x_na %in% y_na
+  return(common)
+}
+
+# Method 2
+both_na <- function(vector1, vector2) {
+  if (length(vector1) != length(vector2)) {
+    stop("Both vectors must have the same length.")
+  }
+  
+  # Find the indices where both vectors have NA values
+  na_indices <- which(is.na(vector1) & is.na(vector2))
+  
+  return(na_indices)
+}
+```
+
+## Question 6
+
+**Read the documentation to figure out what the following functions do. Why are they useful even though they are so short?**
+
+```         
+is_directory <- function(x) {
+  file.info(x)$isdir
+ }
+```
+
+This function tells whether an object is a file or a directory. It is useful because it will return a logical value, i.e., either `TRUE` or `FALSE` and thus can be used inside other operations, rather than using the `$` operator; and is easy to remember in English.
+
+\_\_\_\_\_\_\_\_\_
+
+```         
+is_readable <- function(x) {
+  file.access(x, 4) == 0
+}
+```
+
+This function tells us whether the file has a read permission or not, i.e, whether there is access to the file or not. It is useful because one does not have to remember the `mode` argument values for `file.access()` function, and is easy to remember in English for further use in `for` loops etc.
