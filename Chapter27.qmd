@@ -22,6 +22,14 @@ editor_options:
 bibliography: references.bib
 ---
 
+```{r}
+#| label: setup
+
+library(tidyverse)
+library(gt)
+library(gtExtras)
+```
+
 # **27.2.8 Exercises**
 
 ## Question 1
@@ -30,17 +38,99 @@ bibliography: references.bib
 
 1.  **Computing the number of unique values in each column of [`palmerpenguins::penguins`](https://allisonhorst.github.io/palmerpenguins/reference/penguins.html).**
 
+    ```{r}
+    palmerpenguins::penguins |>
+      summarise(across(.cols = everything(),
+                       .fns = n_distinct))
+    ```
+
 2.  **Computing the mean of every column in `mtcars`.**
+
+    ```{r}
+    mtcars |>
+      summarise(across(everything(), mean))
+    ```
 
 3.  **Grouping `diamonds` by `cut`, `clarity`, and `color` then counting the number of observations and computing the mean of each numeric column.**
 
+    ```{r}
+    ggplot2::diamonds |>
+      group_by(cut, clarity, color) |>
+      summarise(
+        across(
+        .cols = where(is.numeric),
+        .fns = function(x) mean(x, na.rm = TRUE)
+        ),
+        n = n()
+        )
+    ```
+
 ## Question 2
 
-**What happens if you use a list of functions in [`across()`](https://dplyr.tidyverse.org/reference/across.html), but don\'t name them? How is the output named?**
+**What happens if you use a list of functions in [`across()`](https://dplyr.tidyverse.org/reference/across.html), but don't name them? How is the output named?**
+
+Using a list of functions in **`across()`** without naming them will result in automatically generated names for the output columns, following the default convention of
+
+-   `"{.col}"` for the single function case and
+
+-   `"{.col}_{.fn}"` for the case where a named function list is used for `.fns`.
+
+-   `"{.col}_1"` , `"{.col}_2"` etc. for the case where **unnamed list** is used for `.fns`.
+
+Thus, when we use a list, resulting columns will be named like `x_mean` when name of original column is `x` and new named function used across is `mean`.
+
+```{r}
+
+# Create a sample data frame
+data <- data.frame(
+  A = c(1, 2, 3, NA, 4),
+  B = c(4, NA, 5, 6, 7)
+)
+
+# Use across() without naming the functions
+data %>%
+  mutate(across(everything(), list(sqrt, log)))
+
+# Use across() with named new functions
+data %>%
+  mutate(
+    across(
+      everything(), 
+      list(sqrt = sqrt, 
+           log = log,
+           mean = \(x) mean(x, na.rm = TRUE)
+           )
+      )
+    )
+```
 
 ## Question 3
 
-**Adjust `expand_dates()` to automatically remove the date columns after they\'ve been expanded. Do you need to embrace any arguments?**
+**Adjust `expand_dates()` to automatically remove the date columns after they've been expanded. Do you need to embrace any arguments?**
+
+To modify the `expand_dates()` function to automatically remove the date columns after they've been expanded, we can achieve this by adding the `select()` function to drop the original date columns.
+
+We don't need to embrace any additional arguments.
+
+Here's the adjusted `expand_dates()` function:
+
+```{r}
+expand_dates <- function(df) {
+  df |> 
+    mutate(
+      across(where(is.Date), list(year = year, month = month, day = mday))
+    ) |>
+    select(!where(is.Date))
+  }
+
+df_date <- tibble(
+  name = c("Amy", "Bob", "Charlie", "David", "Eva"),
+  date = ymd(c("2009-08-03", "2010-01-16", "2012-05-20", "2013-11-30", "2015-07-12"))
+  )
+
+df_date |> 
+  expand_dates()
+```
 
 ## Question 4
 
@@ -57,4 +147,43 @@ show_missing <- function(df, group_vars, summary_vars = everything()) {
     select(where(\(x) any(x > 0)))
 }
 nycflights13::flights |> show_missing(c(year, month, day))
+```
+
+The `show_missing()` function appears to be designed to display the number of missing values in a data-frame.
+
+The each step of the pipeline is explained as follows: --
+
+1.  **`df |> group_by(pick({{ group_vars }}))`:**
+    -   The pipe operator (`|>`) is used to pass the dataframe `df` to the next operation.
+    -   `group_by()` is applied to the dataframe, and it groups the data by the variables specified by `group_vars`. The `group_vars` parameter is enclosed in double curly braces (`{{ }}`), which is a *tidy evaluation* feature used to work with non-standard evaluation. It allows you to pass column names as unquoted arguments to the function.
+2.  **`summarize(across({{ summary_vars }}, \(x) sum(is.na(x))), .groups = "drop")`**:
+    -   After grouping the data, `summarize()` is used to calculate summary statistics.
+    -   `across()` is applied to the variables specified by `summary_vars`. Similar to `group_vars`, `summary_vars` is also enclosed in double curly braces to use tidyeval. This means you can pass a list of column names to `summary_vars` as unquoted arguments.
+    -   Inside the `across()` function, a lambda function (i.e. an anonymous function) `\(x) sum(is.na(x))` is used to count the number of missing values in each column. This is done by applying the `is.na()` function to each column `x` and then summing the logical values.
+    -   The `.groups = "drop"` argument is used to drop the grouping structure after summarizing. This means the resulting dataframe will not have grouped rows.
+3.  **`select(where(\(x) any(x > 0)))`**:
+    -   Finally, the `select()` function is used to choose the columns for display.
+    -   The `where()` function is applied to select columns based on a condition.
+    -   The condition used here is `\(x) any(x > 0)`, which checks if there is any value greater than 0 in each column `x`. If there are any non-zero values in a column, it means there are missing values in that column, so it's selected.
+    -   This step ensures that only columns with missing values (i.e., columns with at least one non-zero value in the summary) are included in the final output.
+
+So, **the special feature of `where()`** being taken advantage of is its **ability to select columns based on a condition**, and in this case, it's used to select columns with missing values for display. The function is designed to help identify which columns have missing data after grouping by specified variables.
+
+```{r}
+# Recreating the function
+show_missing <- function(df, group_vars, summary_vars = everything()) {
+  df |> 
+    group_by(pick({{ group_vars }})) |> 
+    summarize(
+      across({{ summary_vars }}, \(x) sum(is.na(x))),
+      .groups = "drop"
+    ) |>
+    select(where(\(x) any(x > 0)))
+}
+
+# Running an example
+nycflights13::flights |> 
+  show_missing(c(year, month, day)) |>
+  slice_head(n = 5) |> 
+  gt() |> gt_theme_538()
 ```
