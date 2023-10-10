@@ -62,6 +62,8 @@ website:
           - Chapter25.qmd
       - section: "Program"
         contents:
+          - Chapter26.qmd
+          - Chapter27.qmd
       - section: "Communicate"
         contents:
           - Chapter29.qmd

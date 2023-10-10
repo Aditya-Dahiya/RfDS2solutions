@@ -165,7 +165,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Chapter 26</li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Chapter26.html">Program</a></li><li class="breadcrumb-item"><a href="./Chapter26.html">Chapter 26</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -374,8 +374,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Program</span></span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Program</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Chapter26.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Chapter 26</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Chapter27.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Chapter 27</span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
@@ -425,6 +444,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#question-2-1" id="toc-question-2-1" class="nav-link" data-scroll-target="#question-2-1">Question 2</a></li>
   <li><a href="#question-3-1" id="toc-question-3-1" class="nav-link" data-scroll-target="#question-3-1">Question 3</a></li>
   </ul></li>
+  <li><a href="#exercises-2" id="toc-exercises-2" class="nav-link" data-scroll-target="#exercises-2"><strong>26.4.4 Exercises</strong></a>
+  <ul class="collapse">
+  <li><a href="#question-1-2" id="toc-question-1-2" class="nav-link" data-scroll-target="#question-1-2">Question 1</a></li>
+  <li><a href="#question-2-2" id="toc-question-2-2" class="nav-link" data-scroll-target="#question-2-2">Question 2</a></li>
+  <li><a href="#question-3-2" id="toc-question-3-2" class="nav-link" data-scroll-target="#question-3-2">Question 3</a></li>
+  </ul></li>
+  <li><a href="#exercises-3" id="toc-exercises-3" class="nav-link" data-scroll-target="#exercises-3"><strong>26.5.1 Exercises</strong></a>
+  <ul class="collapse">
+  <li><a href="#question-1-3" id="toc-question-1-3" class="nav-link" data-scroll-target="#question-1-3">Question 1</a></li>
+  <li><a href="#question-2-3" id="toc-question-2-3" class="nav-link" data-scroll-target="#question-2-3">Question 2</a></li>
+  <li><a href="#question-3-3" id="toc-question-3-3" class="nav-link" data-scroll-target="#question-3-3">Question 3</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/edit/main/Chapter26.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -472,6 +503,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li><p>To find the definition of a function that you’ve written, place the cursor on the name of the function and press <code>F2</code>.</p></li>
 <li><p>To quickly jump to a function, press <code>Ctrl + .</code> to open the fuzzy file and function finder and type the first few letters of your function name. You can also navigate to files, Quarto sections, and more, making it a very handy navigation tool.</p></li>
+<li><p>In R, the <strong><code>{{}}</code></strong> (double curly braces) operator is used for <strong><em>unquoting arguments in functions</em></strong>.</p></li>
+<li><p>The <strong><code>:=</code></strong> operator is used for <strong><em>in-place modification or assignment of columns</em></strong> within a data.table object. It is typically used to add or update columns by reference, meaning it doesn’t create a new <code>data.table</code> but instead modifies the existing one directly. This can be very efficient for large datasets because it avoids unnecessary copying of data.</p></li>
 </ul>
 <section id="exercises" class="level1">
 <h1><strong>26.2.5 Exercises</strong></h1>
@@ -2695,19 +2728,25 @@ tbody tr:last-child {
 <li><p><strong>Converts the user supplied variable that uses clock time (e.g., <code>dep_time</code>, <code>arr_time</code>, etc.) into a decimal time (i.e.&nbsp;hours + (minutes / 60)).</strong></p></li>
 </ol>
 <pre><code>flights |&gt; standardize_time(sched_dep_time)</code></pre>
-<div class="cell" data-hash="Chapter26_cache/html/unnamed-chunk-13_f657c35bc16967d95598d1685b3287f8">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>standardize_time <span class="ot">&lt;-</span> <span class="cf">function</span>(data, variable){</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">|&gt;</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">std_time =</span> <span class="fu">round</span>({{variable}} <span class="sc">%/%</span> <span class="dv">100</span>) <span class="sc">+</span> (({{variable}} <span class="sc">%%</span> <span class="dv">100</span>)<span class="sc">/</span><span class="dv">60</span>), <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">relocate</span>(std_time, <span class="at">.after =</span> {{variable}})</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Runinng an example to show it works</span></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">standardize_time</span>(sched_dep_time) <span class="sc">|&gt;</span></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">|&gt;</span></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">display_results</span>() <span class="sc">|&gt;</span></span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(std_time, <span class="at">decimals =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="Chapter26_cache/html/unnamed-chunk-13_3b1bffea4701b25983691a0332296fc3">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Method 1</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>standardize_time <span class="ot">&lt;-</span> <span class="cf">function</span>(data, variable){</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">|&gt;</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">std_time =</span> <span class="fu">round</span>({{variable}} <span class="sc">%/%</span> <span class="dv">100</span>) <span class="sc">+</span> (({{variable}} <span class="sc">%%</span> <span class="dv">100</span>)<span class="sc">/</span><span class="dv">60</span>), <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">relocate</span>(std_time, <span class="at">.after =</span> {{variable}})</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Method 2 (after learning use of ":=" in Section 26.4.2)</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>standardize_time <span class="ot">&lt;-</span> <span class="cf">function</span>(data, variable){</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">|&gt;</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>({{variable}} <span class="sc">:</span><span class="er">=</span> <span class="fu">round</span>({{variable}} <span class="sc">%/%</span> <span class="dv">100</span>) <span class="sc">+</span> (({{variable}} <span class="sc">%%</span> <span class="dv">100</span>)<span class="sc">/</span><span class="dv">60</span>), <span class="dv">2</span>) </span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Runinng an example to show it works</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">standardize_time</span>(sched_dep_time) <span class="sc">|&gt;</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">display_results</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <div id="hnslangzla" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -3164,11 +3203,11 @@ tbody tr:last-child {
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Day">Day</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Dep Time">Dep Time</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Sched Dep Time">Sched Dep Time</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Std Time">Std Time</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Dep Delay">Dep Delay</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Arr Time">Arr Time</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Sched Arr Time">Sched Arr Time</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Arr Delay">Arr Delay</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Carrier">Carrier</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
@@ -3176,52 +3215,52 @@ tbody tr:last-child {
 <td headers="month" class="gt_row gt_right">1</td>
 <td headers="day" class="gt_row gt_right">1</td>
 <td headers="dep_time" class="gt_row gt_right">517</td>
-<td headers="sched_dep_time" class="gt_row gt_right">515</td>
-<td headers="std_time" class="gt_row gt_right">5.25</td>
+<td headers="sched_dep_time" class="gt_row gt_right">5.250000</td>
 <td headers="dep_delay" class="gt_row gt_right">2</td>
 <td headers="arr_time" class="gt_row gt_right">830</td>
 <td headers="sched_arr_time" class="gt_row gt_right">819</td>
-<td headers="arr_delay" class="gt_row gt_right">11</td></tr>
+<td headers="arr_delay" class="gt_row gt_right">11</td>
+<td headers="carrier" class="gt_row gt_left">UA</td></tr>
     <tr><td headers="year" class="gt_row gt_right">2013</td>
 <td headers="month" class="gt_row gt_right">1</td>
 <td headers="day" class="gt_row gt_right">1</td>
 <td headers="dep_time" class="gt_row gt_right">533</td>
-<td headers="sched_dep_time" class="gt_row gt_right">529</td>
-<td headers="std_time" class="gt_row gt_right">5.48</td>
+<td headers="sched_dep_time" class="gt_row gt_right">5.483333</td>
 <td headers="dep_delay" class="gt_row gt_right">4</td>
 <td headers="arr_time" class="gt_row gt_right">850</td>
 <td headers="sched_arr_time" class="gt_row gt_right">830</td>
-<td headers="arr_delay" class="gt_row gt_right">20</td></tr>
+<td headers="arr_delay" class="gt_row gt_right">20</td>
+<td headers="carrier" class="gt_row gt_left">UA</td></tr>
     <tr><td headers="year" class="gt_row gt_right">2013</td>
 <td headers="month" class="gt_row gt_right">1</td>
 <td headers="day" class="gt_row gt_right">1</td>
 <td headers="dep_time" class="gt_row gt_right">542</td>
-<td headers="sched_dep_time" class="gt_row gt_right">540</td>
-<td headers="std_time" class="gt_row gt_right">5.67</td>
+<td headers="sched_dep_time" class="gt_row gt_right">5.666667</td>
 <td headers="dep_delay" class="gt_row gt_right">2</td>
 <td headers="arr_time" class="gt_row gt_right">923</td>
 <td headers="sched_arr_time" class="gt_row gt_right">850</td>
-<td headers="arr_delay" class="gt_row gt_right">33</td></tr>
+<td headers="arr_delay" class="gt_row gt_right">33</td>
+<td headers="carrier" class="gt_row gt_left">AA</td></tr>
     <tr><td headers="year" class="gt_row gt_right">2013</td>
 <td headers="month" class="gt_row gt_right">1</td>
 <td headers="day" class="gt_row gt_right">1</td>
 <td headers="dep_time" class="gt_row gt_right">544</td>
-<td headers="sched_dep_time" class="gt_row gt_right">545</td>
-<td headers="std_time" class="gt_row gt_right">5.75</td>
+<td headers="sched_dep_time" class="gt_row gt_right">5.750000</td>
 <td headers="dep_delay" class="gt_row gt_right">-1</td>
 <td headers="arr_time" class="gt_row gt_right">1004</td>
 <td headers="sched_arr_time" class="gt_row gt_right">1022</td>
-<td headers="arr_delay" class="gt_row gt_right">-18</td></tr>
+<td headers="arr_delay" class="gt_row gt_right">-18</td>
+<td headers="carrier" class="gt_row gt_left">B6</td></tr>
     <tr><td headers="year" class="gt_row gt_right">2013</td>
 <td headers="month" class="gt_row gt_right">1</td>
 <td headers="day" class="gt_row gt_right">1</td>
 <td headers="dep_time" class="gt_row gt_right">554</td>
-<td headers="sched_dep_time" class="gt_row gt_right">600</td>
-<td headers="std_time" class="gt_row gt_right">6.00</td>
+<td headers="sched_dep_time" class="gt_row gt_right">6.000000</td>
 <td headers="dep_delay" class="gt_row gt_right">-6</td>
 <td headers="arr_time" class="gt_row gt_right">812</td>
 <td headers="sched_arr_time" class="gt_row gt_right">837</td>
-<td headers="arr_delay" class="gt_row gt_right">-25</td></tr>
+<td headers="arr_delay" class="gt_row gt_right">-25</td>
+<td headers="carrier" class="gt_row gt_left">DL</td></tr>
   </tbody>
   
   
@@ -3882,6 +3921,122 @@ tbody tr:last-child {
 </div>
 </div>
 </div>
+</section>
+</section>
+<section id="exercises-2" class="level1">
+<h1><strong>26.4.4 Exercises</strong></h1>
+<p><strong>Build up a rich plotting function by incrementally implementing each of the steps below:</strong></p>
+<section id="question-1-2" class="level2">
+<h2 class="anchored" data-anchor-id="question-1-2">Question 1</h2>
+<p><strong>Draw a scatter-plot given dataset and <code>x</code> and <code>y</code> variables.</strong></p>
+<div class="cell" data-hash="Chapter26_cache/html/unnamed-chunk-17_47eefc72240a5423e67c8666af097a1c">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>scatterplot <span class="ot">&lt;-</span> <span class="cf">function</span>(data, x, y){</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">|&gt;</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> {{x}},</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">y =</span> {{y}})) <span class="sc">+</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>()</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="question-2-2" class="level2">
+<h2 class="anchored" data-anchor-id="question-2-2">Question 2</h2>
+<p><strong>Add a line of best fit (i.e.&nbsp;a linear model with no standard errors).</strong></p>
+<div class="cell" data-hash="Chapter26_cache/html/unnamed-chunk-18_8946c6a10910f8f1b0c8401547f21bfb">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>scatterplot <span class="ot">&lt;-</span> <span class="cf">function</span>(data, x, y){</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">|&gt;</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> {{x}},</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">y =</span> {{y}})) <span class="sc">+</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">formula =</span> {{y}} <span class="sc">~</span> {{x}},</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>()</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="question-3-2" class="level2">
+<h2 class="anchored" data-anchor-id="question-3-2">Question 3</h2>
+<p><strong>Add a title.</strong></p>
+<div class="cell" data-hash="Chapter26_cache/html/unnamed-chunk-19_f973490f30f7ccc5d92addbe56952b21">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>scatterplot <span class="ot">&lt;-</span> <span class="cf">function</span>(data, x, y){</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> {{x}},</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">y =</span> {{y}})) <span class="sc">+</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">formula =</span> {{y}} <span class="sc">~</span> {{x}},</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> rlang<span class="sc">::</span><span class="fu">englue</span>(<span class="st">"A scatter plot of {{y}} vs. {{x}}"</span>)) <span class="sc">+</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>()</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="exercises-3" class="level1">
+<h1><strong>26.5.1 Exercises</strong></h1>
+<section id="question-1-3" class="level2">
+<h2 class="anchored" data-anchor-id="question-1-3">Question 1</h2>
+<p><strong>Read the source code for each of the following two functions, puzzle out what they do, and then brainstorm better names.</strong></p>
+<p><strong><code>is_prefix()</code></strong></p>
+<pre><code># is_prefix
+f1 &lt;- function(string, prefix) {
+  str_sub(string, 1, str_length(prefix)) == prefix
+}</code></pre>
+<p><strong><code>match_length()</code></strong></p>
+<pre><code>f3 &lt;- function(x, y) {
+  rep(y, length.out = length(x))
+}</code></pre>
+</section>
+<section id="question-2-3" class="level2">
+<h2 class="anchored" data-anchor-id="question-2-3">Question 2</h2>
+<p><strong>Take a function that you’ve written recently and spend 5 minutes brainstorming a better name for it and its arguments.</strong></p>
+<p>Here are some suggestions for renaming <strong><code>html_nodes()</code></strong> and its arguments (from the package <code>rvest</code>):</p>
+<ol type="1">
+<li><p>Original Function: <strong><code>html_nodes()</code></strong></p>
+<ul>
+<li><p><strong><code>html_extract()</code></strong> - This name suggests the action of extracting nodes from an HTML document.</p></li>
+<li><p><strong><code>select_html_nodes()</code></strong> - A more descriptive name that clarifies the purpose of the function.</p></li>
+</ul></li>
+<li><p>Argument <strong><code>css</code></strong>:</p>
+<ul>
+<li><p><strong><code>selector</code></strong> - A more explicit name to indicate that this argument takes CSS selectors.</p></li>
+<li><p><strong><code>element_selector</code></strong> - If the purpose of the argument is to select HTML elements, this name makes it clear.</p></li>
+</ul></li>
+<li><p>Argument <strong><code>xpath</code></strong>:</p>
+<ul>
+<li><p><strong><code>xpath_expression</code></strong> - A more descriptive name that specifies the type of input expected.</p></li>
+<li><p><strong><code>xml_path</code></strong> - A concise alternative that still hints at the purpose.</p></li>
+</ul></li>
+<li><p>Argument <strong><code>trim</code></strong>:</p>
+<ul>
+<li><p><strong><code>remove_whitespace</code></strong> - A name that better reflects the action performed when <strong><code>trim</code></strong> is set to <strong><code>TRUE</code></strong>.</p></li>
+<li><p><strong><code>clean_whitespace</code></strong> - Another option to indicate the removal of whitespace.</p></li>
+</ul></li>
+</ol>
+</section>
+<section id="question-3-3" class="level2">
+<h2 class="anchored" data-anchor-id="question-3-3">Question 3</h2>
+<p><strong>Make a case for why <code>norm_r()</code>, <code>norm_d()</code> etc. would be better than <a href="https://rdrr.io/r/stats/Normal.html"><code>rnorm()</code></a>, <a href="https://rdrr.io/r/stats/Normal.html"><code>dnorm()</code></a>. Make a case for the opposite. How could you make the names even clearer?</strong></p>
+<p>Function naming conventions in R often follow a pattern where functions are named with a verb followed by a noun, which makes the code more readable and easier to understand.</p>
+<p><strong>Arguments for <code>norm_r()</code> and <code>norm_d()</code> (Custom Names):</strong></p>
+<ol type="1">
+<li><p><strong>Verb-First Naming:</strong> Putting the action (e.g., “normalize”) before the distribution name (e.g., “norm”) makes the function name more descriptive and aligns with R’s naming conventions.</p></li>
+<li><p><strong>Consistency:</strong> These names maintain consistency with other functions in R that follow a similar pattern (e.g., <code>read_csv()</code>, <code>plot_hist()</code>).</p></li>
+<li><p><strong>Clarity:</strong> These names emphasize the action being performed (normalizing) over the distribution being used (normal distribution), which might be more intuitive to some users.</p></li>
+<li><p><strong>Readability:</strong> These names read like a sentence: “Normalize a random sample from a normal distribution.”</p></li>
+</ol>
+<p><strong>Arguments for <code>rnorm()</code> and <code>dnorm()</code> (Current Names):</strong></p>
+<ol type="1">
+<li><p><strong>Historical Convention:</strong> Functions like <code>rnorm()</code> and <code>dnorm()</code> have been part of the base R distribution for a long time. Changing their names might lead to confusion for users who are already familiar with these functions.</p></li>
+<li><p><strong>Alignment with Mathematical Notation:</strong> The <code>rnorm()</code> and <code>dnorm()</code> naming closely resembles mathematical notation, making it easier for users with a strong mathematical background to recognize and use these functions.</p></li>
+<li><p><strong>Package Consistency:</strong> Maintaining the original names ensures consistency with other functions in the stats package (e.g., <code>pnorm()</code>, <code>qnorm()</code>), which also follow this convention.</p></li>
+</ol>
+<p><strong>Even Clearer Names:</strong> If we want to make the function names even clearer, we can consider longer, more descriptive names, such as:</p>
+<ul>
+<li><code>generate_random_samples_from_normal_distribution()</code> for <code>rnorm()</code>: This explicitly states what the function does.</li>
+<li><code>probability_density_function_of_normal_distribution()</code> for <code>dnorm()</code>: This specifies the exact purpose of the function.</li>
+</ul>
+<p>While these longer names are more descriptive, they may become unwieldy in code. Striking a balance between clarity and brevity is important.</p>
 
 
 </section>

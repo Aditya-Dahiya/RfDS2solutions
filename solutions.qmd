@@ -2,7 +2,8 @@
 title: "Solutions"
 author: "Aditya Dahiya"
 listing:
-  
+  type: table
+  sort: title
   contents:
     - "Chapter2.qmd"
     - "Chapter3.qmd"
@@ -28,12 +29,11 @@ listing:
     - "Chapter23.qmd"
     - "Chapter24.qmd"
     - "Chapter25.qmd"
+    - "Chapter26.qmd"
+    - "Chapter27.qmd"
     - "Chapter29.qmd"
     - "Chapter30.qmd"
   fields: [title, subtitle, date]
-  sort: 
-    - "title"
-  type: table
   grid-item-border: false
   table-hover: true
   image-placeholder: "book-cover.jpg"

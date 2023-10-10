@@ -1,0 +1,60 @@
+---
+title: "Chapter 27"
+author: "Aditya Dahiya"
+subtitle: "Iteration"
+date: 2023-10-10
+execute: 
+  echo: true
+  warning: false
+  error: false
+  cache: true
+filters:
+  - social-share
+share:
+  permalink: "https://aditya-dahiya.github.io/RfDS2solutions/Chapter27.html"
+  description: "Solutions: R for Data Science (2e)"
+  twitter: true
+  facebook: true
+  linkedin: true
+  email: true
+editor_options: 
+  chunk_output_type: console
+bibliography: references.bib
+---
+
+# **27.2.8 Exercises**
+
+## Question 1
+
+**Practice your [`across()`](https://dplyr.tidyverse.org/reference/across.html) skills by:**
+
+1.  **Computing the number of unique values in each column of [`palmerpenguins::penguins`](https://allisonhorst.github.io/palmerpenguins/reference/penguins.html).**
+
+2.  **Computing the mean of every column in `mtcars`.**
+
+3.  **Grouping `diamonds` by `cut`, `clarity`, and `color` then counting the number of observations and computing the mean of each numeric column.**
+
+## Question 2
+
+**What happens if you use a list of functions in [`across()`](https://dplyr.tidyverse.org/reference/across.html), but don\'t name them? How is the output named?**
+
+## Question 3
+
+**Adjust `expand_dates()` to automatically remove the date columns after they\'ve been expanded. Do you need to embrace any arguments?**
+
+## Question 4
+
+**Explain what each step of the pipeline in this function does. What special feature of [`where()`](https://tidyselect.r-lib.org/reference/where.html) are we taking advantage of?**
+
+```         
+show_missing <- function(df, group_vars, summary_vars = everything()) {
+  df |> 
+    group_by(pick({{ group_vars }})) |> 
+    summarize(
+      across({{ summary_vars }}, \(x) sum(is.na(x))),
+      .groups = "drop"
+    ) |>
+    select(where(\(x) any(x > 0)))
+}
+nycflights13::flights |> show_missing(c(year, month, day))
+```

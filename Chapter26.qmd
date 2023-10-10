@@ -38,6 +38,10 @@ Important stuff from Chapter 26, [R for Data Science (2e)](https://r4ds.hadley.n
 
 -   To quickly jump to a function, press `Ctrl + .` to open the fuzzy file and function finder and type the first few letters of your function name. You can also navigate to files, Quarto sections, and more, making it a very handy navigation tool.
 
+-   In R, the **`{{}}`** (double curly braces) operator is used for ***unquoting arguments in functions***.
+
+-   The **`:=`** operator is used for ***in-place modification or assignment of columns*** within a data.table object. It is typically used to add or update columns by reference, meaning it doesn't create a new `data.table` but instead modifies the existing one directly. This can be very efficient for large datasets because it avoids unnecessary copying of data.
+
 # **26.2.5 Exercises**
 
 ## Question 1
@@ -327,18 +331,26 @@ flights |> standardize_time(sched_dep_time)
 ```
 
 ```{r}
+# Method 1
 standardize_time <- function(data, variable){
   data |>
     mutate(std_time = round({{variable}} %/% 100) + (({{variable}} %% 100)/60), 2) |>
     relocate(std_time, .after = {{variable}})
 }
 
+# Method 2 (after learning use of ":=" in Section 26.4.2)
+standardize_time <- function(data, variable){
+  data |>
+    mutate({{variable}} := round({{variable}} %/% 100) + (({{variable}} %% 100)/60), 2) 
+}
+
 # Runinng an example to show it works
 flights |>
   standardize_time(sched_dep_time) |>
   select(1:10) |>
-  display_results() |>
-  fmt_number(std_time, decimals = 2)
+  display_results()
+
+
 ```
 
 ## Question 2
@@ -447,3 +459,139 @@ flights |>
   gt() |> gt_theme_538() |> fmt_number(prop, decimals = 4)
   
 ```
+
+# **26.4.4 Exercises**
+
+**Build up a rich plotting function by incrementally implementing each of the steps below:**
+
+## Question 1
+
+**Draw a scatter-plot given dataset and `x` and `y` variables.**
+
+```{r}
+scatterplot <- function(data, x, y){
+  data |>
+    ggplot(aes(x = {{x}},
+               y = {{y}})) +
+    geom_point() +
+    theme_classic()
+}
+```
+
+## Question 2
+
+**Add a line of best fit (i.e. a linear model with no standard errors).**
+
+```{r}
+scatterplot <- function(data, x, y){
+  data |>
+    ggplot(aes(x = {{x}},
+               y = {{y}})) +
+    geom_point() +
+    geom_smooth(method = "lm",
+                formula = {{y}} ~ {{x}},
+                se = FALSE) +
+    theme_classic()
+}
+```
+
+## Question 3
+
+**Add a title.**
+
+```{r}
+scatterplot <- function(data, x, y){
+    ggplot(data, aes(x = {{x}},
+               y = {{y}})) +
+    geom_point() +
+    geom_smooth(method = "lm",
+                formula = {{y}} ~ {{x}},
+                se = FALSE) +
+    labs(title = rlang::englue("A scatter plot of {{y}} vs. {{x}}")) +
+    theme_classic()
+}
+```
+
+# **26.5.1 Exercises**
+
+## Question 1
+
+**Read the source code for each of the following two functions, puzzle out what they do, and then brainstorm better names.**
+
+**`is_prefix()`**
+
+```         
+# is_prefix
+f1 <- function(string, prefix) {
+  str_sub(string, 1, str_length(prefix)) == prefix
+}
+```
+
+**`match_length()`**
+
+```         
+f3 <- function(x, y) {
+  rep(y, length.out = length(x))
+}
+```
+
+## Question 2
+
+**Take a function that you've written recently and spend 5 minutes brainstorming a better name for it and its arguments.**
+
+Here are some suggestions for renaming **`html_nodes()`** and its arguments (from the package `rvest`):
+
+1.  Original Function: **`html_nodes()`**
+
+    -   **`html_extract()`** - This name suggests the action of extracting nodes from an HTML document.
+
+    -   **`select_html_nodes()`** - A more descriptive name that clarifies the purpose of the function.
+
+2.  Argument **`css`**:
+
+    -   **`selector`** - A more explicit name to indicate that this argument takes CSS selectors.
+
+    -   **`element_selector`** - If the purpose of the argument is to select HTML elements, this name makes it clear.
+
+3.  Argument **`xpath`**:
+
+    -   **`xpath_expression`** - A more descriptive name that specifies the type of input expected.
+
+    -   **`xml_path`** - A concise alternative that still hints at the purpose.
+
+4.  Argument **`trim`**:
+
+    -   **`remove_whitespace`** - A name that better reflects the action performed when **`trim`** is set to **`TRUE`**.
+
+    -   **`clean_whitespace`** - Another option to indicate the removal of whitespace.
+
+## Question 3
+
+**Make a case for why `norm_r()`, `norm_d()` etc. would be better than [`rnorm()`](https://rdrr.io/r/stats/Normal.html), [`dnorm()`](https://rdrr.io/r/stats/Normal.html). Make a case for the opposite. How could you make the names even clearer?**
+
+Function naming conventions in R often follow a pattern where functions are named with a verb followed by a noun, which makes the code more readable and easier to understand.
+
+**Arguments for `norm_r()` and `norm_d()` (Custom Names):**
+
+1.  **Verb-First Naming:** Putting the action (e.g., "normalize") before the distribution name (e.g., "norm") makes the function name more descriptive and aligns with R's naming conventions.
+
+2.  **Consistency:** These names maintain consistency with other functions in R that follow a similar pattern (e.g., `read_csv()`, `plot_hist()`).
+
+3.  **Clarity:** These names emphasize the action being performed (normalizing) over the distribution being used (normal distribution), which might be more intuitive to some users.
+
+4.  **Readability:** These names read like a sentence: "Normalize a random sample from a normal distribution."
+
+**Arguments for `rnorm()` and `dnorm()` (Current Names):**
+
+1.  **Historical Convention:** Functions like `rnorm()` and `dnorm()` have been part of the base R distribution for a long time. Changing their names might lead to confusion for users who are already familiar with these functions.
+
+2.  **Alignment with Mathematical Notation:** The `rnorm()` and `dnorm()` naming closely resembles mathematical notation, making it easier for users with a strong mathematical background to recognize and use these functions.
+
+3.  **Package Consistency:** Maintaining the original names ensures consistency with other functions in the stats package (e.g., `pnorm()`, `qnorm()`), which also follow this convention.
+
+**Even Clearer Names:** If we want to make the function names even clearer, we can consider longer, more descriptive names, such as:
+
+-   `generate_random_samples_from_normal_distribution()` for `rnorm()`: This explicitly states what the function does.
+-   `probability_density_function_of_normal_distribution()` for `dnorm()`: This specifies the exact purpose of the function.
+
+While these longer names are more descriptive, they may become unwieldy in code. Striking a balance between clarity and brevity is important.

@@ -26,7 +26,9 @@
       "Chapter22.qmd",
       "Chapter23.qmd",
       "Chapter24.qmd",
-      "Chapter25.qmd"
+      "Chapter25.qmd",
+      "Chapter26.qmd",
+      "Chapter27.qmd"
     ],
     "talks.qmd": [
       "manual_office_procedure_22_sep_23.qmd"

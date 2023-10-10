@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Aditya Dahiya">
+<meta name="dcterms.date" content="2023-10-10">
 
-<title>Book Solutions - Solutions: R for Data Science (2e)</title>
+<title>Book Solutions - Chapter 27</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -87,7 +89,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="./index.html" rel="" target="">
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
@@ -129,7 +131,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Solutions: R for Data Science (2e)</li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Chapter26.html">Program</a></li><li class="breadcrumb-item"><a href="./Chapter27.html">Chapter 27</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -354,7 +356,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Chapter27.html" class="sidebar-item-text sidebar-link">
+  <a href="./Chapter27.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Chapter 27</span></a>
   </div>
 </li>
@@ -389,21 +391,46 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link active" data-scroll-target="#exercises"><strong>27.2.8 Exercises</strong></a>
+  <ul class="collapse">
+  <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1">Question 1</a></li>
+  <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2">Question 2</a></li>
+  <li><a href="#question-3" id="toc-question-3" class="nav-link" data-scroll-target="#question-3">Question 3</a></li>
+  <li><a href="#question-4" id="toc-question-4" class="nav-link" data-scroll-target="#question-4">Question 4</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/edit/main/Chapter27.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Solutions: R for Data Science (2e)</h1>
+<h1 class="title">Chapter 27</h1>
+<p class="subtitle lead">Iteration</p>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Aditya Dahiya </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 10, 2023</p>
+    </div>
+  </div>
   
     
   </div>
@@ -411,11 +438,42 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Author: Aditya Dahiya</p>
-<p>This website displays the solutions for the exercises in the open-source book <a href="https://r4ds.hadley.nz/" title="R for Data Science (2e)">R for Data Science, 2nd Edition</a>.</p>
-<p><a href="https://r4ds.hadley.nz/"><img src="https://r4ds.hadley.nz/cover.jpg" class="img-fluid" data-fig-align="left" alt="R for Data Science (2nd Edition)" width="275"></a>.</p>
+<section id="exercises" class="level1">
+<h1><strong>27.2.8 Exercises</strong></h1>
+<section id="question-1" class="level2">
+<h2 class="anchored" data-anchor-id="question-1">Question 1</h2>
+<p><strong>Practice your <a href="https://dplyr.tidyverse.org/reference/across.html"><code>across()</code></a> skills by:</strong></p>
+<ol type="1">
+<li><p><strong>Computing the number of unique values in each column of <a href="https://allisonhorst.github.io/palmerpenguins/reference/penguins.html"><code>palmerpenguins::penguins</code></a>.</strong></p></li>
+<li><p><strong>Computing the mean of every column in <code>mtcars</code>.</strong></p></li>
+<li><p><strong>Grouping <code>diamonds</code> by <code>cut</code>, <code>clarity</code>, and <code>color</code> then counting the number of observations and computing the mean of each numeric column.</strong></p></li>
+</ol>
+</section>
+<section id="question-2" class="level2">
+<h2 class="anchored" data-anchor-id="question-2">Question 2</h2>
+<p><strong>What happens if you use a list of functions in <a href="https://dplyr.tidyverse.org/reference/across.html"><code>across()</code></a>, but don't name them? How is the output named?</strong></p>
+</section>
+<section id="question-3" class="level2">
+<h2 class="anchored" data-anchor-id="question-3">Question 3</h2>
+<p><strong>Adjust <code>expand_dates()</code> to automatically remove the date columns after they've been expanded. Do you need to embrace any arguments?</strong></p>
+</section>
+<section id="question-4" class="level2">
+<h2 class="anchored" data-anchor-id="question-4">Question 4</h2>
+<p><strong>Explain what each step of the pipeline in this function does. What special feature of <a href="https://tidyselect.r-lib.org/reference/where.html"><code>where()</code></a> are we taking advantage of?</strong></p>
+<pre><code>show_missing &lt;- function(df, group_vars, summary_vars = everything()) {
+  df |&gt; 
+    group_by(pick({{ group_vars }})) |&gt; 
+    summarize(
+      across({{ summary_vars }}, \(x) sum(is.na(x))),
+      .groups = "drop"
+    ) |&gt;
+    select(where(\(x) any(x &gt; 0)))
+}
+nycflights13::flights |&gt; show_missing(c(year, month, day))</code></pre>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -652,7 +710,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/edit/main/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Aditya-Dahiya/RfDS2solutions/issues/new" class="toc-action">Report an issue</a></p></div></div></div></div></footer><div class="page-columns page-rows-contents page-layout-article"><div class="social-share"><a href="https://twitter.com/share?url=https://aditya-dahiya.github.io/RfDS2solutions/&amp;text=Solutions: R for Data Science (2e)" target="_blank" class="twitter"><i class="fab fa-twitter fa-fw fa-lg"></i></a><a href="https://www.linkedin.com/shareArticle?url=https://aditya-dahiya.github.io/RfDS2solutions/&amp;title=Solutions: R for Data Science (2e)" target="_blank" class="linkedin"><i class="fa-brands fa-linkedin-in fa-fw fa-lg"></i></a>  <a href="mailto:?subject=Solutions: R for Data Science (2e)&amp;body=Check out this link:https://aditya-dahiya.github.io/RfDS2solutions/" target="_blank" class="email"><i class="fa-solid fa-envelope fa-fw fa-lg"></i></a><a href="https://www.facebook.com/sharer.php?u=https://aditya-dahiya.github.io/RfDS2solutions/" target="_blank" class="facebook"><i class="fab fa-facebook-f fa-fw fa-lg"></i></a></div></div>
+<div class="page-columns page-rows-contents page-layout-article"><div class="social-share"><a href="https://twitter.com/share?url=https://aditya-dahiya.github.io/RfDS2solutions/Chapter27.html&amp;text=Solutions: R for Data Science (2e)" target="_blank" class="twitter"><i class="fab fa-twitter fa-fw fa-lg"></i></a><a href="https://www.linkedin.com/shareArticle?url=https://aditya-dahiya.github.io/RfDS2solutions/Chapter27.html&amp;title=Solutions: R for Data Science (2e)" target="_blank" class="linkedin"><i class="fa-brands fa-linkedin-in fa-fw fa-lg"></i></a>  <a href="mailto:?subject=Solutions: R for Data Science (2e)&amp;body=Check out this link:https://aditya-dahiya.github.io/RfDS2solutions/Chapter27.html" target="_blank" class="email"><i class="fa-solid fa-envelope fa-fw fa-lg"></i></a><a href="https://www.facebook.com/sharer.php?u=https://aditya-dahiya.github.io/RfDS2solutions/Chapter27.html" target="_blank" class="facebook"><i class="fab fa-facebook-f fa-fw fa-lg"></i></a></div></div>
 
 
 
