@@ -26,13 +26,15 @@ bibliography: references.bib
 #| label: setup
 
 library(tidyverse)
+library(gt)
+library(gtExtras)
 library(nycflights13)
-
+data("flights")
 ```
 
 Important stuff from Chapter 26, [R for Data Science (2e)](https://r4ds.hadley.nz/functions)
 
--   To find the definition of a function that you\'ve written, place the cursor on the name of the function and press `F2`.
+-   To find the definition of a function that you've written, place the cursor on the name of the function and press `F2`.
 
 -   To quickly jump to a function, press `Ctrl + .` to open the fuzzy file and function finder and type the first few letters of your function name. You can also navigate to files, Quarto sections, and more, making it a very handy navigation tool.
 
@@ -216,3 +218,232 @@ is_readable <- function(x) {
 ```
 
 This function tells us whether the file has a read permission or not, i.e, whether there is access to the file or not. It is useful because one does not have to remember the `mode` argument values for `file.access()` function, and is easy to remember in English for further use in `for` loops etc.
+
+# **26.3.5 Exercises**
+
+## Question 1
+
+**Using the datasets from `nycflights13`, write a function that:**
+
+```{r}
+# Creating a function to display the results in a nice way
+
+display_results <- function(data){
+  data |>
+  slice_head(n = 5) |> 
+  gt() |> 
+  cols_label_with(fn = ~ janitor::make_clean_names(., "title")) |>
+  gt_theme_538()
+}
+
+```
+
+1.  **Finds all flights that were cancelled (i.e. `is.na(arr_time)`) or delayed by more than an hour.**
+
+    ```         
+    flights |> filter_severe()
+    ```
+
+    ```{r}
+    filter_severe <- function(data, arrival_delay) {
+      data |>
+        filter(is.na({{arrival_delay}}) | ({{arrival_delay}} > 60))
+    }
+
+    # Runinng an example to show it works
+    flights |>
+      filter_severe(arr_delay) |>
+      select(1:10) |>
+      display_results()
+    ```
+
+2.  **Counts the number of cancelled flights and the number of flights delayed by more than an hour.**
+
+    ```         
+    flights |> group_by(dest) |> summarize_severe()
+    ```
+
+    ```{r}
+    summarize_severe <- function(data, arrival_delay){
+      data |>
+        summarize(
+          cancelled_flights = sum(is.na({{arrival_delay}})),
+          delayed_flights = sum({{arrival_delay}} > 60, na.rm = TRUE)
+        )
+    }
+
+    # Runinng an example to show it works
+    flights |>
+      group_by(dest) |>
+      summarize_severe(arr_delay) |>
+      display_results()
+    ```
+
+3.  **Finds all flights that were cancelled or delayed by more than a user supplied number of hours:**
+
+    ```         
+    flights |> filter_severe(hours = 2)
+    ```
+
+    ```{r}
+    filter_severe <- function(data, hours){
+      data |>
+        filter(arr_delay > (hours*60))
+    }
+
+    # Running an example to show that it works
+    flights |>
+      filter_severe(hours = 4) |>
+      select(1:10) |>
+      display_results()
+    ```
+
+4.  **Summarizes the weather to compute the minimum, mean, and maximum, of a user supplied variable:**
+
+    ```         
+    weather |> summarize_weather(temp)
+    ```
+
+    ```{r}
+    summarize_weather <- function(data, variable){
+      data |>
+        summarize(
+          mean = mean({{variable}}, na.rm = TRUE),
+          minimum = min({{variable}}, na.rm = TRUE),
+          maximum = max({{variable}}, na.rm = TRUE)
+        )
+    }
+    # Runinng an example to show it works
+    weather |>
+      group_by(origin) |>
+      summarize_weather(temp) |>
+      display_results() |> fmt_number(decimals = 2)
+    ```
+
+5.  **Converts the user supplied variable that uses clock time (e.g., `dep_time`, `arr_time`, etc.) into a decimal time (i.e. hours + (minutes / 60)).**
+
+```         
+flights |> standardize_time(sched_dep_time)
+```
+
+```{r}
+standardize_time <- function(data, variable){
+  data |>
+    mutate(std_time = round({{variable}} %/% 100) + (({{variable}} %% 100)/60), 2) |>
+    relocate(std_time, .after = {{variable}})
+}
+
+# Runinng an example to show it works
+flights |>
+  standardize_time(sched_dep_time) |>
+  select(1:10) |>
+  display_results() |>
+  fmt_number(std_time, decimals = 2)
+```
+
+## Question 2
+
+**For each of the following functions list all arguments that use tidy evaluation and describe whether they use data-masking or tidy-selection: [`distinct()`](https://dplyr.tidyverse.org/reference/distinct.html), [`count()`](https://dplyr.tidyverse.org/reference/count.html), [`group_by()`](https://dplyr.tidyverse.org/reference/group_by.html), [`rename_with()`](https://dplyr.tidyverse.org/reference/rename.html), [`slice_min()`](https://dplyr.tidyverse.org/reference/slice.html), [`slice_sample()`](https://dplyr.tidyverse.org/reference/slice.html).**
+
+In the context of the `dplyr` package in `R`, ***tidy evaluation*** refers to a method of non-standard evaluation where you can use variables as arguments to functions and refer to those variables within the context of a data frame. It has two parts: --
+
+1.  **Data Masking**: Data masking involves creating a temporary environment within a function where external variables from the global environment are hidden or masked. This means that variables from the global environment are temporarily unavailable inside the function, preventing unintended interactions or conflicts. For example:
+
+    ```{r}
+    data <- data.frame(x = 1:5, y = 6:10)
+
+    custom_function <- function(df) {
+      
+      # Using data masking to prevent access to global 'data' variable
+      df %>%
+        mutate(z = x + y)
+    }
+
+    custom_function(data)
+    ```
+
+    In this example, the `custom_function` takes a data frame `df` as an argument and uses the `mutate()` function from dplyr to create a new variable `z`. Inside the function, data masking ensures that `x` and `y` refer to the columns within the `df` argument, not the global `data` data frame.
+
+2.  **Tidy Selection**: Tidy selection involves selecting or manipulating columns within a data frame using non-standard evaluation (NSE). It allows you to refer to column names as symbols or expressions, facilitating dynamic and programmatic column selection. For example: --
+
+    ```{r}
+    data <- data.frame(x = 1:5, y = 6:10)
+
+    selected_columns <- c("x", "y")
+
+    data %>%
+      select(all_of(selected_columns))
+    ```
+
+    In this example, the `select()` function uses tidy selection to select columns specified in the `selected_columns` vector.
+
+Thus, Data masking primarily deals with the environment of the function, while tidy selection focuses on column selection and manipulation within a data frame.
+
+All of the following functions use ***Tidy Evaluation*** in the following way: --
+
++------------------+------------------------------------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Function         | Description                                                      | Tidy Selection | Arguments                                                                                                                                                                                                                           |
++==================+==================================================================+================+=====================================================================================================================================================================================================================================+
+| `distinct()`     | Select distinct rows based on specified columns                  | Yes            | -   The **`data`** argument does not involve Data Masking or Tidy Selection.                                                                                                                                                        |
+|                  |                                                                  |                |                                                                                                                                                                                                                                     |
+|                  |                                                                  |                | -   The **`...`** argument supports Tidy Selection methods for specifying columns. It also employs data masking to prevent global environment variables from interfering.                                                           |
+|                  |                                                                  |                |                                                                                                                                                                                                                                     |
+|                  |                                                                  |                | -   The **`.keep_all`** argument does not involve Data Masking or Tidy Selection.                                                                                                                                                   |
++------------------+------------------------------------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `count()`        | Count the number of rows in groups defined by specific variables | Yes            | -   The **`data`** argument does not involve Data Masking or Tidy Selection.                                                                                                                                                        |
+|                  |                                                                  |                |                                                                                                                                                                                                                                     |
+|                  |                                                                  |                | -   The **`...`** argument supports Tidy Selection methods for specifying columns. It also employs data masking to prevent global environment variables from interfering.                                                           |
+|                  |                                                                  |                |                                                                                                                                                                                                                                     |
+|                  |                                                                  |                | -   The **`.name`** argument does not involve Data Masking or Tidy Selection.                                                                                                                                                       |
++------------------+------------------------------------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `group_by()`     | Group data by specific columns                                   | Yes            | -   The **`data`** argument does not involve Data Masking or Tidy Selection.                                                                                                                                                        |
+|                  |                                                                  |                |                                                                                                                                                                                                                                     |
+|                  |                                                                  |                | -   The **`...`** argument supports data masking to prevent global environment variables from interfering. It does not use tidy selection.                                                                                          |
+|                  |                                                                  |                |                                                                                                                                                                                                                                     |
+|                  |                                                                  |                | -   The **`.add`** argument does not involve Data Masking or Tidy Selection.                                                                                                                                                        |
++------------------+------------------------------------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `rename_with()`  | Rename columns based on a function or expression                 | Yes            | -   The **`data`** argument does not involve Data Masking or Tidy Selection.                                                                                                                                                        |
+|                  |                                                                  |                |                                                                                                                                                                                                                                     |
+|                  |                                                                  |                | -   The **`.fn`** and **`...`** arguments support Tidy Selection methods for specifying columns and renaming logic.                                                                                                                 |
+|                  |                                                                  |                |                                                                                                                                                                                                                                     |
+|                  |                                                                  |                | -   The **`.cols`** argument supports Tidy Selection methods for specifying the columns to apply renaming to. It also employs data masking to prevent global environment variables from interfering.                                |
++------------------+------------------------------------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `slice_min()`    | Filter rows corresponding to the minimum value of a column       | Yes            | -   The **`data`** and **`n`** arguments do not involve Data Masking or Tidy Selection.                                                                                                                                             |
+|                  |                                                                  |                |                                                                                                                                                                                                                                     |
+|                  |                                                                  |                | -   The **`order_by`** argument supports Tidy Selection methods for specifying the column to determine the order for finding minimum values. It also employs data masking to prevent global environment variables from interfering. |
++------------------+------------------------------------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `slice_sample()` | Randomly sample rows from a data frame                           | Yes            | -   The **`data`**, **`n`**, **`replace`**, and **`.groups`** arguments do not involve Data Masking or Tidy Selection.                                                                                                              |
+|                  |                                                                  |                |                                                                                                                                                                                                                                     |
+|                  |                                                                  |                | -   The **`weight`** argument supports Tidy Selection methods for specifying the sampling weight variable.                                                                                                                          |
++------------------+------------------------------------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+In summary, all of the functions mentioned above support tidy evaluation for specifying arguments related to column selection or manipulation.
+
+## Question 3
+
+**Generalize the following function so that you can supply any number of variables to count.**
+
+```         
+count_prop <- function(df, var, sort = FALSE) {
+  df |>
+    count({{ var }}, sort = sort) |>
+    mutate(prop = n / sum(n))
+}
+```
+
+Here is the modified function to allow user to supply any number of variables to count: --
+
+```{r}
+count_prop <- function(df, vars, sort = FALSE) {
+  df |>
+    count(pick({{ vars }}), sort = sort) |>
+    mutate(prop = n / sum(n))
+}
+
+# Testing the results
+flights |>
+  count_prop(c(dest, origin)) |>
+  slice_head(n = 10) |> 
+  gt() |> gt_theme_538() |> fmt_number(prop, decimals = 4)
+  
+```
