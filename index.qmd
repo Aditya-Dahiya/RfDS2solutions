@@ -15,9 +15,18 @@ website:
     type: textbox
 ---
 
-Author: Aditya Dahiya
+## Author: Aditya Dahiya
 
-This website displays the solutions for the exercises in the open-source book [R for Data Science, 2nd Edition](https://r4ds.hadley.nz/ "R for Data Science (2e)").
+::: grid
+::: g-col-8
+Welcome to the Solutions Manual for the [second edition](https://r4ds.hadley.nz/) of [R for Data Science](https://r4ds.hadley.nz/) by [Hadley Wickham](https://hadley.nz/), [Mine Çetinkaya-Rundel](https://mine-cr.com/), and [Garrett Grolemund](https://www.rstudio.com/authors/garrett-grolemund/). This manual is your indispensable companion on the path to mastering data science with R.
 
+Inside these pages, you'll find a rich trove of techniques and best practices that underpin the very essence of data science. I emphasize not just the ***"how,"*** but also the ***"why"*** behind each step, ensuring a deep understanding of the principles that drive data science.
+
+This website is committed to fostering a collaborative learning environment and offers the Solutions Manual for free. Happy learning!
+:::
+
+::: g-col-4
 [![R for Data Science (2nd Edition)](https://r4ds.hadley.nz/cover.jpg){fig-alt="R for Data Science (2nd Edition)" fig-align="left" width="275"}](https://r4ds.hadley.nz/).
-
+:::
+:::

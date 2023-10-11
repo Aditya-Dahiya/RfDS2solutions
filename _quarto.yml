@@ -64,6 +64,7 @@ website:
         contents:
           - Chapter26.qmd
           - Chapter27.qmd
+          - Chapter28.qmd
       - section: "Communicate"
         contents:
           - Chapter29.qmd
