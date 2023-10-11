@@ -1,5 +1,5 @@
 ---
-title: "Solutions: R for Data Science (2e)"
+title: "Solutions Manual: R for Data Science (2e)"
 filters:
   - social-share
 share:
